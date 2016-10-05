@@ -1,0 +1,80 @@
+@charset "utf-8";
+a:link { color: #000000; text-decoration: none}
+a:visited { color: #000000; text-decoration: none}
+a:hover { color: #999966; text-decoration: none }
+
+img { border: 0; }
+
+h1 { 
+  color: #cc9933;
+  font: italic 1.4em Georgia;
+ }
+
+h2 {
+  color: #cc9933;
+  font: italic 1.2em Georgia;
+ }
+
+h3 {
+  color: #cc9933;
+  font: italic 1em Georgia;
+  display: inline;
+ }
+
+body {
+  margin-left: 50px; margin-right: auto;
+  text-align: center;
+  margin: 0px; padding: 0px;
+  font: italic 100.01% Georgia;
+  color: black; background-color: #544a31;
+ }
+ 
+.buy {
+  color: #FFFFFF;
+  background-color: #CC9933;
+  font-size: 1.2em;
+  text-align: right;
+  position: absolute;
+  right: 54px;
+  padding-top: 4px; padding-bottom: 4px;
+  padding-left: 16px; padding-right: 16px;
+  border: none;
+  -moz-border-radius: 6px; /* Für Gecko (z.B. Firefox, SeaMonkey) */
+  border-radius: 6px; /* Eigenschaft gemäß Standard */
+ }
+
+.kart {
+  color: #000000;
+  background-color: #656545;
+  border: none;
+  -moz-border-radius: 6px; /* Für Gecko (z.B. Firefox, SeaMonkey) */
+  border-radius: 6px; /* Eigenschaft gemäß Standard */
+  padding: 10px;
+  padding-top: 5px;
+  text-align: left;
+  font: italic 0.8em Georgia;
+ }
+
+.kasse {
+  color: #CC9933;
+  background-color: #656545;
+  a:link { color: #CC9933; text-decoration: none}
+  a:visited { color: #CC9933; text-decoration: none}
+  a:hover { color: #999966; text-decoration: none }
+  border: none;
+  -moz-border-radius: 6px; /* Für Gecko (z.B. Firefox, SeaMonkey) */
+  border-radius: 6px; /* Eigenschaft gemäß Standard */
+  padding: 10px;
+  padding-top: 5px;
+  text-align: left;
+  font: italic 0.97em Georgia;
+ }
+
+#language-selector {
+  
+ }
+
+/*#kart_frame {
+  position: fixed;
+  bottom: 50%;
+ } */

@@ -122,7 +122,7 @@ $value = "{$data["$item"]['item_preis']} &euro;/{$loc_lang["piece"]}";
                    $data["$item"]['item_details'],
                    $alt,
                    $loc_lang["into_shopping_kart"],
-                   $value,
+                   "{$data["$item"]['item_preis']} &euro;",
                    $lang,
                    $item,
                    $kartid,

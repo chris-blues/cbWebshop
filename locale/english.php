@@ -14,7 +14,8 @@
   $loc_lang["translation_send_warn"]     = "Please make sure you have checked for errors trice!!!!! There's nothing worse for us than to find out which version is the best in a strange foreign language!!!";
   $loc_lang["translation_send"]          = " &lt;&lt;&lt; OK, I have double-checked! Send this translation! &gt;&gt;&gt; ";
   $loc_lang["translation_submitted"]     = "\n\nThank you very much!\nYour translation has been saved. We will check it out and integrate it as soon as possible!\n\nFolkadelic Hobo Jamboree";
-  $loc_lang["back_to_shop"]              = "Back to shop";
+  $loc_lang["back_to_shop"]              = "<<< Back to shop";
+  $loc_lang["kart"]                      = "Shopping kart";
   $loc_lang["remove"]                    = "remove";
   $loc_lang["select_country"]            = "Select country!";
   $loc_lang["country_other"]             = "other";
@@ -24,6 +25,7 @@
   $loc_lang["paypal"]                    = "PayPal";
   $loc_lang["payondelivery"]             = "Pay on delivery";
   $loc_lang["reset_kart"]                = "reset shopping kart";
+  $loc_lang["sub_total"]                 = "Sub-Total";
   $loc_lang["total"]                     = "Total";
   $loc_lang["enter_shipping_data"]       = "Enter shipping data";
   $loc_lang["change_shipping_data"]      = "Change shipping data";
@@ -49,14 +51,14 @@
   $loc_lang["province"]                  = "Province: (optional) ";
   $loc_lang["country"]                   = "Country: ";
   $loc_lang["join_newsletter"]           = "I want to sign in to the Folkadelic Newsletter!";
-  $loc_lang["submit_data"]               = " &lt;&lt,&lt; Submit data! ";
+  $loc_lang["submit_data"]               = " Submit data! &gt;&gt;&gt; ";
   $loc_lang["once_money_arrived"]        = "Once you press the button 'buy now' (will appear on the left side, once all neccessary data is entered) the order will be sent.\nOnce your money is received, the package will be sent on its way to you!\n";
   $loc_lang["kart_empty_error"]          = "Kart seems to be emtpy!";
   $loc_lang["no_country_selected"]       = "You didn't choose your country in the kart! Please do so!";
   $loc_lang["no_payment_selected"]       = "You didn't choose your preferred payment method in the kart! Please do so!";
   $loc_lang["information_missing"]       = "You didn't enter all necessary information! Use the button below to return!";
   $loc_lang["back_to_order_form"]        = "BACK TO ORDER-FORM!";
-  $loc_lang["buy"]                       = "buy";
+  $loc_lang["buy"]                       = "Buy";
   $loc_lang["one_moment"]                = "One moment!";
   $loc_lang["redirecting_to_paypal"]     = "Redirecting you to PayPal.";
   //admin

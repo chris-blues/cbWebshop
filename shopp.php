@@ -1,20 +1,47 @@
 <?php
-include('conf/shop_conf.php');
-include('conf/item_conf.php');
-include('header_full.html');
-$lang = $_GET["lang"]; 
-$kartid = $_GET["kartid"]; 
+include('shop/conf/shop_conf.php');
+include('shop/conf/item_conf.php');
+include('shop/conf/countries.php');
+include('shop/conf/cost_conf.php');
+include('shop/conf/payment_conf.php');
+//echo getcwd() . "\n";
+//echo "<pre>"; print_r($conf); echo "</pre>";
 
+// Try to get language
+if (isset($_GET["lang"])) $lang = $_GET["lang"]; // if we already have a ?lang=somelanguage - get it! Will almost never happen!
+if (!isset($lang) or $lang == "") // if $lang is not set or empty - look for ?opt=num (opt = index of language rolldown-menue)
+  {
+   $langopt = $_GET["opt"]; // try to read opt from _get
+   $lang = $conf["lang"][$langopt]; // look up index number in conf/shop_conf.php - will return language string e.g.: "english"
+  }
+if ($lang == "") $lang = $conf["_default_lang"]; // if $lang is still empty - set to default
+//Load loc_lang file
 define( "LOC_LANG", $lang );
-include('locale/' . LOC_LANG . '.php');
+include('shop/locale/' . LOC_LANG . '.php');
 
-echo "<body bgcolor=\"{$conf["bgcolor"]}\">\n";
-echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">\n";
+// Try to get kartid
+if (isset($_GET["kartid"])) { $kartid = $_GET["kartid"]; } // if we already have a kart-id - use it!
+else { $kartid = date("YmdHis"); }                         // if not - create one!
 
-include('read_index.php');
-/* Lese Vorlage aus Datei in einen String */
-$col = "0";
-$template = file_get_contents("templates/item_template_shop.html");
+// Try to get several variables
+$job = $_GET["job"];
+$id = $_GET["id"];
+$c = $_GET["c"];
+$kartfile = "shop/tmp/kart-$kartid.tmp";
+
+// Read content of shop
+include('shop/read_index.php');
+
+// ###################### We got all there is to get ###########################
+
+?>
+
+<!-- HTML CONTENT -->
+
+<!-- Build Shop content -->
+<div id="shop-content">
+<?php
+$template = file_get_contents("shop/templates/item_template_shop.html");
 for ($c = 1; $c <= $itemamount; $c++)
  {
   $col++;
@@ -22,7 +49,7 @@ for ($c = 1; $c <= $itemamount; $c++)
   $buy = "{$loc_lang["buy"]}";
   $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} &euro;/{$loc_lang["piece"]})";
   
-  
+// ########################################################
 // Get category ( music | clothing )
 foreach ($conf["item_type"] as $keycat => $valcat)
   {
@@ -30,12 +57,12 @@ foreach ($conf["item_type"] as $keycat => $valcat)
      $cat = $conf["item_type"][$keycat]["cat"];
   }
 
-/* ######################################################## */
-/* Erstelle Tracklist mit <audio> Playback */
+// ########################################################
+// Generate Tracklist with <audio> Playback
 if ($cat == "music")
   {
    $counter = "0";
-   $fHandle = fopen("items/{$data["$c"]['item_id']}.dat","r");
+   $fHandle = fopen("shop/items/{$data["$c"]['item_id']}.dat","r");
    if ($fHandle != NULL)
     {
      while (!feof($fHandle)) // Get Song-Names
@@ -69,9 +96,9 @@ if ($cat == "music")
    $tracklist = "<font size=\"2\"><table border=\"0\">\n";
    for ($track = "1"; $track <= $counter; $track++)
      {
-      if (file_exists("items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.ogg") and file_exists("items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.mp3"))
+      if (file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.ogg") and file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.mp3"))
         {
-         $tracklisten = file_get_contents("templates/get_audio.html");
+         $tracklisten = file_get_contents("shop/templates/get_audio.html");
          $searchtrack  = array('%id%', '%trackname%', '%trackid%');
         // Womit soll das ersetzt werden?
          $replacetrack = array($data["$c"]['item_id'], $tracks["$track"]['name'], $tracks["$track"]['id']);
@@ -80,7 +107,7 @@ if ($cat == "music")
         }
       else
         {
-         $tracklist .= "<tr><td align=\"left\" valign=\"center\"><img src=\"pics/transparent.png\" width=\"15\" height=\"15\" border=\"0\"> {$tracks["$track"]['name']}</td></tr>\n";
+         $tracklist .= "<tr><td align=\"left\" valign=\"center\"><img src=\"shop/pics/transparent.png\" width=\"15\" height=\"15\" border=\"0\"> {$tracks["$track"]['name']}</td></tr>\n";
         }
      }
    $tracklist .= "</table></font>\n";
@@ -132,8 +159,27 @@ if ($cat == "music")
   $output = str_replace($search, $replace, $template);
   echo "$output";
  }
-
 ?>
-</font>
-</body>
-</html>
+</div>
+
+<!-- SHOPPING KART -->
+<div id="shopping-kart">
+
+</div>
+
+<!-- Language Selector -->
+<div id="language-selector">
+<form style="padding:0px;margin:0px;" action="shop/cdorder-payment.php" method="post" accept-charset="UTF-8" name="language-selector">
+  <?php
+  echo "<select name=\"lang\" size=\"1\" onchange=\"self.location='shop.php?kartid=$kartid&amp;opt='+this.selectedIndex\">\n";
+  foreach($conf["lang"] as $key => $value)
+    {
+     if ($lang == $value) $selected = " selected=\"selected\"";
+     else $selected = "";
+     echo "<option value=\"$value\"$selected>$value</option>\n";
+    }
+  echo "</select>\n";
+  ?>
+</form>
+</div>
+<!-- Language Selector -->

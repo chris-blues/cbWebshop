@@ -109,48 +109,34 @@ if ($job == "additem")
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta name="page-topic" content="folkadelic hobo jamboree - symphonic punk disco folk">
 <meta name="description" content="folkadelic hobo jamboree - a musical mystery, a fine waste of time, a name german fans still can‘t pronounce? Yes! All that and more...">
-<style type="text/css">
-a:link { color: #24280F; text-decoration: none}
-a:visited { color: #24280F; text-decoration: none}
-a:hover { color: #999966; text-decoration: none }
-</style>
+<link rel="stylesheet" href="shop.css" type="text/css">
 <?php
-echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
-?>
-<table border="0">
-<tr>
-<td>
-  
-  <?php echo "{$conf["font_style"]}<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\" color=\"{$conf["color"]}\">\n";
-        echo "<font size=\"5\"><a href=\"shopcontent.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\">\n";
-        echo "{$loc_lang["back_to_shop"]}";
-        echo "</a></font>\n<br>\n<br>\n";
+echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n<div class=\"kart\">\n";
+echo "<h1><b>{$loc_lang["kart"]}</b></h1>";
         if ($kartamount > 0)
          {
-          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n<font size=\"2\">\n";
           for ($counter = "1"; $counter <= $kartamount; $counter++)
             {
              $total = $kart["$counter"]['item_amount'] * $kart["$counter"]['item_preis']; $total = number_format($total, 2, '.', '');
              $kart["$counter"]['item_preis'] = number_format($kart["$counter"]['item_preis'], 2, '.', '');
              $kart_total = $kart_total + $total; $kart_total = number_format($kart_total, 2, '.', '');
-             echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td width=\"184\" align=\"left\">";
+             echo "<table width=\"200\" border=\"0\"><tr><td width=\"184\" align=\"left\">";
              /* Item Name and Type, link to item's page */
              echo "<a href=\"item.php?item={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"shop\">";
              echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']})</a></td><td width=\"16\" align=\"right\">";
              /* Remove button */
              echo "<a href=\"kartline.php?job=remove&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\">";
-             echo "<img src=\"pics/del.png\" alt=\"{$loc_lang["remove"]}\" title=\"{$loc_lang["remove"]}\"></a></td></tr></table>\n<table width=\"200\" border=\"0\"><tr>\n";
+             echo "<img src=\"pics/del.png\" alt=\"{$loc_lang["remove"]}\" title=\"{$loc_lang["remove"]}\" border=\"0\"></a></td></tr></table>\n<table width=\"200\" border=\"0\"><tr>\n";
              /* more & less buttons */
-             echo "<td width=\"40\" align=\"left\">";
-             echo "<a href=\"kartline.php?job=additem&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/more.png\"></a>\n";
-             echo "<a href=\"kartline.php?job=less&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/less.png\"></a></td>\n";
+           /*  echo "<td width=\"40\" align=\"left\">";
+             echo "<a href=\"kartline.php?job=additem&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/more.png\" border=\"0\"></a>\n";
+             echo "<a href=\"kartline.php?job=less&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/less.png\" border=\"0\"></a></td>\n"; */
              /* Show amount * price = total */
              $total = number_format($total, 2, '.', ' ');
-             echo "<td align=\"right\">({$kart["$counter"]['item_amount']} x)&nbsp; <b>$total &euro;</b></td></tr></table>\n";
+             echo "<td align=\"right\">({$kart["$counter"]['item_amount']} x {$kart["$counter"]['item_preis']} &euro;)&nbsp; <b>$total &euro;</b></td></tr></table>\n";
             }
-          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n";
           $show_kart_total = number_format($kart_total, 2, '.', ' ');
-          echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"right\"><b>$show_kart_total &euro;</b></td></tr></table>\n";
+          echo "<table width=\"200\" border=\"0\" style=\"border-top:2px dotted black; padding-left:10px;\"><tr><td align=\"left\">{$loc_lang["sub_total"]}</td><td align=\"right\"><b>$show_kart_total &euro;</b></td></tr></table>\n<br>";
           
           if ($countryname == "") 
             {
@@ -161,12 +147,12 @@ echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
                {
                 echo "<option value=\"$key\">$value</option>\n";
                }
-             echo "<option>{$loc_lang["country_other"]}</option>";
+             echo "<option>{$loc_lang["country_other"]}</option>\n";
              echo "</select></td></tr></table>\n";
             }
           else
             {
-             echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"left\" width=\"130\"><a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;copt=remove\" target=\"kart\">";
+             echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\" width=\"130\">\n<a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;copt=remove\" target=\"kart\">";
              if ($countryname == $cost["_homecountry"]) $shipcost = "{$cost["shipping_home"]}"; else $shipcost = "{$cost["shipping_foreign"]}";
              echo "{$loc_lang["shipping"]} $countryname";
              echo "</a></td><td align=\"right\" width=\"70\">+ $shipcost &euro;</td></tr></table>\n";
@@ -176,7 +162,7 @@ echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
            {
             echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\">\n";
             echo "<select name=\"payment\" size=\"0\" onchange=\"self.location='kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;opt='+this.selectedIndex\">";
-            echo "<option value=\"payment\" selected=\"selected\">{$loc_lang["choose_payment"]}</option>";
+            echo "<option value=\"payment\" selected=\"selected\">{$loc_lang["choose_payment"]}</option>\n";
             foreach($payment as $key => $value)
                {
                 $paymentname = $loc_lang[$key];
@@ -207,16 +193,14 @@ echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
                else $transfercost = $payment["payondelivery"]["foreign"];
                $paymentname = $loc_lang["payondelivery"];
               }
-            echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"left\"><a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;opt=remove\" target=\"kart\">";
+            echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\"><a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;opt=remove\" target=\"kart\">";
             echo "$paymentname</a></td><td align=\"right\">+ $transfercost &euro;</td></tr></table>\n";
            }
-          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n";
-          echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"left\">";
-          echo "<a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=reset\" target=\"kart\"><img src=\"pics/del.png\" alt=\"{$loc_lang["reset_kart"]}\" title=\"{$loc_lang["reset_kart"]}\"></a> ";
+          echo "<br><table width=\"200\" border=\"0\" style=\"border-top:2px dotted black; padding-left:10px;\"><tr><td align=\"left\">";
+          echo "<a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=reset\" target=\"kart\"><img src=\"pics/del.png\" alt=\"{$loc_lang["reset_kart"]}\" title=\"{$loc_lang["reset_kart"]}\" border=\"0\"></a> ";
           $complete = $kart_total + $transfercost + $shipcost; $complete = number_format($complete, 2, '.', ' ');
           echo " {$loc_lang["total"]}:</td><td align=\"right\">";
-          echo "<b>$complete &euro;</b></td></tr></table>\n</font>\n";
-          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n";
+          echo "<b>$complete &euro;</b></td></tr></table>\n</div>\n<br>\n";
 
 /* Check, if all userdata is already received. If all is there,change enter data to change data AND display BUY-link below the kart-list! */
           $datamissing = "0";
@@ -231,10 +215,10 @@ echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
 
           if ($datamissing == "0")
             {
-             echo "<table width=\"100%\"><tr><td align=\"right\">\n";
-             echo "<font size=\"3\">\n<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
+             echo "<div class=\"kasse\">\n<table width=\"100%\"><tr><td align=\"right\">\n";
+             echo "<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
              echo $loc_lang["change_shipping_data"];
-             echo "</b></a>\n</font><br>\n";
+             echo "</b></a>\n<br>\n";
              echo "<form action=\"orderaction.php\" target=\"shop\" id=\"orderform\" method=\"post\" accept-charset=\"UTF-8\">\n";
              echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
              echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
@@ -242,16 +226,17 @@ echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
             }
           else
             {
-             echo "<table width=\"100%\"><tr><td align=\"right\">\n";
-             echo "<font size=\"3\">\n<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
+             echo "<div class=\"kasse\">\n<table width=\"100%\"><tr><td align=\"right\">\n";
+             echo "<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
              echo $loc_lang["enter_shipping_data"];
-             echo "</b></a>\n</font><br>\n";
+             echo "</b></a>\n<br>\n";
             }
          }
-     echo "</font>{$conf["font_style_close"]}\n";
+//     echo "</font>{$conf["font_style_close"]}\n";
   ?>
 </td>
 </tr>
 </table>
+</div>
 </body>
 </html>

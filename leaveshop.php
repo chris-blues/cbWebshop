@@ -106,6 +106,7 @@ echo "<center><iframe src=\"bg.php\" name=\"nlbox\" id=\"nlbox\" width=\"350\" h
    echo "<input type=\"hidden\" name=\"nick\" value=\"$firstname $lastname\">\n";
    echo "<input type=\"hidden\" name=\"mail_format\" value=\"h\">\n";
    echo "<input type=\"hidden\" name=\"grp_00\" value=\"1\" checked>\n</form>";
+   echo "<p><b><a href=\"{$conf["this_domain"]}\" target=\"_top\">{$conf["this_domain"]}</a></b></p>";
 ?>
 </em>
 </font>

@@ -14,7 +14,8 @@
   $loc_lang["translation_send_warn"]     = "Bitte stellen Sie sicher, da&szlig; Sie ihre Übersetzung drei mal nach Fehlern durchsucht haben!!!!! Es gibt nichts Schlimmeres für uns, als herauszufinden, welche Version die Beste ist, in einer fremden Sprache!!!";
   $loc_lang["translation_send"]          = " &lt;&lt;&lt; OK, ich habe mehrfach geprüft! Diese Übersetzung absenden! &gt;&gt;&gt; ";
   $loc_lang["translation_submitted"]     = "\n\nVielen Dank!\nIhre Übersetzung wurde gespeichert. Wir werden diese schnellstmöglich überprüfen und einbauen!\n\nFolkadelic Hobo Jamboree";
-  $loc_lang["back_to_shop"]              = "Zurück zum Shop";
+  $loc_lang["back_to_shop"]              = "<<< Zurück zum Shop";
+  $loc_lang["kart"]                      = "Warenkorb";
   $loc_lang["remove"]                    = "entfernen";
   $loc_lang["select_country"]            = "Wähle Land!";
   $loc_lang["country_other"]             = "Anderes";
@@ -24,6 +25,7 @@
   $loc_lang["paypal"]                    = "PayPal";
   $loc_lang["payondelivery"]             = "Nachnahme";
   $loc_lang["reset_kart"]                = "Verwerfe Warenkorb";
+  $loc_lang["sub_total"]                 = "Zwischensumme";
   $loc_lang["total"]                     = "Gesamt";
   $loc_lang["enter_shipping_data"]       = "Adresse angeben";
   $loc_lang["change_shipping_data"]      = "Adresse ändern";
@@ -49,14 +51,14 @@
   $loc_lang["province"]                  = "Land/Provinz: (optional) ";
   $loc_lang["country"]                   = "Staat: ";
   $loc_lang["join_newsletter"]           = "Ich möchte in den Folkadelic Newsletter eingetragen werden!";
-  $loc_lang["submit_data"]               = " &lt;&lt;&lt; Daten senden! ";
+  $loc_lang["submit_data"]               = " Daten senden! &gt;&gt;&gt; ";
   $loc_lang["once_money_arrived"]        = "Wenn Sie den Knopf 'Jetzt kaufen' drücken (dieser erscheint auf der linken Seite sobald alle erforlderlichen Daten vorhanden sind) wird die Bestellung abgeschickt. Sobald Ihr Geld uns erreicht hat werden wir das Paket auf Reisen schicken!\n";
   $loc_lang["kart_empty_error"]          = "Warenkorb scheint leer zu sein!";
   $loc_lang["no_country_selected"]       = "Sie haben im Warenkorb ihr Land nicht angegeben! Tun Sie das bitte!";
   $loc_lang["no_payment_selected"]       = "Sie haben im Warenkorb ihre bevorzugte Zahlungsmethode nicht angegeben! Tun Sie das bitte!";
   $loc_lang["information_missing"]       = "Sie haben nicht alle nötigen Informationen angegeben! Nutzen Sie den Knopf unten um zurück zu gelangen!";
   $loc_lang["back_to_order_form"]        = "ZURÜCK ZUM BESTELL-FORMULAR!";
-  $loc_lang["buy"]                       = "kaufe";
+  $loc_lang["buy"]                       = "Kaufen";
   $loc_lang["one_moment"]                = "Einen Moment!";
   $loc_lang["redirecting_to_paypal"]     = "Sie werden zu PayPal weitergeleitet.";
   //admin

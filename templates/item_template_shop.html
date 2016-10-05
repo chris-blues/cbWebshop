@@ -1,5 +1,31 @@
-    <td align="center" valign="top" width="%shop_width%" height="%shop_height%">
-      <a href="item.php?item=%id%&amp;lang=%lang%&amp;kartid=%kartid%" target="shop">
-      <img id="%id%" height="%shop_pic_height%" src="%pic%" alt="%alt%" title="%alt%" onmouseout="src='%pic%'" onmouseover="src='%pic%.png'" border="0"><br>
-      <b>%Type% - %name%</b></a>
+<table width="%shop_width%" height="%shop_height%" align="right" border="0">
+  <tr>
+    <td height="30" align="left" valign="top">
+      <h1>%name% (%descr%)</h1></td>
+    <td height="30" align="right" valign="top"><h1><b>%preis%,- &euro;</b></h1></td>
+    <td width="50"></td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      <a href="%pic%" class="fancy">
+      <img id="%id%" height="%shop_pic_height%" src="%pic%" alt="%alt%" title="%alt%" onmouseout="src='%pic%'" onmouseover="src='%pic%.png'" border="0"><br></a>
     </td>
+    <td align="left" valign="top">
+      %details%
+      <form action="kartline.php" id="intokart%c%" method="get" target="kart" accept-charset="UTF-8">
+        <input type="hidden" name="job" value="additem">
+        <input type="hidden" name="id" value="%id%">
+        <input type="hidden" name="c" value="%c%">
+        <input type="hidden" name="lang" value="%lang%">
+        <input type="hidden" name="kartid" value="%kartid%">
+      </form>
+      <a href="javascript:" onclick="document.getElementById('intokart%c%').submit()"><div class="buy" align="right">%buy%</div></a>
+    </td>
+    <td width="50"></td>
+  </tr>
+  <tr>
+    <td height="80" colspan="2">
+    </td>
+    <td width="50"></td>
+  </tr>
+</table>

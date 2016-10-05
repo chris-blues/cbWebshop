@@ -19,10 +19,12 @@ echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">{$conf["
 <center>
 <table width="770" align="center" border="0">
   <tr>
+    <td align="left" valign="top" <? echo "height=\"{$conf["shop_height"]}\""; ?> rowspan="2">
+      <?php echo "<iframe name=\"shop\" src=\"shopcontent.php?lang=$lang&amp;kartid=$kartid\" width=\"{$conf["shop_width"]}\" height=\"670\" onload=\"this.height = this.contentDocument.documentElement.offsetHeight\" scrolling=\"auto\" frameborder=\"0\"></iframe>\n"; ?>
+    </td>
     <td align="left" valign="top" width="220" height="30" rowspan="1">
       <form style="padding:0px;margin:0px;" action="cdorder-payment.php" method="post" accept-charset="UTF-8">
   <?php
-  //echo "<a href=\"translators.php?lang=$lang\" class=\"fancy\" rel=\"translators\"><img src=\"pics/ask.png\" border=\"0\"></a>";
   echo "<select name=\"lang\" size=\"1\" onchange=\"self.location='shop.php?kartid=$kartid&amp;opt='+this.selectedIndex\">\n";
   foreach($conf["lang"] as $key => $value)
     {
@@ -34,13 +36,10 @@ echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">{$conf["
   ?>
     </form>
     </td>
-    <td align="left" valign="top" height="631" rowspan="2">
-      <?php echo "<iframe name=\"shop\" src=\"shopcontent.php?lang=$lang&amp;kartid=$kartid\" width=\"{$conf["shop_width"]}\" height=\"{$conf["shop_height"]}\" scrolling=\"auto\" frameborder=\"0\"></iframe>\n"; ?>
-    </td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="550" height="600" rowspan="1">
-      <?php echo "<iframe name=\"kart\" width=\"{$conf["kart_width"]}\" height=\"{$conf["kart_height"]}\" frameborder=\"0\" scrolling=\"auto\" src=\"kartline.php?lang=$lang&amp;kartid=$kartid\"></iframe>\n"; ?>
+    <td align="center" valign="top" <? echo "width=\"{$conf["kart_width"]}\""; ?> rowspan="1">
+      <?php echo "<iframe name=\"kart\" id=\"kart_frame\" width=\"{$conf["kart_width"]}\" height=\"100\" onload=\"this.height = this.contentDocument.documentElement.offsetHeight\" frameborder=\"0\" scrolling=\"auto\" src=\"kartline.php?lang=$lang&amp;kartid=$kartid\"></iframe>\n"; ?>
     </td>
   </tr>
 </table>

@@ -137,9 +137,11 @@ echo "<table width=\"540\" height=\"600\" border=\"0\" align=\"center\" valign=\
               echo "</td></tr></table>\n";
               echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
               echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
-              echo "<table width=\"100%\"><tr><td align=\"center\" bgcolor=\"#544a31\">";
+              echo "<table width=\"100%\"><tr><td align=\"center\" bgcolor=\"#544a31\" width=\"50%\">\n";
+              echo "<a href=\"shopcontent.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>{$loc_lang["back_to_shop"]}</b></td>\n";
+              echo "<td align=\"center\" bgcolor=\"#544a31\" width=\"50%\">\n";
               echo "<a href=\"javascript:\" onclick=\"document.getElementById('submit_shipping_data').submit();\"><b>{$loc_lang["submit_data"]}</b></a>\n";
-              echo "</td></tr><tr><td align=\"justify\"><br>";
+              echo "</td></tr><tr><td align=\"justify\" colspan=\"2\"><br>";
               echo $loc_lang["once_money_arrived"];
               echo "</td></tr></table></form>";
             ?>
