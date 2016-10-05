@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>folkadelic shop admin</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<style type="text/css">
-a:link { color: #24280F; text-decoration: none}
-a:visited { color: #24280F; text-decoration: none}
-a:hover { color: #999966; text-decoration: none }
-</style>
-</head>
+<?php include('header_short.html'); ?>
 
 <body>
 <center><form action="showitems.php"><input type="submit" value=" <<< BACK "></form></center><br>
@@ -17,32 +7,15 @@ a:hover { color: #999966; text-decoration: none }
 <table border="0" align="center">
 
 <?php
-/* LESE index.dat und schließe index.dat */
-  $counter = "0";
-  $fHandle = fopen("../items/index.dat","r");
-  if ($fHandle != NULL)
-   {
-    while (!feof($fHandle))
-     {
-      $counter++;
-      $buffer = fgets($fHandle); $data[$counter]['item_id'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_name'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_type'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_descr'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_preis'] = trim($buffer,"\n");
-      $data["$counter"]['item_pic'] = "items/pics/{$data["$counter"]['item_id']}.png";
-      $buffer = fgets($fHandle); $data[$counter]['item_details'] = trim($buffer,"\n");
-      $data[$counter]['item_details'] = str_replace("<br>","\n",$data[$counter]['item_details']);
-     }
-   }
-   fclose($fHandle);
-   $counter--;
+$modus = "display_data";
+include('read_index.php');
+
+/* ############################################################# */
 
 if (isset($_GET["type"])) $type = $_GET["type"];
 if ($type == "0") $type = "";
 if ($type == "1") $type = "CD";
 if ($type == "2") $type = "TShirt";
-/* ############################################################# */
 ?>
   <tr>
     <td align="right" colspan="2">

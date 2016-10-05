@@ -1,40 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-     "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>folkadelic shop admin</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<style type="text/css">
-a:link { color: #24280F; text-decoration: none}
-a:visited { color: #24280F; text-decoration: none}
-a:hover { color: #999966; text-decoration: none }
-</style>
-</head>
+<?php include('header_short.html'); ?>
 
 <body>
 <center><form action="newitem.php"><input type="submit" value=" Add a new item "></form></center>
 <?php
-/* LESE index.dat und schließe index.dat */
-  $counter = "0";
-  $fHandle = fopen("../items/index.dat","r");
-  if ($fHandle != NULL)
-   {
-    while (!feof($fHandle))
-     {
-      $counter++;
-      $buffer = fgets($fHandle); $data[$counter]['item_id'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_name'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_type'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_descr'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_preis'] = trim($buffer,"\n");
-      $data["$counter"]['item_pic'] = "items/pics/{$data["$counter"]['item_id']}.png";
-      $buffer = fgets($fHandle); $data[$counter]['item_details'] = trim($buffer,"\n");
-     }
-   }
-   fclose($fHandle);
-   $counter--;
-
-/* ############################################################# */
+$modus = "simple";
+include('read_index.php');
 
 echo "<table align=\"center\" border=\"0\">\n";
 /* Tabelleninhalt */

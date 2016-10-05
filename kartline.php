@@ -1,49 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>folkadelic hobo jamboree - symphonic punk disco folk</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="page-topic" content="folkadelic hobo jamboree - symphonic punk disco folk">
-<meta name="description" content="folkadelic hobo jamboree - a musical mystery, a fine waste of time, a name german fans still can‘t pronounce? Yes! All that and more...">
-<style type="text/css">
-a:link { color: #24280F; text-decoration: none}
-a:visited { color: #24280F; text-decoration: none}
-a:hover { color: #999966; text-decoration: none }
-</style>
-
-
 <?php
+include('header_short.html');
 $job = $_GET["job"];
 $id = $_GET["id"];
 $c = $_GET["c"];
 $lang = $_GET["lang"];
 $kartid = $_GET["kartid"];
+$kartfile = "tmp/kart-$kartid.tmp";
 
-/* LESE index.dat in array $data[][] und schließe index.dat */
-$counter = "0";
-$fHandle = fopen("items/index.dat","r");
-if ($fHandle != NULL)
- {
-  while (!feof($fHandle))
-   {
-    $counter++;
-    $buffer = fgets($fHandle); $data["$counter"]['item_id'] = trim($buffer,"\n"); if ($data["$counter"]['item_id'] == $id) $newitem = $counter;
-    $buffer = fgets($fHandle); $data["$counter"]['item_name'] = trim($buffer,"\n");
-    $buffer = fgets($fHandle); $data["$counter"]['item_type'] = trim($buffer,"\n");
-    $buffer = fgets($fHandle); $data["$counter"]['item_descr'] = trim($buffer,"\n");
-    $buffer = fgets($fHandle); $data["$counter"]['item_preis'] = trim($buffer,"\n");
-    $data["$counter"]['item_pic'] = "items/pics/{$data["$counter"]['item_id']}.png";
-    $buffer = fgets($fHandle); $data["$counter"]['item_details'] = trim($buffer,"\n");
-   }
- }
-fclose($fHandle);
-$counter--;
+include('read_index.php');
 
 if (!isset($newitem)) $job = "";
 
-/* echo "Read $counter entries successfully from index.dat...<br>"; */
-$itemamount = $counter;
-$kartfile = "tmp/kart-$kartid.tmp";
 /* ################################################# */
 
 if ($job == "reset")
@@ -52,8 +19,7 @@ if ($job == "reset")
    if ($karthandle != NULL)
     {
      $lnb = "\n";
-     fputs($karthandle, $lnb);
-     fputs($karthandle, $lnb);
+     fputs($karthandle, "");
      $c = "0";
     }
    else echo "Error! Cannot open $kartfile!";
@@ -63,39 +29,9 @@ if ($job == "reset")
   }
 /* ################################################# */
 
-/* Lese karttmpfile falls vorhanden und Erzeuge Array Kart[1][item_sth] */
-$karthandle = fopen($kartfile, "r");
-$kartamount = "0";
-$kart_total = "0";
-if ($karthandle != NULL)
- {
-  $buffer = fgets($karthandle); $country = trim($buffer,"\n"); if ($country == "") $country = $_GET["country"]; if ($_GET["country"] == "remove") $country = "remove";
-  $buffer = fgets($karthandle); $opt = trim($buffer,"\n"); if ($opt == "") $opt = $_GET["opt"]; if ($_GET["opt"] == "remove") $opt = "remove";
-  $buffer = fgets($karthandle); $firstname = trim($buffer,"\n"); if ($firstname == "") $firstname = $_GET["firstname"];
-  $buffer = fgets($karthandle); $lastname = trim($buffer,"\n"); if ($lastname == "") $lastname = $_GET["lastname"];
-  $buffer = fgets($karthandle); $adress1 = trim($buffer,"\n"); if ($adress1 == "") $adress1 = $_GET["adress1"];
-  $buffer = fgets($karthandle); $adress2 = trim($buffer,"\n"); if ($adress2 == "") $adress2 = $_GET["adress2"];
-  $buffer = fgets($karthandle); $plz = trim($buffer,"\n"); if ($plz == "") $plz = $_GET["plz"];
-  $buffer = fgets($karthandle); $city = trim($buffer,"\n"); if ($city == "") $city = $_GET["city"];
-  $buffer = fgets($karthandle); $province = trim($buffer,"\n"); if ($province == "") $province = $_GET["province"];
-  $buffer = fgets($karthandle); $email = trim($buffer,"\n"); if ($email == "") $email = $_GET["email"];
-  $buffer = fgets($karthandle); $newsletter = trim($buffer,"\n"); if ($newsletter == "") $newsletter = $_GET["newsletter"];
-  while (!feof($karthandle))
-   {
-    $kartamount++;
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_id'] = trim($buffer,"\n"); if ($kart["$kartamount"]['item_id'] == $id) { $item_exists = "ja"; $item_pointer = $kartamount; }
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_name'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_type'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_preis'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_amount'] = trim($buffer,"\n");
-    /* echo "{$kart["$kartamount"]['item_id']} {$kart["$kartamount"]['item_amount']}x $item_exists $item_pointer<br>"; */
-   }
- }
-/* else echo "Could not open $kartfile<br>"; */
-fclose($karthandle);
-chmod($kartfile, 0777);
-$kartamount--;
-if ($kartamount < 1) $kartamount = "0";
+$kartmode = "kart";
+include('read_kartfile.php');
+
 /* ################################################# */
 
 if ($job == "adduserdata")
@@ -111,39 +47,10 @@ if ($job == "adduserdata")
    if (isset($_POST["email"])) $email = $_POST["email"];
    if ($_GET["newsletter"] == "changed")
      {
-      if ($_POST["newsletter"] != "ja") {$newsletter = "nein";} else {$newsletter = "ja";}
+      if ($_POST["newsletter"] != "ja") $newsletter = "nein";
+      else $newsletter = "ja";
      }
-   /* Write new kart-tmp-file */
-   $karthandle = fopen($kartfile, "w");
-   if ($karthandle != NULL)
-    {
-     $lnb = "\n";
-     $buffer = "";
-     $buffer = trim($country,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($opt,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($firstname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($lastname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress1,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress2,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($plz,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($city,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($province,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($email,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($newsletter,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     for ($c = "1"; $c <= $kartamount; $c++)
-      {
-       $buffer = trim($kart["$c"]['item_id'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_name'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_type'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_preis'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_amount'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-      }
-     $c--;
-    }
-   else echo "Error! Cannot open $kartfile!";
-   fclose($karthandle);
-   chmod($kartfile, 0777);
-   if ($kartamount < 1) $kartamount = "0";
+   include('write_kartfile.php');
   }
 
 /* ################################################# */
@@ -158,37 +65,8 @@ if ($job == "addopt")
    if ($country == "5") $country = "other";
    if ($country == "remove") $country = "";
    if ($opt == "remove") $opt = "";
-   /* Write new kart-tmp-file */
-   $karthandle = fopen($kartfile, "w");
-   if ($karthandle != NULL)
-    {
-     $lnb = "\n";
-     $buffer = "";
-     $buffer = trim($country,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($opt,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($firstname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($lastname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress1,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress2,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($plz,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($city,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($province,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($email,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($newsletter,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     for ($c = "1"; $c <= $kartamount; $c++)
-      {
-       $buffer = trim($kart["$c"]['item_id'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_name'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_type'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_preis'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_amount'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-      }
-     $c--;
-    }
-   else echo "Error! Cannot open $kartfile!";
-   fclose($karthandle);
-   chmod($kartfile, 0777);
-   if ($kartamount < 1) $kartamount = "0";
+   
+   include('write_kartfile.php');
   }
 
 /* ################################################# */
@@ -196,75 +74,17 @@ if ($job == "addopt")
 if ($job == "less")
   {
    $kart["$item_pointer"]['item_amount']--;
-   /* Write new kart-tmp-file */
-   $karthandle = fopen($kartfile, "w");
-   if ($karthandle != NULL)
-    {
-     $lnb = "\n";
-     $buffer = "";
-     $buffer = trim($country,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($opt,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($firstname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($lastname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress1,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress2,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($plz,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($city,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($province,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($email,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($newsletter,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     for ($c = "1"; $c <= $kartamount; $c++)
-      {
-       $buffer = trim($kart["$c"]['item_id'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_name'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_type'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_preis'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_amount'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-      }
-     $c--;
-    }
-   else echo "Error! Cannot open $kartfile!";
-   fclose($karthandle);
-   chmod($kartfile, 0777);
-   if ($kartamount < 1) $kartamount = "0";
+   
+   include('write_kartfile.php');
+   
    if ($kart["$item_pointer"]['item_amount'] == "0") echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL=kartline.php?job=remove&amp;id={$kart["$item_pointer"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\">\n";
   }
 
 /* Entferne Artikel aus dem Kart! */
 if ($job == "remove")
   {
-   /* Write new kart-tmp-file */
-   $karthandle = fopen($kartfile, "w");
-   if ($karthandle != NULL)
-    {
-     $lnb = "\n";
-     $buffer = "";
-     $buffer = trim($country,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($opt,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($firstname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($lastname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress1,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress2,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($plz,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($city,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($province,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($email,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($newsletter,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     for ($c = "1"; $c <= $kartamount; $c++)
-      {
-       if ($kart["$c"]['item_id'] == $id) continue;
-       $buffer = trim($kart["$c"]['item_id'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_name'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_type'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_preis'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_amount'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-      }
-     $c--;
-    }
-   else echo "Error! Cannot open $kartfile!";
-   fclose($karthandle);
-   chmod($kartfile, 0777);
-   if ($kartamount < 1) $kartamount = "0";
+   include('write_kartfile.php');
+   
    echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL=kartline.php?id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\">\n";
   }
 
@@ -285,37 +105,7 @@ if ($job == "additem")
       $kart["$kartamount"]['item_amount'] = "1";
      }
    
-/* Write new kart-tmp-file */
-   $karthandle = fopen($kartfile, "w");
-   if ($karthandle != NULL)
-    {
-     $lnb = "\n";
-     $buffer = "";
-     $buffer = trim($country,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($opt,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($firstname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($lastname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress1,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($adress2,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($plz,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($city,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($province,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($email,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     $buffer = trim($newsletter,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-     for ($c = "1"; $c <= $kartamount; $c++)
-      {
-       $buffer = trim($kart["$c"]['item_id'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_name'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_type'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_preis'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-       $buffer = trim($kart["$c"]['item_amount'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
-      }
-     $c--;
-    }
-   else echo "Error! Cannot open $kartfile!";
-   fclose($karthandle);
-   chmod($kartfile, 0777);
-   if ($kartamount < 1) $kartamount = "0";
+   include('write_kartfile.php');
   }
 ?>
 </head>

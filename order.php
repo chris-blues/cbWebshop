@@ -1,42 +1,12 @@
 <?php
-include('../header.html');
+include('header_short.html');
 $lang = $_GET["lang"];
 $kartid = $_GET["kartid"];
 
 /* ######################################################## */
 
-/* Lese karttmpfile und Erzeuge Array Kart[1][item_sth] */
-$kartfile = "tmp/kart-$kartid.tmp";
-$karthandle = fopen($kartfile, "r");
-$kartamount = "0";
-$kart_total = "0";
-if ($karthandle != NULL)
- {
-  $buffer = fgets($karthandle); $country = trim($buffer,"\n");
-  $buffer = fgets($karthandle); $opt = trim($buffer,"\n");
-  $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["firstname"])) $firstname = " style=\"background-color:#FF4B4B;\""; else { $firstname = trim($buffer,"\n"); $firstname = " value=\"$firstname\""; }
-  $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["lastname"])) $lastname = " style=\"background-color:#FF4B4B;\""; else { $lastname = trim($buffer,"\n"); $lastname = " value=\"$lastname\""; }
-  $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["adress1"])) $adress1 = " style=\"background-color:#FF4B4B;\""; else { $adress1 = trim($buffer,"\n"); $adress1 = " value=\"$adress1\""; }
-  $buffer = fgets($karthandle); $adress2 = trim($buffer,"\n"); $adress2 = " value=\"$adress2\"";
-  $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["plz"])) $plz = " style=\"background-color:#FF4B4B;\""; else { $plz = trim($buffer,"\n"); $plz = " value=\"$plz\""; }
-  $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["city"])) $city = " style=\"background-color:#FF4B4B;\""; else { $city = trim($buffer,"\n"); $city = " value=\"$city\""; }
-  $buffer = fgets($karthandle); $province = trim($buffer,"\n"); $province = " value=\"$province\"";
-  $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["email"])) $email = " style=\"background-color:#FF4B4B;\""; else { $email = trim($buffer,"\n"); $email = " value=\"$email\""; }
-  $buffer = fgets($karthandle); $newsletter = trim($buffer,"\n");
-  while (!feof($karthandle))
-   {
-    $kartamount++;
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_id'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_name'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_type'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_preis'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_amount'] = trim($buffer,"\n");
-   }
- }
-fclose($karthandle);
-chmod($kartfile, 0777);
-$kartamount--;
-if ($kartamount < 1) $kartamount = "0";
+$kartmode = "order";
+include('read_kartfile.php');
 
 /* ################################################################### */
 

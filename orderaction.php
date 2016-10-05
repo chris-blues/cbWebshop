@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>folkadelic hobo jamboree - symphonic punk disco folk</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="page-topic" content="folkadelic hobo jamboree - symphonic punk disco folk">
-<meta name="description" content="folkadelic hobo jamboree - a musical mystery, a fine waste of time, a name german fans still can‘t pronounce? Yes! All that and more...">
-<style type="text/css">
-a:link { color: #24280F; text-decoration: none}
-a:visited { color: #24280F; text-decoration: none}
-a:hover { color: #999966; text-decoration: none }
-</style>
-</head>
-<body bgcolor="#544a31" onload="document.checkout_form.submit();">
-<em><font face="Georgia" size="3">
-<table width="500" height="600" align="center" border="0" bgcolor="#544a31">
-  <tr>
-    <td align="center" valign="center">
 <?php
 /* ################################################################### */
 /* Hole Variablen aus POST-Formular */
@@ -27,41 +9,10 @@ if (!$_POST["reset_x"])
    }
 
 /* ################################################################### */
-/* Lese karttmpfile und Erzeuge Array Kart[1][item_sth] */
-$kartfileerror = "0";
-$kartfile = "tmp/kart-$kartid.tmp";
-$karthandle = fopen($kartfile, "r");
-$kartamount = "0";
-$kart_total = "0";
-$errorreturn = "&amp;errorreturn=1";
-if ($karthandle != NULL)
- {
-  $buffer = fgets($karthandle); $country = trim($buffer,"\n"); if ($country == "") { $error = "1"; $errors['kartfile']['country'] = "empty"; }
-  $buffer = fgets($karthandle); $opt = trim($buffer,"\n"); if ($opt == "") { $error = "1"; $errors['kartfile']['opt'] = "empty"; }
-  $buffer = fgets($karthandle); $firstname = trim($buffer,"\n"); if ($firstname == "") { $error = "1"; $errors['kartfile']['firstname'] = "empty"; $errorreturn .= "&amp;firstname=$firstname"; }
-  $buffer = fgets($karthandle); $lastname = trim($buffer,"\n"); if ($lastname == "") { $error = "1"; $errors['kartfile']['lastname'] = "empty"; $errorreturn .= "&amp;lastname=$lastname"; }
-  $buffer = fgets($karthandle); $adress1 = trim($buffer,"\n"); if ($adress1 == "") { $error = "1"; $errors['kartfile']['adress1'] = "empty"; $errorreturn .= "&amp;adress1=$adress1"; }
-  $buffer = fgets($karthandle); $adress2 = trim($buffer,"\n"); if ($adress2 == "") { $errors['kartfile']['adress2'] = "empty"; $errorreturn .= "&amp;adress2=$adress2"; }
-  $buffer = fgets($karthandle); $plz = trim($buffer,"\n"); if ($plz == "") { $error = "1"; $errors['kartfile']['plz'] = "empty"; $errorreturn .= "&amp;plz=$plz"; }
-  $buffer = fgets($karthandle); $city = trim($buffer,"\n"); if ($city == "") { $error = "1"; $errors['kartfile']['city'] = "empty"; $errorreturn .= "&amp;city=$city"; }
-  $buffer = fgets($karthandle); $province = trim($buffer,"\n"); if ($province == "") { $errors['kartfile']['province'] = "empty"; $errorreturn .= "&amp;province=$province"; }
-  $buffer = fgets($karthandle); $email = trim($buffer,"\n"); if ($email == "") { $error = "1"; $errors['kartfile']['email'] = "empty"; $errorreturn .= "&amp;email=$email"; }
-  $buffer = fgets($karthandle); $newsletter = trim($buffer,"\n"); if ($newsletter == "") { $errors['kartfile']['newsletter'] = "empty"; $errorreturn .= "&amp;newsletter=$newsletter"; }
-  while (!feof($karthandle))   /* Lese gesamtes Kartfile und erzeuge $kart-array */
-   {
-    $kartamount++;
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_id'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_name'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_type'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_preis'] = trim($buffer,"\n");
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_amount'] = trim($buffer,"\n");
-    $kart["$kartamount"]['item_total'] = $kart["$kartamount"]['item_amount'] * $kart["$kartamount"]['item_preis'];
-   }
- }
-else { $error = "1"; $kartfileerror = "1"; }
-fclose($karthandle);
-chmod($kartfile, 0777);
-$kartamount--; if ($kartamount < 1) {$kartamount = "0"; $error = "1"; $kartemptyerror = "1";}
+
+$kartmode = "action";
+include('read_kartfile.php');
+
 /* ################################################################### */
 
 /* Stelle Variablen zusammen */
@@ -103,6 +54,18 @@ if ($country == "USA") $country_code = "US";
 
 /* ################################################################### */
 
+include('header_short.html');
+$onload = "document.checkout_form.submit();";
+if ($newsletter == "ja") $onload .= "document.jnl2_sign_form.submit();";
+echo "<body bgcolor=\"#544a31\" onload=\"$onload\">\n";  ?>
+<em><font face="Georgia" size="3">
+<table width="500" height="600" align="center" border="0" bgcolor="#544a31">
+  <tr>
+    <td align="center" valign="center">
+<?php
+
+/* ################################################################### */
+
 /* Check for missing data and exit if so - else redirect to checkout-site (PayPal / leaveshop.php) */
 if ($error != "0")
   {
@@ -125,14 +88,17 @@ if ($error != "0")
      }}
    echo $errormessage;
    echo "</ol><br>\n";
-   if ($lang == "english") $backtoshop = "BACK TO SHOP!";
-                      else $backtoshop = "ZUR&Uuml;CK ZUM SHOP!";
+   if ($lang == "english") $backtoshop = "BACK TO ORDER-FORM!";
+                      else $backtoshop = "ZUR&Uuml;CK ZUM BESTELL-FORMULAR!";
    echo "</td></tr><tr><td align=\"center\">\n<a href=\"order.php?kartid=$kartid&amp;lang=$lang$errorreturn\" target=\"shop\"><b>$backtoshop</b></a><br>\n</td></tr></table></td></tr></table></body></html>";
    exit;
   }
+  
+/* NO ERRORS => Go on! */
+  
 else
   {
-/* Prepare strings for receits in mail and browser output and put it out! */
+/* Prepare strings for receits in mail output and send it! */
 /* mail format */
 $email_shop = "Folkadelic Shop <shop@folkadelic.de>";
 $email_buyer = "$firstname $lastname <$email>";
@@ -187,6 +153,7 @@ $mail_shop = wordwrap($mail_shop, 70);
 $header_shop = "From: $email_buyer\r\n";
 $header_shop .= $header;
 if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR!</h3>Failed to send mail to shop!<br>\n";
+
 /* ########################################## */
 
    if ($lang == "english") echo "<b>One moment!</b><br>\n"; else echo "<b>Einen Moment!</b><br>\n";
@@ -241,6 +208,12 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR
       echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
       echo "</form>\n";
      }
+   /* Newsletter entry */
+   echo "<form name=\"jnl2_sign_form\" method=\"post\" action=\"../newsletter/validate.php?do=sign_in&language=german&ml_id=00\" target=\"nlbox\">\n";
+   echo "<input type=\"hidden\" name=\"email\" value=\"$email\">\n";
+   echo "<input type=\"hidden\" name=\"nick\" value=\"$firstname $lastname\">\n";
+   echo "<input type=\"hidden\" name=\"mail_format\" value=\"h\">\n";
+   echo "<input type=\"hidden\" name=\"grp_00\" value=\"1\" checked>\n</form>";
   }
 
 ?>

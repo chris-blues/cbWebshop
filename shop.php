@@ -9,7 +9,7 @@ if (isset($_GET["kartid"])) { $kartid = $_GET["kartid"]; }
 else { $kartid = date("YmdHisu"); }
 
 $current_page = "shop";
-include ('../header.html'); 
+include ('header_full.html'); 
 include ('../kopf.php');
 
 ?>

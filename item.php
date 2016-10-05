@@ -1,40 +1,19 @@
 <?php
-include('header.html');
+include('header_full.html');
 echo "<body bgcolor=\"#544a31\" align=\"center\">\n";
-$item = $_GET["item"]; 
+$itemid = $_GET["item"]; 
 $lang = $_GET["lang"]; 
 $kartid = $_GET["kartid"]; 
-/* ######################################################## */
+include('read_index.php');
 
-/* LESE index.dat in array $data[][] und schließe index.dat */
-$counter = "0";
-$fHandle = fopen("items/index.dat","r");
-if ($fHandle != NULL)
- {
-  while (!feof($fHandle))
-   {
-    $counter++;
-    $buffer = fgets($fHandle); $data["$counter"]['item_id'] = trim($buffer,"\n"); if ($data["$counter"]['item_id'] == $item) $c = $counter;  /* Find out which array contains the wanted item */
-    $buffer = fgets($fHandle); $data["$counter"]['item_name'] = trim($buffer,"\n");
-    $buffer = fgets($fHandle); $data["$counter"]['item_type'] = trim($buffer,"\n"); $utype = strtoupper($buffer); $ltype = strtolower($buffer);
-    $buffer = fgets($fHandle); $data["$counter"]['item_descr'] = trim($buffer,"\n");
-    $buffer = fgets($fHandle); $data["$counter"]['item_preis'] = trim($buffer,"\n");
-    $data["$counter"]['item_pic'] = "items/pics/{$data["$counter"]['item_id']}.png";
-    $buffer = fgets($fHandle); $data["$counter"]['item_details'] = trim($buffer,"\n");
-   }
- }
-fclose($fHandle);
-$counter--;
-$itemamount = $counter;
-
-if ($c == "") { echo "Error! $item does not exist in array!<br>\n<pre>"; print_r($data); echo "</pre>\n"; }
+if ($item == "") { echo "Error! $itemid does not exist in array!<br>\n<pre>"; print_r($data); echo "</pre>\n"; }
 
 /* ######################################################## */
 /* Erstelle Tracklist mit <audio> Playback */
-if ($data["$c"]['item_type'] == "CD")
+if ($data["$item"]['item_type'] == "CD")
   {
    $counter = "0";
-   $fHandle = fopen("items/{$data["$c"]['item_id']}.dat","r");
+   $fHandle = fopen("items/{$data["$item"]['item_id']}.dat","r");
    if ($fHandle != NULL)
     {
      while (!feof($fHandle))
@@ -48,8 +27,12 @@ if ($data["$c"]['item_type'] == "CD")
                             "&",
                             "?",
                             "!",
-                            ".");
+                            ".",
+                            "'",
+                            "#");
        $char_replace = array("_",
+                             "",
+                             "",
                              "",
                              "",
                              "",
@@ -67,12 +50,12 @@ if ($data["$c"]['item_type'] == "CD")
       $tracklisten = file_get_contents("get_audio.html");
       $searchtrack  = array('%id%', '%trackname%', '%trackid%');
         /* Womit soll das ersetzt werden? */
-        $replacetrack = array($data["$c"]['item_id'], $tracks["$track"]['name'], $tracks["$track"]['id']);
+        $replacetrack = array($data["$item"]['item_id'], $tracks["$track"]['name'], $tracks["$track"]['id']);
         /* Finde und ersetze Platzhalter in $output */
         $tracklist .= str_replace($searchtrack, $replacetrack, $tracklisten);
      }
    $tracklist .= "</table></font>";
-   $data["$c"]['item_details'] = $tracklist;
+   $data["$item"]['item_details'] = $tracklist;
   }
 
 /* ######################################################## */
@@ -81,15 +64,15 @@ $itemtemplate = "items/item_template.html";
 $template = file_get_contents($itemtemplate);
   if ($lang == "english") 
     {
-     $alt = "click here to view our {$data["$c"]['item_type']} {$data["$c"]['item_name']}";
+     $alt = "click here to view our {$data["$item"]['item_type']} {$data["$item"]['item_name']}";
      $buy = "into shopping kart";
-     $value = "{$data["$c"]['item_preis']} &euro;/piece";
+     $value = "{$data["$item"]['item_preis']} &euro;/piece";
     }
   else 
     {
-     $alt = "clicken Sie hier um die {$data["$c"]['item_type']} {$data["$c"]['item_name']} anzusehen";
+     $alt = "clicken Sie hier um die {$data["$item"]['item_type']} {$data["$item"]['item_name']} anzusehen";
      $buy = "in den Warenkorb";
-     $value = "{$data["$c"]['item_preis']} &euro;/St&uuml;ck";
+     $value = "{$data["$item"]['item_preis']} &euro;/St&uuml;ck";
     }
   /* Was soll ersetzt werden? */
   $search  = array('%id%', 
@@ -108,20 +91,20 @@ $template = file_get_contents($itemtemplate);
                    '%c%',
                    '%kartid%');
   /* Womit soll das ersetzt werden? */
-  $replace = array($data["$c"]['item_id'], 
-                   $data["$c"]['item_name'],
+  $replace = array($data["$item"]['item_id'], 
+                   $data["$item"]['item_name'],
                    $ltype,
-                   $data["$c"]['item_type'], 
+                   $data["$item"]['item_type'], 
                    $utype, 
-                   $data["$c"]['item_descr'], 
-                   $data["$c"]['item_preis'], 
-                   $data["$c"]['item_pic'], 
-                   $data["$c"]['item_details'],
+                   $data["$item"]['item_descr'], 
+                   $data["$item"]['item_preis'], 
+                   $data["$item"]['item_pic'], 
+                   $data["$item"]['item_details'],
                    $alt,
                    $buy,
                    $value,
                    $lang,
-                   $c,
+                   $item,
                    $kartid);
   /* Finde und ersetze Platzhalter in $output */
   $output = str_replace($search, $replace, $template);

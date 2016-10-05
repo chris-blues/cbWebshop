@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>folkadelic shop admin</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<style type="text/css">
-a:link { color: #24280F; text-decoration: none}
-a:visited { color: #24280F; text-decoration: none}
-a:hover { color: #999966; text-decoration: none }
-</style>
-</head>
+<?php include('header_short.html'); ?>
 
 <body>
 <center>
@@ -23,35 +13,10 @@ a:hover { color: #999966; text-decoration: none }
 
 $c = $_GET["c"];
 
-/* LESE index.dat und schließe index.dat */
-  $counter = "0";
-  $fHandle = fopen("../items/index.dat","r");
-  if ($fHandle != NULL)
-   {
-    while (!feof($fHandle))
-     {
-      $counter++;
-      $buffer = fgets($fHandle); $data[$counter]['item_id'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_name'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_type'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_descr'] = trim($buffer,"\n");
-      $buffer = fgets($fHandle); $data[$counter]['item_preis'] = trim($buffer,"\n");
-      $data["$counter"]['item_pic'] = "items/pics/{$data["$counter"]['item_id']}.png";
-      $buffer = fgets($fHandle); $data[$counter]['item_details'] = trim($buffer,"\n");
-      if ($data[$counter]['item_type'] == "CD") 
-        {
-         $tracklist = "../items/{$data[$counter]['item_id']}.dat";
-         $data[$counter]['item_details'] = file_get_contents($tracklist);
-         $data[$counter]['item_details'] = trim($data[$counter]['item_details'],"\n");
-        }
-      else $data[$counter]['item_details'] = str_replace("<br>","\n",$data[$counter]['item_details']);
-     }
-   }
-   fclose($fHandle);
-   $counter--;
+$modus = "display_data";
+include('read_index.php');
 
-/* ############################################################# */
-
+  $oldid = $data[$c]['item_id'];
   echo "<form name=\"item-$c\" action=\"savelist.php?job=updateitem\" method=\"post\" accept-charset=\"UTF-8\" enctype=\"multipart/form-data\">\n";
   echo "<table border=\"0\" align=\"center\">\n";
   echo "  <tr>\n    <td>\n      <b>$c</b><br>\n      <img src=\"../{$data[$c]['item_pic']}\" height=\"120\"><br>\n";
@@ -74,7 +39,7 @@ $c = $_GET["c"];
   echo "      Preis:<input name=\"item_preis\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_preis']}\"><br>\n";
   echo "    </td>\n  </tr>\n  <tr>\n    <td align=\"left\" colspan=\"2\">\n      Details:<br>\n";
   echo "      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";
-  echo "      <input type=\"submit\" value=\" update this item \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n";
+  echo "      <input type=\"submit\" value=\" update this item \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n      <input type=\"hidden\" name=\"oldid\" value=\"$oldid\">\n";
   echo "    </td>\n  </tr>\n";
   /* echo "<pre>";print_r($data);echo "</pre>"; */
 ?>
