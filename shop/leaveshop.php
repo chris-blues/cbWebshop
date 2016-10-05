@@ -81,7 +81,7 @@ foreach ($kart as $c => $value)
 
 $betreff_buyer = gettext("Your order") . " @ {$conf["this_domain"]} - ID:$kartid";
 $mail_items .= "--------------------------------\n" . gettext("Transfercost") . "($paymentname): $transfercost {$conf["_currency"]}\n" . gettext("Shipping cost") . " $shippingcost {$conf["_currency"]}\n--------------------------------\n" . gettext("Total") . ": $sum_items {$conf["_currency"]}\n\n";
-$mail_opener_buyer = gettext("For your information and as an invoice to your order at  {$conf["this_domain"]}") . "\n\n$date\n\n";
+$mail_opener_buyer = gettext("For your information and as an invoice to your order at") . " {$conf["this_domain"]}\n\n$date\n\n";
 $mail_opener_buyer .= gettext("Hello $firstname $lastname!") . "\n\n" . gettext("Thank you for your order and your interest in our work!") . "\n" . gettext("Here is what you ordered:") . "\n\n"; 
 $mail_opener_buyer .= gettext("Kart-ID:") . " $kartid\n\n";
 $mail_end_buyer = gettext("Please transfer the amount to our account as soon as possible, so we can send you the shipment as soon as your money has arrived!") . "\n\n";
@@ -146,7 +146,8 @@ echo "<tr>\n<td align=\"center\" colspan=\"3\">\n<hr style=\"width:100%; color:#
 echo "<tr>\n<td align=\"center\" colspan=\"3\">\n";
 if ($opt == "1")
   {
-   echo gettext("Please send <b>$str_sum_items {$conf["_currency"]}</b> to the following bank account:") . "<br>\n<br>\n";
+   printf (gettext("Please send <b>%s %s</b> to the following bank account:"),$str_sum_items, $conf["_currency"]);
+   echo "<br>\n<br>\n";
    echo nl2br($conf["bankaccount_info"],false) . "<br>\n";
    echo gettext("As soon as your money arrives we'll send your shipment.") . "<br>\n";
   }

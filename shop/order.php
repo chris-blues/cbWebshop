@@ -69,14 +69,14 @@ $costs = $transfercost + $shippingcost;
         echo "<div class=\"orderdata\">\n";
         echo "<form action=\"{$conf["callup"]}{$link}job=adduserdata&amp;kart=show\" id=\"submit_shipping_data\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
       ?>
-            <div class="orderline"><?php echo gettext("First name: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="firstname"<?php echo "$firstname"; ?>></div><br>
-            <div class="orderline"><?php echo gettext("Last name: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="lastname"<?php echo "$lastname"; ?>></div><br>
-            <div class="orderline"><?php echo gettext("Street No: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="adress1"<?php echo "$adress1"; ?>></div><br>
-            <div class="orderline"><?php echo gettext("Adress line 2: (optional) "); ?></div><div class="orderline"><input maxlength="100" size="20" name="adress2"<?php echo "$adress2"; ?>></div><br>
-            <div class="orderline"><?php echo gettext("ZIP: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="plz"<?php echo "$plz"; ?>></div><br>
-            <div class="orderline"><?php echo gettext("City: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="city"<? echo "$city"; ?>></div><br>
-            <div class="orderline"><?php echo gettext("Province: (optional) "); ?></div><div class="orderline"><input maxlength="100" size="20" name="province"<?php echo "$province"; ?>></div><br>
-            <div class="orderline"><?php echo gettext("Country: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="countryname"<?php echo " value=\"$countryname\""; ?>></div><br>
+            <div class="orderline"><?php echo gettext("First name:"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="firstname"<?php echo "$firstname"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Last name:"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="lastname"<?php echo "$lastname"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Street No:"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="adress1"<?php echo "$adress1"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Adress line 2: (optional)"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="adress2"<?php echo "$adress2"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("ZIP:"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="plz"<?php echo "$plz"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("City:"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="city"<? echo "$city"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Province: (optional)"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="province"<?php echo "$province"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Country:"); ?> </div><div class="orderline"><input maxlength="100" size="20" name="countryname"<?php echo " value=\"$countryname\""; ?>></div><br>
             <div class="orderline">Email: </div><div class="orderline"><input maxlength="100" size="20" name="email"<?php echo "$email"; ?>></div><br>
             <?php
               echo "<input type=\"hidden\" name=\"newsletter\" value=\"nein\">\n";

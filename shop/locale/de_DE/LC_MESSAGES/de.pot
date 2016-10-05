@@ -1,0 +1,613 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cbWebshop v0.60\n"
+"POT-Creation-Date: 2016-10-05 20:27+0200\n"
+"PO-Revision-Date: 2016-10-05 20:39+0200\n"
+"Last-Translator: chris_blues <chris@musicchris.de>\n"
+"Language-Team: chris_blues <chris@musicchris.de>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.9\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/edit_costs.php:8 admin/shopadminmenu.php:45
+msgid "Edit costs"
+msgstr "Kosten bearbeiten"
+
+#: admin/edit_costs.php:9 admin/edit_payment.php:10 admin/settings.php:34
+msgid "Edit carefully!"
+msgstr "Vorsicht beim Bearbeiten!"
+
+#: admin/edit_costs.php:9 admin/edit_payment.php:10
+msgid "Use dots for decimals (e.g.: 1234.56)"
+msgstr "Punkt für Komma benutzen! (z.Bsp.: 1234.56)"
+
+#: admin/edit_costs.php:18
+msgid "Your Home Country:"
+msgstr "Ihr Heimatland:"
+
+#: admin/edit_costs.php:32 admin/edit_countries.php:21 admin/edit_lang.php:62
+#: admin/edit_payment.php:22 admin/edit_types.php:93 admin/newitem.php:59
+#: admin/savelist.php:258 admin/settings.php:108 admin/viewitem.php:49
+msgid "Back"
+msgstr "Zurück"
+
+#: admin/edit_costs.php:32 admin/edit_countries.php:21 admin/edit_lang.php:62
+#: admin/edit_payment.php:22 admin/edit_types.php:93 admin/newitem.php:60
+#: admin/settings.php:108 admin/viewitem.php:49
+msgid "Save"
+msgstr "Speichern"
+
+#: admin/edit_countries.php:8 admin/shopadminmenu.php:60
+msgid "Edit countries"
+msgstr "Länder bearbeiten"
+
+#: admin/edit_countries.php:9
+msgid "These will show up in the kart's shipping-list."
+msgstr "Diese tauchen in der Lieferungsliste im Warenkorb auf."
+
+#: admin/edit_countries.php:16 admin/edit_lang.php:38 admin/edit_types.php:52
+msgid "Remove"
+msgstr "Entfernen"
+
+#: admin/edit_kartfiles.php:19 admin/shopadminmenu.php:22
+msgid "View available karts"
+msgstr "vorhandene Warenkörbe ansehen"
+
+#: admin/edit_kartfiles.php:40 admin/edit_lang.php:83 admin/edit_lang.php:91
+msgid "delete file"
+msgstr "Datei löschen"
+
+#: admin/edit_lang.php:26
+msgid "Edit available languages"
+msgstr "Verfügbare Sprachen bearbeiten"
+
+#: admin/edit_lang.php:26
+msgid ""
+"Note that you need a translated language in the shop's locale!!! You can "
+"translate the locale-file <a href=\"translate/translate.php\" target=\"_blank"
+"\">here</a>. At the bottom of this page you can process existing language "
+"files!"
+msgstr ""
+"Beachte, daß eine übersetzte Sprachdatei in der Locale vorhanden sein muß!!! "
+"Sie können die Sprachdatei <a href=\"translate/translate.php\" target="
+"\"_blank\">hier</a> übersetzen. Unten auf dieser Seite können vorhandene "
+"Sprachdateien verarbeitet werden!"
+
+#: admin/edit_lang.php:73
+msgid "Existing language files:"
+msgstr "Vorhandene Sprachdateien:"
+
+#: admin/edit_lang.php:88
+msgid "Not registered yet:"
+msgstr "Noch nicht registriert:"
+
+#: admin/edit_lang.php:94
+msgid "register file"
+msgstr "Datei registrieren"
+
+#: admin/edit_lang.php:99
+msgid "rename file"
+msgstr "Datei umbenennen"
+
+#: admin/edit_payment.php:9 admin/shopadminmenu.php:48
+msgid "Edit payment"
+msgstr "Bezahlung bearbeiten"
+
+#: admin/edit_types.php:31 admin/shopadminmenu.php:54
+msgid "Edit item-types"
+msgstr "Artikeltypen bearbeiten"
+
+#: admin/edit_types.php:31
+msgid "These will show up in 'Add new item' once you added an item here."
+msgstr ""
+"Diese tauchen in 'Neuen Artikel hinzufügen' auf, sobald hier etwas "
+"hinzugefügt wird."
+
+#: admin/edit_types.php:49
+msgid "Music"
+msgstr "Musik"
+
+#: admin/edit_types.php:50
+msgid "Clothing"
+msgstr "Kleidung"
+
+#: admin/index.php:35
+msgid "Shop Admin Tools"
+msgstr "Shop Admin Werkzeuge"
+
+#: admin/newitem.php:10
+msgid "Add item to the shop"
+msgstr "Artikel zum Shop hinzufügen"
+
+#: admin/newitem.php:25 admin/viewitem.php:33
+msgid "Type:"
+msgstr "Typ:"
+
+#: admin/newitem.php:26
+msgid "Choose type!"
+msgstr "Typ wählen!"
+
+#: admin/newitem.php:35 admin/viewitem.php:31
+msgid "Name:"
+msgstr "Name:"
+
+#: admin/newitem.php:36
+msgid "Year:"
+msgstr "Jahr:"
+
+#: admin/newitem.php:37
+msgid "Sizes:"
+msgstr "Größen:"
+
+#: admin/newitem.php:38 admin/viewitem.php:43
+msgid "Price:"
+msgstr "Preis:"
+
+#: admin/newitem.php:43
+msgid "PNG-files only!"
+msgstr "Nur PNG-Dateien!"
+
+#: admin/newitem.php:43 admin/viewitem.php:44
+msgid "Item's Pic:"
+msgstr "Artikelbild:"
+
+#: admin/newitem.php:48 admin/viewitem.php:47
+msgid "Details (html is allowed!):"
+msgstr "Einzelheiten (html ist erlaubt!):"
+
+#: admin/newitem.php:54 admin/viewitem.php:48
+msgid "Tracklist (plain text only!)"
+msgstr "Tracklist (nur reiner Text erlaubt!)"
+
+#: admin/read_kartfile.php:68 conf/payment_conf.php:4 kartline.php:193
+#: leaveshop.php:43 order.php:29 orderaction.php:70
+msgid "Bank Transfer"
+msgstr "Überweisung"
+
+#: admin/read_kartfile.php:69 conf/payment_conf.php:7 kartline.php:199
+#: leaveshop.php:49 order.php:35 orderaction.php:76
+msgid "PayPal"
+msgstr "PayPal"
+
+#: admin/read_kartfile.php:70 conf/payment_conf.php:10 kartline.php:205
+#: leaveshop.php:55 order.php:41 orderaction.php:82
+msgid "Pay on delivery"
+msgstr "Nachnahme"
+
+#: admin/settings.php:33
+msgid "Shop Settings"
+msgstr "Shopeinstellungen"
+
+#: admin/settings.php:64
+msgid "Default language:"
+msgstr "Standardsprache:"
+
+#: admin/settings.php:75
+msgid "Bank Account:"
+msgstr "Bankkonto:"
+
+#: admin/shopadminmenu.php:13
+msgid "View items"
+msgstr "Artikel ansehen"
+
+#: admin/shopadminmenu.php:16
+msgid "Add new item"
+msgstr "Neuen Artikel hinzufügen"
+
+#: admin/shopadminmenu.php:30
+msgid "Show options"
+msgstr "Optionen anzeigen"
+
+#: admin/shopadminmenu.php:31
+msgid "Hide options"
+msgstr "Optionen verstecken"
+
+#: admin/shopadminmenu.php:35
+msgid "Layout:"
+msgstr "Layout:"
+
+#: admin/shopadminmenu.php:39
+msgid "General settings:"
+msgstr "Generelle Einstellungen:"
+
+#: admin/shopadminmenu.php:42
+msgid "Financial:"
+msgstr "Finanzielles:"
+
+#: admin/shopadminmenu.php:51
+msgid "Contents:"
+msgstr "Inhalte:"
+
+#: admin/shopadminmenu.php:57
+msgid "Edit languages"
+msgstr "Sprachen bearbeiten"
+
+#: admin/showitems.php:20 admin/viewitem.php:11
+msgid "edit this item"
+msgstr "Diesen Artikel bearbeiten"
+
+#: admin/translate/translate.php:49
+msgid ""
+"The language you want to use as a template. Here are all languages we "
+"already have. We recommend you use english or deutsch to avoid subsequent "
+"errors, since these were the first languages we had.\n"
+"WARNING! Don't use this switch, once you have begun working! It will destroy "
+"all your work!"
+msgstr ""
+"Die Sprache, die als Vorlage genutzt werden soll. Hier sind alle verfügbaren "
+"Sprachen aufgelistet. Wir empfehlen Deutsch oder Englisch um Folgefehler zu "
+"vermeiden, da dies die ersten verfügbaren Übersetzungen waren.\n"
+" WARNUNG! Dieser Schalter darf nicht mehr benutzt werden, nachdem die "
+"Übersetzung angefangen wurde! Das würde die getane Arbeit vernichten!"
+
+#: admin/translate/translate.php:52
+msgid ""
+"In to which language would you like to translate? Please enter the language "
+"name in its own language! (e.g.:fran&#231;ais instead of french!)"
+msgstr ""
+"In welche Sprache möchten Sie übersetzen? Bitte geben Sie den Sprachnamen in "
+"der eigenen Sprache an! (z.Bsp.: fran&#231;ais statt französisch!)"
+
+#: admin/translate/translate.php:54
+msgid ""
+"Please tell us your &quot;name &lt;email-address&gt;&quot; so, that we can "
+"come back to you if there are any questions."
+msgstr ""
+"Bitte nennen Sie uns ihren &quot;Namen &lt;email-address&gt;&quot;, damit "
+"wir auf Sie zurückkommen können falls es Fragen gibt."
+
+#: admin/translate/translate.php:56
+msgid "Systemname of text field"
+msgstr "Systemname des Textfelds"
+
+#: admin/translate/translate.php:56
+msgid "Your new translation"
+msgstr "Ihre neue Übersetzung"
+
+#: admin/translate/translate.php:56
+msgid "Your template"
+msgstr "Ihre Vorlage"
+
+#: admin/translate/translate.php:85
+msgid ""
+"Please make sure you have checked for errors trice!!!!! There's nothing "
+"worse for us than to find out which version is the best in a strange foreign "
+"language!!!"
+msgstr ""
+"Bitte stellen Sie sicher, daß Sie mehrfach nach Fehlern gesucht haben!!!!! "
+"Es gibt nichts Schlimmeres, als versuchen herauszubekommen welche Version "
+"die bessere ist - in einer unbekannten Sprache!!!"
+
+#: admin/translate/translate.php:86
+msgid "OK, I have double-checked! Send this translation!"
+msgstr "OK, ich habe die Übersetzung mehrfach überprüft! Absenden!"
+
+#: admin/translate/translators.php:36
+msgid ""
+"Your language is not available? If you have some time to spare, you could "
+"help us."
+msgstr ""
+"Ihre Sprache ist nicht vorhanden? Wenn Sie etwas Zeit haben, dann könnten "
+"Sie uns helfen."
+
+#: admin/viewitem.php:15
+msgid "delete this item"
+msgstr "Diesen Artikel löschen"
+
+#: admin/viewitem.php:42
+msgid "Year/Size:"
+msgstr "Jahr/Größe:"
+
+#: admin/viewitem.php:55
+msgid "Expected Audio-File-Names in:"
+msgstr "Erwartete Audiodateinamen:"
+
+#: kartline.php:61 kartline.php:162
+msgid "other"
+msgstr "andere"
+
+#: kartline.php:115 kartline.php:214
+msgid "Shopping kart"
+msgstr "Warenkorb"
+
+#: kartline.php:119 shopcontent.php:152
+msgid "Please activate JavaScript to use this page!"
+msgstr "Bitte aktivieren Sie JavaScript, um diese Seite nutzen zu können!"
+
+#: kartline.php:128 shop.php:79
+msgid "Hide Details"
+msgstr "Details verstecken"
+
+#: kartline.php:143
+msgid "remove"
+msgstr "entfernen"
+
+#: kartline.php:152
+msgid "Sub-Total"
+msgstr "Zwischensumme"
+
+#: kartline.php:157
+msgid "Select country!"
+msgstr "Land wählen"
+
+#: kartline.php:169 leaveshop.php:142
+msgid "Shipping"
+msgstr "Lieferung"
+
+#: kartline.php:176
+msgid "Choose payment!"
+msgstr "Bezahlung wählen!"
+
+#: kartline.php:211
+msgid "reset shopping kart (including all adress data)"
+msgstr "Warenkorb löschen (inkl der Adressdaten)"
+
+#: kartline.php:213 leaveshop.php:83 leaveshop.php:144
+msgid "Total"
+msgstr "Summe"
+
+#: kartline.php:235
+msgid "Change shipping data"
+msgstr "Lieferdaten ändern"
+
+#: kartline.php:236
+msgid "Finally buy!"
+msgstr "Jetzt kaufen!"
+
+#: kartline.php:242
+msgid "Enter shipping data"
+msgstr "Lieferdaten eingeben"
+
+#: kartline.php:248
+msgid "Kart is empty."
+msgstr "Warenkorb ist leer."
+
+#: leaveshop.php:64 leaveshop.php:82
+msgid "Your order"
+msgstr "Ihre Bestellung"
+
+#: leaveshop.php:83
+msgid "Transfercost"
+msgstr "Überweisungskosten"
+
+#: leaveshop.php:83
+msgid "Shipping cost"
+msgstr "Lieferkosten"
+
+#: leaveshop.php:84
+msgid "For your information and as an invoice to your order at"
+msgstr "Zu ihrer Information und als Rechnung für Ihre Bestellung bei"
+
+#: leaveshop.php:85
+msgid "Thank you for your order and your interest in our work!"
+msgstr "Vielen Dank für Ihre Bestellung und Ihr Interesse in unsere Arbeit!"
+
+#: leaveshop.php:85
+msgid "Here is what you ordered:"
+msgstr "Das haben Sie bestellt:"
+
+#: leaveshop.php:86
+msgid "Kart-ID:"
+msgstr "Warenkorb-ID:"
+
+#: leaveshop.php:87
+msgid ""
+"Please transfer the amount to our account as soon as possible, so we can "
+"send you the shipment as soon as your money has arrived!"
+msgstr ""
+"Bitte überweisen Sie die Summe schnellstmöglich, sodaß wir die Lieferung "
+"abschicken können, sobald das Geld eingetroffen ist!"
+
+#: leaveshop.php:88
+msgid "We hope you enjoy our work and wish you all the best!"
+msgstr ""
+"Wir hoffen Ihnen gefällt das Ergebnis unserer Arbeit und verbleiben mit den "
+"besten Grüßen!"
+
+# someone speaks a language
+# jemand spricht eine Sprache
+#: leaveshop.php:91
+msgid "speaks"
+msgstr "spricht"
+
+# someone orders an item
+# jemand bestellt einen Artikel
+#: leaveshop.php:95
+msgid "orders"
+msgstr "bestellt"
+
+#: leaveshop.php:121
+msgid "Thank you for your order!"
+msgstr "Vielen Dank für Ihre Bestellung!"
+
+#: leaveshop.php:130 shopcontent.php:13
+msgid "pieces"
+msgstr "Stück"
+
+#: leaveshop.php:149
+#, php-format
+msgid "Please send <b>%s %s</b> to the following bank account:"
+msgstr "Bitte überweisen Sie <b>%s %s</b> auf folgendes Konto:"
+
+#: leaveshop.php:152
+msgid "As soon as your money arrives we'll send your shipment."
+msgstr "Sobald ihre Bezahlung eintrifft, schicken wir Ihre Lieferung ab."
+
+#: leaveshop.php:156
+msgid ""
+"Your order will be sent soon! Please keep enough cash under your pillow to "
+"pay for the package, when it arrives!"
+msgstr ""
+"Ihre Bestellung wird demnächst versandt! Bitte halten Sie genug Bargeld "
+"unter Ihrem Kissen bereit, wenn die Lieferung eintrifft!"
+
+#: leaveshop.php:169
+msgid ""
+"Something went wrong! We couldn't send an email to you! But we have been "
+"notified and will get in touch with you!"
+msgstr ""
+"Etwas ist schief gegangen! Wir konnten Ihnen keine Email schicken! Wir "
+"wurden benachrichtigt und werden uns bei Ihnen melden!"
+
+#: leaveshop.php:170
+msgid ""
+"Your data was kept on the server for error tracking. It will be erased as "
+"soon as we have completed."
+msgstr ""
+"Ihre Daten wurden auf dem Server belassen, um den Fehler zu finden. Die "
+"Daten werden gelöscht, sobald wir fertig sind."
+
+#: leaveshop.php:174
+msgid ""
+"An email has been sent to you, containing all the information you'll need to "
+"finalize this business."
+msgstr ""
+"Wir haben ihnen eine Email geschickt, die alle Informationen beinhaltet, um "
+"das Geschäft abzuschließen."
+
+#: leaveshop.php:175
+msgid "Your data could not be erased!"
+msgstr "Ihre Daten konnten nicht gelöscht werden!"
+
+#: leaveshop.php:176
+msgid "Your data has been erased from the server!"
+msgstr "Ihre Daten wurden vom Server gelöscht!"
+
+#: order.php:54
+msgid ""
+"This connection is NOT encrypted with SSL! I strongly recommend: do NOT send "
+"your private data through an unencrypted connection!"
+msgstr ""
+"Diese Verbindung istr NICHT mit SSL verschlüsselt! Senden Sie NIEMALS "
+"private Daten über eine unverschlüsselte Verbindung!"
+
+#: order.php:61
+msgid "Encrypt now!"
+msgstr "Jetzt verschlüsseln!"
+
+#: order.php:66
+msgid "This connection is encrypted with SSL."
+msgstr "Diese Verbindung ist mit SSL verschlüsselt."
+
+#: order.php:68
+msgid ""
+"Now we need to know, where we shall send the order. You still can make "
+"changes to the contents of the shopping kart!"
+msgstr ""
+"Jetzt müssen wir noch erfahren, wo Ihre Bestellung hingeschickt werden soll. "
+"Sie können ihren Warenkorb weiterhin verändern!"
+
+#: order.php:72
+msgid "First name:"
+msgstr "Vorname:"
+
+#: order.php:73
+msgid "Last name:"
+msgstr "Nachname:"
+
+#: order.php:74
+msgid "Street No:"
+msgstr "Straße Nr:"
+
+#: order.php:75
+msgid "Adress line 2: (optional)"
+msgstr "Adresszusatz: (optional)"
+
+#: order.php:76
+msgid "ZIP:"
+msgstr "PLZ:"
+
+#: order.php:77
+msgid "City:"
+msgstr "Stadt:"
+
+#: order.php:78
+msgid "Province: (optional)"
+msgstr "Provinz: (optional)"
+
+#: order.php:79
+msgid "Country:"
+msgstr "Ihr Heimatland:"
+
+#: order.php:91
+msgid "Back to shop"
+msgstr "Zurück zum Shop"
+
+#: order.php:94
+msgid "Submit data!"
+msgstr "Daten senden!"
+
+#: order.php:97
+msgid ""
+"Your data will not be shared with anybody! We only use it to label your "
+"package, so that it will find you. We store your data only for a short time, "
+"in order to be able to respond, if there should be something wrong with your "
+"shipment. This data is stored in our email-account, so no one else will have "
+"access to it. The data stored on our server is deleted, as soon as the order "
+"has been made."
+msgstr ""
+"Ihre Daten werden mit niemandem geteilt! Wir benutzen Ihre Daten nur um die "
+"Lieferung zu beschriften, so daß sie auch bei Ihnen ankommt. Wir speichern "
+"ihre Daten nur für kurze Zeit, um Ihnen antworten zu können, falls etwas mit "
+"der Sendung schiefgeht. Diese Daten werden nur in Form einer Email bei uns "
+"gespeichert, so daß niemand sonst Zugriff auf Ihre Daten hat. Ihre Daten auf "
+"dem Server werden gelöscht sobald Sie Ihre Bestellung abschicken."
+
+#: orderaction.php:110
+msgid "Kart seems to be emtpy!"
+msgstr "Der Warenkorb scheint leer zu sein!"
+
+#: orderaction.php:111
+msgid "You didn't choose your country in the kart! Please do so!"
+msgstr "Sie haben im Warenkorb kein Land angegeben! Bitte holen Sie das nach!"
+
+#: orderaction.php:112
+msgid ""
+"You didn't choose your preferred payment method in the kart! Please do so!"
+msgstr ""
+"Sie haben im Warenkorb kein Art der Bezahlung angegeben! Bitte holen Sie das "
+"nach!"
+
+#: orderaction.php:115
+msgid ""
+"You didn't enter all necessary information! Use the button below to return!"
+msgstr ""
+"Sie haben nicht alle notwendigen Felder asgefüllt! Benutzen Sie den Zurück-"
+"Knopf unten um zurückzukehren!"
+
+#: orderaction.php:119
+msgid "BACK TO ORDER-FORM!"
+msgstr "ZURÜCK ZUM BESTELLFORMULAR!"
+
+#: orderaction.php:154
+msgid "One moment!"
+msgstr "Einen Moment!"
+
+#: orderaction.php:160
+msgid "Redirecting you to PayPal."
+msgstr "Sie werden zu PayPal weitergeleitet."
+
+#: shop.php:80
+msgid "Show Details"
+msgstr "Details anzeigen"
+
+#: shop.php:81
+msgid "Really delete this item?"
+msgstr "Diesen Artikel wirklich löschen?"
+
+#: shopcontent.php:12
+msgid "Buy"
+msgstr "Kaufen"
+
+#: shopcontent.php:13
+msgid "piece"
+msgstr "Stück"
+
+#: shopcontent.php:71
+msgid "Click here to play this song!"
+msgstr "Klicken Sie hier, um den Song zu hören!"
