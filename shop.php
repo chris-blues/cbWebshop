@@ -1,7 +1,29 @@
 <?php
-$opt = $_GET["opt"];
-if ($opt == "1") $lang = "english";
+if ($_GET["opt"] == "1") $lang = "english";
 else $lang = "deutsch";
+/* LESE index.dat in array $data[][] und schließe index.dat */
+  $counter = "0";
+  $fHandle = fopen("items/index.dat","r");
+  if ($fHandle != NULL)
+   {
+    while (!feof($fHandle))
+     {
+      $counter++;
+      $buffer = fgets($fHandle); $data[$counter]['item_id'] = trim($buffer,"\n"); $newitem = $buffer;
+      $buffer = fgets($fHandle); $data[$counter]['item_name'] = trim($buffer,"\n");
+      $buffer = fgets($fHandle); $data[$counter]['item_type'] = trim($buffer,"\n"); $$utype = strtoupper($buffer); $ltype = strtolower($buffer);
+      $buffer = fgets($fHandle); $data[$counter]['item_descr'] = trim($buffer,"\n");
+      $buffer = fgets($fHandle); $data[$counter]['item_preis'] = trim($buffer,"\n");
+      $buffer = fgets($fHandle); $data[$counter]['item_pic'] = trim($buffer,"\n");
+      $buffer = fgets($fHandle); $data[$counter]['item_preview'] = trim($buffer,"\n");
+      $buffer = fgets($fHandle); $data[$counter]['item_details'] = trim($buffer,"\n");
+     }
+   }
+  fclose($fHandle);
+  $counter--;
+  /* echo "Read $counter entries successfully from index.dat...<br>"; */
+  $itemamount = $counter;
+
 $current_page = "shop";
 include ('../header.html'); 
 include ('../kopf.php');
@@ -39,7 +61,9 @@ OUTPUT;
 
 OUTPUT;
              }
+            echo $lang;
             ?>
+            </form>
             </td>
             <td align="right" valign="top" width="220" height="631" rowspan="2">
               <iframe name="kart" width="220" height="634" frameborder="0" scrolling="no" src="kartline.php?lang=<?php echo $lang; ?>"></iframe>
@@ -51,7 +75,6 @@ OUTPUT;
             </td>
           </tr>
         </table>
-        </form>
         </center>
         </em></font>
     </td>

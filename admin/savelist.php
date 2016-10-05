@@ -41,20 +41,20 @@ if((!$_POST["reset_x"]))
  }  /* Daten sind abgeholt! */
  
  $type = strtolower($data["$counter"]['item_type']);
- $uploaddir = "../items/";
- $uploaddir .= "$type/";
- mkdir($uploaddir, 0777);
+ $uploaddir = "../items/pics/";
  $uploadfile = $uploaddir . basename($_FILES['upload']['name']);
+ 
  echo "<table border=\"1\"><tr><td><pre><h3>Upload</h3><br>";
  if (move_uploaded_file($_FILES['upload']['tmp_name'], $uploadfile)) 
   { echo "File is valid, and was successfully uploaded.<br>"; } 
  else 
   { echo "Error! Could not move file to $uploaddir<br>"; }
  echo 'Here is some more debugging info:<br>';
+ chmod($uploadfile, 0777);
  echo "filename: $uploadfile<br>";
  print_r($_FILES);
  echo "</pre></td></tr></table>";
- $data[$counter]['item_pic'] = "$type/" . basename($_FILES['upload']['name']);
+ $data[$counter]['item_pic'] = $uploadfile;
  chmod($uploadfile, 0755);
  
 }  /* Neuer Datensatz ist komplett eingelesen! */
@@ -68,7 +68,16 @@ if ($job != "")
    {
     if ($job == "delete")          /* Wenn wir einen Datensatz $num löschen sollen... */
      {
-      if ($c == $num) { $delitem = $data["$c"]['item_id']; continue; }  /* ...dann schreiben wir diesen einfach nicht wieder in die Datei! :) */
+      if ($c == $num) 
+        {
+         $delitem = $data["$c"]['item_id'];
+         $output = "deleting {$data["$c"]['item_pic']} : ";
+         if (!unlink($data["$c"]['item_pic']))    /* versuchen wir das Bild zu löschen! */
+           { $output .= "Error!"; }
+         else { $output .= "Success!"; }
+         echo "$output<br>";
+         continue;                                      /* ...und dann schreiben wir den betreffenden Datensatz einfach nicht wieder in die Datei! :) */
+        }
      }
     $str = trim($data["$c"]['item_id'],"\n"); fputs($fHandle, $str); fputs($fHandle, $lnb);
     $str = trim($data["$c"]['item_name'],"\n"); fputs($fHandle, $str); fputs($fHandle, $lnb); 

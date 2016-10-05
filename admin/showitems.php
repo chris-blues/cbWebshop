@@ -40,7 +40,7 @@ echo "<td align=\"left\">item_descr</td>\n";
 echo "<td align=\"left\">item_preis</td>\n";
 echo "<td align=\"left\">item_pic</td>\n";
 echo "<td align=\"left\">item_preview</td>\n";
-echo "<td align=\"left\">item_details</td>\n";
+echo "<td align=\"left\" width=\"500\">item_details</td>\n";
 echo "</tr>\n";
 
 /* Tabelleninhalt */
@@ -54,7 +54,7 @@ for ($c=1; $c <= $counter; $c++)
   echo "<td align=\"left\">{$data[$c]['item_preis']}</td>\n";
   echo "<td align=\"left\">{$data[$c]['item_pic']}</td>\n";
   echo "<td align=\"left\">{$data[$c]['item_preview']}</td>\n";
-  echo "<td align=\"left\">{$data[$c]['item_details']}</td>\n";
+  echo "<td align=\"left\" width=\"500\">{$data[$c]['item_details']}</td>\n";
   echo "</tr>\n";
  }  /* Ende Tabelle */
 ?>
@@ -64,6 +64,7 @@ for ($c=1; $c <= $counter; $c++)
   <tr>
     <td align="left" valign="center">
       <form action="savelist.php?job=additem" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+      <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
       <table>
         <tr><td align="right" valign="center">item_id</td><td align="left" valign="center"><input size="50" name="item_id" value=""><font size="1">Nur Kleinbuchstaben und Zahlen, keine Leerzeichen!</font></td></tr>
         <tr><td align="right" valign="center">item_name</td><td align="left" valign="center"><input size="50" name="item_name" value=""><font size="1">der Name der angezeigt wird</font></td></tr>
