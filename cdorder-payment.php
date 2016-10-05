@@ -35,10 +35,10 @@ echo <<<CDORDER
     
 CDORDER;
 
-   include('items/cd_darkercolors.php');
-   include('items/cd_livemix.php');
-   include('items/cd_roughmix.php');
-   include('items/tshirt_whatthefolk.php');
+   if ($darkercolors == "ja") include('items/cd_darkercolors.php');
+   if ($livemix == "ja") include('items/cd_livemix.php');
+   if ($roughmix == "ja") include('items/cd_roughmix.php');
+   if ($ts_wtf == "ja") include('items/tshirt_whatthefolk.php');
   
   echo <<<CDORDER
     </table><br>
