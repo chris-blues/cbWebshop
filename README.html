@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ReadMe CBWebshop</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+code { display:inline; background-color:#DDDDAA; }
+li { margin-bottom: 20px; }
+ul li { margin-bottom: 0px; }
+body { max-width: 800px; margin-left: auto; margin-right: auto; }
+h3 { display: inline; }
+</style>
+</head>
+<body>
+<img width="99%" src="cbwebshop0.48-screenie.png" alt="Screenshot">
+<h1>Thanks for using CBWebshop!</h1>
+<h2>About</h2>
+Software: CBWebshop<br>
+Copyright 2013<br>
+Author: chris_blues<br>
+Website: <a href="http://musicchris.de" target="_blank">http://musicchris.de</a><br>
+<br>
+A simple shop-application, written in php and a little JavaScript, aimed at musicians and bands to enhance their websites. It works solely with files, so there's no need for MySQL.<br>
+At the moment there is support for selling:
+<ul><li>CD's or other media (with HTML5 playbacks)</li>
+<li>T'shirts or other textiles</li></ul>
+Payment-options are:
+<ul><li>Bank transfer</li>
+<li>PayPal</li>
+<li>Pay on delivery</li></ul>
+At this time, it supports the following languages:
+<ul><li>english</li>
+<li>german</li></ul>
+There is a translation-script in the <code>admin area</code> -> <code>edit languages</code>. If you have translated the shop in another language, please let me know! I could include your translations into the next release. Contact me: <a href="mailto:chris@musicchris.de">chris@musicchris.de</a>.
+<h2>License</h2>
+This software is released under the <a href="https://www.gnu.org/copyleft/gpl.html" target="_blank">GPL(3)-License</a>. For details, see <a href="../LICENSE.txt" target="_blank">LICENSE.txt</a>.<br>This software comes with a <a href="http://jquery.com/" target="_blank">jQuery</a>-JavaScript library which is released under the <a href="http://jquery.org/license" target="_blank">MIT</a>-license.
+<h2>Installation</h2>
+<ol><li>Extract the zip and upload the folder <code>shop</code> to your website.</li>
+<li><h3>Folders:</h3>
+<ol><li>Make sure that the directory <code>shop/admin</code> is protected with a password. This is usually done with a <code>.htaccess</code> and a corresponding <code>.htpasswd</code> file. On some hosts this is done on the admin-interface of the server.</li>
+<li>Make sure the directory <code>shop/tmp</code> and it's contents have write access (777).</li></ol></li>
+<li>Link the shop.<ol><li>First, you should link the shop's CSS-files in the head-section of your HTML. Put in 2 lines between the &lt;head&gt; - tags; like this:<br>
+<code>&lt;head&gt;<br>
+[...]<br>
+&lt;link rel="stylesheet" media="(min-width: 1024px)" href="shop/shop.css" type="text/css"&gt;<br>
+&lt;link rel="stylesheet" media="(max-width: 1023px)" href="shop/shop-mobile.css" type="text/css"&gt;<br>
+[...]<br>
+&lt;/head&gt;</code><br></li>
+<li>You can include the shop itself in different ways, depending on how you actually built your website. On my site, it's currently done via a php script. Since the shop is made to be included into existing php, you can easily add it in php via: <code>include("shop/shop.php");</code><br>
+I've created a simple example for an "index.php". There you can see, how it is done. I've commented the important lines. Make sure you pass along a $lang: <code>$lang=english;</code> and a unique $kartid: <code>kartid=1234567890;</code>(see my index.php). You'll also need to set these up in the admin area of the shop. In general settings, there is a variable "callup". This is by default set to index.php. And there are "call"s. These are the parameters that are passed along with the index.php via get. <code>(e.g. index.php?somecall=somevalue)</code> Add your own calls you might need to run your website smoothly.</li></li>
+<li>I recommend, that you link the jQuery library. It adds some nice visual effects to the kart.<br>
+Include the following line in your HTML's head-section:<br>
+<code>&lt;script type="text/javascript" src="js/jquery-1.10.2.min.js"&gt;&lt;/script&gt;</code></li></ol>
+<li>Setup some important variables: Open the shop in a browser. Goto the following adress: <code>https://yourdomain.com/shop/admin</code>(I strongly advise to use https!)<br>
+Now click on the left side on <code>show settings</code>. Go through the settings-pages and change the variables accordingly to your site.</li>
+<li>Now you should be good to go! Delete or edit the examples and add new items to your shop!</li>
+<li>Edit the .css-files in the folder <code>shop</code> to your liking!</li>
+</ol>
+Have fun!
+</body>
+</html>

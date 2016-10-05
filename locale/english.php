@@ -44,6 +44,9 @@
   $loc_lang["to_following_account"]      = "to the following bank account:";
   $loc_lang["as_soon_as_money_arrives"]  = "As soon as your money arrives we'll send your shipment.";
   $loc_lang["will_be_sent_soon"]         = "Your order will be sent soon! Please keep enough cash under your pillow to pay for the package, when it arrives!";
+  $loc_lang["ssl_on"]                    = "This connection is encrypted with SSL.";
+  $loc_lang["ssl_off"]                   = "This connection is NOT encrypted with SSL! I strongly recommend: do NOT send your private data through an unencrypted connection!";
+  $loc_lang["encrypt"]                   = "Encrypt now!";
   $loc_lang["explain_order_form_1"]      = "Now we need to know, where we shall send the order. You still can make changes to the contents of the shopping kart!";
   $loc_lang["first_name"]                = "First name: ";
   $loc_lang["last_name"]                 = "Last name: ";

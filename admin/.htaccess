@@ -1,0 +1,5 @@
+AuthName "Shop Admin"
+AuthType Basic
+AuthUserFile /customers/e/7/c/musicchris.de/httpd.www/admin/.htpasswd
+AuthGroupFile /dev/null
+require valid-user 

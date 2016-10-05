@@ -1,7 +1,16 @@
 <?php
+include('shop/conf/shop_conf.php');
+include('shop/conf/cost_conf.php');
+include('shop/conf/payment_conf.php');
+include('shop/conf/countries.php');
+//include('header_short.html');
+if ($lang == "" or !isset($lang)) $lang = $_GET["lang"];
+if ($kartid == "" or !isset($kartid)) $kartid = $_GET["kartid"];
 
 /* ######################################################## */
 
+define( "LOC_LANG", $lang );
+include('shop/locale/' . LOC_LANG . '.php');
 $kartmode = "order";
 include('shop/read_kartfile.php');
 
@@ -36,6 +45,24 @@ $costs = $transfercost + $shippingcost;
   <tr>
     <td align="justify" valign="top">
       <?php
+      if ($conf["surpress_ssl_warning"] != "TRUE")
+       {
+        if (!isset($_SERVER[HTTPS]) or $_SERVER[HTTPS] == "")
+          {
+           echo "<p style=\"font-weight: bold;\">" . $loc_lang["ssl_off"] . "\n";
+           ?>
+           <form action="https://<?php echo $_SERVER["HTTP_HOST"] . "/" . $conf["callup"]; ?>" method="get" accept-charset="UTF-8">
+           <?php foreach($conf["call"] as $call => $value) { ?>
+             <input type="hidden" name="<?php echo $call; ?>" value="<?php echo $value; ?>">
+            <?php } ?>
+             <input type="hidden" name="display" value="order">
+             <input type="submit" value="<?php echo $loc_lang["encrypt"]; ?>">
+           </form></p>
+           
+           <?php
+          }
+        else { ?> <img src="pics/ssl20.png" style="vertical-align: middle;" alt="<?php echo $loc_lang["ssl_on"]; ?>" title="<?php echo $loc_lang["ssl_on"]; ?>"><br> <?php }
+       }
         echo "{$loc_lang["explain_order_form_1"]}<br>\n<br>\n";
         echo "<form action=\"index.php?page=shop&amp;kartid=$kartid&amp;lang=$lang&amp;job=adduserdata&amp;kart=show\" id=\"submit_shipping_data\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
         echo "<table border=\"0\">\n";
@@ -126,9 +153,9 @@ $costs = $transfercost + $shippingcost;
               echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
               echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
               echo "<table width=\"100%\"><tr><td align=\"center\" width=\"50%\">\n";
-              echo "<a target=\"_top\" href=\"index.php?page=shop&amp;kartid=$kartid&amp;lang=$lang\"><b>{$loc_lang["back_to_shop"]}</b></a></td>\n";
+              echo "<a target=\"_top\" href=\"{$conf["callup"]}{$link}\"><b>{$loc_lang["back_to_shop"]}</b></a></td>\n";
               echo "<td align=\"center\" width=\"50%\">\n";
-              echo "<a onclick=\"document.getElementById('submit_shipping_data').submit();\" target=\"_top\"><b>{$loc_lang["submit_data"]}</b></a>\n";
+              echo "<a href=\"javascript:\" onclick=\"document.getElementById('submit_shipping_data').submit();\" target=\"_top\"><b>{$loc_lang["submit_data"]}</b></a>\n";
               echo "</td></tr><tr><td align=\"justify\" colspan=\"2\"><br>";
               //echo $loc_lang["once_money_arrived"];
               echo "</td></tr></table></form>";

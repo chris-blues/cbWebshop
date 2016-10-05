@@ -44,6 +44,9 @@
   $loc_lang["to_following_account"]      = "auf das folgende Bankkonto:";
   $loc_lang["as_soon_as_money_arrives"]  = "Sobald uns ihre Zahlung erreicht hat werden wir Ihre Bestellung verschicken.";
   $loc_lang["will_be_sent_soon"]         = "Ihre Bestellung wird demnächst versandt. Bitte behalten Sie genug Bargeld unter Ihrem Kopfkissen, um das Paket bezahlen zu können wenn es eintrifft!";
+  $loc_lang["ssl_on"]                    = "Diese Verbindung ist mit SSL verschlüsselt.";
+  $loc_lang["ssl_off"]                   = "Diese Verbindung ist NICHT mit SSL verschlüsselt! Senden sie NIEMALS ihre privaten Daten über eine unverschlüsselte Verbindung!";
+  $loc_lang["encrypt"]                   = "Jetzt verschlüsseln!";
   $loc_lang["explain_order_form_1"]      = "Jetzt müssen wir nur noch erfahren wohin die Bestellung geschickt werden soll. Sie können immer noch Änderungen am Warenkorb vornehmen!";
   $loc_lang["first_name"]                = "Vorname: ";
   $loc_lang["last_name"]                 = "Nachname: ";

@@ -17,8 +17,6 @@
   $loc_lang["back_to_shop"]              = "&lt;&lt;&lt; Zurück zum Shop";
   $loc_lang["kart"]                      = "Warenkorb";
   $loc_lang["kart_empty"]                = "Warenkorb ist leer.";
-  $loc_lang["showdetails"]               = "Zeige Details";
-  $loc_lang["hidedetails"]               = "Verstecke Details";
   $loc_lang["remove"]                    = "entfernen";
   $loc_lang["select_country"]            = "Wähle Land!";
   $loc_lang["country_other"]             = "Anderes";
@@ -157,17 +155,17 @@
   $loc_lang["mail"]["thx_4_order"]               = "Vielen Dank für Ihre Bestellung und Ihr Interesse an unserer Arbeit!\nDas haben Sie bestellt:";
   $loc_lang["mail"]["kart_id"]                   = "Warenkorb-ID:";
   $loc_lang["mail"]["transfer_money_to_account"] = "Bitte überweisen Sie den Betrag schnellstmöglich auf unser Konto, damit wir die Sendung losschicken können sobald das Geld da ist!";
-  $loc_lang["mail"]["submitted_to_newsletter"]   = "Sie wurden in unseren Newsletter eingetragen.";
+  $loc_lang["mail"]["submitted_to_newsletter"]   = "Sie haben sich für unseren Newsletter eingetragen. Sie werden in Kürze eine Bestätigungs-Mail erhalten.";
   $loc_lang["mail"]["hope_you_enjoy"]            = "Wir hoffen, daß Ihnen unsere Arbeit Spaß macht und wünschen alles Gute!";
 
 foreach($loc_lang as $key => $value)
   {
    if ($key == "mail")
      {
-     /* foreach($loc_lang["mail"] as $key2 => $value2)
+      foreach($loc_lang["mail"] as $key2 => $value2)
         {
          $loc_lang[$key][$key2] = nl2br($value2, false);
-        } */
+        }
      }
    if ($key != "mail")
      {

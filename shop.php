@@ -1,21 +1,25 @@
 <!-- Begin shop/shop.php -->
 <?php
 include('conf/shop_conf.php');
-include('conf/item_conf.php');
 include('conf/countries.php');
 include('conf/cost_conf.php');
 include('conf/payment_conf.php');
 
-if ($lang == "" or !isset($lang)) $lang = $conf["_default_lang"];
-define( "LOC_LANG", $lang );
-include('locale/' . LOC_LANG . '.php');
+$link = "?";
+foreach($conf["call"] as $call => $value)
+  {
+   $link .= "{$call}={$value}&amp;";
+  }
 
-// ##### Set or keep shopping-kart's id #####
-if (isset($_GET["kartid"])) { $kartid = $_GET["kartid"]; }
-else { $kartid = date("YmdHis"); }
-// ##### Set or keep shopping-kart's id #####
+foreach($conf["call"] as $call => $value)
+  {
+   $value = str_replace('\$','$',$value);
+  }
 
-//echo "DEBUG shop.php:<br>\nlang: $lang<br>\nkartid: $kartid<br>\n<br>\n";
+include("locale/$lang.php");
+include('read_index.php');
+
+//echo "DEBUG shop.php:<br>\nlang: $lang - \$conf[call][lang]: {$conf[call][lang]}<br>\nkartid: $kartid<br>\n<br>\n";
 
 ?>
 <div class="content" id="shop-main">
@@ -36,3 +40,4 @@ else { $kartid = date("YmdHis"); }
 
 </div>
 <!-- End shop/shop.php -->
+<?php //echo "<pre>"; print_r($conf); echo "</pre>\n"; ?>

@@ -1,5 +1,7 @@
 <?php
 $conf["_default_lang"] = "english";
+$conf["_currency"] = "€";
+$conf["_currency_code"] = "EUR";
 $conf["_email_shopkeeper"] = "shopkeeper@example.com";
 $conf["_paypal_business"] = "shopkeeper@example.com";
 $conf["bankaccount_info"] = "Your Name

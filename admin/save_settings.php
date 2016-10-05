@@ -1,15 +1,18 @@
 <?php
 include('header_short.php');
-echo "<body>\n";
+echo "<body onload=\"document.getElementById('reload').submit();\">\n";
+//echo "<body>\n";
+
+//echo "POST:<pre>"; print_r($_POST); echo "</pre>\n";
 
 // Write conf-file
 if ($_GET["job"] == "shop")
   {
-   
    // Integrate _POST into conf
    foreach($_POST as $key => $value)
      {
       $switch = "0";
+      if ($key == "wheretoreturn") continue 1;
       if (strncmp($key, "lang", 4) == "0")
         {
          $switch = "1";
@@ -26,10 +29,21 @@ if ($_GET["job"] == "shop")
          $conf["item_type"][$key1][$key2] = $value;
          if ($value == "") unset($conf["item_type"][$key1]); // Remove empty values from array
         }
+      if (strncmp($key, "call-", 5) == "0")
+        {
+         if ($key == "call-newcall") { $conf["call"][$value] = "$newvalue"; $newcall = $value; continue 1; }
+         if ($key == "call-newvalue") { $conf["call"][$newcall] = $value; $newvalue = $value; continue 1; }
+         $switch = "1";
+         $key = substr($key, 5);
+         $conf["call"][$key] = $value;
+         if ($value == "") unset($conf["call"][$key]); // Remove empty values from array
+        }
       if ($switch == "0")
         {
          $conf[$key] = $value;
         }
+      if ($conf["surpress_ssl_warning"] != "TRUE") $conf["surpress_ssl_warning"] = "FALSE";
+      else $conf["surpress_ssl_warning"] = "TRUE";
      }
    
    //echo "<pre>CONF after POST: "; print_r($conf); echo "</pre>\n";
@@ -42,7 +56,7 @@ if ($_GET["job"] == "shop")
    
    //echo "<pre>CONF after SORT: "; print_r($conf); echo "</pre>\n";
    
-   reset($conf);
+   reset($conf); // bring array-pointer back to zero!
    $configfile = "../conf/shop_conf.php";
    $fHandle = fopen($configfile, "w");
    fputs($fHandle, "<?php\n");
@@ -72,13 +86,28 @@ if ($_GET["job"] == "shop")
               }
            }
         }
+      if ($key == "call")
+        {
+         $switch = "1";
+         foreach($conf[$key] as $key2 => $value2)
+           {
+            $str = "\$conf[\"$key\"][\"$key2\"] = \"$value2\";\n";
+            if ($value2 == "") { $str = ""; }
+            fputs($fHandle, $str);
+           }
+        }
       if ($switch == "0")
         {
          $str = "\$conf[\"$key\"] = \"$value\";\n";
          fputs($fHandle, $str);
         }
      }
+   $location = "settings.php";
+   if ($_POST["wheretoreturn"] == "itemtypes") $location = "edit_types.php";
   }
+
+/* ######################################## */
+
 if ($_GET["job"] == "cost")
   {
    if (!ksort($_POST)) echo "Failed to sort the array!<br>\n";
@@ -90,7 +119,10 @@ if ($_GET["job"] == "cost")
       $str = "\$cost[\"$key\"] = \"$value\";\n";
       fputs($fHandle, $str);
      }
+   $location = "edit_costs.php";
   }
+
+/* ######################################## */
 
 if ($_GET["job"] == "payment")
   {
@@ -112,7 +144,10 @@ if ($_GET["job"] == "payment")
          fputs($fHandle, $str);
         }
      }
+   $location = "edit_payment.php";
   }
+
+/* ######################################## */
 
 if ($_GET["job"] == "countries")
   {
@@ -130,10 +165,13 @@ if ($_GET["job"] == "countries")
       if ($value == "") $str = "";
       fputs($fHandle, $str);
      }
+   $location = "edit_countries.php";
   }
 
 fputs($fHandle, "?>");
 fclose($fHandle);
+
+/* ######################################## */
 
 // Output conf-file
 $output = file_get_contents($configfile);
@@ -146,5 +184,6 @@ echo "$output\n</textarea>\n</form>\n";
 //echo "</pre>\n";
 ?>
 <center><button type="button" value=" Back " onclick="top.location='index.php'"> &lt;&lt;&lt; Back </button></center>
+<form id="reload" action="<?php echo $location; ?>"></form>
 </body>
 </html>

@@ -49,7 +49,32 @@ foreach ($conf as $key => $value)
       $count++;
       echo "  <tr><td>{$loc_lang["admin_bankaccount"]}</td><td colspan=\"2\"> <textarea name=\"$key\" cols=\"35\" rows=\"6\">$value</textarea></td></tr>\n";
      }
-   if ($key != "lang" and $key != "item_type" and $key != "_default_lang" and $key != "bankaccount_info")
+   if ($key == "call")
+     { // If here are variables, we'll need to get them as text, not as variables => So, we re-read shop_conf.php in text-format and strip all unusable information from the lines!
+      $settings = file('../conf/shop_conf.php', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      foreach($settings as $numline => $line)
+        {
+         $line = rtrim($line);
+         if ($line == '<?php' or $line == '?>') { /* echo "line is php: $line<br>\n"; */ continue 1; }
+         if (strncmp($line, '$conf["call"]', 13) != "0") { /* echo "strncmp failed with: $line<br>\n"; */ continue 1; }
+         $line = str_replace(" ","",$line);
+         $line = str_replace('$conf["call"]["',"",$line);
+         $line = str_replace('"]',"",$line);
+         $line = str_replace('"',"",$line);
+         $line = str_replace(';',"",$line);
+         $line = trim($line,"\n");
+         $line = explode("=",$line);
+         echo "  <tr><td>call {$line[0]}: <a href=\"javascript:\" onclick=\"document.getElementById('call-{$line[0]}').value='';\"><img src=\"../pics/del.png\" alt=\"delete this call\" title=\"delete this call\"></a></td><td colspan=\"2\"> <input id=\"call-{$line[0]}\" name=\"call-{$line[0]}\" value=\"{$line[1]}\" type=\"text\" size=\"30\" title=\"If you delete this value, the whole call will be erased from the array.\"></td></tr>\n";
+        }
+      echo "  <tr><td><input type=\"text\" size=\"30\" name=\"$key-newcall\" value=\"new call\" title=\"Enter a new call here! It will appear in every call of the shop in the URLs, e.g. index.php?newcall=thisvalue&page=shop\"></td><td colspan=\"2\"> <input type=\"text\" size=\"30\" name=\"$key-newvalue\" value=\"\" title=\"Enter your new value here. Variables are accepted, e.g.\$lang.\"></td></tr>\n";
+     }
+   if ($key == "surpress_ssl_warning")
+     {
+      if ($conf["surpress_ssl_warning"] == "TRUE") $checked = " checked";
+      else $checked = "";
+      echo "<tr><td>$key:</td><td colspan=\"2\"> <input type=\"checkbox\" name=\"$key\" value=\"TRUE\"$checked>";
+     }
+   if ($key != "lang" and $key != "item_type" and $key != "_default_lang" and $key != "bankaccount_info" and $key != "surpress_ssl_warning" and $key != "call")
      {
       $count++;
       echo "  <tr><td>$key:</td><td colspan=\"2\"> <input name=\"$key\" value=\"$value\" type=\"text\" size=\"30\"></td></tr>\n";

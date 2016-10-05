@@ -9,6 +9,7 @@ echo "<h2>{$loc_lang["admin_edit_itemtypes"]}</h2>\n{$loc_lang["admin_willshowup
 echo "<form action=\"save_settings.php?job=shop\" method=\"post\" accept-charste=\"UTF-8\">\n";
 $cat01 = "music";
 $cat02 = "clothing";
+echo "<input name=\"wheretoreturn\" value=\"itemtypes\" type=\"hidden\">\n";
 foreach ($conf as $key => $value)
   {
    if ($key == "item_type")
@@ -41,7 +42,25 @@ foreach ($conf as $key => $value)
          echo "<input name=\"$key$key2\" value=\"$value2\" type=\"hidden\">\n";
         }
      }
-   if ($key != "lang" and $key != "item_type")
+   if ($key == "call")
+     {
+      $settings = file('../conf/shop_conf.php', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      foreach($settings as $numline => $line)
+        {
+         $line = rtrim($line);
+         if ($line == '<?php' or $line == '?>') { /* echo "line is php: $line<br>\n"; */ continue 1; }
+         if (strncmp($line, '$conf["call"]', 13) != "0") { /* echo "strncmp failed with: $line<br>\n"; */ continue 1; }
+         $line = str_replace(" ","",$line);
+         $line = str_replace('$conf["call"]["',"",$line);
+         $line = str_replace('"]',"",$line);
+         $line = str_replace('"',"",$line);
+         $line = str_replace(';',"",$line);
+         $line = trim($line,"\n");
+         $line = explode("=",$line);
+         echo "<input name=\"call-{$line[0]}\" value=\"{$line[1]}\" type=\"hidden\">\n";
+        }
+     }
+   if ($key != "lang" and $key != "item_type" and $key != "call")
      {
       echo "<input name=\"$key\" value=\"$value\" type=\"hidden\">\n";
      }

@@ -45,7 +45,7 @@ if ($opt == "2") { $paymentname = $loc_lang["paypal"]; }
 if ($opt == "3") { $paymentname = $loc_lang["payondelivery"]; }
 if (!isset($paymentname)) { $paymentname = "[n/a]"; }
 
-include('header_short.html');
+include('header_full.html');
 ?>
 
 <!-- Output gathered data -->
@@ -64,11 +64,11 @@ include('header_short.html');
   echo "$plz - $city<br>";
   echo "$province<br>$countryname<br><br>$opt: $paymentname</td>";
   
-  echo "<td valign=\"top\"><ul>";
+  echo "<td valign=\"top\"><ul style=\"width: 100%;\">";
   $count = 1;
   while ($count <= $kartamount)
     {
-     echo "<li>{$kart["$count"]['item_name']} ({$kart["$count"]['item_type']} - {$kart["$count"]['item_size']}) - {$kart["$count"]['item_amount']} x {$kart["$count"]['item_preis']}{$conf["_currency"]}</li>";
+     echo "<li style=\"width: 100%;\">{$kart["$count"]['item_name']} ({$kart["$count"]['item_type']} - {$kart["$count"]['item_size']}) - {$kart["$count"]['item_amount']} x {$kart["$count"]['item_preis']} {$conf['_currency']}</li>";
      $count++;
     }
   $kartidstr = str_replace("kart-","",$kartid);

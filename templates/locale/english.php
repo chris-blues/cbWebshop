@@ -17,8 +17,6 @@
   $loc_lang["back_to_shop"]              = "&lt;&lt;&lt; Back to shop";
   $loc_lang["kart"]                      = "Shopping kart";
   $loc_lang["kart_empty"]                = "Kart is empty.";
-  $loc_lang["showdetails"]               = "Show Details";
-  $loc_lang["hidedetails"]               = "Hide Details";
   $loc_lang["remove"]                    = "remove";
   $loc_lang["select_country"]            = "Select country!";
   $loc_lang["country_other"]             = "other";
@@ -155,17 +153,17 @@
   $loc_lang["mail"]["thx_4_order"]               = "Thank you for your order and your interest in our work!\nHere is what you ordered:";
   $loc_lang["mail"]["kart_id"]                   = "Kart-ID:";
   $loc_lang["mail"]["transfer_money_to_account"] = "Please transfer the amount to our account as soon as possible, so we can send you the shipment as soon as your money has arrived!";
-  $loc_lang["mail"]["submitted_to_newsletter"]   = "You have been submitted to our newsletter.";
+  $loc_lang["mail"]["submitted_to_newsletter"]   = "You have submitted to our newsletter. You will receive a confirmation-mail soon.";
   $loc_lang["mail"]["hope_you_enjoy"]            = "We hope you enjoy our work and wish you all the best!";
 
 foreach($loc_lang as $key => $value)
   {
    if ($key == "mail")
      {
-     /* foreach($loc_lang["mail"] as $key2 => $value2)
+      foreach($loc_lang["mail"] as $key2 => $value2)
         {
          $loc_lang[$key][$key2] = nl2br($value2, false);
-        } */
+        }
      }
    if ($key != "mail")
      {

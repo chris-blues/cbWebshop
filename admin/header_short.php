@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>WebShop admin</title>
+<title>cbwebshop admin area</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="page-topic" content="shop admin area">
-<meta name="description" content="shop admin area">
+<meta name="page-topic" content="Folkadelic shop admin area">
+<meta name="description" content="Folkadelic shop admin area">
 <style type="text/css">
 a:link { color: #24280F; text-decoration: none}
 a:visited { color: #24280F; text-decoration: none}

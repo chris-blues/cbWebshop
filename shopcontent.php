@@ -1,14 +1,16 @@
 <!-- BEGIN shopcontent.php -->
 <?php
-include('read_index.php');
+include('conf/item_conf.php');
+
+include('shop/read_index.php');
 /* Lese Vorlage aus Datei in einen String */
 $col = "0";
 for ($c = 1; $c <= $itemamount; $c++)
  {
   $col++;
-  $alt = "{$data["$c"]['item_type']} {$data["$c"]['item_name']}";
+  $alt = "{$loc_lang["click_to_view"]} {$data["$c"]['item_type']} {$data["$c"]['item_name']}{$loc_lang["click_to_view_add"]}";
   $buy = "{$loc_lang["buy"]}";
-  $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} {$conf["_currency"]}/{$loc_lang["piece"]})";
+  $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} &euro;/{$loc_lang["piece"]})";
   
   
 // Get category ( music | clothing )
@@ -83,13 +85,19 @@ if ($cat == "music")
      $sizes = explode(" ", $data[$c]['item_descr']);
      foreach ($sizes as $sizeskey => $sizesvalue)
        {
-        if ($sizesvalue == "XXL") { $sizesvalueshow = $sizesvalue . " +2 " . $conf["_currency"]; $sizesdefault = ""; }
-        if ($sizesvalue == "XL") { $sizesvalueshow = $sizesvalue . " +1 " . $conf["_currency"]; $sizesdefault = ""; }
-        if ($sizesvalue == "L") { $sizesvalueshow = $sizesvalue; $sizesdefault = "selected"; }
-        if ($sizesvalue == "M") { $sizesvalueshow = $sizesvalue . " -1 " . $conf["_currency"]; $sizesdefault = ""; }
-        if ($sizesvalue == "S") { $sizesvalueshow = $sizesvalue . " -2 " . $conf["_currency"]; $sizesdefault = ""; }
-        $sizesdropdown .= "<option value=\"$sizesvalue\" $sizesdefault>$sizesvalueshow</option>\n";
+        if ($sizesvalue == "XXL") $sizesvalueshow = $sizesvalue . " +2 €";
+        if ($sizesvalue == "XL") $sizesvalueshow = $sizesvalue . " +1 €";
+        if ($sizesvalue == "L") $sizesvalueshow = $sizesvalue;
+        if ($sizesvalue == "M") $sizesvalueshow = $sizesvalue . " -1 €";
+        if ($sizesvalue == "S") $sizesvalueshow = $sizesvalue . " -2 €";
+        $sizesdropdown .= "<option value=\"$sizesvalue\">$sizesvalueshow</option>\n";
        }
+    }
+  
+  $calls = "";
+  foreach($conf["call"] as $call => $value)
+    {
+     $calls .= "<input type=\"hidden\" name=\"$call\" value=\"$value\">\n";
     }
 
   /* Was soll ersetzt werden? */
@@ -114,7 +122,8 @@ if ($cat == "music")
                    '%shop_height%',
                    '%shop_pic_width%',
                    '%sizes%',
-                   '%_currency%');
+                   '%_currency%',
+                   '%_calls%');
   /* Womit soll das ersetzt werden? */
   $replace = array($data["$c"]['item_id'],
                    $data["$c"]['item_name'],
@@ -137,7 +146,8 @@ if ($cat == "music")
                    $item_conf["shop_height"],
                    $item_conf["shop_pic_width"],
                    $sizesdropdown,
-                   $conf["_currency"]);
+                   $conf["_currency"],
+                   $calls);
   /* Finde und ersetze Platzhalter in $output */
   $output = str_replace($search, $replace, $template);
   echo "$output";

@@ -41,7 +41,7 @@ sort($kartfiles);
     ?>
 </table>
 <br>
-<iframe src="" name="kart-content" frameborder="0" border="0" scrolling="auto" width="700" height="300"></iframe>
+<iframe src="" name="kart-content" frameborder="0" border="0" scrolling="auto" width="99%" height="400"></iframe>
 
 <?php
 /*  echo "<pre>\n";
