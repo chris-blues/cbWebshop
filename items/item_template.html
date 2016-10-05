@@ -1,23 +1,26 @@
-<body bgcolor="#544a31" align="center">
 <font face="Georgia" size="3"><em>
 <table bgcolor="#544a31" align="center" width="490" border="0">
   <tr>
     <td align="center" colspan="2">
-      <h2>%name% (%value%)</h2>
-      <font size="4">%descr%    <a href="kartline.php?job=additem&amp;id=%id%&amp;c=%c%" target="kart">%buy%</a></font>
+      <font size="5">%name%</font><font size="4"><b> (%value%) %descr%</b></font><br>
+      <hr style="color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:left;">
     </td>
   </tr>
   <tr>
-    <td align="center" colspan="1">
-      <a href="%pic%" rel="%id%" class="fancy"><img height="150" src="%pic%" alt="%name%" title="%name%"></img></a><br>
+    <td align="center" valign="top" colspan="1">
+      <br>
+      <a href="%pic%" rel="%id%" class="fancy"><img height="150" src="%pic%" alt="%name%" title="%name%" onmouseout="src='%pic%'" onmouseover="src='%pic%.png'"></a><br>
     </td>
     <td align="left" valign="top" colspan="1">
-      %details%
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="2">
-      %preview%
+      %details%<br><br>
+      <form action="kartline.php" method="get" target="kart" accept-charset="UTF-8">
+        <input type="hidden" name="job" value="additem">
+        <input type="hidden" name="id" value="%id%">
+        <input type="hidden" name="c" value="%c%">
+        <input type="hidden" name="lang" value="%lang%">
+        <input type="hidden" name="kartid" value="%kartid%">
+        <button type="submit" onclick="this.form.submit()"><img src="pics/more.png"><br> %buy% </button>
+      </form>
     </td>
   </tr>
 </table>

@@ -1,0 +1,18 @@
+<tr><td align="left" valign="center">
+<audio id="%id%_%trackid%" class="%id%_%trackid%">
+ <source src="items/audio/%id%/%trackid%.mp3" type="audio/mpeg" />
+ <source src="items/audio/%id%/%trackid%.ogg" type="audio/ogg" />
+Dieser Browser unterstützt HTML5 <code>audio</code> nicht.
+</audio>
+<a class="%id%_%trackid%" href="javascript:play_%trackid%();"><img src="pics/play.png" id="%id%_%trackid%-pp" height="15"> %trackname%</a>
+<script type="text/javascript">
+   var audio_%trackid% = document.getElementById('%id%_%trackid%');
+   function play_%trackid%()
+     {
+     if (audio_%trackid%.paused)
+       { audio_%trackid%.play(); document.getElementById('%id%_%trackid%-pp').src = "pics/stop.png"; }
+     else
+       { audio_%trackid%.pause(); audio_%trackid%.currentTime = 0; document.getElementById('%id%_%trackid%-pp').src = "pics/play.png"; }
+     }
+</script>
+</td></tr>
