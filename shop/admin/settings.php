@@ -1,12 +1,37 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   default: { $lang = "en"; break; }
+  }
+$directory = $cbPlayer_dirname . '/locale';
+$domain = 'cbplayer';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($domain, $directory);
+textdomain($domain);
+bind_textdomain_codeset($domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 include('header_full.html');
 echo "<body>\n";
 if (!natcasesort($conf["lang"])) echo "Failed to sort the array \$conf[\"lang\"]!<br>\n";
 if (!sort($conf["item_type"])) echo "Failed to sort the array \$conf[\"item_type\"]!<br>\n";
-echo "<h2>{$loc_lang["admin_shopsettings"]}</h2>\n";
-echo "{$loc_lang["admin_editcarefully"]}<br>\n<hr>\n<br>\n";
+echo "<h2>" . gettext("Shop Settings") . "</h2>\n";
+echo gettext("Edit carefully!") . "<br>\n<hr>\n<br>\n";
 echo "<form action=\"save_settings.php?job=shop\" method=\"post\" accept-charste=\"UTF-8\">\n";
 echo "<table align=\"center\" border=\"0\" rules=\"rows\">\n";
 foreach ($conf as $key => $value)
@@ -36,7 +61,7 @@ foreach ($conf as $key => $value)
      }
    if ($key == "_default_lang")
      {
-      echo "  <tr><td>{$loc_lang["admin_defaultlang"]}</td><td colspan=\"2\"><select name=\"_default_lang\" size=\"1\">\n";
+      echo "  <tr><td>" . gettext("Default language:") . "</td><td colspan=\"2\"><select name=\"_default_lang\" size=\"1\">\n";
       foreach($conf["lang"] as $langind => $langname)
         {
          if ($langname == $conf["_default_lang"]) $selected = " selected=\"selected\""; else $selected = "";
@@ -47,7 +72,7 @@ foreach ($conf as $key => $value)
    if ($key == "bankaccount_info")
      {
       $count++;
-      echo "  <tr><td>{$loc_lang["admin_bankaccount"]}</td><td colspan=\"2\"> <textarea name=\"$key\" cols=\"35\" rows=\"6\">$value</textarea></td></tr>\n";
+      echo "  <tr><td>" . gettext("Bank Account:") . "</td><td colspan=\"2\"> <textarea name=\"$key\" cols=\"35\" rows=\"6\">$value</textarea></td></tr>\n";
      }
    if ($key == "call")
      { // If here are variables, we'll need to get them as text, not as variables => So, we re-read shop_conf.php in text-format and strip all unusable information from the lines!
@@ -80,7 +105,7 @@ foreach ($conf as $key => $value)
       echo "  <tr><td>$key:</td><td colspan=\"2\"> <input name=\"$key\" value=\"$value\" type=\"text\" size=\"30\"></td></tr>\n";
      }
   }
-echo "<tr><td></td><td align=\"left\" colspan=\"1\"><button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; {$loc_lang["admin_back"]} </button></td><td colspan=\"1\" align=\"right\"><input type=\"submit\" value=\" {$loc_lang["admin_save"]} &gt;&gt;&gt; \"></td></tr>\n";
+echo "<tr><td></td><td align=\"left\" colspan=\"1\"><button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; " . gettext("Back") . " </button></td><td colspan=\"1\" align=\"right\"><input type=\"submit\" value=\" " . gettext("Save") . " &gt;&gt;&gt; \"></td></tr>\n";
 echo "</table>\n</form>\n";
 //echo "Debugging:<br>\n<pre>"; print_r($conf); echo "</pre>\n";
 ?>

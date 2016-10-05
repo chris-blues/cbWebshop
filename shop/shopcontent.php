@@ -9,10 +9,10 @@ $col = "0";
 for ($c = 1; $c <= $itemamount; $c++)
  {
   $col++;
-  $buy = "{$loc_lang["buy"]}";
-  $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} €/{$loc_lang["piece"]})";
-  
-  
+  $buy = gettext("Buy");
+  $value = gettext("pieces") . " ({$data["$c"]['item_preis']} €/" . gettext("piece") . ")";
+
+
 // Get category ( music | clothing )
 foreach ($conf["item_type"] as $keycat => $valcat)
   {
@@ -68,7 +68,7 @@ if ($cat == "music")
          $tracklisten = file_get_contents("shop/templates/get_audio.html");
          $searchtrack  = array('%id%', '%trackname%', '%trackid%', '%playbutton%', '%clicktoplay%');
         // Womit soll das ersetzt werden?
-         $replacetrack = array($data["$c"]['item_id'], $tracks["$track"]['name'], "{$tracks["$track"]['id']}", $playbutton, $loc_lang["clicktoplay"]);
+         $replacetrack = array($data["$c"]['item_id'], $tracks["$track"]['name'], "{$tracks["$track"]['id']}", $playbutton, gettext("Click here to play this song!"));
         // Finde und ersetze Platzhalter in $output
          $tracklist .= str_replace($searchtrack, $replacetrack, $tracklisten);
         }
@@ -149,7 +149,7 @@ if ($cat == "music")
                    $sizesdropdown,
                    $conf["_currency"],
                    $calls,
-                   $loc_lang["noscript"]);
+                   gettext("Please activate JavaScript to use this page!"));
   /* Finde und ersetze Platzhalter in $output */
   $output = str_replace($search, $replace, $template);
   echo "$output";

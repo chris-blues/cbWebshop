@@ -17,7 +17,7 @@ for ($c=1; $c <= $counter; $c++)
   echo "    <a href=\"viewitem.php?c=$c\">\n";
   echo "    <img src=\"../items/pics/{$data[$c]['item_id']}.png\" height=\"100\" border=\"0\"></a><br>\n";
   echo "    <form name=\"item-$c\" action=\"viewitem.php?c=$c\" method=\"post\" accept-charset=\"UTF-8\">\n";
-  echo "    <input type=\"submit\" value=\"{$loc_lang["admin_edit_item"]}\"></form>\n</td>\n";
+  echo "    <input type=\"submit\" value=\"" . gettext("edit this item") . "\"></form>\n</td>\n";
   if ($cols == "4") echo "</tr>\n<tr>\n";
  }
 ?>

@@ -5,8 +5,8 @@ include('../conf/cost_conf.php');
 include('../conf/countries.php');
 include('header_short.php');
 echo "<body>\n";
-echo "<h2>{$loc_lang["admin_edit_costs"]}</h2>\n";
-echo "{$loc_lang["admin_editcarefully"]} {$loc_lang["admin_usedots"]}<br>\n<hr>\n<br>\n";
+echo "<h2>" . gettext("Edit costs") . "</h2>\n";
+echo gettext("Edit carefully!") . " " . gettext("Use dots for decimals (e.g.: 1234.56)") . "<br>\n<hr>\n<br>\n";
 echo "<form action=\"save_settings.php?job=cost\" method=\"post\" accept-charste=\"UTF-8\">\n";
 echo "<table align=\"center\" border=\"0\" rules=\"rows\">\n";
 $count = "0";
@@ -15,7 +15,7 @@ foreach($cost as $key => $value)
    if ($key == "_homecountry")
      {
       $count++;
-      echo "  <tr><td>{$loc_lang["admin_yourhomecountry"]}</td><td colspan=\"2\"> <select name=\"$key\" size=\"1\">\n";
+      echo "  <tr><td>" . gettext("Your Home Country:") . "</td><td colspan=\"2\"> <select name=\"$key\" size=\"1\">\n";
       foreach($country as $countryind => $countryname)
         {
          if ($countryname == $cost["_homecountry"]) $selected = " selected=\"selected\""; else $selected = "";
@@ -29,7 +29,7 @@ foreach($cost as $key => $value)
       echo "  <tr><td>$key:</td><td colspan=\"2\"> <input name=\"$key\" value=\"$value\" type=\"text\" size=\"30\"></td></tr>\n";
      }
   }
-echo "<tr><td></td><td align=\"left\" colspan=\"1\"><button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; {$loc_lang["admin_back"]} </button></td><td colspan=\"1\" align=\"right\"><input type=\"submit\" value=\" {$loc_lang["admin_save"]} &gt;&gt;&gt; \"></td></tr>\n";
+echo "<tr><td></td><td align=\"left\" colspan=\"1\"><button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; " . gettext("Back") . " </button></td><td colspan=\"1\" align=\"right\"><input type=\"submit\" value=\" " . gettext("Save") . " &gt;&gt;&gt; \"></td></tr>\n";
 ?>
 </table>
 </form>

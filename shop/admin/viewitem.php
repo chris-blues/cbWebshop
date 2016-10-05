@@ -8,11 +8,11 @@ include('header_short.php');
 <?php
   $c = $_GET["c"];
   
-  echo "<h2>{$loc_lang["admin_edit_item"]}</h2>\n<hr>\n<br>\n";
+  echo "<h2>" . gettext("edit this item") . "</h2>\n<hr>\n<br>\n";
   echo "  <div style=\"text-align: center;\"><form name=\"del-$c\" action=\"savelist.php\" method=\"get\" accept-charset=\"UTF-8\" onsubmit=\"return DeleteCheck()\">\n";
   echo "    <input type=\"hidden\" name=\"job\" value=\"delete\">\n";
   echo "    <input type=\"hidden\" name=\"num\" value=\"$c\">\n";
-  echo "    <input type=\"submit\" value=\"        {$loc_lang["admin_deleteitem"]}        \">\n";
+  echo "    <input type=\"submit\" value=\"        " . gettext("delete this item") . "        \">\n";
   echo "  </form></div>\n";
 
 $modus = "display_data";
@@ -28,9 +28,9 @@ include('read_index.php');
   echo "<table border=\"0\" align=\"center\">\n";
   echo "  <tr>\n    <td>\n      Item No: <b>$c</b><br>\n      <img src=\"../{$data[$c]['item_pic']}\" height=\"120\" border=\"0\"><br>\n";
   echo "    </td>\n    <td align=\"right\">\n";
-  echo "      {$loc_lang["admin_itemname"]}<input name=\"item_name\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_name']}\"><br>\n";
+  echo "      " . gettext("Name:") . "<input name=\"item_name\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_name']}\"><br>\n";
   
-  echo "      {$loc_lang["admin_itemtype"]}<select name=\"item_type\" size=\"1\" style=\"width:185px;\" width=\"185\">\n";
+  echo "      " . gettext("Type:") . "<select name=\"item_type\" size=\"1\" style=\"width:185px;\" width=\"185\">\n";
   foreach ($conf["item_type"] as $key => $value)
           {
            if ($conf["item_type"][$key]["name"] == $data[$c]['item_type']) { $selected = " selected=\"selected\""; } else $selected = "";
@@ -39,20 +39,20 @@ include('read_index.php');
 
   echo "      </select><br>\n";
   
-  echo "      {$loc_lang["admin_descryear"]}<input name=\"item_descr\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_descr']}\"><br>\n";
-  echo "      {$loc_lang["admin_itemprice"]}<input name=\"item_preis\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_preis']}\"><br>\n";
-  echo "      {$loc_lang["admin_item_pic"]}<input size=\"5\" name=\"upload_pic\" type=\"file\" accept=\"image/png\"><br>\n";
+  echo "      " . gettext("Year/Size:") . "<input name=\"item_descr\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_descr']}\"><br>\n";
+  echo "      " . gettext("Price:") . "<input name=\"item_preis\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_preis']}\"><br>\n";
+  echo "      " . gettext("Item's Pic:") . "<input size=\"5\" name=\"upload_pic\" type=\"file\" accept=\"image/png\"><br>\n";
   echo "    </td>\n  </tr>\n  <tr>\n    <td align=\"center\" colspan=\"2\">\n";
   $data[$c]['tracklist'] = trim($data[$c]['tracklist'],"\n");
-  echo "      {$loc_lang["admin_details"]}<br>\n      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";
-  if($cat == "music") { echo "      {$loc_lang["admin_tracklist"]}"; ?>:<br><textarea name="tracklist" cols="50" rows="8"><?php echo $data[$c]['tracklist']; ?></textarea><br><?php }
-  echo "      <button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; {$loc_lang["admin_back"]} </button> <input type=\"submit\" value=\" {$loc_lang["admin_save"]} \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n      <input type=\"hidden\" name=\"oldid\" value=\"$oldid\">\n";
+  echo "      " . gettext("Details (html is allowed!):") . "<br>\n      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";
+  if($cat == "music") { echo "      " . gettext("Tracklist (plain text only!)"); ?>:<br><textarea name="tracklist" cols="50" rows="8"><?php echo $data[$c]['tracklist']; ?></textarea><br><?php }
+  echo "      <button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; " . gettext("Back") . " </button> <input type=\"submit\" value=\" " . gettext("Save") . " \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n      <input type=\"hidden\" name=\"oldid\" value=\"$oldid\">\n";
   echo "    </td>\n  </tr>\n</table>\n";
   
   
   if ($cat == "music")
   {
-   echo "<table align=\"center\">\n  <tr>\n    <td align=\"center\" colspan=\"2\">\n<br>      <b>{$loc_lang["admin_expectedfilenames"]} shop/items/audio/{$data["$c"]['item_id']}/</b>\n    </td>\n  </tr>\n";
+   echo "<table align=\"center\">\n  <tr>\n    <td align=\"center\" colspan=\"2\">\n<br>      <b>" . gettext("Expected Audio-File-Names in:") . " shop/items/audio/{$data["$c"]['item_id']}/</b>\n    </td>\n  </tr>\n";
    $counter = "0";
    $fHandle = fopen("../items/{$data["$c"]['item_id']}.dat","r");
    if ($fHandle != NULL)

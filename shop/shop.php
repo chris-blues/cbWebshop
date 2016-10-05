@@ -13,6 +13,32 @@ else
 ini_set("log_errors", 1);
 ini_set("error_log", "/www/admin/logs/php-error.log");
 
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   default: { $lang = "en"; break; }
+  }
+$directory = $cbPlayer_dirname . '/locale';
+$domain = 'cbplayer';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($domain, $directory);
+textdomain($domain);
+bind_textdomain_codeset($domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
+
 include('conf/shop_conf.php');
 include('conf/countries.php');
 include('conf/cost_conf.php');
@@ -49,7 +75,12 @@ include('read_index.php');
       if ($displayswitch != "1") { include('shopcontent.php'); }
     ?>
   </div>
+  <div id="locale_data"
+       data-hidedetails="<?php echo gettext("Hide Details"); ?>"
+       data-showdetails="<?php echo gettext("Show Details"); ?>"
+       data-adminreallydelete="<?php echo gettext("Really delete this item?"); ?>">
+  </div>
 
 </div>
 <!-- End shop/shop.php -->
-<?php //echo "<pre>"; print_r($conf); echo "</pre>\n"; ?>
+<?php if ($debug) { echo "<h2>\$conf</h2><pre>"; print_r($conf); echo "</pre>\n"; } ?>

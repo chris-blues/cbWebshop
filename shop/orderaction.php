@@ -10,6 +10,32 @@ ini_set("display_errors", 0);
 ini_set("log_errors", 1);
 ini_set("error_log", "/www/admin/logs/php-error.log");
 
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   default: { $lang = "en"; break; }
+  }
+$directory = $cbPlayer_dirname . '/locale';
+$domain = 'cbplayer';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($domain, $directory);
+textdomain($domain);
+bind_textdomain_codeset($domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
+
 include('conf/shop_conf.php');
 include('conf/cost_conf.php');
 include('conf/payment_conf.php');
@@ -41,22 +67,19 @@ if ($opt == "1")
   {
    if ($countryname == $cost["_homecountry"]) $transfercost = $payment["banktransfer"]["home"];
    else $transfercost = $payment["banktransfer"]["foreign"];
-   $paymentname = $loc_lang["banktransfer"];
-   $paymentnamemail = $loc_lang["mail"]["banktransfer"];
+   $paymentname = gettext("Bank Transfer");
   }
 if ($opt == "2")
   {
    if ($countryname == $cost["_homecountry"]) $transfercost = $payment["paypal"]["home"];
    else $transfercost = $payment["paypal"]["foreign"];
-   $paymentname = $loc_lang["paypal"];
-   $paymentnamemail = $loc_lang["mail"]["paypal"];
+   $paymentname = gettext("PayPal");
   }
 if ($opt == "3")
   {
    if ($countryname == $cost["_homecountry"]) $transfercost = $payment["payondelivery"]["home"];
    else $transfercost = $payment["payondelivery"]["foreign"];
-   $paymentname = $loc_lang["payondelivery"];
-   $paymentnamemail = $loc_lang["mail"]["payondelivery"];
+   $paymentname = gettext("Pay on delivery");
   }
 $costs = $transfercost + $shippingcost;
 
@@ -84,16 +107,16 @@ echo "<table width=\"500\" height=\"600\" align=\"center\" border=\"0\">";
 if ($error != "0")
   {
    echo "<table border=\"0\"><tr><td align=\"center\"><h4><u><b>ERROR!</b></u></h4></td></tr><tr><td align=\"left\">\n<ol>\n";
-   if ($kartemptyerror == "1") $errormessage .= "<li>{$loc_lang["kart_empty_error"]}</li><br>\n";
-   if ($errors['kartfile']['country'] == "empty" and $kartemptyerror != "1") $errormessage .= "<li>{$loc_lang["no_country_selected"]}</li><br>\n";
-   if ($errors['kartfile']['opt'] == "empty" and $kartemptyerror != "1") $errormessage .= "<li>{$loc_lang["no_payment_selected"]}</li><br>\n";
+   if ($kartemptyerror == "1") $errormessage .= "<li>" . gettext("Kart seems to be emtpy!") . "</li><br>\n";
+   if ($errors['kartfile']['country'] == "empty" and $kartemptyerror != "1") $errormessage .= "<li>" . gettext("You didn't choose your country in the kart! Please do so!") . "</li><br>\n";
+   if ($errors['kartfile']['opt'] == "empty" and $kartemptyerror != "1") $errormessage .= "<li>" . gettext("You didn't choose your preferred payment method in the kart! Please do so!") . "</li><br>\n";
    if ($kartemptyerror != "1")
      { if ($errors['kartfile']['firstname'] == "empty" or $errors['kartfile']['lastname'] == "empty" or $errors['kartfile']['adress1'] == "empty" or $errors['kartfile']['plz'] == "empty" or $errors['kartfile']['city'] == "empty" or $errors['kartfile']['email'] == "empty")
-       $errormessage .= "<li>{$loc_lang["information_missing"]}</li><br>\n";
+       $errormessage .= "<li>" . gettext("You didn't enter all necessary information! Use the button below to return!") . "</li><br>\n";
      }
    echo $errormessage;
    echo "</ol><br>\n";
-   echo "</td></tr><tr><td align=\"center\">\n<a href=\"../index.php?page=shop&amp;display=order&amp;kartid=$kartid&amp;lang=$lang$errorreturn\" target=\"_top\"><b>{$loc_lang["back_to_order_form"]}</b></a><br>\n</td></tr></table></td></tr></table>";
+   echo "</td></tr><tr><td align=\"center\">\n<a href=\"../index.php?page=shop&amp;display=order&amp;kartid=$kartid&amp;lang=$lang$errorreturn\" target=\"_top\"><b>" . gettext("BACK TO ORDER-FORM!") . "</b></a><br>\n</td></tr></table></td></tr></table>";
    echo "<pre>\n"; print_r($errors); print_r($errorreturn); echo "</pre>\n";
    exit;
   }
@@ -128,13 +151,13 @@ if (!isset($countryexists) or $countryexists != "yes")
 
 /* ################################################################### */
 
-   echo "<b>{$loc_lang["one_moment"]}</b><br>\n";
+   echo "<b>" . gettext("One moment!") . "</b><br>\n";
    $pp_returnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid&display=leaveshop&kart=reset";
    $pp_cancelreturnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid";
    if ($opt == "2")
      {
       if ($lang == "english") $lc = "EN"; else $lc = "DE";
-      echo "{$loc_lang["redirecting_to_paypal"]}\n";
+      echo gettext("Redirecting you to PayPal.") . "\n<br>";
       echo "<form id=\"checkout_form\" name=\"paypal_form\" method=\"post\" action=\"https://www.paypal.com/cgi-bin/webscr\" accept-charset=\"UTF-8\" target=\"_top\">\n";
         echo "<input id=\"cmd\" name=\"cmd\" type=\"hidden\" value=\"_cart\" />\n";
         echo "<input id=\"upload\" name=\"upload\" type=\"hidden\" value=\"1\" />\n";
@@ -174,7 +197,6 @@ if (!isset($countryexists) or $countryexists != "yes")
 
         echo "<input id=\"shipping_1\" name=\"shipping_1\" type=\"hidden\" value=\"$costs\" />\n";
         echo "<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/de_DE/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
-        //echo "<input type=\"submit\" value=\"{$loc_lang["buy"]}\">\n";
       echo "</form>\n";
      }
    else
@@ -182,7 +204,6 @@ if (!isset($countryexists) or $countryexists != "yes")
       echo "<form name=\"leaveshop_form\" action=\"../index.php?page=shop&amp;display=leaveshop&amp;kartid=$kartid&amp;lang=$lang&amp;kart=reset\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
       echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
       echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
-      //echo "<input type=\"submit\" value=\"{$loc_lang["buy"]}\">\n";
       echo "</form>\n";
      }
   }

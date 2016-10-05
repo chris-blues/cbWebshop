@@ -255,7 +255,7 @@ echo "</pre></td></tr></table>";
 
 // echo "<pre>"; print_r($data); echo "</pre>";
 
-echo "<form action=\"showitems.php\"><input type=\"submit\" value=\" {$loc_lang["admin_back"]} \"></form>\n";
+echo "<form action=\"showitems.php\"><input type=\"submit\" value=\" " . gettext("Back") . " \"></form>\n";
 ?>
 </body>
 </html>

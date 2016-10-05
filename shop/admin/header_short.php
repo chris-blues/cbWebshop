@@ -20,10 +20,5 @@ li { list-style: none; width: 180px; }
 .menu hr { width: 155px; }
 body.menu { width: 190px; text-align: center; }
 </style>
-<?php echo "<script type=\"text/javascript\">
-function DeleteCheck () {
-  var chk = window.confirm(\"{$loc_lang["admin_reallydelete"]}\");
-  return (chk);
-}
-</script>\n"; ?>
+<script type="text/javascript" src="../shop.js"></script>
 </head>

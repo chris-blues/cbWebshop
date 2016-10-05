@@ -19,10 +19,14 @@
 <body>
 <?php
 $lang = $_GET["lang"];      // This gets the language from the URL. E.g. index.php?lang=english
+$debug = $_GET["debug"];
 
+if (!isset($debug) or $debug == "") $debug = false;
+else $debug = true;
+
+// ##### Set or keep shopping-kart's id #####
 // You'll need this, to keep the shopping kart while browsing the rest of your site. This will
 // result in sth like: index.php?kartid=20140101123456
-// ##### Set or keep shopping-kart's id #####
 if (isset($_GET["kartid"])) { $kartid = $_GET["kartid"]; } // Look, if we already got a kart-ID
 else { $kartid = date("YmdHis");                           // If not, create one!
 $kartid = hash('md5', $kartid); }                       // Create a unique hash from the date.

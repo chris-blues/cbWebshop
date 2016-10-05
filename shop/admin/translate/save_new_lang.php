@@ -1,4 +1,29 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   default: { $lang = "en"; break; }
+  }
+$directory = $cbPlayer_dirname . '/locale';
+$domain = 'cbplayer';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($domain, $directory);
+textdomain($domain);
+bind_textdomain_codeset($domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('../header_full.html');
 include('../conf/shop_conf.php');
 echo "<body><br>\n<br>\n";
@@ -65,7 +90,7 @@ fclose($fHandle);
 
 mail("chris@musicchris.de", "Übersetzung Folkadelic Shop", "$author hat den Shop von $lang in $new_lang übersetzt!\nJruß\n", "From:$author\r\nContent-Type: text/plain; charset = \"UTF-8\"\r\nContent-Transfer-Encoding: 8bit\r\n");
 echo "<center>Vielen Dank! Thank you very much! Muchas gra&#231;ias! Mille grazie! Merci beaucoup!</font>{$conf["font_style_close"]}\n</center>";
-echo "<pre>"; print_r($loc_lang); echo "</pre>\n";
+
 ?>
 
 </body>

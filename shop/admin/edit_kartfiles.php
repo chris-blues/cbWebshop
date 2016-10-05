@@ -16,7 +16,7 @@ sort($kartfiles);
 date_default_timezone_set('Europe/Berlin');
 ?>
 <body>
-<h2><?php echo "{$loc_lang["admin_editkart"]}"; ?></h2>
+<h2><?php echo gettext("View available karts"); ?></h2>
 <hr>
 <br>
 <table rules="all" border="0">
@@ -37,7 +37,7 @@ date_default_timezone_set('Europe/Berlin');
                    <td><form action=\"edit_kartfiles.php\" target=\"shop-admin\" method=\"get\">
                          <input type=\"hidden\" name=\"kartid\" value=\"$value\">
                          <input type=\"hidden\" name=\"delete\" value=\"$value\">
-                         <input type=\"submit\" value=\"{$loc_lang["admin_deletefile"]}\" style=\"width:200px;\">
+                         <input type=\"submit\" value=\"" . gettext("delete file") . "\" style=\"width:200px;\">
                    </form></td></tr>";
         }
     ?>

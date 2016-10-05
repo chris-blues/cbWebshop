@@ -1,4 +1,29 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   default: { $lang = "en"; break; }
+  }
+$directory = $cbPlayer_dirname . '/locale';
+$domain = 'cbplayer';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($domain, $directory);
+textdomain($domain);
+bind_textdomain_codeset($domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 include('header_short.php');
@@ -7,7 +32,7 @@ include('header_short.php');
 <table border="0" align="center" width="99%" height="99%">
   <tr>
     <td colspan="2" align="center">
-      <font size="5"><b><?php echo $loc_lang["admin_title"]; ?></b></font><br>
+      <font size="5"><b><?php echo gettext("Shop Admin Tools"); ?></b></font><br>
       <hr>
     </td>
   </tr>

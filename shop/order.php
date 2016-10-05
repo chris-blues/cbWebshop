@@ -26,19 +26,19 @@ if ($opt == "1")
   {
    if ($countryname == $cost["_homecountry"]) $transfercost = $payment["banktransfer"]["home"];
    else $transfercost = $payment["banktransfer"]["foreign"];
-   $paymentname = $loc_lang["banktransfer"];
+   $paymentname = gettext("Bank Transfer");
   }
 if ($opt == "2")
   {
    if ($countryname == $cost["_homecountry"]) $transfercost = $payment["paypal"]["home"];
    else $transfercost = $payment["paypal"]["foreign"];
-   $paymentname = $loc_lang["paypal"];
+   $paymentname = gettext("PayPal");
   }
 if ($opt == "3")
   {
    if ($countryname == $cost["_homecountry"]) $transfercost = $payment["payondelivery"]["home"];
    else $transfercost = $payment["payondelivery"]["foreign"];
-   $paymentname = $loc_lang["payondelivery"];
+   $paymentname = gettext("Pay on delivery");
   }
 $costs = $transfercost + $shippingcost;
 
@@ -51,32 +51,32 @@ $costs = $transfercost + $shippingcost;
        {
         if (!isset($_SERVER[HTTPS]) or $_SERVER[HTTPS] == "")
           {
-           echo "<p style=\"font-weight: bold;\">" . $loc_lang["ssl_off"] . "\n";
+           echo "<p style=\"font-weight: bold;\">" . gettext("This connection is NOT encrypted with SSL! I strongly recommend: do NOT send your private data through an unencrypted connection!") . "\n";
            ?>
            <form action="https://<?php echo $_SERVER["HTTP_HOST"] . "/" . $conf["callup"]; ?>" method="get" accept-charset="UTF-8">
            <?php foreach($conf["call"] as $call => $value) { ?>
              <input type="hidden" name="<?php echo $call; ?>" value="<?php echo $value; ?>">
             <?php } ?>
              <input type="hidden" name="display" value="order">
-             <input type="submit" value="<?php echo $loc_lang["encrypt"]; ?>">
+             <input type="submit" value="<?php echo gettext("Encrypt now!"); ?>">
            </form></p>
            
            <?php
           }
-        else { ?> <img src="pics/ssl20.png" style="vertical-align: middle;" alt="<?php echo $loc_lang["ssl_on"]; ?>" title="<?php echo $loc_lang["ssl_on"]; ?>"><br> <?php }
+        else { ?> <img src="pics/ssl20.png" style="vertical-align: middle;" alt="<?php echo gettext("This connection is encrypted with SSL."); ?>" title="<?php echo gettext("This connection is encrypted with SSL."); ?>"><br> <?php }
        }
-        echo "{$loc_lang["explain_order_form_1"]}<br>\n<br>\n";
+        echo gettext("Now we need to know, where we shall send the order. You still can make changes to the contents of the shopping kart!") . "<br>\n<br>\n";
         echo "<div class=\"orderdata\">\n";
         echo "<form action=\"{$conf["callup"]}{$link}job=adduserdata&amp;kart=show\" id=\"submit_shipping_data\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
       ?>
-            <div class="orderline"><?php echo $loc_lang["first_name"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="firstname"<?php echo "$firstname"; ?>></div><br>
-            <div class="orderline"><?php echo $loc_lang["last_name"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="lastname"<?php echo "$lastname"; ?>></div><br>
-            <div class="orderline"><?php echo $loc_lang["street"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="adress1"<?php echo "$adress1"; ?>></div><br>
-            <div class="orderline"><?php echo $loc_lang["address_2"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="adress2"<?php echo "$adress2"; ?>></div><br>
-            <div class="orderline"><?php echo $loc_lang["zip"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="plz"<?php echo "$plz"; ?>></div><br>
-            <div class="orderline"><?php echo $loc_lang["city"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="city"<? echo "$city"; ?>></div><br>
-            <div class="orderline"><?php echo $loc_lang["province"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="province"<?php echo "$province"; ?>></div><br>
-            <div class="orderline"><?php echo $loc_lang["country"]; ?></div><div class="orderline"><input maxlength="100" size="20" name="countryname"<?php echo " value=\"$countryname\""; ?>></div><br>
+            <div class="orderline"><?php echo gettext("First name: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="firstname"<?php echo "$firstname"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Last name: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="lastname"<?php echo "$lastname"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Street No: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="adress1"<?php echo "$adress1"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Adress line 2: (optional) "); ?></div><div class="orderline"><input maxlength="100" size="20" name="adress2"<?php echo "$adress2"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("ZIP: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="plz"<?php echo "$plz"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("City: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="city"<? echo "$city"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Province: (optional) "); ?></div><div class="orderline"><input maxlength="100" size="20" name="province"<?php echo "$province"; ?>></div><br>
+            <div class="orderline"><?php echo gettext("Country: "); ?></div><div class="orderline"><input maxlength="100" size="20" name="countryname"<?php echo " value=\"$countryname\""; ?>></div><br>
             <div class="orderline">Email: </div><div class="orderline"><input maxlength="100" size="20" name="email"<?php echo "$email"; ?>></div><br>
             <?php
               echo "<input type=\"hidden\" name=\"newsletter\" value=\"nein\">\n";
@@ -88,11 +88,11 @@ $costs = $transfercost + $shippingcost;
                 {
                  echo "  <input type=\"hidden\" name=\"$call\" value=\"$value\">\n";
                 }
-              echo "  <input type=\"submit\" value=\"{$loc_lang["back_to_shop"]}\" title=\"{$loc_lang["back_to_shop"]}\">\n";
+              echo "  <input type=\"submit\" value=\"&lt;&lt;&lt; " . gettext("Back to shop") . "\" title=\"" . gettext("Back to shop") . "\">\n";
               echo "</form></div>\n";
               echo "<div class=\"orderbuttons\">";
-              echo "<input type=\"button\" value=\"{$loc_lang["submit_data"]}\" onclick=\"document.getElementById('submit_shipping_data').submit();\" title=\"{$loc_lang["submit_data"]}\"></div>\n";
+              echo "<input type=\"button\" value=\" " . gettext("Submit data!") . " &gt;&gt;&gt; \" onclick=\"document.getElementById('submit_shipping_data').submit();\" title=\"" . gettext("Submit data!") . "\"></div>\n";
             ?>
      </div>
-     <div class="clear notes" style="padding-top: 25px;"><?php echo $loc_lang["data_privacy_statement"]; ?></div>
+     <div class="clear notes" style="padding-top: 25px;"><?php echo gettext("Your data will not be shared with anybody! We only use it to label your package, so that it will find you. We store your data only for a short time, in order to be able to respond, if there should be something wrong with your shipment. This data is stored in our email-account, so no one else will have access to it. The data stored on our server is deleted, as soon as the order has been made."); ?></div>
 </div>

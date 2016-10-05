@@ -1,4 +1,29 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   default: { $lang = "en"; break; }
+  }
+$directory = $cbPlayer_dirname . '/locale';
+$domain = 'cbplayer';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($domain, $directory);
+textdomain($domain);
+bind_textdomain_codeset($domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('../header_full.html');
 include('../../conf/shop_conf.php');
 if (isset($_GET["opt"]))
@@ -21,13 +46,14 @@ echo "<select name=\"lang\" size=\"1\" onchange=\"self.location='translate.php?o
   echo "</select>\n</td>\n</tr>\n";
 define( "LOC_LANG", $lang );
 include('../../locale/' . LOC_LANG . '.php');
-echo "<tr><td align=\"justify\">{$loc_lang["translation_base_language"]}<br><br>\n</td>\n</tr>\n";
+echo "<tr><td align=\"justify\">" . gettext("The language you want to use as a template. Here are all languages we already have. We recommend you use english or deutsch to avoid subsequent errors, since these were the first languages we had.
+WARNING! Don't use this switch, once you have begun working! It will destroy all your work!") . "<br><br>\n</td>\n</tr>\n";
 echo "<tr><td align=\"center\"><input type=\"text\" size=\"46\" name=\"new_lang\">\n</td>\n</tr>\n";
-echo "<tr><td align=\"justify\">{$loc_lang["translation_new_language"]}<br><br>\n</td>\n</tr>\n";
+echo "<tr><td align=\"justify\">" . gettext("In to which language would you like to translate? Please enter the language name in its own language! (e.g.:fran&#231;ais instead of french!)") . "<br><br>\n</td>\n</tr>\n";
 echo "<tr><td align=\"center\"><input type=\"text\" size=\"46\" name=\"author\">\n</td>\n</tr>\n";
-echo "<tr><td align=\"justify\">{$loc_lang["translation_author"]}\n</td>\n</tr>\n</table><br><br><br>\n";
+echo "<tr><td align=\"justify\">" . gettext("Please tell us your &quot;name &lt;email-address&gt;&quot; so, that we can come back to you if there are any questions.") . "\n</td>\n</tr>\n</table><br><br><br>\n";
 echo "<table border=\"0\" align=\"center\" width=\"1000\" bgcolor=\"{$conf["bgcolor"]}\" rules=\"rows\">\n";
-echo "<tr height=\"30\"><td align=\"center\">{$loc_lang["translation_variable"]}</td><td align=\"center\">{$loc_lang["translation_new_field"]}</td><td align=\"center\">{$loc_lang["translation_template"]}</td></tr>\n";
+echo "<tr height=\"30\"><td align=\"center\">" . gettext("Systemname of text field") . "</td><td align=\"center\">" . gettext("Your new translation") . "</td><td align=\"center\">" . gettext("Your template") . "</td></tr>\n";
 $count = "0";
 foreach($loc_lang as $key => $value)
   {
@@ -56,8 +82,8 @@ foreach($loc_lang as $key => $value)
       <br>
       <br>
       <?php 
-        echo "<table width=\"400\" align=\"center\"><tr><td align=\"justify\">{$loc_lang["translation_send_warn"]}</td></tr></table><br>\n<br>\n";
-        echo "<input type=\"submit\" value=\"{$loc_lang["translation_send"]}\">\n"; 
+        echo "<table width=\"400\" align=\"center\"><tr><td align=\"justify\">" . gettext("Please make sure you have checked for errors trice!!!!! There's nothing worse for us than to find out which version is the best in a strange foreign language!!!") . "</td></tr></table><br>\n<br>\n";
+        echo "<input type=\"submit\" value=\" &lt;&lt;&lt; " . gettext("OK, I have double-checked! Send this translation!") . " &gt;&gt;&gt; \">\n"; 
       ?>
     </td>
   </tr>
