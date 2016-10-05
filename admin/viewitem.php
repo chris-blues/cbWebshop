@@ -47,6 +47,7 @@ include('read_index.php');
   echo "    </td>\n  </tr>\n  <tr>\n    <td align=\"center\" colspan=\"2\">\n";
   if ($cat == "music") echo "      {$loc_lang["admin_tracklist"]}<br>\n";
   else echo "      {$loc_lang["admin_details"]}<br>\n";
+  $data[$c]['item_details'] = trim($data[$c]['item_details'],"\n");
   echo "      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";
   echo "      <button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; {$loc_lang["admin_back"]} </button> <input type=\"submit\" value=\" {$loc_lang["admin_save"]} \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n      <input type=\"hidden\" name=\"oldid\" value=\"$oldid\">\n";
   echo "    </td>\n  </tr>\n</table>\n";

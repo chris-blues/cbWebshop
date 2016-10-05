@@ -47,8 +47,8 @@
   $loc_lang["province"]                  = "Land/Provinz: (optional) ";
   $loc_lang["country"]                   = "Staat: ";
   $loc_lang["join_newsletter"]           = "Ich m&ouml;chte in den Folkadelic Newsletter eingetragen werden!";
-  $loc_lang["submit_data"]               = " >>> Daten senden! ";
-  $loc_lang["once_money_arrived"]        = "Wenn Sie den Knopf 'Jetzt kaufen' dr&uuml;cken wird die Bestellung abgeschickt. Sobald Ihr Geld uns erreicht hat werden wir das Paket auf Reisen schicken!<br>";
+  $loc_lang["submit_data"]               = " <<< Daten senden! ";
+  $loc_lang["once_money_arrived"]        = "Wenn Sie den Knopf 'Jetzt kaufen' dr&uuml;cken (dieser erscheint auf der linken Seite sobald alle erforlderlichen Daten vorhanden sind) wird die Bestellung abgeschickt. Sobald Ihr Geld uns erreicht hat werden wir das Paket auf Reisen schicken!<br>";
   $loc_lang["kart_empty_error"]          = "Warenkorb scheint leer zu sein!";
   $loc_lang["no_country_selected"]       = "Sie haben im Warenkorb ihr Land nicht angegeben! Tun Sie das bitte!";
   $loc_lang["no_payment_selected"]       = "Sie haben im Warenkorb ihre bevorzugte Zahlungsmethode nicht angegeben! Tun Sie das bitte!";

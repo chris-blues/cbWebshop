@@ -1,8 +1,9 @@
 <?php
 include('header_short.php');
 include('../conf/shop_conf.php');
+include("../locale/{$conf["_default_lang"]}.php");
 ?>
-<body align="center" valign="top">
+<body align="center" valign="top" onload="document.location.href='showitems.php'">
 
 <?php 
 $job = $_GET["job"];  /* Was sollen wir tun? job=additem == neuen eintrag hinzufügen */
@@ -80,20 +81,21 @@ if ($job == "updateitem")  /* Wenn wir einen bestehenden Datensatz verändern so
       $error = "0";
       echo "<b>Creating</b> $tracklistfile: ";
       $tracklist = str_replace("<br>", "\n", $data["$c"]['item_details']);
+      $tracklist = trim($tracklist,"\n");
       //$data["$c"]['item_details'] = "";
       if (!($tlfHandle = fopen($tracklistfile,"w"))) { echo "ERROR opening $tracklistfile!<br>\n"; $error = "1"; }
       fputs($tlfHandle, $tracklist); fputs($tlfHandle, "\n");
       if (!fclose($tlfHandle)) { echo "ERROR closing $tracklistfile!<br>\n"; $error = "1"; }
       if (!chmod($tracklistfile, 0755)) { echo "ERROR! Cannot change permissions for $tracklistfile!<br>\n"; $error = "1"; }
-      if ($error != "1") echo "OK<br>\n";
+      if ($error != "1") { echo "OK<br>\n"; }
      }
    else
      {
       if (file_exists("../items/{$data["$c"]['item_id']}.dat"))
         {
          echo "<b>Deleting left-over tracklist-file:</b><br>\n../items/{$data["$c"]['item_id']}.dat: ";
-         if (!unlink("../items/{$data["$c"]['item_id']}.dat")) echo "ERROR deleting ../items/{$data["$c"]['item_id']}.dat<br>\n"; 
-         else echo "OK<br>\n";
+         if (!unlink("../items/{$data["$c"]['item_id']}.dat"))  echo "ERROR deleting ../items/{$data["$c"]['item_id']}.dat<br>\n"; 
+         else { echo "OK<br>\n"; }
         }
      }
   }
@@ -146,21 +148,21 @@ if((!$_POST["reset_x"]))
 // Hochgeladene Bilder speichern
 $uploaddir = "items/pics";
 $uploadfile = "../$uploaddir/{$data[$counter]['item_id']}.png";
-echo "<table border=\"1\"><tr><td><pre><h3>Upload</h3><br>";
+//echo "<table border=\"1\"><tr><td><pre><h3>Upload</h3><br>";
 if (move_uploaded_file($_FILES['upload_pic']['tmp_name'], $uploadfile)) 
-  { echo "File is valid, and was successfully uploaded.<br>"; } 
+  { /*echo "File is valid, and was successfully uploaded.<br>";*/ } 
 else 
-  { echo "Error! Could not move file to ../$uploaddir/<br>"; }
+  { /*echo "Error! Could not move file to ../$uploaddir/<br>";*/ }
 if (move_uploaded_file($_FILES['upload_pricetag']['tmp_name'], "$uploadfile.png")) 
-  { echo "File is valid, and was successfully uploaded.<br>"; } 
+  { /*echo "File is valid, and was successfully uploaded.<br>"; } 
 else 
-  { echo "Error! Could not move file to ../$uploaddir/<br>"; }
-echo "Here is some more debugging info:<br>";
+  { /*echo "Error! Could not move file to ../$uploaddir/<br>";*/ }
+//echo "Here is some more debugging info:<br>";
 chmod($uploadfile, 0755);
 chmod("$uploadfile.png", 0755);
-echo "new filename: $uploadfile<br>";
-echo "new filename: $uploadfile.png<br>";
-echo "</pre></td></tr></table>";
+//echo "new filename: $uploadfile<br>";
+//echo "new filename: $uploadfile.png<br>";
+//echo "</pre></td></tr></table>";
 
 
 /* SCHREIBE index.dat und schließe index.dat */
@@ -199,7 +201,7 @@ if ($job != "")    /* Falls kein Job angegeben wurde, schreibe keine neue index.
               { $output .= "Error! Could not delete ../items/$delitem.dat!<br>\n"; }
             else { $output .= "OK<br>\n"; }
            }
-         echo "$output<br>";
+         //echo "$output<br>";
          continue;     /* ...dann schreiben wir den betreffenden Datensatz einfach nicht wieder in die Datei! :) */
         }
      }
@@ -238,7 +240,7 @@ echo "<table border=\"1\" align=\"center\"><tr><td><pre><h2>index.dat</h2><br>";
 if ($job == "delete")  { echo "<h3>Successfully deleted Entry $delitem</h3><br><br>"; }
 if ($job == "additem") { echo "<h3>Successfully added Entry {$data[$c]['item_id']}</h3><br><br>\n$tracklistfile<br>\n"; }
 if ($job == "updateitem") { echo "<h3>Successfully updated Entry {$data[$c]['item_id']}</h3><br><br>\n$tracklistfile<br>\n"; }
-if ($job == "") { echo "<h3>No job assigned, so nothing happened!</h3>Here\'s the actual data tree:<br><br>"; print_r($data); }
+if ($job == "") { /*echo "<h3>No job assigned, so nothing happened!</h3>Here\'s the actual data tree:<br><br>"; print_r($data); */ }
 echo "</pre></td></tr></table>";
 
 // echo "<pre>"; print_r($data); echo "</pre>";

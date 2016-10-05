@@ -46,7 +46,7 @@ echo "<table width=\"540\" height=\"600\" border=\"0\" align=\"center\" valign=\
     <td align="justify" valign="top">
       <?php
         echo "{$loc_lang["explain_order_form_1"]}<br>\n<br>\n";
-        echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n";
+        echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" id=\"submit_shipping_data\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n";
         echo "<table align=\"center\" valign=\"top\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\">\n";
       ?>
         <tr>
@@ -138,7 +138,7 @@ echo "<table width=\"540\" height=\"600\" border=\"0\" align=\"center\" valign=\
               echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
               echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
               echo "<table width=\"100%\"><tr><td align=\"center\" bgcolor=\"#544a31\">";
-              echo "<input type=\"submit\" value=\"{$loc_lang["submit_data"]}\">\n";
+              echo "<a href=\"javascript:\" onclick=\"document.getElementById('submit_shipping_data').submit();\"><b>{$loc_lang["submit_data"]}</b></a>\n";
               echo "</td></tr><tr><td align=\"justify\"><br>";
               echo $loc_lang["once_money_arrived"];
               echo "</td></tr></table></form>";

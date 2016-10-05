@@ -47,8 +47,8 @@
   $loc_lang["province"]                  = "Province: (optional) ";
   $loc_lang["country"]                   = "Country: ";
   $loc_lang["join_newsletter"]           = "I want to sign in to the Folkadelic Newsletter!";
-  $loc_lang["submit_data"]               = " >>> Submit data! ";
-  $loc_lang["once_money_arrived"]        = "Once you press the button 'buy now' the order will be sent.<br>\nOnce your money is received, the package will be sent on its way to you!<br>";
+  $loc_lang["submit_data"]               = " <<< Submit data! ";
+  $loc_lang["once_money_arrived"]        = "Once you press the button 'buy now' (will appear on the left side, once all neccessary data is entered) the order will be sent.<br>\nOnce your money is received, the package will be sent on its way to you!<br>";
   $loc_lang["kart_empty_error"]          = "Kart seems to be emtpy!";
   $loc_lang["no_country_selected"]       = "You didn't choose your country in the kart! Please do so!";
   $loc_lang["no_payment_selected"]       = "You didn't choose your preferred payment method in the kart! Please do so!";

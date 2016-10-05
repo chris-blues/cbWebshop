@@ -107,7 +107,9 @@ $value = "{$data["$item"]['item_preis']} &euro;/{$loc_lang["piece"]}";
                    '%font_size%',
                    '%bgcolor%',
                    '%itemview_width%',
-                   '%itemview_pic_height%');
+                   '%itemview_pic_height%',
+                   '%alignment%',
+                   '%shop_align%');
   /* Womit soll das ersetzt werden? */
   $replace = array($data["$item"]['item_id'], 
                    $data["$item"]['item_name'],
@@ -128,7 +130,9 @@ $value = "{$data["$item"]['item_preis']} &euro;/{$loc_lang["piece"]}";
                    $conf_["font_size"],
                    $conf["bgcolor"],
                    $item_conf["itemview_width"],
-                   $item_conf["itemview_pic_height"]);
+                   $item_conf["itemview_pic_height"],
+                   $item_conf["align"],
+                   $conf["shop_align"]);
   /* Finde und ersetze Platzhalter in $output */
   $output = str_replace($search, $replace, $template);
   echo "$output";

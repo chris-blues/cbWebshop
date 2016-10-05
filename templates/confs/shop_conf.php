@@ -1,14 +1,14 @@
 <?php
 $conf["_default_lang"] = "deutsch";
-$conf["_email_shopkeeper"] = "kassenwart@folkadelic.de";
-$conf["_paypal_business"] = "kassenwart@folkadelic.de";
-$conf["bankaccount_info"] = "Brian Brademann
-Kto.Nr.: 915 660 540
-BLZ: 200 411 33
-IBAN: DE83200411330915660540
-BIC/Swift-Code: COBADEHD001
+$conf["_email_shopkeeper"] = "shopkeeper@yourdomain.com";
+$conf["_paypal_business"] = "paypaladress@somedomain.com";
+$conf["bankaccount_info"] = "Some One
+Kto.Nr.: 123 456 789
+BLZ: 123 456 78
+IBAN: AB12345678901234
+BIC/Swift-Code: ABCDEFGH123
 
-PayPal-ID: LL5N934Z5GMT8";
+PayPal-ID: AB1C345D6GMT7";
 $conf["bgcolor"] = "#544a31";
 $conf["color"] = "#000000";
 $conf["font_face"] = "Georgia";
@@ -27,6 +27,6 @@ $conf["shop_align"] = "center";
 $conf["shop_columns"] = "2";
 $conf["shop_height"] = "631";
 $conf["shop_width"] = "550";
-$conf["this_domain"] = "http://folkadelic.de";
-$conf["this_organization"] = "Folkadelic Hobo Jamboree";
+$conf["this_domain"] = "http://yourdomain.com";
+$conf["this_organization"] = "Your Name or band or sth";
 ?>
