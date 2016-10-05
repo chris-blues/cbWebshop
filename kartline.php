@@ -139,11 +139,11 @@ echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
              echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']})</a></td><td width=\"16\" align=\"right\">";
              /* Remove button */
              echo "<a href=\"kartline.php?job=remove&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\">";
-             echo "<img src=\"pics/del.png\" alt=\"{$loc_lang["remove"]}\" title=\"{$loc_lang["remove"]}\" border=\"0\"></a></td></tr></table>\n<table width=\"200\" border=\"0\"><tr>\n";
+             echo "<img src=\"pics/del.png\" alt=\"{$loc_lang["remove"]}\" title=\"{$loc_lang["remove"]}\"></a></td></tr></table>\n<table width=\"200\" border=\"0\"><tr>\n";
              /* more & less buttons */
              echo "<td width=\"40\" align=\"left\">";
-             echo "<a href=\"kartline.php?job=additem&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/more.png\" border=\"0\"></a>\n";
-             echo "<a href=\"kartline.php?job=less&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/less.png\" border=\"0\"></a></td>\n";
+             echo "<a href=\"kartline.php?job=additem&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/more.png\"></a>\n";
+             echo "<a href=\"kartline.php?job=less&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/less.png\"></a></td>\n";
              /* Show amount * price = total */
              $total = number_format($total, 2, '.', ' ');
              echo "<td align=\"right\">({$kart["$counter"]['item_amount']} x)&nbsp; <b>$total &euro;</b></td></tr></table>\n";
@@ -212,7 +212,7 @@ echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
            }
           echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n";
           echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"left\">";
-          echo "<a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=reset\" target=\"kart\"><img src=\"pics/del.png\" alt=\"{$loc_lang["reset_kart"]}\" title=\"{$loc_lang["reset_kart"]}\" border=\"0\"></a> ";
+          echo "<a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=reset\" target=\"kart\"><img src=\"pics/del.png\" alt=\"{$loc_lang["reset_kart"]}\" title=\"{$loc_lang["reset_kart"]}\"></a> ";
           $complete = $kart_total + $transfercost + $shipcost; $complete = number_format($complete, 2, '.', ' ');
           echo " {$loc_lang["total"]}:</td><td align=\"right\">";
           echo "<b>$complete &euro;</b></td></tr></table>\n</font>\n";

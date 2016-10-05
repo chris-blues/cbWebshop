@@ -56,8 +56,8 @@ if ($countryname == "USA") $countryname_code = "US";
 /* ################################################################### */
 
 include('header_short.html');
-if ($paymentname == "PayPal") $onload = "document.paypal_form.submit();";
-else $onload = "document.leaveshop_form.submit();";
+$onload = "document.leaveshop_form.submit();";
+if ($paymentname == "PayPal") $onload .= "document.paypal_form.submit();";
 if ($newsletter == "ja") $onload .= "document.jnl2_sign_form.submit();";
 echo "<body bgcolor=\"#544a31\" onload=\"$onload\">\n";  
 echo "{$conf["font_style"]}<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\"\n>";
@@ -99,7 +99,7 @@ foreach($country as $key => $value)
 if (!isset($countryexists) or $countryexists != "yes")
   {
    $key++;
-   $country[$key] = $countryname;
+   $country[$key] = htmlspecialchars($countryname, ENT_QUOTES | ENT_HTML5, "UTF-8");
    sort($country, SORT_STRING);
    $configfile = "conf/countries.php";
    $fHandle = fopen($configfile, "w");
@@ -167,7 +167,7 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR
      {
       if ($lang == "english") $lc = "EN"; else $lc = "DE";
       echo "{$loc_lang["redirecting_to_paypal"]}\n";
-      echo "<form id=\"checkout_form\" name=\"paypal_form\" method=\"post\" action=\"https://www.paypal.com/cgi-bin/webscr\" accept-charset=\"UTF-8\" target=\"_top\">\n";
+      echo "<form id=\"checkout_form\" name=\"paypal_form\" method=\"post\" action=\"https://www.paypal.com/cgi-bin/webscr\" accept-charset=\"UTF-8\" target=\"_blank\">\n";
         echo "<input id=\"cmd\" name=\"cmd\" type=\"hidden\" value=\"_cart\" />\n";
         echo "<input id=\"upload\" name=\"upload\" type=\"hidden\" value=\"1\" />\n";
         echo "<input id=\"charset\" name=\"charset\" type=\"hidden\" value=\"utf-8\" />\n";
@@ -179,9 +179,9 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR
         echo "<input id=\"currency_code\" name=\"currency_code\" type=\"hidden\" value=\"EUR\" />\n";
         echo "<input id=\"lc\" name=\"lc\" type=\"hidden\" value=\"$lc\" />\n";
         echo "<input id=\"invoice\" name=\"invoice\" type=\"hidden\" value=\"$kartid\" />\n";
-        echo "<input id=\"shopping_url\" name=\"shopping_url\" type=\"hidden\" value=\"{$conf["this_domain"]}/store.php\" />\n";
-        echo "<input id=\"return\" name=\"return\" type=\"hidden\" value=\"{$conf["this_domain"]}/store.php\" />\n";
-        echo "<input id=\"cancel_return\" name=\"cancel_return\" type=\"hidden\" value=\"{$conf["this_domain"]}/store.php?kartid=$kartid\" />\n";
+        echo "<input id=\"shopping_url\" name=\"shopping_url\" type=\"hidden\" value=\"{$conf["this_domain"]}\" />\n";
+        echo "<input id=\"return\" name=\"return\" type=\"hidden\" value=\"{$conf["this_domain"]}\" />\n";
+        echo "<input id=\"cancel_return\" name=\"cancel_return\" type=\"hidden\" value=\"{$conf["this_domain"]}\" />\n";
         echo "<input id=\"notify_url\" name=\"notify_url\" type=\"hidden\" value=\"{$conf["this_domain"]}\" />\n";
         echo "<input id=\"bn\" name=\"bn\" type=\"hidden\" value=\"{$conf["this_organization"]}\" />\n";
         echo "<input id=\"tax_cart\" name=\"tax_cart\" type=\"hidden\" value=\"0\" />\n";

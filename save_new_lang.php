@@ -35,7 +35,7 @@ foreach($_POST as $key => $value)
      {
       $keys = explode("-", $key, -1);
       $key = $keys["0"];
-      $loc_lang[$key] = htmlentities($value, ENT_QUOTES | ENT_HTML5, "UTF-8");
+      $loc_lang[$key] = htmlspecialchars($value, ENT_QUOTES | ENT_HTML5, "UTF-8");
       //$loc_lang[$key] = str_replace("\"", "&quot;", $loc_lang[$key]);
      }
   }
@@ -60,11 +60,13 @@ foreach ($loc_lang as $key => $value)
       fputs($fHandle, $str);
      }
   }
+fputs($fHandle, "foreach(\$loc_lang as \$key => \$value)\n  {\n   if (\$key == \"mail\")\n     {\n      foreach(\$loc_lang[\"mail\"] as \$key2 => \$value2)\n        {\n         \$loc_lang[\$key][\$key2] = nl2br(\$value2, false);\n        }\n     }\n   if (\$key != \"mail\")\n     {\n      \$loc_lang[\$key] = nl2br(\$value, false);\n     }\n  }\n");
 fputs($fHandle, "?>");
 fclose($fHandle);
-
+unset($loc_lang);
+include("locale/$lang.php");
 mail("chris@musicchris.de", "Übersetzung Folkadelic Shop", "$author hat den Shop von $lang in $new_lang übersetzt!\nJruß\n", "From:$author\r\nContent-Type: text/plain; charset = \"UTF-8\"\r\nContent-Transfer-Encoding: 8bit\r\n");
-echo "<center>Vielen Dank! Thank you very much! Muchas gra&#231;ias! Mille grazie! Merci beaucoup!</font>{$conf["font_style_close"]}\n{$loc_lang["translation_submitted"]}</center>";
+echo "<center>Vielen Dank! Thank you very much! Muchas gra&#231;ias! Mille grazie! Merci beaucoup!\n{$loc_lang["translation_submitted"]}</center></font>{$conf["font_style_close"]}";
 echo "<pre>"; print_r($loc_lang); echo "</pre>\n";
 ?>
 

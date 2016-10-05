@@ -22,7 +22,7 @@ echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">{$conf["
     <td align="left" valign="top" width="220" height="30" rowspan="1">
       <form style="padding:0px;margin:0px;" action="cdorder-payment.php" method="post" accept-charset="UTF-8">
   <?php
-  echo "<a href=\"translators.php?lang=$lang\" class=\"fancy\" rel=\"translators\"><img src=\"pics/ask.png\" border=\"0\"></a>";
+  //echo "<a href=\"translators.php?lang=$lang\" class=\"fancy\" rel=\"translators\"><img src=\"pics/ask.png\" border=\"0\"></a>";
   echo "<select name=\"lang\" size=\"1\" onchange=\"self.location='shop.php?kartid=$kartid&amp;opt='+this.selectedIndex\">\n";
   foreach($conf["lang"] as $key => $value)
     {

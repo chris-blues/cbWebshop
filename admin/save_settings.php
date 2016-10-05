@@ -160,6 +160,6 @@ echo "$output\n</textarea>\n</form>\n";
 //if ($job == "countries") print_r($country);
 //echo "</pre>\n";
 ?>
-<center><button type="button" value=" Back " onclick="self.location='showitems.php'"> &lt;&lt;&lt; Back </button></center>
+<center><button type="button" value=" Back " onclick="top.location='index.php'"> &lt;&lt;&lt; Back </button></center>
 </body>
 </html>

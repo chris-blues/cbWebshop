@@ -2,10 +2,8 @@
 // Author of this file: Chris <chris(a)musicchris.de>
 // Be sure to use UTF-8 encoding - NO ISO-9876 stuff!!!!
 // html format strings, special chars must be coded (ö -> &ouml; , ß -> &szlig; , € -> &euro;  etc)
-  $loc_lang["translators_needed_1"]      = "Your language is not available? If you have some time to spare, you could help us";
-  $loc_lang["translators_needed_2"]      = "translate";
-  $loc_lang["translators_needed_3"]      = " our shop in your language";
-  $loc_lang["translation_base_language"] = "The language you want to use as a template. Here are all languages we already have. We recommend you use english or deutsch to avoid subsequent errors, since these were the first languages we had.\nWARNING! Don't use this switch, once you have begun working! It will destroy all your work!";
+  $loc_lang["translators_needed"]        = "Your language is not available? If you have some time to spare, you could help us <a href=\"translate.php\" target=\"_blank\">translate</a> our shop in your language.";
+  $loc_lang["translation_base_language"] = "The language you want to use as a template. Here are all languages we already have. We recommend you use english or deutsch to avoid subsequent errors, since these were the first languages we had.<br>\nWARNING! Don't use this switch, once you have begun working! It will destroy all your work!";
   $loc_lang["translation_new_language"]  = "In to which language would you like to translate? Please enter the language name in its own language! (e.g.:fran&#231;ais instead of french!)";
   $loc_lang["translation_author"]        = "Please tell us your &quot;name &lt;email-address&gt;&quot; so, that we can come back to you if there are any questions.";
   $loc_lang["translation_variable"]      = "Systemname of text field";
@@ -13,8 +11,8 @@
   $loc_lang["translation_template"]      = "Your template";
   $loc_lang["translation_send_warn"]     = "Please make sure you have checked for errors trice!!!!! There's nothing worse for us than to find out which version is the best in a strange foreign language!!!";
   $loc_lang["translation_send"]          = " &lt;&lt;&lt; OK, I have double-checked! Send this translation! &gt;&gt;&gt; ";
-  $loc_lang["translation_submitted"]     = "\n\nThank you very much!\nYour translation has been saved. We will check it out and integrate it as soon as possible!\n\nFolkadelic Hobo Jamboree";
-  $loc_lang["back_to_shop"]              = "Back to shop";
+  $loc_lang["translation_submitted"]     = "Thank you very much!<br>\nYour translation has been saved. We will check it out and integrate it as soon as possible!<br><br>\nFolkadelic Hobo Jamboree";
+  $loc_lang["back_to_shop"]              = "Back to";
   $loc_lang["remove"]                    = "remove";
   $loc_lang["select_country"]            = "Select country!";
   $loc_lang["country_other"]             = "other";
@@ -27,11 +25,11 @@
   $loc_lang["total"]                     = "Total";
   $loc_lang["enter_shipping_data"]       = "Enter shipping data";
   $loc_lang["change_shipping_data"]      = "Change shipping data";
-  $loc_lang["final_buy"]                 = " Finally buy! &gt;&gt;&gt; ";
+  $loc_lang["final_buy"]                 = " Finally buy! >>> ";
   $loc_lang["click_to_view"]             = "click here to view our";
   $loc_lang["click_to_view_add"]         = ""; // In some languages we need to add something after the object we want to see - in english we don't! :)
   $loc_lang["into_shopping_kart"]        = "into shopping kart";
-  $loc_lang["audio_errormessage"]        = "Sorry!\nYour Browser is unable to interpret HTML5. You can't listen to audio with this browser... :(\nWe recommend f.i. Firefox";
+  $loc_lang["audio_errormessage"]        = "Sorry!<br>Your Browser is unable to interpret HTML5. You can't listen to audio with this browser... :(<br>We recommend f.i. Firefox";
   $loc_lang["piece"]                     = "piece";
   $loc_lang["pieces"]                    = "pieces";
   $loc_lang["thx_4_order"]               = "Thank you for your order!";
@@ -49,8 +47,8 @@
   $loc_lang["province"]                  = "Province: (optional) ";
   $loc_lang["country"]                   = "Country: ";
   $loc_lang["join_newsletter"]           = "I want to sign in to the Folkadelic Newsletter!";
-  $loc_lang["submit_data"]               = " &lt;&lt,&lt; Submit data! ";
-  $loc_lang["once_money_arrived"]        = "Once you press the button 'buy now' (will appear on the left side, once all neccessary data is entered) the order will be sent.\nOnce your money is received, the package will be sent on its way to you!\n";
+  $loc_lang["submit_data"]               = " <<< Submit data! ";
+  $loc_lang["once_money_arrived"]        = "Once you press the button 'buy now' (will appear on the left side, once all neccessary data is entered) the order will be sent.<br>\nOnce your money is received, the package will be sent on its way to you!<br>";
   $loc_lang["kart_empty_error"]          = "Kart seems to be emtpy!";
   $loc_lang["no_country_selected"]       = "You didn't choose your country in the kart! Please do so!";
   $loc_lang["no_payment_selected"]       = "You didn't choose your preferred payment method in the kart! Please do so!";
@@ -61,7 +59,7 @@
   $loc_lang["redirecting_to_paypal"]     = "Redirecting you to PayPal.";
   //admin
   //index
-  $loc_lang["admin_title"]               = "Shop Admin Tools";
+  $loc_lang["admin_title"]               = "Admin Tools";
   $loc_lang["admin_reallydelete"]        = "Really delete this item?";
   //menue
   $loc_lang["admin_view_items"]          = "View items";
@@ -115,9 +113,7 @@
   $loc_lang["admin_remove"]              = "Remove";
   //edit_lang
   $loc_lang["admin_editlang"]            = "Edit available languages";
-  $loc_lang["admin_notelangfile_1"]      = "Note that you need a translated \"language.php\" in dir shop/locale!!!\nYou can translate the locale-file";
-  $loc_lang["admin_notelangfile_2"]      = "here";
-  $loc_lang["admin_notelangfile_3"]      = ". At the bottom of this page you can process existing language files!";
+  $loc_lang["admin_notelangfile"]        = "Note that you need a translated \"your_new_language.php\" in dir shop/locale!!!<br>You can translate the locale-file <a href=\"../translate.php\" target=\"_blank\">here</a>. At the bottom of this page you can process existing language files!";
   $loc_lang["admin_existinglangfile"]    = "Existing language files:";
   $loc_lang["admin_renamefile"]          = "rename file";
   $loc_lang["admin_deletefile"]          = "delete file";
@@ -147,19 +143,4 @@
   $loc_lang["mail"]["transfer_money_to_account"] = "Please transfer the amount to our account as soon as possible, so we can send you the shipment as soon as your money has arrived!";
   $loc_lang["mail"]["submitted_to_newsletter"]   = "You have submitted to our newsletter. You will receive a confirmation-mail soon.";
   $loc_lang["mail"]["hope_you_enjoy"]            = "We hope you enjoy our work and wish you all the best!";
-
-foreach($loc_lang as $key => $value)
-  {
-   if ($key == "mail")
-     {
-      foreach($loc_lang["mail"] as $key2 => $value2)
-        {
-         $loc_lang[$key][$key2] = nl2br($value2, false);
-        }
-     }
-   if ($key != "mail")
-     {
-      $loc_lang[$key] = nl2br($value, false);
-     }
-  }
 ?>

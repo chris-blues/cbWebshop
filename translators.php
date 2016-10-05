@@ -10,7 +10,7 @@ echo "  <table border=\"0\" align=\"center\" width=\"400\" bgcolor=\"{$conf["bgc
       <td align="justified"><b>
         <?php define( "LOC_LANG", $lang );
               include('locale/' . LOC_LANG . '.php');
-              echo "{$loc_lang["translators_needed"]}"; ?></b>
+              echo "{$loc_lang["translators_needed_1"]} <a href=\"translate.php\" target=\"_blank\">{$loc_lang["translators_needed_2"]}</a>{$loc_lang["translators_needed_3"]}"; ?></b>
       </td>
     </tr>
   </table>
