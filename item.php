@@ -70,7 +70,7 @@ $template = file_get_contents($itemtemplate);
     }
   else 
     {
-     $alt = "clicken Sie hier um die {$data["$item"]['item_type']} {$data["$item"]['item_name']} anzusehen";
+     $alt = "clicken Sie hier um {$data["$item"]['item_type']} {$data["$item"]['item_name']} anzusehen";
      $buy = "in den Warenkorb";
      $value = "{$data["$item"]['item_preis']} &euro;/St&uuml;ck";
     }

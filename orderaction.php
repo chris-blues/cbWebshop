@@ -200,6 +200,7 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR
         echo "<input id=\"shipping_1\" name=\"shipping_1\" type=\"hidden\" value=\"$costs\" />\n";
         echo "<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/de_DE/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
       echo "</form>\n";
+      if (!unlink($kartfile)) echo "ERROR! Could not delete $kartfile.<br>\n";
      }
    else
      {

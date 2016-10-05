@@ -1,4 +1,5 @@
 <?php
+$kartfile = "tmp/kart-$kartid.tmp";
 if ($kartmode == "kart")
 {
 /* Lese karttmpfile falls vorhanden und Erzeuge Array Kart[1][item_sth] */
@@ -41,7 +42,6 @@ if ($kartamount < 1) $kartamount = "0";
 if ($kartmode == "order")
 {
 /* Lese karttmpfile und Erzeuge Array Kart[1][item_sth]   ORDER */
-$kartfile = "tmp/kart-$kartid.tmp";
 $karthandle = fopen($kartfile, "r");
 $kartamount = "0";
 $kart_total = "0";
@@ -80,7 +80,6 @@ if ($kartmode == "action")
 {
 /* Lese karttmpfile und Erzeuge Array Kart[1][item_sth]   ORDERACTION */
 $kartfileerror = "0";
-$kartfile = "tmp/kart-$kartid.tmp";
 $karthandle = fopen($kartfile, "r");
 $kartamount = "0";
 $kart_total = "0";

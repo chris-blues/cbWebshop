@@ -15,16 +15,7 @@ if (!isset($newitem)) $job = "";
 
 if ($job == "reset")
   {
-   $karthandle = fopen($kartfile, "w");
-   if ($karthandle != NULL)
-    {
-     $lnb = "\n";
-     fputs($karthandle, "");
-     $c = "0";
-    }
-   else echo "Error! Cannot open $kartfile!";
-   fclose($karthandle);
-   chmod($kartfile, 0777);
+   if (!unlink($kartfile)) echo "ERROR! Could not delete $kartfile.<br>\n";
    $kartamount = "0";
   }
 /* ################################################# */
@@ -45,11 +36,9 @@ if ($job == "adduserdata")
    if (isset($_POST["province"])) $province = $_POST["province"];
    if (isset($_POST["country"]) and $_POST["country"] != "") $country = $_POST["country"];
    if (isset($_POST["email"])) $email = $_POST["email"];
-   if ($_GET["newsletter"] == "changed")
-     {
-      if ($_POST["newsletter"] != "ja") $newsletter = "nein";
-      else $newsletter = "ja";
-     }
+   if (isset($_POST["newsletter"])) $newsletter = $_POST["newsletter"];
+   if ($_POST["newsletter"] != "ja") $newsletter = "nein";
+   else $newsletter = "ja";
    include('write_kartfile.php');
   }
 
@@ -247,11 +236,39 @@ if ($job == "additem")
           else echo " Gesamt:</td><td align=\"right\">";
           echo "<b>$complete &euro;</b></td></tr></table>\n</font>\n";
           echo "<hr style=\"color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:left;\">\n";
-          echo "<table width=\"100%\"><tr><td align=\"right\">\n";
-          echo "<font size=\"3\">\n<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
-          if ($lang == "english") { echo "Order now!"; }  /* Spracheinstellung  */
-          else { echo "Jetzt bestellen!"; }
-          echo "</b></a>\n</font><br>\n";
+          
+
+/* Check, if all userdata is already received. If all is there,change enter data to change data AND display BUY-link below the kart-list! */
+          $datamissing = "0";
+          if($country == "") $datamissing = "1";
+          if($opt == "") $datamissing = "1";
+          if($firstname == "") $datamissing = "1";
+          if($lastname == "") $datamissing = "1";
+          if($adress1 == "") $datamissing = "1";
+          if($plz == "") $datamissing = "1";
+          if($city == "") $datamissing = "1";
+          if($email == "") $datamissing = "1";
+
+          if ($datamissing == "0")
+            {
+             echo "<table width=\"100%\"><tr><td align=\"right\">\n";
+             echo "<font size=\"3\">\n<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
+             if ($lang == "english") { echo "Change shipping data"; $finalbuy = " Finally buy! >>> "; }  /* Spracheinstellung  */
+             else { echo "Adresse &auml;ndern"; $finalbuy = " Jetzt kaufen! >>> "; }
+             echo "</b></a>\n</font><br>\n";
+             echo "<form action=\"orderaction.php\" target=\"shop\" method=\"post\" accept-charset=\"UTF-8\">\n";
+             echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
+             echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
+             echo "<input type=\"submit\" value=\"$finalbuy\">\n";
+            }
+          else
+            {
+             echo "<table width=\"100%\"><tr><td align=\"right\">\n";
+             echo "<font size=\"3\">\n<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
+             if ($lang == "english") { echo "Enter shipping data"; }  /* Spracheinstellung  */
+             else { echo "Adresse angeben"; }
+             echo "</b></a>\n</font><br>\n";
+            }
          }
       ?>
   </font></em>

@@ -45,6 +45,7 @@ if ($opt == "3")
            echo "Jetzt m&uuml;ssen wir nur noch erfahren wohin die Bestellung geschickt werden soll. Sie k&ouml;nnen immer noch &Auml;nderungen am Warenkorb vornehmen!<br>\n<br>\n";
           }
       ?>
+      <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
       <table align="center" valign="top" border="0" bgcolor="#544a31">
         <tr>
           <td align="right">
@@ -53,9 +54,7 @@ if ($opt == "3")
             ?>
           </td>
           <td width="300">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="firstname"<?php echo "$firstname"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -66,9 +65,7 @@ if ($opt == "3")
             ?>
           </td>
           <td width="300">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="lastname"<?php echo "$lastname"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -78,9 +75,7 @@ if ($opt == "3")
                   else echo"Strasse Nr: "; ?>
           </td>
           <td align="left">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="adress1"<?php echo "$adress1"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -90,9 +85,7 @@ if ($opt == "3")
                   else echo"Zusatz: (optional) "; ?>
           </td>
           <td align="left">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="adress2"<?php echo "$adress2"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -102,9 +95,7 @@ if ($opt == "3")
                   else echo"PLZ: "; ?>
           </td>
           <td align="left">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="plz"<?php echo "$plz"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -114,9 +105,7 @@ if ($opt == "3")
                   else echo"Stadt: "; ?>
           </td>
           <td align="left">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="city"<? echo "$city"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -126,9 +115,7 @@ if ($opt == "3")
                   else echo "Land/Provinz: (optional) "; ?>
           </td>
           <td align="left">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="province"<?php echo "$province"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -138,9 +125,7 @@ if ($opt == "3")
                   else echo"Staat: "; ?>
           </td>
           <td align="left">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="country"<?php echo " value=\"$country\""; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         
@@ -149,31 +134,27 @@ if ($opt == "3")
             Email: 
           </td>
           <td align="left">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n"; ?>
             <input maxlength="100" size="20" name="email"<?php echo "$email"; ?> onblur="this.form.submit();">
-            </form>
           </td>
         </tr>
         <tr>
           <td colspan="2" align="center">
-            <?php echo "<form action=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=adduserdata&amp;newsletter=changed\" method=\"post\" accept-charset=\"UTF-8\" target=\"kart\">\n";
-                  if ($newsletter == "ja") $checked = " checked=\"checked\""; else $checked = "";
+            <?php if ($newsletter == "ja") $checked = " checked=\"checked\""; else $checked = "";
                   if ($lang == "english") { echo"<input type=\"checkbox\" name=\"newsletter\" value=\"ja\"$checked onchange=\"this.form.submit();\">\n";
                                             echo "I want to sign in to the Folkadelic Newsletter!\n"; }
                   else { echo "<input type=\"checkbox\" name=\"newsletter\" value=\"ja\"$checked onchange=\"this.form.submit();\">\n";
                          echo "Ich m&ouml;chte in den Folkadelic Newsletter eingetragen werden!\n"; }
-            echo "</form></td></tr></table>\n";
-       echo "<form action=\"orderaction.php\" method=\"post\" accept-charset=\"UTF-8\" target=\"shop\">\n";
+            echo "</td></tr></table>\n";
        echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
        echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
        echo "<table width=\"100%\"><tr><td align=\"center\" bgcolor=\"#544a31\">";
-       if ($lang == "english") echo "<input type=\"submit\" value=\" >>> Buy now! \">\n";
-       else echo "<input type=\"submit\" value=\" >>> Jetzt kaufen! \"><br>\n";
+       if ($lang == "english") echo "<input type=\"submit\" value=\" >>> Submit data! \">\n";
+       else echo "<input type=\"submit\" value=\" >>> Daten senden! \"><br>\n";
        echo "</td></tr><tr><td align=\"justify\"><br>";
        if ($lang == "english") echo "Once you press the button 'buy now' the order will be sent.<br>\nOnce your money is received, the package will be sent on its way to you!<br>";
        else echo "Wenn Sie den Knopf 'Jetzt kaufen' dr&uuml;cken wird die Bestellung abgeschickt. Sobald Ihr Geld uns erreicht hat werden wir das Paket auf Reisen schicken!<br>";
        
-       echo "</td></tr></table>";
+       echo "</td></tr></table></form>";
             ?>
     </td>
   </tr>
