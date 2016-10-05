@@ -1,4 +1,5 @@
 <!-- BEGIN shopcontent.php -->
+<img src="shop/pics/play_active.png" style="display: none;">
 <?php
 include('conf/item_conf.php');
 
@@ -9,7 +10,7 @@ for ($c = 1; $c <= $itemamount; $c++)
  {
   $col++;
   $buy = "{$loc_lang["buy"]}";
-  $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} &euro;/{$loc_lang["piece"]})";
+  $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} €/{$loc_lang["piece"]})";
   
   
 // Get category ( music | clothing )
@@ -39,7 +40,7 @@ if ($cat == "music")
                             " ",
                             "(",
                             ")",
-                            "&",
+                            "&amp;",
                             "?",
                             "!",
                             ".",
@@ -152,7 +153,7 @@ if ($cat == "music")
   /* Finde und ersetze Platzhalter in $output */
   $output = str_replace($search, $replace, $template);
   echo "$output";
-  echo "<div class=\"spacer-items\">&nbsp;</div>\n";
+  echo "<div class=\"spacer-items\"> </div>\n";
  }
 
 ?>
