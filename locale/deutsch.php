@@ -3,7 +3,7 @@
 // Stellen Sie sicher, daß alles in UTF-8 encodiert wird - keine ISO-9876 Dateien!!!!
 // html format strings, spezielle chars müssen codiert werden (ö -> &ouml; , ß -> &szlig; , € -> &euro;  etc)
   $loc_lang["noscript"]                  = "Bitte aktivieren Sie JavaScript, um diese Seite zu nutzen!";
-  $loc_lang["clicktoplay"]               = "Klicken Sie hier um den Song anzuhören!";
+  $loc_lang["clicktoplay"]               = "Klicken Sie hier um den Song anzuhören! (Beim ersten Mal kann es ein bißchen dauern, bis die Musik heruntergeladen wurde.)";
   $loc_lang["translators_needed_1"]      = "Ihre Sprache ist nicht verfügbar? Falls Sie ein wenig Zeit haben, könnten Sie uns helfen, den Shop in Ihre Sprache zu";
   $loc_lang["translators_needed_2"]      = "übersetzen";
   $loc_lang["translators_needed_3"]      = ".";
@@ -96,7 +96,7 @@
   $loc_lang["admin_edit_countries"]      = "Länder bearbeiten";
   $loc_lang["admin_view_shop"]           = "Shop anzeigen";
   $loc_lang["admin_edit_karts"]          = "Karts bearbeiten";
-  
+
   //showitems
   $loc_lang["admin_edit_item"]           = "Artikel bearbeiten";
   //newitem
@@ -151,7 +151,7 @@
   $loc_lang["admin_deleteitem"]          = "Artikel entfernen";
   //edit_kart
   $loc_lang["admin_editkart"]            = "Verfügbare Karts bearbeiten";
-  
+
 
 // email format strings, spezielle chars müssen direkt angegeben werden (ö, ß, € etc)
   $loc_lang["mail"]["your_order"]                = "Ihre Bestellung";

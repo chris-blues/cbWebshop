@@ -1,4 +1,9 @@
 <?php
+error_reporting(0);
+ini_set("display_errors", 0);
+ini_set("log_errors", 1);
+ini_set("error_log", "/www/admin/logs/php-error.log");
+
 include('shop/conf/shop_conf.php');
 include('shop/conf/cost_conf.php');
 include('shop/conf/payment_conf.php');

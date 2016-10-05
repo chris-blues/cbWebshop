@@ -5,6 +5,11 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 </head>
 <?php
+error_reporting(0);
+ini_set("display_errors", 0);
+ini_set("log_errors", 1);
+ini_set("error_log", "/www/admin/logs/php-error.log");
+
 include('conf/shop_conf.php');
 include('conf/cost_conf.php');
 include('conf/payment_conf.php');

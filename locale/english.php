@@ -3,7 +3,7 @@
 // Be sure to use UTF-8 encoding - NO ISO-9876 stuff!!!!
 // html format strings, special chars must be coded (ö -> &ouml; , ß -> &szlig; , € -> &euro;  etc)
   $loc_lang["noscript"]                  = "Please activate JavaScript to use this page!";
-  $loc_lang["clicktoplay"]               = "Click here to play this song!";
+  $loc_lang["clicktoplay"]               = "Click here to play this song! (It may take a moment to download the music at the first time.)";
   $loc_lang["translators_needed_1"]      = "Your language is not available? If you have some time to spare, you could help us";
   $loc_lang["translators_needed_2"]      = "translate";
   $loc_lang["translators_needed_3"]      = " our shop in your language";

@@ -1,5 +1,18 @@
 <!-- Begin shop/shop.php -->
 <?php
+if ($debug)
+  {
+   error_reporting(E_ALL & ~E_NOTICE);
+   ini_set("display_errors", 1);
+  }
+else
+  {
+   error_reporting(0);
+   ini_set("display_errors", 0);
+  }
+ini_set("log_errors", 1);
+ini_set("error_log", "/www/admin/logs/php-error.log");
+
 include('conf/shop_conf.php');
 include('conf/countries.php');
 include('conf/cost_conf.php');
@@ -29,13 +42,13 @@ include('read_index.php');
     </div>
   </div>
   <div class="shop-content container" name="shop" id="shopframe">
-    <?php 
+    <?php
       if ($_GET["display"] == "order") { $displayswitch = "1"; include('shop/order.php'); }
       if ($_GET["display"] == "orderaction") { $displayswitch = "1"; include('shop/orderaction.php'); }
       if ($_GET["display"] == "leaveshop") { $displayswitch = "1"; include('shop/leaveshop.php'); }
       if ($displayswitch != "1") { include('shopcontent.php'); }
     ?>
-  </div> 
+  </div>
 
 </div>
 <!-- End shop/shop.php -->

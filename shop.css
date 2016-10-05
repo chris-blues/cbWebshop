@@ -16,7 +16,7 @@ form {
  /* float: left; */
   position: static;
   display: block;
-  margin-right: 200px;
+ /* margin-right: 200px; */
  }
 
 #shopframe {
@@ -131,7 +131,7 @@ a#show-hide {
  }
 
 .item-header {
-  text-align: center;
+  
  }
 
 .item-pic {

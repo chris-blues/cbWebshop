@@ -1,11 +1,12 @@
-<div class="item shadow" id="%id%" name="%id%">
+<div class="item shadow round" id="%id%" name="%id%">
   <div><h1 class="item-header">%name% (%Type%)</h1><h4>%Type% </h4></div>
   <div class="item-pic">
-    <img id="%id%" src="shop/%pic%" alt="%name%" title="%name%" border="0">
+    <a href="shop/%pic%" class="fancy" rel="%id%"><img id="%id%" src="shop/%pic%" alt="%name%" title="%name%" border="0"></a>
   </div>
   <div class="item-details">
     <div class="centerme">
       %details%
+      <br>Größe:
       <form action="index.php" id="intokart%c%" method="get" target="_top" accept-charset="UTF-8">
         %_calls%
         <input type="hidden" name="job" value="additem">
@@ -16,7 +17,7 @@
         </select>
       </form>
       <div class="button-buy">
-        <a href="javascript:" onclick="document.getElementById('intokart%c%').submit()" onkeypress="document.getElementById('intokart%c%').submit()" href=""><div class="buy">%buy% : <b>%preis% €</b></div></a>
+        <a href="javascript:" onclick="document.getElementById('intokart%c%').submit()" onkeypress="document.getElementById('intokart%c%').submit()"><div class="buy">%buy% : <b>%preis% €</b></div></a>
       </div>
     </div>
   </div>

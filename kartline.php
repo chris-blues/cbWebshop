@@ -53,7 +53,7 @@ if ($job == "addopt")
    if ($_GET["copt"] == "remove") $countryname = "";  // if Country wants to be changed
    if ($_GET["copt"] != "remove")
      {
-      if (isset($_GET["copt"])) 
+      if (isset($_GET["copt"]))
         {
          foreach($country as $key => $value) { }
          $copt = $_GET["copt"]; $copt--;
@@ -169,7 +169,7 @@ echo "<center><b class=\"karthead\"><a href=\"javascript:show_kart();\" id=\"sho
              ?><div class="kartitem">
              <div class="firstkartitem">
              <?php
-             if ($kart[$counter]['item_size'] != "") { echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']} - {$kart[$counter]['item_size']})\n"; }
+             if ($kart[$counter]['item_size'] != "") { echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']} - {$kart[$counter]['item_size']})</div>\n"; }
              else { echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']})</div>\n"; }
              /* Remove button */
              echo "\n<div class=\"secondkartitem\"><a href=\"{$conf["callup"]}{$link}job=remove&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;kart=show\" target=\"_top\">";
@@ -183,8 +183,8 @@ echo "<center><b class=\"karthead\"><a href=\"javascript:show_kart();\" id=\"sho
             }
           $show_kart_total = number_format($kart_total, 2, '.', ' ');
           echo "<div class=\"kartitem\">\n<div class=\"firstkartitem\">\n{$loc_lang["sub_total"]}</div>\n<div class=\"secondkartitem\"><b>$show_kart_total {$conf["_currency"]}</b>\n</div></div></div>\n";
-          
-          if ($countryname == "") 
+
+          if ($countryname == "")
             { ?><div class="kartitem"><div class="firstkartitem">
              <select name="countryname" size="1" onchange="self.location='<?php echo $conf["callup"] . $link; ?>kart=show&amp;job=addopt&amp;copt='+this.selectedIndex">
              <?php echo "<option selected=\"selected\">{$loc_lang["select_country"]}</option>\n";
@@ -219,19 +219,19 @@ echo "<center><b class=\"karthead\"><a href=\"javascript:show_kart();\" id=\"sho
            }
           else
            {
-            if ($opt == "1") 
+            if ($opt == "1")
               {
                if ($countryname == $cost["_homecountry"]) $transfercost = $payment["banktransfer"]["home"];
                else $transfercost = $payment["banktransfer"]["foreign"];
                $paymentname = $loc_lang["banktransfer"];
               }
-            if ($opt == "2") 
-              { 
-               $paymentname = "PayPal"; 
+            if ($opt == "2")
+              {
+               $paymentname = "PayPal";
                if ($countryname == $cost["_homecountry"]) $transfercost = $payment["paypal"]["home"];
                else $transfercost = $payment["paypal"]["foreign"];
               }
-            if ($opt == "3") 
+            if ($opt == "3")
               {
                if ($countryname == $cost["_homecountry"]) $transfercost = $payment["payondelivery"]["home"];
                else $transfercost = $payment["payondelivery"]["foreign"];
