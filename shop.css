@@ -1,80 +1,152 @@
 @charset "utf-8";
-a:link { color: #000000; text-decoration: none}
-a:visited { color: #000000; text-decoration: none}
-a:hover { color: #999966; text-decoration: none }
 
-img { border: 0; }
-
-h1 { 
-  color: #cc9933;
-  font: italic 1.4em Georgia;
+#shop-main {
+  margin: 0px;
  }
 
-h2 {
-  color: #cc9933;
-  font: italic 1.2em Georgia;
+.shop-content {
+  float: left;
+  min-width: 300px;
+  max-width: 750px;
+  width: 75%;
+  position: static;
+  display: block;
  }
 
-h3 {
-  color: #cc9933;
-  font: italic 1em Georgia;
-  display: inline;
+#shopframe {
+  max-width: 740px;
  }
 
-body {
-  margin-left: 50px; margin-right: auto;
+.shop-content#orderform {
+  max-width: 580px;
+ }
+
+#shopframe {
+  max-width: 740px;
+ }
+
+.shop-lang {
+  float: left;
+  position: relative;
+ }
+
+#sidebar {
+  position: fixed;
+  margin-left: 70%;
+  z-index: 1001;
+  width: 220px;
+ }
+
+#sidebar.fixed {
+  position: fixed;
+  top: 40px;
+ }
+
+b.karthead {
+  font-size: 1.49em;
+ }
+
+#kart_frame {
+  width: 220px;
+ }
+
+.karthide {
+  display: block;
+  clear: both;
+  margin-top: 10px;
+ }
+
+.kart {
+  min-width: 20px;
+ }
+
+.kart#kart {
+  color: #000000;
+  background-color: #999966;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  padding-top: 5px;
+  font-size: 0.7em;
+ }
+
+.kart#kasse {
+  color: #CC9933;
+  background-color: #999966;
+  border-radius: 8px;
+  padding: 10px;
+  padding-top: 5px;
+  font-size: 0.8em;
+ }
+
+.item {
+  margin: 20px;
+  padding-left: 20px;
+  margin-bottom: 50px;
+  clear: both;
+ }
+
+.item-header {
   text-align: center;
-  margin: 0px; padding: 0px;
-  font: italic 100.01% Georgia;
-  color: black; background-color: #544a31;
  }
- 
+
+.item-pic {
+  float: left;
+  position: relative;
+  margin-bottom: 50px;
+ }
+
+.item-pic img {
+  width: 250px;
+ }
+
+.item-details {
+  float: left;
+  position: relative;
+  vertical-align: middle;
+  min-height: 220px;
+  padding-top: 0px;
+ }
+
+.centerme {
+  margin: 0px;
+  min-height: 220px;
+  width: 350px;
+  text-align: left;
+  padding-left: 20px;
+ }
+
+.spacer-items {
+  height: 50px;
+  clear: both;
+ }
+
+.item-details li {
+  list-style-type: none;
+  font-size: 0.85em;
+  vertical-align: middle;
+ }
+
+.button-buy {
+  clear: both;
+ }
+
 .buy {
   color: #FFFFFF;
   background-color: #CC9933;
   font-size: 1.2em;
   text-align: right;
   position: absolute;
-  right: 54px;
-  padding-top: 4px; padding-bottom: 4px;
-  padding-left: 16px; padding-right: 16px;
+  margin: 0px 10px 0px 20%;
+  padding: 4px 16px;
   border: none;
-  -moz-border-radius: 6px; /* Für Gecko (z.B. Firefox, SeaMonkey) */
+ /* -moz-border-radius: 6px;  Für Gecko (z.B. Firefox, SeaMonkey) */
   border-radius: 6px; /* Eigenschaft gemäß Standard */
+  margin-bottom: 40px;
  }
 
-.kart {
-  color: #000000;
-  background-color: #656545;
-  border: none;
-  -moz-border-radius: 6px; /* Für Gecko (z.B. Firefox, SeaMonkey) */
-  border-radius: 6px; /* Eigenschaft gemäß Standard */
-  padding: 10px;
-  padding-top: 5px;
-  text-align: left;
-  font: italic 0.8em Georgia;
+.buy:hover {
+  background-color: #999966;
+  border: 1px solid #CC9933;
  }
 
-.kasse {
-  color: #CC9933;
-  background-color: #656545;
-  a:link { color: #CC9933; text-decoration: none}
-  a:visited { color: #CC9933; text-decoration: none}
-  a:hover { color: #999966; text-decoration: none }
-  border: none;
-  -moz-border-radius: 6px; /* Für Gecko (z.B. Firefox, SeaMonkey) */
-  border-radius: 6px; /* Eigenschaft gemäß Standard */
-  padding: 10px;
-  padding-top: 5px;
-  text-align: left;
-  font: italic 0.97em Georgia;
- }
-
-#language-selector {
-  
- }
-
-/*#kart_frame {
-  position: fixed;
-  bottom: 50%;
- } */

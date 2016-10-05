@@ -7,7 +7,7 @@ else $type = "-1";
 ?>
 
 <body>
-<?php echo "<center><h2>{$loc_lang["admin_addnewitem"]}</h2></center>\n<hr>\n<br>\n"; ?>
+<?php echo "<h2>{$loc_lang["admin_addnewitem"]}</h2>\n<hr>\n<br>\n"; ?>
 <form action="savelist.php?job=additem" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <table border="0" align="center">
 
@@ -32,10 +32,10 @@ include('read_index.php');
           }
       ?>
       </select><br>
-      <?php echo $loc_lang["admin_itemname"]; ?><input name="item_name" type="text" length="20"><br>
-      <?php if ($itemcat == "music") echo "{$loc_lang["admin_itemyear"]}<input name=\"item_descr\" type=\"text\" length=\"20\"><br>\n";
-            if ($itemcat != "music") echo "{$loc_lang["admin_itemdescr"]}<input name=\"item_descr\" type=\"text\" length=\"20\"><br>\n"; ?> 
-      <?php echo $loc_lang["admin_itemprice"]; ?><input name="item_preis" type="text" length="20"><br>
+      <?php echo $loc_lang["admin_itemname"]; ?><input name="item_name" type="text" length="20" value="New Item"><br>
+      <?php if ($itemcat == "music") echo "{$loc_lang["admin_itemyear"]}<input name=\"item_descr\" type=\"text\" length=\"20\" value=\"2014\"><br>\n";
+            if ($itemcat != "music") echo "{$loc_lang["admin_itemdescr"]}<input name=\"item_descr\" type=\"text\" length=\"20\" value=\"S M L XL XXL\"><br>\n"; ?> 
+      <?php echo $loc_lang["admin_itemprice"]; ?><input name="item_preis" type="text" length="20" value="10.00"><br>
     </td>
   </tr>
   <tr>
@@ -46,9 +46,15 @@ include('read_index.php');
   </tr>
   <tr>
     <td align="center">
-      <?php if ($itemcat != "music") echo $loc_lang["admin_details"]; else echo $loc_lang["admin_tracklist"]; ?>:<br><textarea name="item_details" cols="50" rows="8"></textarea>
+      <?php echo $loc_lang["admin_details"]; ?>:<br><textarea name="item_details" cols="50" rows="8">Some info about this item.</textarea>
     </td>
   </tr>
+ <?php if($itemcat == "music") { ?>
+  <tr>
+    <td align="center">
+      <?php echo $loc_lang["admin_tracklist"]; ?>:<br><textarea name="tracklist" cols="50" rows="8">01 - Tracklist</textarea>
+    </td>
+  </tr>  <?php } ?>
   <tr>
     <td align="center">
       <button type="button" value="Back" onclick="self.location='showitems.php'"> &lt;&lt;&lt; <?php echo $loc_lang["admin_back"]; ?> </button>

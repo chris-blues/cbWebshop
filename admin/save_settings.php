@@ -79,21 +79,6 @@ if ($_GET["job"] == "shop")
         }
      }
   }
-  
-if ($_GET["job"] == "item")
-  {
-   if (!ksort($_POST)) echo "Failed to sort the array!<br>\n";
-   $configfile = "../conf/item_conf.php";
-   $fHandle = fopen($configfile, "w");
-   fputs($fHandle, "<?php\n");
-   foreach ($_POST as $key => $value)
-     {
-      $str = "\$item_conf[\"$key\"] = \"$value\";\n";
-      if ($value == "") $str = "";
-      fputs($fHandle, $str);
-     }
-  }
-
 if ($_GET["job"] == "cost")
   {
    if (!ksort($_POST)) echo "Failed to sort the array!<br>\n";

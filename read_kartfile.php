@@ -1,5 +1,9 @@
 <?php
-$kartfile = "tmp/kart-$kartid.tmp";
+unset($item_exists);
+unset($item_pointer);
+
+//echo "DEBUG: read_kartfile.php<br>\nfile: $dir / $kartfile<br>\n";
+$kartfile = "shop/tmp/kart-$kartid.tmp";
 if ($kartmode == "kart")
 {
 /* Lese karttmpfile falls vorhanden und Erzeuge Array Kart[1][item_sth] */
@@ -8,6 +12,7 @@ $kartamount = "0";
 $kart_total = "0";
 if ($karthandle != NULL)
  {
+  $buffer = fgets($karthandle); $kartlang = trim($buffer,"\n");
   $buffer = fgets($karthandle); $countryname = trim($buffer,"\n"); if ($countryname == "") $countryname = $_GET["countryname"]; if ($_GET["countryname"] == "remove") $countryname = "remove";
   $buffer = fgets($karthandle); $opt = trim($buffer,"\n"); if ($opt == "") $opt = $_GET["opt"]; if ($_GET["opt"] == "remove") $opt = "remove";
   $buffer = fgets($karthandle); $firstname = trim($buffer,"\n"); if ($firstname == "") $firstname = $_GET["firstname"];
@@ -22,15 +27,25 @@ if ($karthandle != NULL)
   while (!feof($karthandle))
    {
     $kartamount++;
-    $buffer = fgets($karthandle); $kart["$kartamount"]['item_id'] = trim($buffer,"\n"); if ($kart["$kartamount"]['item_id'] == $id) { $item_exists = "ja"; $item_pointer = $kartamount; }
+    $buffer = fgets($karthandle); $kart["$kartamount"]['item_id'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_name'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_type'] = trim($buffer,"\n");
+    $buffer = fgets($karthandle); $kart["$kartamount"]['item_size'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_preis'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_amount'] = trim($buffer,"\n");
+    if ($kart["$kartamount"]['item_id'] == $id)
+        {
+         if (strcmp($kart["$kartamount"]['item_size'],$size) == "0" or $kart["$kartamount"]['item_size'] == "")
+           { $item_exists = "ja"; $item_pointer = $kartamount; }
+        }
+    /*  if ($kart["$kartamount"]['item_size'] == "XXL") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] + 2;
+      if ($kart["$kartamount"]['item_size'] == "XL") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] + 1;
+      if ($kart["$kartamount"]['item_size'] == "M") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] - 1;
+      if ($kart["$kartamount"]['item_size'] == "S") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] - 2; */
     /* echo "{$kart["$kartamount"]['item_id']} {$kart["$kartamount"]['item_amount']}x $item_exists $item_pointer<br>"; */
    }
  }
-/* else echo "Could not open $kartfile<br>"; */
+//else echo "Could not open $kartfile<br>kartmode=$kartmode<br>\n";
 fclose($karthandle);
 chmod($kartfile, 0777);
 $kartamount--;
@@ -42,11 +57,13 @@ if ($kartamount < 1) $kartamount = "0";
 if ($kartmode == "order")
 {
 /* Lese karttmpfile und Erzeuge Array Kart[1][item_sth]   ORDER */
+//$kartfile = "shop/tmp/kart-$kartid.tmp";
 $karthandle = fopen($kartfile, "r");
 $kartamount = "0";
 $kart_total = "0";
 if ($karthandle != NULL)
  {
+  $buffer = fgets($karthandle); $kartlang = trim($buffer,"\n");
   $buffer = fgets($karthandle); $countryname = trim($buffer,"\n");
   $buffer = fgets($karthandle); $opt = trim($buffer,"\n");
   $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["firstname"])) $firstname = " style=\"background-color:#FF4B4B;\""; else { $firstname = trim($buffer,"\n"); $firstname = " value=\"$firstname\""; }
@@ -64,10 +81,16 @@ if ($karthandle != NULL)
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_id'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_name'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_type'] = trim($buffer,"\n");
+    $buffer = fgets($karthandle); $kart["$kartamount"]['item_size'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_preis'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_amount'] = trim($buffer,"\n");
+    /*  if ($kart["$kartamount"]['item_size'] == "XXL") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] + 2;
+      if ($kart["$kartamount"]['item_size'] == "XL") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] + 1;
+      if ($kart["$kartamount"]['item_size'] == "M") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] - 1;
+      if ($kart["$kartamount"]['item_size'] == "S") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] - 2; */
    }
  }
+else echo "Could not open $kartfile<br>kartmode=$kartmode<br>\n";
 fclose($karthandle);
 chmod($kartfile, 0777);
 $kartamount--;
@@ -79,6 +102,7 @@ if ($kartamount < 1) $kartamount = "0";
 if ($kartmode == "action")
 {
 /* Lese karttmpfile und Erzeuge Array Kart[1][item_sth]   ORDERACTION */
+$kartfile = "tmp/kart-$kartid.tmp";
 $kartfileerror = "0";
 $karthandle = fopen($kartfile, "r");
 $kartamount = "0";
@@ -86,7 +110,8 @@ $kart_total = "0";
 $errorreturn = "&amp;errorreturn=1";
 if ($karthandle != NULL)
  {
-  $buffer = fgets($karthandle); $countryname = trim($buffer,"\n"); if ($country == "") { $error = "1"; $errors['kartfile']['country'] = "empty"; }
+  $buffer = fgets($karthandle); $kartlang = trim($buffer,"\n");
+  $buffer = fgets($karthandle); $countryname = trim($buffer,"\n"); if ($countryname == "") { $error = "1"; $errors['kartfile']['country'] = "empty"; }
   $buffer = fgets($karthandle); $opt = trim($buffer,"\n"); if ($opt == "") { $error = "1"; $errors['kartfile']['opt'] = "empty"; }
   $buffer = fgets($karthandle); $firstname = trim($buffer,"\n"); if ($firstname == "") { $error = "1"; $errors['kartfile']['firstname'] = "empty"; $errorreturn .= "&amp;firstname=$firstname"; }
   $buffer = fgets($karthandle); $lastname = trim($buffer,"\n"); if ($lastname == "") { $error = "1"; $errors['kartfile']['lastname'] = "empty"; $errorreturn .= "&amp;lastname=$lastname"; }
@@ -103,12 +128,17 @@ if ($karthandle != NULL)
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_id'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_name'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_type'] = trim($buffer,"\n");
+    $buffer = fgets($karthandle); $kart["$kartamount"]['item_size'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_preis'] = trim($buffer,"\n");
     $buffer = fgets($karthandle); $kart["$kartamount"]['item_amount'] = trim($buffer,"\n");
+    /*  if ($kart["$kartamount"]['item_size'] == "XXL") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] + 2;
+      if ($kart["$kartamount"]['item_size'] == "XL") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] + 1;
+      if ($kart["$kartamount"]['item_size'] == "M") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] - 1;
+      if ($kart["$kartamount"]['item_size'] == "S") $kart["$kartamount"]['item_preis'] = $kart["$kartamount"]['item_preis'] - 2; */
     $kart["$kartamount"]['item_total'] = $kart["$kartamount"]['item_amount'] * $kart["$kartamount"]['item_preis'];
    }
  }
-else { $error = "1"; $kartfileerror = "1"; }
+else { $error = "1"; $kartfileerror = "1"; $errors['kartfile']['file'] = "Unable to read kartfile.<br>kartmode=$kartmode<br>\n"; }
 fclose($karthandle);
 chmod($kartfile, 0777);
 $kartamount--; 
@@ -116,4 +146,6 @@ if ($kartamount < 1) {$kartamount = "0"; $error = "1"; $kartemptyerror = "1";}
 }
 
 /* ################################################################### */
+//echo "read_kartfile.php:<br>\nkartfile: $kartfile<br>\nlastname: $lastname<br>\ncountryname: $countryname<br>\nerror: $error<br>\nkartemptyerror: $kartemptyerror<br>\nerrorreturn: $errorreturn<br>\nkartamount: $kartamount<br>\n";
+//echo "<pre>"; print_r($kart); print_r($errors); echo "</pre>\n";
 ?>

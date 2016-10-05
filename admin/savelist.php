@@ -3,7 +3,7 @@ include('header_short.php');
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 ?>
-<body align="center" valign="top" onload="document.location.href='showitems.php'">
+<body onload="document.location.href='showitems.php'">
 
 <?php 
 $job = $_GET["job"];  /* Was sollen wir tun? job=additem == neuen eintrag hinzufügen */
@@ -43,11 +43,16 @@ if ($job == "updateitem")  /* Wenn wir einen bestehenden Datensatz verändern so
       $buffer = ((isset($_POST["item_type"])) && ($_POST["item_type"] != "")) ? $_POST["item_type"]:""; $data[$c]['item_type'] = trim($buffer,"\n");
       $buffer = ((isset($_POST["item_descr"])) && ($_POST["item_descr"] != "")) ? $_POST["item_descr"]:""; $data[$c]['item_descr'] = trim($buffer,"\n");
       $buffer = ((isset($_POST["item_preis"])) && ($_POST["item_preis"] != "")) ? $_POST["item_preis"]:""; $data[$c]['item_preis'] = trim($buffer,"\n");
-      $buffer = ((isset($_POST["item_details"])) && ($_POST["item_details"] != "")) ? $_POST["item_details"]:""; 
-      $data[$c]['item_details'] = str_replace("\r\n","<br>",$buffer);
-      $data[$c]['item_details'] = str_replace("\r","<br>",$data[$c]['item_details']);
-      $data[$c]['item_details'] = str_replace("\n","<br>",$data[$c]['item_details']);
-      $data[$c]['item_details'] = stripslashes($data[$c]['item_details']);
+      $buffer = ((isset($_POST["item_details"])) && ($_POST["item_details"] != "")) ? $_POST["item_details"]:"";
+        $data[$c]['item_details'] = str_replace("\r\n","<br>",$buffer);
+        $data[$c]['item_details'] = str_replace("\r","<br>",$data[$c]['item_details']);
+        $data[$c]['item_details'] = str_replace("\n","<br>",$data[$c]['item_details']);
+        $data[$c]['item_details'] = stripslashes($data[$c]['item_details']);
+      $buffer = ((isset($_POST["tracklist"])) && ($_POST["tracklist"] != "")) ? $_POST["tracklist"]:"";
+        $data[$c]['tracklist'] = str_replace("\r\n","<br>",$buffer);
+        $data[$c]['tracklist'] = str_replace("\r","<br>",$data[$c]['tracklist']);
+        $data[$c]['tracklist'] = str_replace("\n","<br>",$data[$c]['tracklist']);
+        $data[$c]['tracklist'] = stripslashes($data[$c]['tracklist']);
      }  /* Daten sind abgeholt und einsortiert! */
      
    // Get category ( music | clothing )
@@ -80,7 +85,7 @@ if ($job == "updateitem")  /* Wenn wir einen bestehenden Datensatz verändern so
       $tracklistfile = "../items/{$data["$c"]['item_id']}.dat";
       $error = "0";
       echo "<b>Creating</b> $tracklistfile: ";
-      $tracklist = str_replace("<br>", "\n", $data["$c"]['item_details']);
+      $tracklist = str_replace("<br>", "\n", $data["$c"]['tracklist']);
       $tracklist = trim($tracklist,"\n");
       //$data["$c"]['item_details'] = "";
       if (!($tlfHandle = fopen($tracklistfile,"w"))) { echo "ERROR opening $tracklistfile!<br>\n"; $error = "1"; }
@@ -112,11 +117,16 @@ if((!$_POST["reset_x"]))
     $buffer = ((isset($_POST["item_type"])) && ($_POST["item_type"] != "")) ? $_POST["item_type"]:""; $data[$counter]['item_type'] = trim($buffer,"\n");
     $buffer = ((isset($_POST["item_descr"])) && ($_POST["item_descr"] != "")) ? $_POST["item_descr"]:""; $data[$counter]['item_descr'] = trim($buffer,"\n");
     $buffer = ((isset($_POST["item_preis"])) && ($_POST["item_preis"] != "")) ? $_POST["item_preis"]:""; $data[$counter]['item_preis'] = trim($buffer,"\n");
-    $buffer = ((isset($_POST["item_details"])) && ($_POST["item_details"] != "")) ? $_POST["item_details"]:""; 
+    $buffer = ((isset($_POST["item_details"])) && ($_POST["item_details"] != "")) ? $_POST["item_details"]:"";
     $data[$counter]['item_details'] = str_replace("\r\n","<br>",$buffer);
     $data[$counter]['item_details'] = str_replace("\r","<br>",$data[$counter]['item_details']);
     $data[$counter]['item_details'] = str_replace("\n","<br>",$data[$counter]['item_details']);
     $data[$counter]['item_details'] = stripslashes($data[$counter]['item_details']);
+    $buffer = ((isset($_POST["tracklist"])) && ($_POST["tracklist"] != "")) ? $_POST["tracklist"]:"";
+    $data[$counter]['tracklist'] = str_replace("\r\n","<br>",$buffer);
+    $data[$counter]['tracklist'] = str_replace("\r","<br>",$data[$counter]['tracklist']);
+    $data[$counter]['tracklist'] = str_replace("\n","<br>",$data[$counter]['tracklist']);
+    $data[$counter]['tracklist'] = stripslashes($data[$counter]['tracklist']);
   }  /* Daten sind abgeholt! */
  $newitem_id = strtolower($data[$counter]['item_name']);
        $char_search = array("-",
@@ -209,9 +219,9 @@ if ($job != "")    /* Falls kein Job angegeben wurde, schreibe keine neue index.
       {
        if ($job == "additem" and $c == $counter)   // If we add a new item and reached it
          {
-          $tracklist = str_replace("<br>", "\n", $data["$c"]['item_details']);
+          $tracklist = str_replace("<br>", "\n", $data["$c"]['tracklist']);
           $tracklistfile = "../items/{$data["$c"]['item_id']}.dat";
-          $data["$c"]['item_details'] = "";
+          //$data["$c"]['item_details'] = "";
           if (!$tlfHandle = fopen($tracklistfile,"w")) echo "ERROR opening $tracklistfile!<br>\n";
           else echo "$tracklistfile created.<br>\n";
           fputs($tlfHandle, $tracklist); fputs($tlfHandle, "\n");
@@ -221,7 +231,7 @@ if ($job != "")    /* Falls kein Job angegeben wurde, schreibe keine neue index.
          }
        else
          {
-          $data["$c"]['item_details'] = "";
+          //$data["$c"]['item_details'] = "";
          }
       }
     $str = trim($data["$c"]['item_id'],"\n"); $str = stripslashes($str); fputs($fHandle, $str); fputs($fHandle, $lnb);
@@ -245,7 +255,7 @@ echo "</pre></td></tr></table>";
 
 // echo "<pre>"; print_r($data); echo "</pre>";
 
-echo "<center><form action=\"showitems.php\"><input type=\"submit\" value=\" {$loc_lang["admin_back"]} \"></form></center>\n";
+echo "<form action=\"showitems.php\"><input type=\"submit\" value=\" {$loc_lang["admin_back"]} \"></form>\n";
 ?>
 </body>
 </html>

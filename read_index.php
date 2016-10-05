@@ -1,8 +1,10 @@
 <?php
 
 /* LESE index.dat und schließe index.dat */
+  //$dir = getcwd();
+  //echo "DEBUG: read_index.php<br>\nfile: $dir /shop/items/index.dat<br>\n";
   $counter = "0";
-  $fHandle = fopen("items/index.dat","r");
+  $fHandle = fopen("shop/items/index.dat","r");
   if ($fHandle != NULL)
    {
     while (!feof($fHandle))
@@ -23,19 +25,19 @@
          if ($conf["item_type"][$keycat]["name"] == $data["$counter"]['item_type'])
            $cat = $conf["item_type"][$keycat]["cat"];
         }
-      if ($modus != "simple")
-        {
+   /*   if ($modus != "simple")
+        {  */
          if ($cat == "music") 
            {
             $tracklist = "items/{$data[$counter]['item_id']}.dat";
-            $data[$counter]['item_details'] = file_get_contents($tracklist);
-            $data[$counter]['item_details'] = trim($data[$counter]['item_details'],"\n");
+            $data[$counter]['tracklist'] = file_get_contents($tracklist);
+            $data[$counter]['tracklist'] = trim($data[$counter]['tracklist'],"\n");
            }
          else 
            {
-            if ($modus == "display_data") $data[$counter]['item_details'] = str_replace("<br>","\n",$data[$counter]['item_details']);
+           /* if ($modus == "display_data")*/ $data[$counter]['item_details'] = str_replace("<br>","\n",$data[$counter]['item_details']);
            }
-        }
+     /*   }   */
      }
    }
    fclose($fHandle);
@@ -44,4 +46,4 @@
 
 /* ############################################################# */
 
-?>
+?> 

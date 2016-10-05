@@ -21,25 +21,25 @@
          if ($conf["item_type"][$keycat]["name"] == $data["$counter"]['item_type'])
            $cat = $conf["item_type"][$keycat]["cat"];
         }
-      if ($modus != "simple")
-        {
+   /*   if ($modus != "simple")
+        { */
          if ($cat == "music")
            {
             $tracklist = "../items/{$data[$counter]['item_id']}.dat";
-            $data[$counter]['item_details'] = file_get_contents($tracklist);
+            $data[$counter]['tracklist'] = file_get_contents($tracklist);
             /*$data[$counter]['item_details'] = str_replace("\r\n", "", $data[$counter]['item_details']);
             $data[$counter]['item_details'] = str_replace("\r", "", $data[$counter]['item_details']);
             $data[$counter]['item_details'] = str_replace("\n", "", $data[$counter]['item_details']);*/
            }
          else 
            {
-            if ($modus == "display_data") 
-              {
+         /*   if ($modus == "display_data") 
+              {  */
                $data[$counter]['item_details'] = str_replace("<br>","\n",$data[$counter]['item_details']);
                $data[$counter]['item_details'] = trim($data[$counter]['item_details'],"\n");
-              }
+           /*   }  */
            }
-        }
+      /*  }  */
      }
    }
    fclose($fHandle);

@@ -2,8 +2,7 @@
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 include('header_short.php');
-echo "<body bgcolor=\"{$conf["bgcolor"]}\">\n";
-echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">\n{$conf["font_style"]}\n";
+echo "<body>\n";
 
 $modus = "simple";
 include('read_index.php');
@@ -24,10 +23,5 @@ for ($c=1; $c <= $counter; $c++)
 ?>
   </tr>  
 </table>
-<?php 
-  echo "{$conf["font_style_close"]}\n";
-// echo "\$data[\$c]['item_name']\n";
-?>
-</font>
 </body>
 </html>

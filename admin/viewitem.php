@@ -5,16 +5,15 @@ include('header_short.php');
 ?>
 
 <body>
-<center>
 <?php
   $c = $_GET["c"];
   
-  echo "<center><h2>{$loc_lang["admin_edit_item"]}</h2></center>\n<hr>\n<br>\n";
-  echo "  <form name=\"del-$c\" action=\"savelist.php\" method=\"get\" accept-charset=\"UTF-8\" onsubmit=\"return DeleteCheck()\">\n";
+  echo "<h2>{$loc_lang["admin_edit_item"]}</h2>\n<hr>\n<br>\n";
+  echo "  <div style=\"text-align: center;\"><form name=\"del-$c\" action=\"savelist.php\" method=\"get\" accept-charset=\"UTF-8\" onsubmit=\"return DeleteCheck()\">\n";
   echo "    <input type=\"hidden\" name=\"job\" value=\"delete\">\n";
   echo "    <input type=\"hidden\" name=\"num\" value=\"$c\">\n";
-  echo "    <input type=\"submit\" value=\" {$loc_lang["admin_deleteitem"]} \">\n";
-  echo "  </form>\n</center>\n";
+  echo "    <input type=\"submit\" value=\"        {$loc_lang["admin_deleteitem"]}        \">\n";
+  echo "  </form></div>\n";
 
 $modus = "display_data";
 include('read_index.php');
@@ -45,10 +44,9 @@ include('read_index.php');
   echo "      {$loc_lang["admin_item_pic"]}<input size=\"5\" name=\"upload_pic\" type=\"file\" accept=\"image/png\"><br>\n";
   echo "      {$loc_lang["admin_pngpricetag"]}<input size=\"5\" name=\"upload_pricetag\" type=\"file\" accept=\"image/png\">\n";
   echo "    </td>\n  </tr>\n  <tr>\n    <td align=\"center\" colspan=\"2\">\n";
-  if ($cat == "music") echo "      {$loc_lang["admin_tracklist"]}<br>\n";
-  else echo "      {$loc_lang["admin_details"]}<br>\n";
-  $data[$c]['item_details'] = trim($data[$c]['item_details'],"\n");
-  echo "      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";
+  $data[$c]['tracklist'] = trim($data[$c]['tracklist'],"\n");
+  echo "      {$loc_lang["admin_details"]}<br>\n      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";
+  if($cat == "music") { echo "      {$loc_lang["admin_tracklist"]}"; ?>:<br><textarea name="tracklist" cols="50" rows="8"><?php echo $data[$c]['tracklist']; ?></textarea><br><?php }
   echo "      <button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; {$loc_lang["admin_back"]} </button> <input type=\"submit\" value=\" {$loc_lang["admin_save"]} \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n      <input type=\"hidden\" name=\"oldid\" value=\"$oldid\">\n";
   echo "    </td>\n  </tr>\n</table>\n";
   
@@ -97,8 +95,6 @@ include('read_index.php');
      $counter--;
     }
   }
-  
-  
   /* echo "<pre>";print_r($data);echo "</pre>"; */
 ?>
 </table>

@@ -22,8 +22,8 @@ if (isset($_GET["delete"]))
 if (isset($_GET["register"])) $onload = " onload=\"document.langform.submit();\"";
 
 include('header_short.html');
-echo "<body bgcolor=\"{$conf["bgcolor"]}\"$onload>\n";
-echo "<center><br><font size=\"5\"><b>{$loc_lang["admin_editlang"]}</b></font><br><br>\n{$loc_lang["admin_notelangfile_1"]} <a href=\"../translate.php\" target=\"_blank\">{$loc_lang["admin_notelangfile_2"]}</a> {$loc_lang["admin_notelangfile_3"]}<br><br>\n<hr>\n<br><br>\n";
+echo "<body$onload>\n";
+echo "<h2>{$loc_lang["admin_editlang"]}</h2>\n{$loc_lang["admin_notelangfile_1"]} <a href=\"translate/translate.php\" target=\"_blank\">{$loc_lang["admin_notelangfile_2"]}</a> {$loc_lang["admin_notelangfile_3"]}<br>\n<hr>\n<br>\n";
 
 // Prepare Array for POST + add input fields for new types + hide unnecessary fields
 echo "<form name=\"langform\" action=\"save_settings.php?job=shop\" method=\"post\" accept-charste=\"UTF-8\">\n";
@@ -59,7 +59,7 @@ foreach ($conf as $key => $value)
      }
   }
 
-echo "<button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; {$loc_lang["admin_back"]} </button><input type=\"submit\" value=\" {$loc_lang["admin_save"]} &gt;&gt;&gt; \">\n</form>\n<br>\n<hr>\n<br>\n";
+echo "<div style=\"text-align: center;\"><button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; {$loc_lang["admin_back"]} </button><input type=\"submit\" value=\" {$loc_lang["admin_save"]} &gt;&gt;&gt; \"></div>\n</form>\n<br>\n<hr>\n<br>\n";
 // echo "Debugging:<br>\n<pre>"; print_r($conf); echo "</pre>\n";
 
 echo $operation_message;
@@ -102,9 +102,8 @@ foreach($lang_files as $filekey => $filevalue)
    
   }
 echo "</table>\n";
-print_r($lang_files);
+//print_r($lang_files);
 echo "\n";
 ?>
-</center>
 </body>
 </html>

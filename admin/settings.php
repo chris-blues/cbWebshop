@@ -2,11 +2,11 @@
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 include('header_full.html');
-echo "<body bgcolor=\"{$conf["bgcolor"]}\">\n";
+echo "<body>\n";
 if (!natcasesort($conf["lang"])) echo "Failed to sort the array \$conf[\"lang\"]!<br>\n";
 if (!sort($conf["item_type"])) echo "Failed to sort the array \$conf[\"item_type\"]!<br>\n";
-echo "<center><h2>{$loc_lang["admin_shopsettings"]}</h2>\n";
-echo "{$loc_lang["admin_editcarefully"]} <a href=\"help.png\" class=\"fancy\"><img src=\"../pics/ask.png\"><b> {$loc_lang["admin_help"]}</b></a></center><br>\n<hr>\n<br>\n";
+echo "<h2>{$loc_lang["admin_shopsettings"]}</h2>\n";
+echo "{$loc_lang["admin_editcarefully"]}<br>\n<hr>\n<br>\n";
 echo "<form action=\"save_settings.php?job=shop\" method=\"post\" accept-charste=\"UTF-8\">\n";
 echo "<table align=\"center\" border=\"0\" rules=\"rows\">\n";
 foreach ($conf as $key => $value)

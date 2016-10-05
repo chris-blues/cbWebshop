@@ -1,3 +1,9 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
 <?php
 include('conf/shop_conf.php');
 include('conf/cost_conf.php');
@@ -59,9 +65,8 @@ include('header_short.html');
 if ($paymentname == "PayPal") $onload = "document.paypal_form.submit();";
 else $onload = "document.leaveshop_form.submit();";
 if ($newsletter == "ja") $onload .= "document.jnl2_sign_form.submit();";
-echo "<body bgcolor=\"#544a31\" onload=\"$onload\">\n";  
-echo "{$conf["font_style"]}<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\"\n>";
-echo "<table width=\"500\" height=\"600\" align=\"center\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\">";
+echo "<body onload=\"$onload\">\n";
+echo "<table width=\"500\" height=\"600\" align=\"center\" border=\"0\">";
 ?>
   <tr>
     <td align="center" valign="center">
@@ -72,7 +77,7 @@ echo "<table width=\"500\" height=\"600\" align=\"center\" border=\"0\" bgcolor=
 /* Check for missing data and exit if so - else redirect to checkout-site (PayPal / leaveshop.php) */
 if ($error != "0")
   {
-   echo "<table border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"center\"><font color=\"F61818\"><h4><u><b>ERROR!</b></u></h4></font></td></tr><tr><td align=\"left\">\n<ol>\n";
+   echo "<table border=\"0\"><tr><td align=\"center\"><h4><u><b>ERROR!</b></u></h4></td></tr><tr><td align=\"left\">\n<ol>\n";
    if ($kartemptyerror == "1") $errormessage .= "<li>{$loc_lang["kart_empty_error"]}</li><br>\n";
    if ($errors['kartfile']['country'] == "empty" and $kartemptyerror != "1") $errormessage .= "<li>{$loc_lang["no_country_selected"]}</li><br>\n";
    if ($errors['kartfile']['opt'] == "empty" and $kartemptyerror != "1") $errormessage .= "<li>{$loc_lang["no_payment_selected"]}</li><br>\n";
@@ -82,7 +87,8 @@ if ($error != "0")
      }
    echo $errormessage;
    echo "</ol><br>\n";
-   echo "</td></tr><tr><td align=\"center\">\n<a href=\"order.php?kartid=$kartid&amp;lang=$lang$errorreturn\" target=\"shop\"><b>{$loc_lang["back_to_order_form"]}</b></a><br>\n</td></tr></table></td></tr></table></body></html>";
+   echo "</td></tr><tr><td align=\"center\">\n<a href=\"../index.php?page=shop&amp;display=order&amp;kartid=$kartid&amp;lang=$lang$errorreturn\" target=\"_top\"><b>{$loc_lang["back_to_order_form"]}</b></a><br>\n</td></tr></table></td></tr></table>";
+   echo "<pre>\n"; print_r($errors); print_r($errorreturn); echo "</pre>\n";
    exit;
   }
   
@@ -101,7 +107,7 @@ if (!isset($countryexists) or $countryexists != "yes")
    $key++;
    $country[$key] = htmlspecialchars($countryname, ENT_QUOTES | ENT_HTML5, "UTF-8");
    sort($country, SORT_STRING);
-   $configfile = "conf/countries.php";
+   $configfile = "shop/conf/countries.php";
    $fHandle = fopen($configfile, "w");
    fputs($fHandle, "<?php\n");
    foreach ($country as $key => $value)
@@ -114,57 +120,11 @@ if (!isset($countryexists) or $countryexists != "yes")
    //echo "<pre>"; print_r($country); echo "</pre>\n";
   }
 
-/* Prepare strings for receits in mail output and send it! */
-/* mail format */
-$email_shop = $conf["_email_shopkeeper"];
-$email_buyer = "$firstname $lastname <$email>";
-$betreff_shop = "{$loc_lang["mail"]["your_order"]} @ {$conf["this_domain"]} - ID:$kartid";
-$kontoinfo = $conf["bankaccount_info"];
-$sum_items = $costs;
-$mail_items = "";
-for ($c = "1"; $c <= $kartamount; $c++)
-  {
-   $sum_items = $sum_items + $kart["$c"]['item_total'];
-   $mail_items .= "{$kart["$c"]['item_type']} - {$kart["$c"]['item_name']} ({$kart["$c"]['item_amount']} x {$kart["$c"]['item_preis']} €) : {$kart["$c"]['item_total']} €\n";
-  }
-
-$betreff_buyer = "{$loc_lang["mail"]["your_order"]} @ {$conf["this_domain"]} - ID:$kartid";
-$mail_items .= "--------------------------------\n{$loc_lang["mail"]["transfer_cost"]}($paymentnamemail): $transfercost €\n{$loc_lang["mail"]["shipping_cost"]} $shippingcost €\n--------------------------------\n{$loc_lang["mail"]["total"]}: $sum_items €\n\n";
-$mail_opener_buyer = "{$loc_lang["mail"]["for_invoice_to_order"]} {$conf["this_domain"]}\n\n$date\n\n";
-$mail_opener_buyer .= "{$loc_lang["mail"]["hello"]} $firstname $lastname!\n\n{$loc_lang["mail"]["thx_4_order"]}\n\n"; 
-$mail_opener_buyer .= "{$loc_lang["mail"]["kart_id"]} $kartid\n\n";
-$mail_end_buyer = "{$loc_lang["mail"]["transfer_money_to_account"]}\n\n";
-if ($newsletter == "ja") { $mail_end_buyer .= "{$loc_lang["mail"]["submitted_to_newsletter"]}\n\n"; }
-$mail_end_buyer .= "{$loc_lang["mail"]["hope_you_enjoy"]}\n{$conf["this_organization"]}\n{{$conf["this_domain"]}}\n\n\n\n";
-
-$mail_end_buyer .= $kontoinfo;
-$mail_opener_shop = "$date\nKart-ID: $kartid\n\n$email_buyer ({$loc_lang["mail"]["speaks"]} $lang)\n$adress1\n";
-if ($adress2 != "") $mail_opener_shop .= "$adress2\n";
-$mail_opener_shop .= "$plz - $city\n";
-if ($province != "") $mail_opener_shop .= "$province\n";
-$mail_opener_shop .= "$countryname\n\n{$loc_lang["mail"]["orders"]}:\n\n";
-$mail_end_shop = "Newsletter: $newsletter\n\n";
-$header = "Content-Type: text/plain; charset = \"UTF-8\";\r\n";
-$header .= "Content-Transfer-Encoding: 8bit\r\n";
-$header .= "\r\n";
-
-$mail_buyer = $mail_opener_buyer . $mail_items . $mail_end_buyer;
-$mail_buyer = wordwrap($mail_buyer, 70);
-$header_buyer = "From: $email_shop\r\n";
-$header_buyer .= $header;
-if (!mail($email_buyer, $betreff_buyer, $mail_buyer, $header_buyer)) echo "<h3>ERROR!</h3>Failed to send mail to buyer!<br>\n";
-
-$mail_shop = $mail_opener_shop . $mail_items . $mail_end_shop;
-$mail_shop = wordwrap($mail_shop, 70);
-$header_shop = "From: $email_buyer\r\n";
-$header_shop .= $header;
-if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR!</h3>Failed to send mail to shop!<br>\n";
-
 /* ################################################################### */
 
    echo "<b>{$loc_lang["one_moment"]}</b><br>\n";
-   $pp_returnpath = str_replace("orderaction.php","leaveshop.php?lang=$lang&kartid=$kartid",$_SERVER["PHP_SELF"]);
-   $pp_cancelreturnpath = str_replace("orderaction.php","shop.php?lang=$lang&kartid=$kartid",$_SERVER["PHP_SELF"]);
+   $pp_returnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid&display=leaveshop";
+   $pp_cancelreturnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid";
    if ($opt == "2")
      {
       if ($lang == "english") $lc = "EN"; else $lc = "DE";
@@ -177,8 +137,8 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR
         echo "<input id=\"no_note\" name=\"no_note\" type=\"hidden\" value=\"0\" />\n";
         echo "<input id=\"rm\" name=\"rm\" type=\"hidden\" value=\"2\" />\n";
         echo "<input id=\"business\" name=\"business\" type=\"hidden\" value=\"{$conf["_paypal_business"]}\" />\n";
-        echo "<input id=\"cbt\" name=\"cbt\" type=\"hidden\" value=\"Return to The Folkadelic Shop\" />\n";
-        echo "<input id=\"currency_code\" name=\"currency_code\" type=\"hidden\" value=\"EUR\" />\n";
+        echo "<input id=\"cbt\" name=\"cbt\" type=\"hidden\" value=\"Return to {$conf["this_domain"]}\" />\n";
+        echo "<input id=\"currency_code\" name=\"currency_code\" type=\"hidden\" value=\"{$conf["_currency_code"]}\" />\n";
         echo "<input id=\"lc\" name=\"lc\" type=\"hidden\" value=\"$lc\" />\n";
         echo "<input id=\"invoice\" name=\"invoice\" type=\"hidden\" value=\"$kartid\" />\n";
         echo "<input id=\"shopping_url\" name=\"shopping_url\" type=\"hidden\" value=\"{$conf["this_domain"]}\" />\n";
@@ -208,14 +168,16 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR
 
         echo "<input id=\"shipping_1\" name=\"shipping_1\" type=\"hidden\" value=\"$costs\" />\n";
         echo "<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/de_DE/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
+        //echo "<input type=\"submit\" value=\"{$loc_lang["buy"]}\">\n";
       echo "</form>\n";
 //      if (!unlink($kartfile)) echo "ERROR! Could not delete $kartfile.<br>\n";
      }
-
+   else
      {
-      echo "<form name=\"leaveshop_form\" action=\"leaveshop.php\" method=\"post\" accept-charset=\"UTF-8\" target=\"main_shop\">\n";
+      echo "<form name=\"leaveshop_form\" action=\"../index.php?page=shop&amp;display=leaveshop&amp;kartid=$kartid&amp;lang=$lang\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
       echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
       echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
+      //echo "<input type=\"submit\" value=\"{$loc_lang["buy"]}\">\n";
       echo "</form>\n";
      }
   }
@@ -224,6 +186,3 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR
     </td>
   </tr>
 </table>
-</font><?php echo "{$conf["font_style_close"]}\n"; ?>
-</body>
-</html>

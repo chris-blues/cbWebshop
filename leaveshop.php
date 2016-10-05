@@ -1,8 +1,4 @@
 <?php
-include('conf/shop_conf.php');
-include('conf/cost_conf.php');
-include('conf/payment_conf.php');
-include('header_short.html');
 
 /* ################################################################### */
 /* Hole Variablen aus POST-Formular */
@@ -13,12 +9,15 @@ if (!$_POST["reset_x"])
     if ((isset($_POST["kartid"])) && ($_POST["kartid"] != "")) $kartid = $_POST["kartid"]; else {$error = "1"; $posterror++; $errors['post']["$posterror"] = "kartid";}
    }
 
+
+/*   if (isset($_GET["kartid"])) $kartid = $_GET["kartid"];
+   if (isset($_GET["lang"])) $lang = $_GET["lang"]; */
+
+
 /* ################################################################### */
 
-define( "LOC_LANG", $lang );
-include('locale/' . LOC_LANG . '.php');
 $kartmode = "action";
-include('read_kartfile.php');
+include('shop/read_kartfile.php');
 
 /* ################################################################### */
 
@@ -46,48 +45,97 @@ if ($opt == "3")
 $costs = $transfercost + $shippingcost;
 
 /* ################################################################### */
-
-if ($newsletter == "ja") $onload = "document.jnl2_sign_form.submit();";
-echo "<body bgcolor=\"{$conf["bgcolor"]}\" onload=\"$onload\">\n";
-echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">{$conf["font_style"]}\n";
-
-/* Prepare strings for receits in browser output and put it out! */
-
-$kontoinfo = "Brian Brademann\nKto.Nr.: 915 660 540\nBLZ: 200 411 33\nIBAN: DE83200411330915660540\nBIC/Swift-Code: COBADEHD001\n\nPayPal-ID: LL5N934Z5GMT8\n";
+/* Prepare strings for receits in browser/mail output and put it out! */
+/* mail format */
+$email_shop = $conf["_email_shopkeeper"];
+$email_buyer = "$firstname $lastname <$email>";
+$betreff_shop = "{$loc_lang["mail"]["your_order"]} @ {$conf["this_domain"]} - ID:$kartid";
+$kontoinfo = $conf["bankaccount_info"];
 $sum_items = $costs;
-for ($c = "1"; $c <= $kartamount; $c++)
+$mail_items = "";
+
+//echo "<pre>"; print_r($kart); echo "</pre>\n";
+
+foreach ($kart as $c => $value)
   {
+   if ($kart["$c"]['item_id'] == "") continue 1;
+   $kart["$c"]['item_total'] = $kart["$c"]['item_preis'] * $kart["$c"]['item_amount'];
    $sum_items = $sum_items + $kart["$c"]['item_total'];
+   if ($kart["$c"]['item_size'] == "")
+     $mail_items .= "{$kart["$c"]['item_type']} - {$kart["$c"]['item_name']} ({$kart["$c"]['item_amount']} x {$kart["$c"]['item_preis']} {$conf["_currency"]}) : {$kart["$c"]['item_total']} {$conf["_currency"]}\n";
+   else
+     $mail_items .= "{$kart["$c"]['item_type']} - {$kart["$c"]['item_name']} ({$kart["$c"]['item_size']}) ({$kart["$c"]['item_amount']} x {$kart["$c"]['item_preis']} {$conf["_currency"]}) : {$kart["$c"]['item_total']} {$conf["_currency"]}\n";
   }
 
-/* ################################################################### */
+$betreff_buyer = "{$loc_lang["mail"]["your_order"]} @ {$conf["this_domain"]} - ID:$kartid";
+$mail_items .= "--------------------------------\n{$loc_lang["mail"]["transfer_cost"]}($paymentnamemail): $transfercost {$conf["_currency"]}\n{$loc_lang["mail"]["shipping_cost"]} $shippingcost {$conf["_currency"]}\n--------------------------------\n{$loc_lang["mail"]["total"]}: $sum_items {$conf["_currency"]}\n\n";
+$mail_opener_buyer = "{$loc_lang["mail"]["for_invoice_to_order"]} {$conf["this_domain"]}\n\n$date\n\n";
+$mail_opener_buyer .= "{$loc_lang["mail"]["hello"]} $firstname $lastname!\n\n{$loc_lang["mail"]["thx_4_order"]}\n\n"; 
+$mail_opener_buyer .= "{$loc_lang["mail"]["kart_id"]} $kartid\n\n";
+$mail_end_buyer = "{$loc_lang["mail"]["transfer_money_to_account"]}\n\n";
+//if ($newsletter == "ja") { $mail_end_buyer .= "{$loc_lang["mail"]["submitted_to_newsletter"]}\n\n"; }
+$mail_end_buyer .= "{$loc_lang["mail"]["hope_you_enjoy"]}\n{$conf["this_organization"]}\n{$conf["this_domain"]}\n\n\n\n";
+
+$mail_end_buyer .= $kontoinfo;
+$mail_opener_shop = "$date\nKart-ID: $kartid\n\n$email_buyer ({$loc_lang["mail"]["speaks"]} $lang)\n$adress1\n";
+if ($adress2 != "") $mail_opener_shop .= "$adress2\n";
+$mail_opener_shop .= "$plz - $city\n";
+if ($province != "") $mail_opener_shop .= "$province\n";
+$mail_opener_shop .= "$countryname\n\n{$loc_lang["mail"]["orders"]}:\n\n";
+$mail_end_shop = "Newsletter: $newsletter\n\n";
+
+date_default_timezone_set('Europe/Berlin'); $maildate = date(DATE_RFC2822);
+$header = "Content-Type: text/plain; charset = \"UTF-8\";\r\n";
+$header .= "Content-Transfer-Encoding: 8bit\r\n";
+$header .= "Date: $maildate\r\n";
+$header .= "\r\n";
+
+$mail_buyer = $mail_opener_buyer . $mail_items . $mail_end_buyer;
+$mail_buyer = wordwrap($mail_buyer, 70);
+$header_buyer = "From: $email_shop\r\n";
+$header_buyer .= $header;
+if (!mail($email_buyer, $betreff_buyer, $mail_buyer, $header_buyer)) echo "<h3>ERROR!</h3>Failed to send mail to buyer!<br>\n";
+
+$mail_shop = $mail_opener_shop . $mail_items . $mail_end_shop;
+$mail_shop = wordwrap($mail_shop, 70);
+$header_shop = "From: $email_buyer\r\n";
+$header_shop .= $header;
+if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR!</h3>Failed to send mail to shopkeeper!<br>\n";
+
+
 /* html format */
 
 echo "<table width=\"500\" align=\"center\" valign=\"center\" border=\"0\">\n<tr>\n<td align=\"center\" colspan=\"3\">\n";
 echo "<h3>{$loc_lang["thx_4_order"]}</h3>\n";
 echo "<hr style=\"width:500px; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n";
 echo "</td>\n</tr>\n";
-for ($c = "1"; $c <= $kartamount; $c++)
+
+foreach($kart as $c => $value)
   {
+   if ($kart["$c"]['item_id'] == "") continue 1;
+   if ($kart["$c"]['item_size'] == "") echo "<tr><td align=\"left\" colspan=\"1\">$c - {$kart["$c"]['item_type']} - <b>{$kart["$c"]['item_name']}</b> </td>";
+   else echo "<tr><td align=\"left\" colspan=\"1\">$c - {$kart["$c"]['item_type']} - <b>{$kart["$c"]['item_name']}</b> ({$kart["$c"]['item_size']}) </td>";
+   echo "<td align=\"right\" colspan=\"1\"> ({$kart["$c"]['item_preis']} {$conf["_currency"]} x {$kart["$c"]['item_amount']} {$loc_lang["pieces"]}) </td>";
+ //  $kart["$c"]['item_total'] = $kart["$c"]['item_amount'] * $kart["$c"]['item_preis'];
    $str_itemtotal = number_format($kart["$c"]['item_total'], 2, '.', ' ');
-   echo "<tr><td align=\"right\" colspan=\"1\">{$kart["$c"]['item_type']} - <b>{$kart["$c"]['item_name']}</b> </td>";
-   echo "<td align=\"right\" colspan=\"1\"> ({$kart["$c"]['item_preis']} &euro; x {$kart["$c"]['item_amount']} {$loc_lang["pieces"]}) </td>";
-   echo "<td align=\"right\" colspan=\"1\"><b>$str_itemtotal &euro;</b></td></tr>\n";
+   echo "<td align=\"right\" colspan=\"1\"><b>$str_itemtotal {$conf["_currency"]}</b></td></tr>\n";
+ //  $sum_items = $sum_items + $kart["$c"]['item_total'];
   }
+  
 $str_transfercost = number_format($transfercost, 2, '.', ' ');
 $str_shippingcost = number_format($shippingcost, 2, '.', ' ');
 $str_sum_items = number_format($sum_items, 2, '.', ' ');
 
-echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>$paymentname</b> ($countryname)</td><td align=\"right\" colspan=\"1\"><b>$str_transfercost &euro;</b></td>\n</tr>\n";
-echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>{$loc_lang["shipping"]}</b> ($countryname)</td><td align=\"right\" colspan=\"1\"><b>$str_shippingcost &euro;</b></td>\n</tr>\n";
+echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>$paymentname</b> ($countryname)</td><td align=\"right\" colspan=\"1\"><b>$str_transfercost {$conf["_currency"]}</b></td>\n</tr>\n";
+echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>{$loc_lang["shipping"]}</b> ($countryname)</td><td align=\"right\" colspan=\"1\"><b>$str_shippingcost {$conf["_currency"]}</b></td>\n</tr>\n";
 echo "<tr>\n<td align=\"center\" colspan=\"3\">\n<hr style=\"width:500px; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n</td>\n</tr>\n";
-echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>{$loc_lang["total"]}</b></td><td align=\"right\" colspan=\"1\"><b>$str_sum_items &euro;</b></td>\n</tr>\n";
+echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>{$loc_lang["total"]}</b></td><td align=\"right\" colspan=\"1\"><b>$str_sum_items {$conf["_currency"]}</b></td>\n</tr>\n";
 echo "<tr>\n<td align=\"center\" colspan=\"3\">\n<hr style=\"width:500px; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n</td>\n</tr>\n";
 echo "<tr>\n<td align=\"center\" colspan=\"3\">\n";
 if ($opt == "1")
   {
-   echo "{$loc_lang["please_send"]} <b>$str_sum_items &euro;</b> {$loc_lang["to_following_account"]}<br>\n<br>\n";
-   echo "Brian Brademann<br>\nKto.Nr.: 915 660 540<br>\nBLZ: 200 411 33<br>\n<br>\nIBAN: DE83200411330915660540<br>\nBIC/Swift-Code: COBADEHD001<br>\n<br>\n";
+   echo "{$loc_lang["please_send"]} <b>$str_sum_items {$conf["_currency"]}</b> {$loc_lang["to_following_account"]}<br>\n<br>\n";
+   echo nl2br($conf["bankaccount_info"],false) . "<br>\n";
    echo "{$loc_lang["as_soon_as_money_arrives"]}<br>\n";
   }
 if ($opt == "3")
@@ -95,20 +143,11 @@ if ($opt == "3")
    echo "{$loc_lang["will_be_sent_soon"]}<br>\n";
   }
 echo "</td>\n</tr>\n</table>\n";
-echo "<center><iframe src=\"bg.php\" name=\"nlbox\" id=\"nlbox\" width=\"350\" height=\"200\" frameborder=\"0\" border=\"0\"></iframe></center>\n";
-/* ################################################################### */
-
-// if (!unlink($kartfile)) echo "ERROR! Could not delete $kartfile.<br>\n";
-
-   /* Newsletter entry */
-   echo "<form name=\"jnl2_sign_form\" method=\"post\" action=\"../newsletter/validate.php?do=sign_in&language=german&ml_id=00\" target=\"nlbox\">\n";
-   echo "<input type=\"hidden\" name=\"email\" value=\"$email\">\n";
-   echo "<input type=\"hidden\" name=\"nick\" value=\"$firstname $lastname\">\n";
-   echo "<input type=\"hidden\" name=\"mail_format\" value=\"h\">\n";
-   echo "<input type=\"hidden\" name=\"grp_00\" value=\"1\" checked>\n</form>";
-   echo "<p><b><a href=\"{$conf["this_domain"]}\" target=\"_top\">{$conf["this_domain"]}</a></b></p>";
+if ($newsletter=="ja")
+  {
+   $_GET["order"] = "check";
+   $_POST["name"] = "$firstname";
+   $_POST["email"] = $email;
+   include('newsletter/newsletter.php');
+  }
 ?>
-</em>
-</font>
-</body>
-</html>

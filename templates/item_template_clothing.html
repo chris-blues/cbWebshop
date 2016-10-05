@@ -1,0 +1,25 @@
+<div class="item" id="%id%" name="%id%">
+  <div><h1 class="item-header">%name% (%Type%)</h1><h4>%Type% </h4></div>
+  <div class="item-pic">
+    <img id="%id%" src="shop/%pic%" alt="%alt%" onmouseout="src='shop/%pic%'" onmouseover="src='shop/%pic%.png'" border="0">
+  </div>
+  <div class="item-details">
+    <div class="centerme">
+      %details%
+      <form action="index.php" id="intokart%c%" method="get" target="_top" accept-charset="UTF-8">
+        <input type="hidden" name="page" value="shop">
+        <input type="hidden" name="job" value="additem">
+        <input type="hidden" name="id" value="%id%">
+        <input type="hidden" name="c" value="%c%">
+        <input type="hidden" name="lang" value="%lang%">
+        <input type="hidden" name="kartid" value="%kartid%">
+        <select size="1" name="size" form="intokart%c%">
+          %sizes%
+        </select>
+      </form>
+      <div class="button-buy">
+        <a href="javascript:" onclick="document.getElementById('intokart%c%').submit()"><div class="buy">%buy% : <b>%preis% %_currency%</b></div></a>
+      </div>
+    </div>
+  </div>
+</div>
