@@ -1,0 +1,33 @@
+<li>
+<audio id="%id%_%trackid%" class="%id%_%trackid%" onended="document.getElementById('%id%_%trackid%-button').src='shop/pics/%playbutton%.png';">
+ <source src="shop/items/audio/%id%/%trackid%.mp3" type="audio/mpeg" />
+ <source src="shop/items/audio/%id%/%trackid%.ogg" type="audio/ogg" />
+</audio>
+<a class="%id%_%trackid%" href="javascript:play_%id%_%trackid%();" onfocus="this.blur()" title="%clicktoplay%">
+  <img src="shop/pics/%playbutton%.png" id="%id%_%trackid%-button" border="0" name="playbutton" alt="play"> %trackname%</a>
+<script type="text/javascript">
+   var audio_%id%_%trackid% = document.getElementById('%id%_%trackid%');
+   var playbacks = document.getElementsByTagName("audio");
+   function play_%id%_%trackid%()
+     {
+     if (audio_%id%_%trackid%.paused)
+       {  // command: Play!
+         for (var i = 0; i < playbacks.length; i++)
+           {
+            document.getElementsByTagName("audio")[i].pause();
+            document.getElementsByTagName("audio")[i].currentTime = 0;
+            document.getElementsByName("playbutton")[i].src = "shop/pics/%playbutton%.png";
+           }
+         document.getElementById('%id%_%trackid%-button').src = "shop/pics/play_active.png";
+         audio_%id%_%trackid%.play();
+         var lastplayed = document.getElementById('%id%_%trackid%');
+       }
+     else
+       {  // command: Stop!
+         audio_%id%_%trackid%.pause(); 
+         audio_%id%_%trackid%.currentTime = 0; 
+         document.getElementById('%id%_%trackid%-button').src = "shop/pics/%playbutton%.png";
+       }
+     }
+</script>
+</li>
