@@ -8,7 +8,7 @@ $kartamount = "0";
 $kart_total = "0";
 if ($karthandle != NULL)
  {
-  $buffer = fgets($karthandle); $country = trim($buffer,"\n"); if ($country == "") $country = $_GET["country"]; if ($_GET["country"] == "remove") $country = "remove";
+  $buffer = fgets($karthandle); $countryname = trim($buffer,"\n"); if ($countryname == "") $countryname = $_GET["countryname"]; if ($_GET["countryname"] == "remove") $countryname = "remove";
   $buffer = fgets($karthandle); $opt = trim($buffer,"\n"); if ($opt == "") $opt = $_GET["opt"]; if ($_GET["opt"] == "remove") $opt = "remove";
   $buffer = fgets($karthandle); $firstname = trim($buffer,"\n"); if ($firstname == "") $firstname = $_GET["firstname"];
   $buffer = fgets($karthandle); $lastname = trim($buffer,"\n"); if ($lastname == "") $lastname = $_GET["lastname"];
@@ -47,7 +47,7 @@ $kartamount = "0";
 $kart_total = "0";
 if ($karthandle != NULL)
  {
-  $buffer = fgets($karthandle); $country = trim($buffer,"\n");
+  $buffer = fgets($karthandle); $countryname = trim($buffer,"\n");
   $buffer = fgets($karthandle); $opt = trim($buffer,"\n");
   $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["firstname"])) $firstname = " style=\"background-color:#FF4B4B;\""; else { $firstname = trim($buffer,"\n"); $firstname = " value=\"$firstname\""; }
   $buffer = fgets($karthandle); if ($_GET["errorreturn"] == "1" and isset($_GET["lastname"])) $lastname = " style=\"background-color:#FF4B4B;\""; else { $lastname = trim($buffer,"\n"); $lastname = " value=\"$lastname\""; }
@@ -86,7 +86,7 @@ $kart_total = "0";
 $errorreturn = "&amp;errorreturn=1";
 if ($karthandle != NULL)
  {
-  $buffer = fgets($karthandle); $country = trim($buffer,"\n"); if ($country == "") { $error = "1"; $errors['kartfile']['country'] = "empty"; }
+  $buffer = fgets($karthandle); $countryname = trim($buffer,"\n"); if ($country == "") { $error = "1"; $errors['kartfile']['country'] = "empty"; }
   $buffer = fgets($karthandle); $opt = trim($buffer,"\n"); if ($opt == "") { $error = "1"; $errors['kartfile']['opt'] = "empty"; }
   $buffer = fgets($karthandle); $firstname = trim($buffer,"\n"); if ($firstname == "") { $error = "1"; $errors['kartfile']['firstname'] = "empty"; $errorreturn .= "&amp;firstname=$firstname"; }
   $buffer = fgets($karthandle); $lastname = trim($buffer,"\n"); if ($lastname == "") { $error = "1"; $errors['kartfile']['lastname'] = "empty"; $errorreturn .= "&amp;lastname=$lastname"; }

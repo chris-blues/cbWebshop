@@ -1,0 +1,5 @@
+AuthName "Shop Admin"
+AuthType Basic
+AuthUserFile /customers/4/f/9/folkadelic.de/httpd.www/shop/admin/.htpasswd
+AuthGroupFile /dev/null
+require valid-user 

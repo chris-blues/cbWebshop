@@ -1,8 +1,13 @@
-<?php include('header_short.html'); ?>
+<?php 
+include('../conf/shop_conf.php');
+include("../locale/{$conf["_default_lang"]}.php");
+include('header_short.php');
+if (isset($_GET["type"])) { $type = $_GET["type"]; $type--; }
+else $type = "-1";
+?>
 
 <body>
-<center><form action="showitems.php"><input type="submit" value=" <<< BACK "></form></center><br>
-<br>
+<?php echo "<center><h2>{$loc_lang["admin_addnewitem"]}</h2></center>\n<hr>\n<br>\n"; ?>
 <form action="savelist.php?job=additem" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <table border="0" align="center">
 
@@ -12,44 +17,42 @@ include('read_index.php');
 
 /* ############################################################# */
 
-if (isset($_GET["type"])) $type = $_GET["type"];
-if ($type == "0") $type = "";
-if ($type == "1") $type = "CD";
-if ($type == "2") $type = "TShirt";
+
 ?>
   <tr>
-    <td align="right" colspan="2">
+    <td align="right">
       <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-      Type:<select name="item_type" size="1" onchange="self.location='newitem.php?type='+this.selectedIndex">
-        <option<?php if ($type == "") echo " selected"; ?>>Choose type!</option>
-        <option<?php if ($type == "CD") echo " selected"; ?> value="CD">CD</option>
-        <option<?php if ($type == "TShirt") echo " selected"; ?> value="TShirt">TShirt</option>
+      <?php echo $loc_lang["admin_itemtype"]; ?><select name="item_type" size="1" onchange="self.location='newitem.php?type='+this.selectedIndex">
+        <option<?php if ($type < "0") echo " selected=\"selected\""; ?> width="156" style="width:156px;"><?php echo $loc_lang["admin_choosetype"]; ?></option>
+      <?php
+        foreach ($conf["item_type"] as $key => $value)
+          {
+           if ($key == $type) { $selected = " selected=\"selected\""; $itemcat = $conf["item_type"][$key]["cat"]; } else $selected = "";
+           echo "<option value=\"{$conf["item_type"][$key]["name"]}\"$selected>{$conf["item_type"][$key]["name"]}</option>\n";
+          }
+      ?>
       </select><br>
-      ID:<input name="item_id" type="text" length="20"><br>
-      Name:<input name="item_name" type="text" length="20"><br>
-      <?php if ($type == "")       echo "Description:<input name=\"item_descr\" type=\"text\" length=\"20\"><br>\n";
-            if ($type == "TShirt") echo "<input name=\"item_descr\" type=\"hidden\">\n"; 
-            if ($type == "CD")     echo "Year:<input name=\"item_descr\" type=\"text\" length=\"20\"><br>\n"; ?> 
-      Preis:<input name="item_preis" type="text" length="20"><br>
+      <?php echo $loc_lang["admin_itemname"]; ?><input name="item_name" type="text" length="20"><br>
+      <?php if ($itemcat == "music") echo "{$loc_lang["admin_itemyear"]}<input name=\"item_descr\" type=\"text\" length=\"20\"><br>\n";
+            if ($itemcat != "music") echo "{$loc_lang["admin_itemdescr"]}<input name=\"item_descr\" type=\"text\" length=\"20\"><br>\n"; ?> 
+      <?php echo $loc_lang["admin_itemprice"]; ?><input name="item_preis" type="text" length="20"><br>
     </td>
   </tr>
   <tr>
-    <td align="right" colspan="2">
-      <font color="FF000"><b>PNG-file!</b></font> Pic:<input size="5" name="upload_pic" type="file" accept="image/png"><br>
-      Pricetag:<input size="5" name="upload_pricetag" type="file" accept="image/png">
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <?php if ($type != "CD") echo "Details"; else echo "Tracklist"; ?>:<br><textarea name="item_details" cols="50" rows="8"></textarea>
+    <td align="right">
+      <font color="FF000"><b><?php echo $loc_lang["admin_pngonly"]; ?></b></font> <?php echo $loc_lang["admin_item_pic"]; ?><input size="5" name="upload_pic" type="file" accept="image/png"><br>
+      <?php echo $loc_lang["admin_pngpricetag"]; ?><input size="5" name="upload_pricetag" type="file" accept="image/png">
     </td>
   </tr>
   <tr>
     <td align="center">
-      <input type="reset" value=" Reset ">
+      <?php if ($itemcat != "music") echo $loc_lang["admin_details"]; else echo $loc_lang["admin_tracklist"]; ?>:<br><textarea name="item_details" cols="50" rows="8"></textarea>
     </td>
+  </tr>
+  <tr>
     <td align="center">
-      <input type="submit" value=" Save! ">
+      <button type="button" value="Back" onclick="self.location='showitems.php'"> &lt;&lt;&lt; <?php echo $loc_lang["admin_back"]; ?> </button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo "<input type=\"submit\" value=\"{$loc_lang["admin_save"]}\">\n"; ?>
     </td>
   </tr>
 </table>

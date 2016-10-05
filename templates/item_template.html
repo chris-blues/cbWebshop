@@ -1,15 +1,14 @@
-<font face="Georgia" size="3"><em>
-<table bgcolor="#544a31" align="center" width="490" border="0">
+<table bgcolor="%bgcolor%" align="center" width="%itemview_width%" border="0">
   <tr>
     <td align="center" colspan="2">
-      <font size="5">%name%</font><font size="4"><b> (%value%) %descr%</b></font><br>
+      <font size="5">%name%</font><font size="4">  %descr%</font><br>
       <hr style="color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:left;">
     </td>
   </tr>
   <tr>
     <td align="center" valign="top" colspan="1">
       <br>
-      <a href="%pic%" rel="%id%" class="fancy"><img height="150" src="%pic%" alt="%name%" title="%name%" onmouseout="src='%pic%'" onmouseover="src='%pic%.png'"></a><br>
+      <a href="%pic%" rel="%id%" class="fancy"><img height="%itemview_pic_height%" src="%pic%" alt="%name%" title="%name%" onmouseout="src='%pic%'" onmouseover="src='%pic%.png'" border="0"></a><br>
     </td>
     <td align="left" valign="top" colspan="1">
       %details%<br><br>
@@ -19,11 +18,8 @@
         <input type="hidden" name="c" value="%c%">
         <input type="hidden" name="lang" value="%lang%">
         <input type="hidden" name="kartid" value="%kartid%">
-        <button type="submit" onclick="this.form.submit()"><img src="pics/more.png"><br> %buy% </button>
+        <button type="submit" onclick="this.form.submit()"><img src="pics/more.png"><br> %buy% </button><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %value%
       </form>
     </td>
   </tr>
 </table>
-</em></font>
-</body>
-</html>

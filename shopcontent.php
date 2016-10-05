@@ -1,31 +1,29 @@
 <?php
+include('conf/shop_conf.php');
+include('conf/item_conf.php');
 include('header_short.html');
 $lang = $_GET["lang"]; 
 $kartid = $_GET["kartid"]; 
-?>
-<body bgcolor="#544a31">
-<font face="Georgia" size="3"><em>
-<table width="500" border="0" align="center" bgcolor="#544a31">
-  <tr>
-<?php
+
+define( "LOC_LANG", $lang );
+include('locale/' . LOC_LANG . '.php');
+
+echo "<body bgcolor=\"{$conf["bgcolor"]}\">\n";
+echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">\n{$conf["font_style"]}\n";
+$tablewidth = $conf["shop_width"] - 50;
+echo "<table width=\"$tablewidth\" align=\"{$conf["shop_align"]}\" border=\"0\">\n  <tr>\n";
+
 include('read_index.php');
 /* Lese Vorlage aus Datei in einen String */
-$template = file_get_contents("items/item_template_shop.html");
-$col = "1";
+$col = "0";
+$template = file_get_contents("templates/item_template_shop.html");
 for ($c = 1; $c <= $itemamount; $c++)
  {
-  if ($lang == "english") 
-    {
-     $alt = "click here to view our {$data["$c"]['item_type']} {$data["$c"]['item_name']}";
-     $buy = "buy <b>{$data["$c"]['item_name']}</b>";
-     $value = "pieces ({$data["$c"]['item_preis']} &euro;/piece)";
-    }
-  else 
-    {
-     $alt = "clicken Sie hier um {$data["$c"]['item_type']} {$data["$c"]['item_name']} anzusehen";
-     $buy = "kaufe <b>{$data["$c"]['item_name']}</b>";
-     $value = "St&uuml;ck ({$data["$c"]['item_preis']} &euro;/St&uuml;ck)";
-    }
+  $col++;
+  $alt = "{$loc_lang["click_to_view"]} {$data["$c"]['item_type']} {$data["$c"]['item_name']}{$loc_lang["click_to_view_add"]}";
+  $buy = "{$loc_lang["buy"]} <b>{$data["$c"]['item_name']}</b>";
+  $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} &euro;/{$loc_lang["piece"]})";
+
   /* Was soll ersetzt werden? */
   $search  = array('%id%', 
                    '%name%', 
@@ -41,7 +39,10 @@ for ($c = 1; $c <= $itemamount; $c++)
                    '%buy%',
                    '%value%',
                    '%kartid%',
-                   '%lang%');
+                   '%lang%',
+                   '%shop_width%',
+                   '%shop_height%',
+                   '%shop_pic_height%');
   /* Womit soll das ersetzt werden? */
   $replace = array($data["$c"]['item_id'],
                    $data["$c"]['item_name'],
@@ -57,27 +58,18 @@ for ($c = 1; $c <= $itemamount; $c++)
                    $buy,
                    $value,
                    $kartid,
-                   $lang);
+                   $lang,
+                   $item_conf["shop_width"],
+                   $item_conf["shop_height"],
+                   $item_conf["shop_pic_height"]);
   /* Finde und ersetze Platzhalter in $output */
   $output = str_replace($search, $replace, $template);
   echo "$output";
-  if ($col == "1") 
-    {
-     $col = "2";
-    }
-  else
-    {
-     if ($itemamount != $c)
-      {
-       echo "</tr><tr height=\"40\"><td></td><td></td></tr><tr>\n";
-       $col = "1";
-      }
-    }
- } 
+  if ($col == $conf["shop_columns"]) { echo "  </tr>\n  <tr>\n"; $col = "0"; }
+ }
+ 
+echo "  </tr>\n</table>\n{$conf["font_style_close"]}\n";
 ?>
-  </tr>
-</table>
-</em>
 </font>
 </body>
 </html>

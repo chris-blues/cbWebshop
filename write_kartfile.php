@@ -5,7 +5,7 @@
     {
      $lnb = "\n";
      $buffer = "";
-     $buffer = trim($country,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
+     $buffer = trim($countryname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
      $buffer = trim($opt,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
      $buffer = trim($firstname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
      $buffer = trim($lastname,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);

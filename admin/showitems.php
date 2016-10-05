@@ -1,28 +1,33 @@
-<?php include('header_short.html'); ?>
+<?php 
+include('../conf/shop_conf.php');
+include("../locale/{$conf["_default_lang"]}.php");
+include('header_short.php');
+echo "<body bgcolor=\"{$conf["bgcolor"]}\">\n";
+echo "<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\">\n{$conf["font_style"]}\n";
 
-<body>
-<center><form action="newitem.php"><input type="submit" value=" Add a new item "></form></center>
-<?php
 $modus = "simple";
 include('read_index.php');
 
-echo "<table align=\"center\" border=\"0\">\n";
+echo "<table align=\"center\" border=\"0\">\n<tr>\n";
 /* Tabelleninhalt */
 $cols = "0";
 for ($c=1; $c <= $counter; $c++)
  {
   $cols++;
-  echo "  <td width=\"180\" height=\"225\" align=\"center\" valign=\"center\"><b>$c - {$data[$c]['item_name']}</b><br><img src=\"../items/pics/{$data[$c]['item_id']}.png\" height=\"100\"><br>\n";
-  echo "    <form name=\"del-$c\" action=\"savelist.php\" method=\"get\" accept-charset=\"UTF-8\">\n";
-  echo "      <input type=\"hidden\" name=\"job\" value=\"delete\">\n";
-  echo "      <input type=\"hidden\" name=\"num\" value=\"$c\">\n";
-  echo "      <input type=\"submit\" value=\" delete this item \"></form><form name=\"item-$c\" action=\"viewitem.php?c=$c\" method=\"post\" accept-charset=\"UTF-8\">\n";
-  echo "    <input type=\"submit\" value=\" update this item \"></form>\n</td>\n";
+  echo "  <td width=\"180\" height=\"225\" align=\"center\" valign=\"center\"><b>$c - {$data[$c]['item_name']}</b><br>\n";
+  echo "    <a href=\"viewitem.php?c=$c\">\n";
+  echo "    <img src=\"../items/pics/{$data[$c]['item_id']}.png\" height=\"100\" onmouseout=\"src='../items/pics/{$data[$c]["item_id"]}.png'\" onmouseover=\"src='../items/pics/{$data[$c]["item_id"]}.png.png'\" border=\"0\"></a><br>\n";
+  echo "    <form name=\"item-$c\" action=\"viewitem.php?c=$c\" method=\"post\" accept-charset=\"UTF-8\">\n";
+  echo "    <input type=\"submit\" value=\"{$loc_lang["admin_edit_item"]}\"></form>\n</td>\n";
   if ($cols == "4") echo "</tr>\n<tr>\n";
  }
 ?>
-  
+  </tr>  
 </table>
-<?php /* echo "<pre>\n"; var_dump($data); echo "</pre>\n"; */ ?>
+<?php 
+  echo "{$conf["font_style_close"]}\n";
+// echo "\$data[\$c]['item_name']\n";
+?>
+</font>
 </body>
 </html>

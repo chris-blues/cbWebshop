@@ -1,5 +1,9 @@
 <?php
-include('header_short.html');
+include('conf/shop_conf.php');
+include('conf/countries.php');
+include('conf/cost_conf.php');
+include('conf/payment_conf.php');
+
 $job = $_GET["job"];
 $id = $_GET["id"];
 $c = $_GET["c"];
@@ -7,6 +11,8 @@ $lang = $_GET["lang"];
 $kartid = $_GET["kartid"];
 $kartfile = "tmp/kart-$kartid.tmp";
 
+define( "LOC_LANG", $lang );
+include('locale/' . LOC_LANG . '.php');
 include('read_index.php');
 
 if (!isset($newitem)) $job = "";
@@ -15,7 +21,7 @@ if (!isset($newitem)) $job = "";
 
 if ($job == "reset")
   {
-   if (!unlink($kartfile)) echo "ERROR! Could not delete $kartfile.<br>\n";
+   if (!unlink($kartfile)) echo "ERROR! Cannot delete $kartfile.<br>\n";
    $kartamount = "0";
   }
 /* ################################################# */
@@ -34,7 +40,7 @@ if ($job == "adduserdata")
    if (isset($_POST["plz"])) $plz = $_POST["plz"];
    if (isset($_POST["city"])) $city = $_POST["city"];
    if (isset($_POST["province"])) $province = $_POST["province"];
-   if (isset($_POST["country"]) and $_POST["country"] != "") $country = $_POST["country"];
+   if (isset($_POST["countryname"]) and $_POST["countryname"] != "") $countryname = $_POST["countryname"];
    if (isset($_POST["email"])) $email = $_POST["email"];
    if (isset($_POST["newsletter"])) $newsletter = $_POST["newsletter"];
    if ($_POST["newsletter"] != "ja") $newsletter = "nein";
@@ -46,15 +52,18 @@ if ($job == "adduserdata")
 
 if ($job == "addopt")
   {
-   if ($country == "0") $country = "Germany";
-   if ($country == "1") $country = "Germany";
-   if ($country == "2") $country = "Great Britain"; 
-   if ($country == "3") $country = "Poland"; 
-   if ($country == "4") $country = "USA"; 
-   if ($country == "5") $country = "other";
-   if ($country == "remove") $country = "";
-   if ($opt == "remove") $opt = "";
-   
+   if ($_GET["copt"] == "remove") $countryname = "";  // if Country wants to be changed
+   if ($_GET["copt"] != "remove")
+     {
+      if (isset($_GET["copt"])) 
+        {
+         foreach($country as $key => $value) { }
+         $copt = $_GET["copt"]; $copt--;
+         $countryname = $country[$copt];
+         if ($copt > $key) $countryname = $loc_lang["country_other"];
+        }
+     }
+   if ($opt == "remove") $opt = "";   // if Payment wants to be changed
    include('write_kartfile.php');
   }
 
@@ -63,9 +72,7 @@ if ($job == "addopt")
 if ($job == "less")
   {
    $kart["$item_pointer"]['item_amount']--;
-   
    include('write_kartfile.php');
-   
    if ($kart["$item_pointer"]['item_amount'] == "0") echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL=kartline.php?job=remove&amp;id={$kart["$item_pointer"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\">\n";
   }
 
@@ -73,7 +80,6 @@ if ($job == "less")
 if ($job == "remove")
   {
    include('write_kartfile.php');
-   
    echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL=kartline.php?id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\">\n";
   }
 
@@ -93,154 +99,128 @@ if ($job == "additem")
       $kart["$kartamount"]['item_preis'] = $data["$newitem"]['item_preis'];
       $kart["$kartamount"]['item_amount'] = "1";
      }
-   
    include('write_kartfile.php');
   }
 ?>
-</head>
-<body bgcolor="#544a31">
-<table border="0" bgcolor="#544a31">
+<!DOCTYPE html>
+<html>
+<head>
+<title>folkadelic hobo jamboree - symphonic punk disco folk</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="page-topic" content="folkadelic hobo jamboree - symphonic punk disco folk">
+<meta name="description" content="folkadelic hobo jamboree - a musical mystery, a fine waste of time, a name german fans still can‘t pronounce? Yes! All that and more...">
+<style type="text/css">
+a:link { color: #24280F; text-decoration: none}
+a:visited { color: #24280F; text-decoration: none}
+a:hover { color: #999966; text-decoration: none }
+</style>
+<?php
+echo "</head>\n<body bgcolor=\"{$conf["bgcolor"]}\">\n";
+?>
+<table border="0">
 <tr>
 <td>
-  <em><font face="Georgia" size="3">
-  <?php echo "<font size=\"5\"><a href=\"shopcontent.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\">\n";
-        if ($lang == "english") echo "Back to shop";
-        else echo "Zur&uuml;ck zum Shop";
+  
+  <?php echo "{$conf["font_style"]}<font face=\"{$conf["font_face"]}\" size=\"{$conf["font_size"]}\" color=\"{$conf["color"]}\">\n";
+        echo "<font size=\"5\"><a href=\"shopcontent.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\">\n";
+        echo "{$loc_lang["back_to_shop"]}";
         echo "</a></font>\n<br>\n<br>\n";
         if ($kartamount > 0)
          {
-          echo "<hr style=\"color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:left;\">\n<font size=\"2\">\n";
+          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n<font size=\"2\">\n";
           for ($counter = "1"; $counter <= $kartamount; $counter++)
             {
              $total = $kart["$counter"]['item_amount'] * $kart["$counter"]['item_preis']; $total = number_format($total, 2, '.', '');
              $kart["$counter"]['item_preis'] = number_format($kart["$counter"]['item_preis'], 2, '.', '');
              $kart_total = $kart_total + $total; $kart_total = number_format($kart_total, 2, '.', '');
-             echo "<table width=\"200\" border=\"0\" bgcolor=\"#544a31\"><tr><td width=\"184\" align=\"left\">";
+             echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td width=\"184\" align=\"left\">";
              /* Item Name and Type, link to item's page */
              echo "<a href=\"item.php?item={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"shop\">";
              echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']})</a></td><td width=\"16\" align=\"right\">";
              /* Remove button */
-             if ($lang == "english") $alt = "remove"; else $alt = "entfernen";
              echo "<a href=\"kartline.php?job=remove&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\">";
-             echo "<img src=\"pics/del.png\" alt=\"$alt\" title=\"$alt\"></a></td></tr></table>\n<table width=\"200\" border=\"0\"><tr><td width=\"29\" align=\"left\">";
+             echo "<img src=\"pics/del.png\" alt=\"{$loc_lang["remove"]}\" title=\"{$loc_lang["remove"]}\"></a></td></tr></table>\n<table width=\"200\" border=\"0\"><tr>\n";
              /* more & less buttons */
-             echo "<a href=\"kartline.php?job=additem&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/more.png\"></a>&nbsp;";
-             echo "<a href=\"kartline.php?job=less&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/less.png\"></a></td>";
+             echo "<td width=\"40\" align=\"left\">";
+             echo "<a href=\"kartline.php?job=additem&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/more.png\"></a>\n";
+             echo "<a href=\"kartline.php?job=less&amp;id={$kart["$counter"]['item_id']}&amp;lang=$lang&amp;kartid=$kartid\" target=\"kart\"><img src=\"pics/less.png\"></a></td>\n";
              /* Show amount * price = total */
              $total = number_format($total, 2, '.', ' ');
-             echo "<td width=\"170\" align=\"right\">({$kart["$counter"]['item_amount']} x)&nbsp; <b>$total &euro;</b></td></tr></table>\n";
+             echo "<td align=\"right\">({$kart["$counter"]['item_amount']} x)&nbsp; <b>$total &euro;</b></td></tr></table>\n";
             }
-          echo "<hr style=\"color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:left;\">\n";
+          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n";
           $show_kart_total = number_format($kart_total, 2, '.', ' ');
-          echo "<table width=\"200\" border=\"0\" bgcolor=\"#544a31\"><tr><td align=\"right\"><b>$show_kart_total &euro;</b></td></tr></table>\n";
+          echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"right\"><b>$show_kart_total &euro;</b></td></tr></table>\n";
           
-          if ($country == "" or $country == "0") 
+          if ($countryname == "") 
             {
-             if ($lang == "english") 
+             echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\">\n";
+             echo "<select name=\"countryname\" size=\"1\" onchange=\"self.location='kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;copt='+this.selectedIndex\">\n";
+             echo "<option selected=\"selected\">{$loc_lang["select_country"]}</option>\n";
+             foreach($country as $key => $value)
                {
-                echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\">\n";
-                echo "<select name=\"country\" size=\"1\" onchange=\"self.location='kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;country='+this.selectedIndex\">\n";
-                echo "<option value=\"\" selected=\"selected\">Select country!</option>\n";  /* index = 0 */
-                echo "<option value=\"Germany\">Germany</option>\n";             /* index = 1 */
-                echo "<option value=\"GreatBritain\">Great Britain</option>";        /* index = 2 */
-                echo "<option value=\"Poland\">Poland</option>";                     /* index = 3 */
-                echo "<option value=\"USA\">USA</option>";                           /* index = 4 */
-                echo "<option value=\"other\">other</option>";                      /* index = 5 */
-                echo "</select></td></tr></table>\n";
+                echo "<option value=\"$key\">$value</option>\n";
                }
-             else 
-               {
-                echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\">\n";
-                echo "<select name=\"country\" size=\"1\" onchange=\"self.location='kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;country='+this.selectedIndex\">\n";
-                echo "<option value=\"\" selected=\"selected\">W&auml;hle Land!</option>\n";  /* index = 0 */
-                echo "<option value=\"Germany\">Deutschland</option>\n";             /* index = 1 */
-                echo "<option value=\"GreatBritain\">Gro&szlig;britannien</option>";        /* index = 2 */
-                echo "<option value=\"Poland\">Polen</option>";                     /* index = 3 */
-                echo "<option value=\"USA\">USA</option>";                           /* index = 4 */
-                echo "<option value=\"other\">Anderes</option>";                      /* index = 5 */
-                echo "</select></td></tr></table>\n";
-               }
+             echo "<option>{$loc_lang["country_other"]}</option>";
+             echo "</select></td></tr></table>\n";
             }
           else
             {
-             echo "<table width=\"200\" border=\"0\" bgcolor=\"#544a31\"><tr><td align=\"left\" width=\"140\"><a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;country=remove\" target=\"kart\">";
-             if ($country == "Germany") { $shipcost = "1.45"; } else $shipcost = "3.45";
-             if ($lang == "english") 
-               {
-                if ($country == "Germany") $country_trans = $country;
-                if ($country == "Great Britain") $country_trans = $country;
-                if ($country == "Poland") $country_trans = $country;
-                if ($country == "USA") $country_trans = $country;
-                echo "Shipping $country_trans";
-               }
-             else 
-               {
-                if ($country == "Germany") $country_trans = "Deutschland";
-                if ($country == "Great Britain") $country_trans = "Gro&szlig;britannien";
-                if ($country == "Poland") $country_trans = "Polen";
-                if ($country == "USA") $country_trans = $country;
-                echo "Versand $country_trans";
-               }
-             echo "</a></td><td align=\"right\" width=\"60\">+ $shipcost &euro;</td></tr></table>\n";
+             echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"left\" width=\"130\"><a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;copt=remove\" target=\"kart\">";
+             if ($countryname == $cost["_homecountry"]) $shipcost = "{$cost["shipping_home"]}"; else $shipcost = "{$cost["shipping_foreign"]}";
+             echo "{$loc_lang["shipping"]} $countryname";
+             echo "</a></td><td align=\"right\" width=\"70\">+ $shipcost &euro;</td></tr></table>\n";
             }
 
            if ($opt == "" or !isset($opt))
            {
             echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\">\n";
             echo "<select name=\"payment\" size=\"0\" onchange=\"self.location='kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;opt='+this.selectedIndex\">";
-            if ($lang == "english")
-             {
-                echo "<option value=\"Bank Transfer\" selected=\"selected\">Choose payment!</option>";
-                echo "<option value=\"Bank Transfer\">Bank Transfer (+ 0.00 &euro;)</option>";
-                echo "<option value=\"PayPal\">PayPal (+ 1.13 &euro;)</option>";
-                echo "<option value=\"Pay On Delivery\">Pay on delivery (+ 5.65 &euro;)</option>";
-             }
-            else
-             {
-                echo "<option value=\"Bank Transfer\" selected=\"selected\">W&auml;hle Zahlung!</option>";
-                echo "<option value=\"Bank Transfer\">&Uuml;berweisung (+ 0.00 &euro;)</option>";
-                echo "<option value=\"PayPal\">PayPal (+ 1.13 &euro;)</option>";
-                echo "<option value=\"Pay On Delivery\">Nachnahme (+ 5.65 &euro;)</option>";
-             }
+            echo "<option value=\"payment\" selected=\"selected\">{$loc_lang["choose_payment"]}</option>";
+            foreach($payment as $key => $value)
+               {
+                $paymentname = $loc_lang[$key];
+                if ($countryname == $cost["_homecountry"]) $transfercost = $payment[$key]["home"];
+                else $transfercost = $payment[$key]["foreign"];
+                echo "<option value=\"$key\">$paymentname (+ $transfercost &euro;)</option>\n";
+               }
+            $transfercost = "0.00";
             echo "</select></td></tr></table>\n";
            }
           else
            {
             if ($opt == "1") 
               {
-               $transfercost = "0.00";
-               if ($lang == "english") { $payment = "Bank Transfer"; }
-               else { $payment = "&Uuml;berweisung"; }
+               if ($countryname == $cost["_homecountry"]) $transfercost = $payment["banktransfer"]["home"];
+               else $transfercost = $payment["banktransfer"]["foreign"];
+               $paymentname = $loc_lang["banktransfer"];
               }
             if ($opt == "2") 
               { 
-               $payment = "PayPal"; 
-               if ($country == "Germany") { $transfercost = "0.68"; } 
-               else { $transfercost = "1.13"; }
+               $paymentname = "PayPal"; 
+               if ($countryname == $cost["_homecountry"]) $transfercost = $payment["paypal"]["home"];
+               else $transfercost = $payment["paypal"]["foreign"];
               }
             if ($opt == "3") 
               {
-               $transfercost = "5.65";
-               if ($lang == "english") { $payment = "Pay On Delivery"; } 
-               else { $payment = "Nachnahme"; }
+               if ($countryname == $cost["_homecountry"]) $transfercost = $payment["payondelivery"]["home"];
+               else $transfercost = $payment["payondelivery"]["foreign"];
+               $paymentname = $loc_lang["payondelivery"];
               }
-            echo "<table width=\"200\" border=\"0\" bgcolor=\"#544a31\"><tr><td align=\"left\"><a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;opt=remove\" target=\"kart\">";
-            echo "$payment</a></td><td align=\"right\">+ $transfercost &euro;</td></tr></table>\n";
+            echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"left\"><a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=addopt&amp;opt=remove\" target=\"kart\">";
+            echo "$paymentname</a></td><td align=\"right\">+ $transfercost &euro;</td></tr></table>\n";
            }
-          echo "<hr style=\"color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:left;\">\n";
-          echo "<table width=\"200\" border=\"0\" bgcolor=\"#544a31\"><tr><td align=\"left\">";
-          if ($lang == "english") $alt = "reset shopping kart"; else $alt = "Verwerfe Warenkorb";
-          echo "<a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=reset\" target=\"kart\"><img src=\"pics/del.png\" alt=\"$alt\" title=\"$alt\"></a> ";
+          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n";
+          echo "<table width=\"200\" border=\"0\" bgcolor=\"{$conf["bgcolor"]}\"><tr><td align=\"left\">";
+          echo "<a href=\"kartline.php?kartid=$kartid&amp;lang=$lang&amp;job=reset\" target=\"kart\"><img src=\"pics/del.png\" alt=\"{$loc_lang["reset_kart"]}\" title=\"{$loc_lang["reset_kart"]}\"></a> ";
           $complete = $kart_total + $transfercost + $shipcost; $complete = number_format($complete, 2, '.', ' ');
-          if ($lang == "english") echo " Total:</td><td align=\"right\">";
-          else echo " Gesamt:</td><td align=\"right\">";
+          echo " {$loc_lang["total"]}:</td><td align=\"right\">";
           echo "<b>$complete &euro;</b></td></tr></table>\n</font>\n";
-          echo "<hr style=\"color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:left;\">\n";
-          
+          echo "<hr style=\"color:{$conf["color"]}; background-color:{$conf["bgcolor"]}; height:1px; margin-right:0; text-align:left;\">\n";
 
 /* Check, if all userdata is already received. If all is there,change enter data to change data AND display BUY-link below the kart-list! */
           $datamissing = "0";
-          if($country == "") $datamissing = "1";
+          if($countryname == "") $datamissing = "1";
           if($opt == "") $datamissing = "1";
           if($firstname == "") $datamissing = "1";
           if($lastname == "") $datamissing = "1";
@@ -253,25 +233,23 @@ if ($job == "additem")
             {
              echo "<table width=\"100%\"><tr><td align=\"right\">\n";
              echo "<font size=\"3\">\n<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
-             if ($lang == "english") { echo "Change shipping data"; $finalbuy = " Finally buy! >>> "; }  /* Spracheinstellung  */
-             else { echo "Adresse &auml;ndern"; $finalbuy = " Jetzt kaufen! >>> "; }
+             echo $loc_lang["change_shipping_data"];
              echo "</b></a>\n</font><br>\n";
              echo "<form action=\"orderaction.php\" target=\"shop\" method=\"post\" accept-charset=\"UTF-8\">\n";
              echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
              echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
-             echo "<input type=\"submit\" value=\"$finalbuy\">\n";
+             echo "<input type=\"submit\" value=\"{$loc_lang["final_buy"]}\">\n";
             }
           else
             {
              echo "<table width=\"100%\"><tr><td align=\"right\">\n";
              echo "<font size=\"3\">\n<a href=\"order.php?lang=$lang&amp;kartid=$kartid\" target=\"shop\"><b>";
-             if ($lang == "english") { echo "Enter shipping data"; }  /* Spracheinstellung  */
-             else { echo "Adresse angeben"; }
+             echo $loc_lang["enter_shipping_data"];
              echo "</b></a>\n</font><br>\n";
             }
          }
-      ?>
-  </font></em>
+     echo "</font>{$conf["font_style_close"]}\n";
+  ?>
 </td>
 </tr>
 </table>
