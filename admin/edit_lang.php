@@ -21,7 +21,7 @@ if (isset($_GET["delete"]))
   }
 if (isset($_GET["register"])) $onload = " onload=\"document.langform.submit();\"";
 
-include('header_short.html');
+include('header_short.php');
 echo "<body$onload>\n";
 echo "<h2>{$loc_lang["admin_editlang"]}</h2>\n{$loc_lang["admin_notelangfile_1"]} <a href=\"translate/translate.php\" target=\"_blank\">{$loc_lang["admin_notelangfile_2"]}</a> {$loc_lang["admin_notelangfile_3"]}<br>\n<hr>\n<br>\n";
 

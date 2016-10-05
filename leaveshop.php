@@ -6,7 +6,14 @@ $error = "0"; $posterror = "0";
 if (!$_POST["reset_x"])
   {
     if ((isset($_POST["lang"])) && ($_POST["lang"] != "")) $lang = $_POST["lang"]; else {$error = "1"; $posterror++; $errors['post']["$posterror"] = "lang";}
-    if ((isset($_POST["kartid"])) && ($_POST["kartid"] != "")) $kartid = $_POST["kartid"]; else {$error = "1"; $posterror++; $errors['post']["$posterror"] = "kartid";}
+    if (isset($lastkart))
+      {
+       $kartid = $lastkart;
+      }
+    else
+      {
+       if ((isset($_POST["kartid"])) && ($_POST["kartid"] != "")) $kartid = $_POST["kartid"]; else {$error = "1"; $posterror++; $errors['post']["$posterror"] = "kartid";}
+      }
    }
 
 
@@ -17,6 +24,7 @@ if (!$_POST["reset_x"])
 /* ################################################################### */
 
 $kartmode = "action";
+$kartfilepath = "shop/tmp";
 include('shop/read_kartfile.php');
 
 /* ################################################################### */
@@ -94,20 +102,21 @@ $mail_buyer = $mail_opener_buyer . $mail_items . $mail_end_buyer;
 $mail_buyer = wordwrap($mail_buyer, 70);
 $header_buyer = "From: $email_shop\r\n";
 $header_buyer .= $header;
-if (!mail($email_buyer, $betreff_buyer, $mail_buyer, $header_buyer)) echo "<h3>ERROR!</h3>Failed to send mail to buyer!<br>\n";
+if (!mail($email_buyer, $betreff_buyer, $mail_buyer, $header_buyer)) { echo "<h3>ERROR!</h3>Failed to send mail to buyer!<br>\n"; $mailerrorbuyer = "1"; }
 
 $mail_shop = $mail_opener_shop . $mail_items . $mail_end_shop;
+if ($mailerrorbuyer == "1") $mail_shop .= "\n\n=============================\nFailed to send mail to buyer!\n=============================\n";
 $mail_shop = wordwrap($mail_shop, 70);
 $header_shop = "From: $email_buyer\r\n";
 $header_shop .= $header;
-if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) echo "<h3>ERROR!</h3>Failed to send mail to shopkeeper!<br>\n";
+if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) { echo "<h3>ERROR!</h3>Failed to send mail to shopkeeper!<br>\n"; $mailerrorshop = "1"; }
 
 
 /* html format */
-
-echo "<table width=\"500\" align=\"center\" valign=\"center\" border=\"0\">\n<tr>\n<td align=\"center\" colspan=\"3\">\n";
+echo "<div class=\"shadow\">\n";
+echo "<table width=\"75%\" align=\"center\" valign=\"center\" border=\"0\">\n<tr>\n<td align=\"center\" colspan=\"3\">\n";
 echo "<h3>{$loc_lang["thx_4_order"]}</h3>\n";
-echo "<hr style=\"width:500px; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n";
+echo "<hr style=\"width:100%; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n";
 echo "</td>\n</tr>\n";
 
 foreach($kart as $c => $value)
@@ -128,9 +137,9 @@ $str_sum_items = number_format($sum_items, 2, '.', ' ');
 
 echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>$paymentname</b> ($countryname)</td><td align=\"right\" colspan=\"1\"><b>$str_transfercost {$conf["_currency"]}</b></td>\n</tr>\n";
 echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>{$loc_lang["shipping"]}</b> ($countryname)</td><td align=\"right\" colspan=\"1\"><b>$str_shippingcost {$conf["_currency"]}</b></td>\n</tr>\n";
-echo "<tr>\n<td align=\"center\" colspan=\"3\">\n<hr style=\"width:500px; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n</td>\n</tr>\n";
+echo "<tr>\n<td align=\"center\" colspan=\"3\">\n<hr style=\"width:100%; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n</td>\n</tr>\n";
 echo "<tr>\n<td align=\"right\" colspan=\"2\"><b>{$loc_lang["total"]}</b></td><td align=\"right\" colspan=\"1\"><b>$str_sum_items {$conf["_currency"]}</b></td>\n</tr>\n";
-echo "<tr>\n<td align=\"center\" colspan=\"3\">\n<hr style=\"width:500px; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n</td>\n</tr>\n";
+echo "<tr>\n<td align=\"center\" colspan=\"3\">\n<hr style=\"width:100%; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n</td>\n</tr>\n";
 echo "<tr>\n<td align=\"center\" colspan=\"3\">\n";
 if ($opt == "1")
   {
@@ -142,7 +151,7 @@ if ($opt == "3")
   {
    echo "{$loc_lang["will_be_sent_soon"]}<br>\n";
   }
-echo "</td>\n</tr>\n</table>\n";
+echo "</td>\n</tr>\n</table>\n</div>\n";
 if ($newsletter=="ja")
   {
    $_GET["order"] = "check";
@@ -150,4 +159,17 @@ if ($newsletter=="ja")
    $_POST["email"] = $email;
    include('newsletter/newsletter.php');
   }
+echo "<br><div class=\"shadow\" style=\"text-align: center;\">";
+if ($mailerrorbuyer == "1") 
+  {
+   echo $loc_lang["mailerror"] . "<br>\n";
+   echo $loc_lang["datastoredonserver"] . "<br>\n";
+  }
+else
+  {
+   echo $loc_lang["mailsent"] . "<br>\n";
+   if (!unlink("shop/tmp/kart-$kartid.tmp")) echo "<h3>ERROR!</h3>{$loc_lang["error_data_erase"]}<br>\n";
+   else echo "<br>\n{$loc_lang["data_erased"]}<br>\n";
+  }
+echo "</div>\n";
 ?>

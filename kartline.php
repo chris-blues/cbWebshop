@@ -71,7 +71,7 @@ if ($job == "less")
   {
    $kart["$item_pointer"]['item_amount']--;
    include('write_kartfile.php');
-   if ($kart["$item_pointer"]['item_amount'] <= "0") echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL=index.php?page=shop&amp;job=remove&amp;id={$kart["$item_pointer"]['item_id']}&amp;size={$kart["$item_pointer"]['item_size']}&amp;lang=$lang&amp;kartid=$kartid\">\n";
+   if ($kart["$item_pointer"]['item_amount'] <= "0") echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL={$conf["callup"]}{$link}job=remove&amp;id={$kart["$item_pointer"]['item_id']}&amp;size={$kart["$item_pointer"]['item_size']}\">\n";
   }
 
 /* ################################################# */
@@ -79,7 +79,7 @@ if ($job == "less")
 if ($job == "remove")
   {
    include('write_kartfile.php');
-   echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL=index.php?page=shop&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;lang=$lang&amp;kartid=$kartid&amp;kart=show\">\n";
+   echo "<META HTTP-EQUIV=\"refresh\" CONTENT=\"0; URL={$conf["callup"]}{$link}kart=show\">\n";
   }
 
 /* ################################################# */
@@ -112,21 +112,21 @@ if ($job == "additem")
 
 <div class="kart shadow" id="kart">
 <?php
-echo "<b class=\"karthead\"><a href=\"javascript:show_kart();\" id=\"show-hide\" name=\"show-hide\" onfocus=\"this.blur();\">{$loc_lang["kart"]}&nbsp;</a></b>\n";
+echo "<center><b class=\"karthead\"><a href=\"javascript:show_kart();\" id=\"show-hide\" name=\"show-hide\" onfocus=\"this.blur();\">{$loc_lang["kart"]}</a></b></center>\n";
 ?>
-
   <script type="text/javascript">
     function show_kart()
       {
-       if (document.getElementsByName("karthide")["0"].style.display != "block")
+       if (document.getElementsByName("karthide")[0].style.display == "none")
          {
-          document.getElementsByName("karthide")["0"].style.display = "block";
+          $( "div.karthide" ).slideDown( 500 );
+          document.getElementsByName('karthide')[0].id = 'karthide';
          }
        else
          {
-          document.getElementsByName("karthide")["0"].style.display = "none";
+          $( "div.karthide" ).slideUp( 500 );
+          document.getElementsByName('karthide')[0].id = 'kartshow';
          }
-       kart.height = document.getElementById("kart_frame").contentDocument.documentElement.offsetHeight;
       }
 
     function show_items()
@@ -149,43 +149,43 @@ echo "<b class=\"karthead\"><a href=\"javascript:show_kart();\" id=\"show-hide\"
          }
       }
     </script>
+    <noscript><?php echo $loc_lang["noscript"]; ?></noscript>
 
 <?php
-if ($_GET["kart"] == "show") { echo "<div class=\"karthide\" name=\"karthide\" id=\"kartshow\">\n"; }
-else { echo "<div class=\"karthide\" name=\"karthide\" id=\"karthide\">\n"; }
+        if ($_GET["kart"] == "show") { echo "<div class=\"karthide\" name=\"karthide\" id=\"kartshow\">\n"; }
+        else { echo "<div class=\"karthide\" name=\"karthide\" id=\"karthide\">\n"; } ?>
+      <div class="hideable" name="hideable" id="hideable" style="padding: 5px;"></div>
+        <?php
         if ($kartamount > 0)
          {
-          echo "<center><a href=\"javascript:show_items();\" id=\"show-details\">{$loc_lang["hidedetails"]}</a></center>\n";
-          echo "<div class=\"hideable\" name=\"hideable\" id=\"hideable\" style=\"margin: 0px; padding: 0px;\">";
-          echo "<table width=\"200\" border=\"0\">\n";
+          echo "<center><a href=\"javascript:show_items();\" id=\"show-details\" onfocus=\"this.blur();\">{$loc_lang["hidedetails"]}</a></center>\n";
+          echo "<div class=\"hideable\" name=\"hideable\" id=\"hideable\" style=\"margin: 0px; padding: 0px; padding-top: 10px;\">";
           for ($counter = "1"; $counter <= $kartamount; $counter++)
             {
              $total = $kart["$counter"]['item_amount'] * $kart["$counter"]['item_preis']; $total = number_format($total, 2, '.', '');
              $kart["$counter"]['item_preis'] = number_format($kart["$counter"]['item_preis'], 2, '.', '');
              $kart_total = $kart_total + $total; $kart_total = number_format($kart_total, 2, '.', '');
-             echo "<tr><td width=\"184\" align=\"left\" colspan=\"2\">\n";
              /* Item Name and Type */
-             if ($kart[$counter]['item_size'] != "") { echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']} - {$kart[$counter]['item_size']})</td>\n";
-                                                       echo "<td width=\"16\" align=\"right\" colspan=\"1\">"; }
-             else { echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']})</td>\n<td width=\"16\" align=\"right\" colspan=\"1\">"; }
+             ?><div class="kartitem">
+             <div class="firstkartitem">
+             <?php
+             if ($kart[$counter]['item_size'] != "") { echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']} - {$kart[$counter]['item_size']})\n"; }
+             else { echo "{$kart["$counter"]['item_name']} ({$kart["$counter"]['item_type']})</div>\n"; }
              /* Remove button */
-             echo "<a href=\"{$conf["callup"]}{$link}job=remove&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;kart=show\" target=\"_top\">";
-             echo "<img src=\"shop/pics/del.png\" alt=\"{$loc_lang["remove"]}\" title=\"{$loc_lang["remove"]}\" border=\"0\"></a></td></tr>\n<tr>\n";
+             echo "\n<div class=\"secondkartitem\"><a href=\"{$conf["callup"]}{$link}job=remove&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;kart=show\" target=\"_top\">";
+             echo "<img src=\"shop/pics/del.png\" alt=\"{$loc_lang["remove"]}\" title=\"{$loc_lang["remove"]}\" border=\"0\"></a></div></div>\n";
              /* more & less buttons */
-             echo "<td width=\"40\" align=\"left\" colspan=\"1\">";
-             echo "<a href=\"{$conf["callup"]}{$link}job=additem&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;kart=show\" target=\"_top\"><img src=\"shop/pics/more.png\" border=\"0\"></a>\n";
-             echo "<a href=\"{$conf["callup"]}{$link}job=less&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;kart=show\" target=\"_top\"><img src=\"shop/pics/less.png\" border=\"0\"></a></td>\n";
+             echo "<div class=\"kartitem\">\n<div class=\"firstkartitem\"><a href=\"{$conf["callup"]}{$link}job=additem&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;kart=show\" target=\"_top\"><img src=\"shop/pics/more.png\" border=\"0\"></a>\n";
+             echo "<a href=\"{$conf["callup"]}{$link}job=less&amp;id={$kart["$counter"]['item_id']}&amp;size={$kart["$counter"]['item_size']}&amp;kart=show\" target=\"_top\"><img src=\"shop/pics/less.png\" border=\"0\"></a></div>\n";
              /* Show amount * price = total */
              $total = number_format($total, 2, '.', ' ');
-             echo "<td align=\"right\" colspan=\"2\">({$kart["$counter"]['item_amount']} x {$kart["$counter"]['item_preis']} {$conf["_currency"]})&nbsp; <b>$total {$conf["_currency"]}</b></td></tr>\n";
+             echo "<div class=\"secondkartitem\">({$kart["$counter"]['item_amount']} x {$kart["$counter"]['item_preis']} {$conf["_currency"]})&nbsp; <b>$total {$conf["_currency"]}</b></div></div>\n<hr>\n";
             }
-          echo "</table>\n";
           $show_kart_total = number_format($kart_total, 2, '.', ' ');
-          echo "<table width=\"200\" border=\"0\" style=\"border-top:2px dotted black; padding-left:10px;\"><tr><td align=\"left\">{$loc_lang["sub_total"]}</td><td align=\"right\"><b>$show_kart_total {$conf["_currency"]}</b></td></tr></table>\n</div>\n";
+          echo "<div class=\"kartitem\">\n<div class=\"firstkartitem\">\n{$loc_lang["sub_total"]}</div>\n<div class=\"secondkartitem\"><b>$show_kart_total {$conf["_currency"]}</b>\n</div></div></div>\n";
           
           if ($countryname == "") 
-            {
-             echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\">\n"; ?>
+            { ?><div class="kartitem"><div class="firstkartitem">
              <select name="countryname" size="1" onchange="self.location='<?php echo $conf["callup"] . $link; ?>kart=show&amp;job=addopt&amp;copt='+this.selectedIndex">
              <?php echo "<option selected=\"selected\">{$loc_lang["select_country"]}</option>\n";
              foreach($country as $key => $value)
@@ -193,19 +193,18 @@ else { echo "<div class=\"karthide\" name=\"karthide\" id=\"karthide\">\n"; }
                 echo "<option value=\"$key\">$value</option>\n";
                }
              echo "<option>{$loc_lang["country_other"]}</option>\n";
-             echo "</select></td></tr></table>\n";
+             echo "</select>\n</div></div>\n";
             }
           else
             {
-             echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\" width=\"130\">\n<a href=\"{$conf["callup"]}{$link}job=addopt&amp;copt=remove&amp;kart=show\" target=\"_top\">";
+             echo "<div class=\"kartitem\"><div class=\"firstkartitem\"><a href=\"{$conf["callup"]}{$link}job=addopt&amp;copt=remove&amp;kart=show\" target=\"_top\">";
              if ($countryname == $cost["_homecountry"]) $shipcost = "{$cost["shipping_home"]}"; else $shipcost = "{$cost["shipping_foreign"]}";
              echo "{$loc_lang["shipping"]} $countryname";
-             echo "</a></td><td align=\"right\" width=\"70\">+ $shipcost {$conf["_currency"]}</td></tr></table>\n";
+             echo "</a></div>\n<div class=\"secondkartitem\">+ $shipcost {$conf["_currency"]}</div></div>\n";
             }
 
            if ($opt == "" or !isset($opt))
-           {
-            echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\">\n"; ?>
+           { ?><div class="kartitem"><div class="firstkartitem">
             <select name="payment" size="0" onchange="self.location='<?php echo $conf["callup"] . $link; ?>kart=show&amp;job=addopt&amp;opt='+this.selectedIndex">
             <?php echo "<option value=\"payment\" selected=\"selected\">{$loc_lang["choose_payment"]}</option>\n";
             foreach($payment as $key => $value)
@@ -216,7 +215,7 @@ else { echo "<div class=\"karthide\" name=\"karthide\" id=\"karthide\">\n"; }
                 echo "<option value=\"$key\">$paymentname (+ $transfercost {$conf["_currency"]})</option>\n";
                }
             $transfercost = "0.00";
-            echo "</select></td></tr></table>\n";
+            echo "</select>\n</div></div>\n";
            }
           else
            {
@@ -238,15 +237,13 @@ else { echo "<div class=\"karthide\" name=\"karthide\" id=\"karthide\">\n"; }
                else $transfercost = $payment["payondelivery"]["foreign"];
                $paymentname = $loc_lang["payondelivery"];
               }
-            echo "<table width=\"200\" border=\"0\"><tr><td align=\"left\"><a href=\"{$conf["callup"]}{$link}job=addopt&amp;opt=remove&amp;kart=show\" target=\"_top\">";
-            echo "$paymentname</a></td><td align=\"right\">+ $transfercost {$conf["_currency"]}</td></tr></table>\n";
+            echo "<div class=\"kartitem\"><div class=\"firstkartitem\"><a href=\"{$conf["callup"]}{$link}job=addopt&amp;opt=remove&amp;kart=show\" target=\"_top\">\n";
+            echo "$paymentname</a></div><div class=\"secondkartitem\">+ $transfercost {$conf["_currency"]}</div></div>\n";
            }
-          echo "<div class=\"hideable\" name=\"hideable\" id=\"hideable\" style=\"margin: 0px; padding: 0px;\">";
-          echo "<table width=\"200\" border=\"0\" style=\"border-top:2px dotted black; padding-left:10px;\"><tr><td align=\"left\">";
-          echo "<a href=\"{$conf["callup"]}{$link}job=reset\" target=\"_top\"><img src=\"shop/pics/del.png\" alt=\"{$loc_lang["reset_kart"]}\" title=\"{$loc_lang["reset_kart"]}\" border=\"0\"></a> ";
+          echo "<div class=\"hideable\" name=\"hideable\" id=\"hideable\" style=\"margin: 0px; padding: 0px;\">\n<hr>\n";
+          echo "<div class=\"kartitem\">\n<div class=\"firstkartitem\">\n<a href=\"{$conf["callup"]}{$link}job=reset\" target=\"_top\"><img src=\"shop/pics/del.png\" alt=\"{$loc_lang["reset_kart"]}\" title=\"{$loc_lang["reset_kart"]}\" border=\"0\"></a></div> ";
           $complete = $kart_total + $transfercost + $shipcost; $complete = number_format($complete, 2, '.', ' ');
-          echo " {$loc_lang["total"]}:</td><td align=\"right\">";
-          echo "<b>$complete {$conf["_currency"]}</b></td></tr></table>\n<br>\n</div>\n";
+          echo "<div class=\"secondkartitem\"> {$loc_lang["total"]}: <b>$complete {$conf["_currency"]}</b>\n</div></div></div>\n";
           echo "<script type=\"text/javascript\">document.getElementById(\"show-hide\").firstChild.data = \"{$loc_lang["kart"]} ($complete {$conf["_currency"]}) \";</script>\n";
 
 /* Check, if all userdata is already received. If all is there,change enter data to change data AND display BUY-link below the kart-list! */
@@ -268,9 +265,8 @@ else { echo "<div class=\"karthide\" name=\"karthide\" id=\"karthide\">\n"; }
                {
                 echo "<input type=\"hidden\" name=\"$call\" value=\"$value\">\n";
                }
-             echo "<table border=\"0\" width=\"200\"><tr><td align=\"left\">\n";
-             echo "<a class=\"iframe int\" id=\"media\" href=\"{$conf["callup"]}{$link}display=order\"><b>{$loc_lang["change_shipping_data"]}</b></a></td><td align=\"right\">";
-             echo "<a href=\"javascript:\" onclick=\"document.getElementById('orderform').submit();\"><b>{$loc_lang["final_buy"]}</b></a>\n</td></tr></table></form>";
+             echo "<a class=\"iframe int\" id=\"media\" href=\"{$conf["callup"]}{$link}display=order\"><b>{$loc_lang["change_shipping_data"]}</b></a>";
+             echo "<a id=\"final_buy\" href=\"javascript:\" onclick=\"document.getElementById('orderform').submit();\"><b>{$loc_lang["final_buy"]}</b></a>\n</form>";
             }
           else
             {

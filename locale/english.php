@@ -2,6 +2,8 @@
 // Author of this file: Chris <chris(a)musicchris.de>
 // Be sure to use UTF-8 encoding - NO ISO-9876 stuff!!!!
 // html format strings, special chars must be coded (ö -> &ouml; , ß -> &szlig; , € -> &euro;  etc)
+  $loc_lang["noscript"]                  = "Please activate JavaScript to use this page!";
+  $loc_lang["clicktoplay"]               = "Click here to play this song!";
   $loc_lang["translators_needed_1"]      = "Your language is not available? If you have some time to spare, you could help us";
   $loc_lang["translators_needed_2"]      = "translate";
   $loc_lang["translators_needed_3"]      = " our shop in your language";
@@ -58,6 +60,7 @@
   $loc_lang["country"]                   = "Country: ";
   $loc_lang["join_newsletter"]           = "I want to sign in to the Folkadelic Newsletter!";
   $loc_lang["submit_data"]               = " Submit data! &gt;&gt;&gt; ";
+  $loc_lang["data_privacy_statement"]    = "Your data will not be shared with anybody! We only use it to label your package, so that it will find you. We store your data only for a short time, in order to be able to respond, if there should be something wrong with your shipment. This data is stored in our email-account, so no one else will have access to it. The data stored on our server is deleted, as soon as the order has been made.";
   $loc_lang["once_money_arrived"]        = "Once you press the button 'buy now' (will appear on the left side, once all neccessary data is entered) the order will be sent.\nOnce your money is received, the package will be sent on its way to you!\n";
   $loc_lang["kart_empty_error"]          = "Kart seems to be emtpy!";
   $loc_lang["no_country_selected"]       = "You didn't choose your country in the kart! Please do so!";
@@ -67,6 +70,11 @@
   $loc_lang["buy"]                       = "Buy";
   $loc_lang["one_moment"]                = "One moment!";
   $loc_lang["redirecting_to_paypal"]     = "Redirecting you to PayPal.";
+  $loc_lang["mailerror"]                 = "Something went wrong! We couldn't send an email to you! But we have been notified and will get in touch with you!";
+  $loc_lang["mailsent"]                  = "An email has been sent to you, containing all the information you'll need to finalize this business.";
+  $loc_lang["data_erased"]               = "Your data has been erased from the server!";
+  $loc_lang["error_data_erase"]          = "Your data could not be erased!";
+  $loc_lang["datastoredonserver"]        = "Your data was kept on the server for error tracking. It will be erased as soon as we have completed.";
   //admin
   //index
   $loc_lang["admin_title"]               = "Shop Admin Tools";

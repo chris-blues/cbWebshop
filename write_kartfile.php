@@ -21,7 +21,7 @@
      $buffer = trim($newsletter,"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
      for ($c = "1"; $c <= $kartamount; $c++)
       {
-       if ($job == "remove") { if ($kart["$c"]['item_id'] == $id and strcmp($kart["$c"]['item_size'],$size) == "0") continue; }
+       if ($_GET["job"] == "remove") { if ($kart["$c"]['item_id'] == $_GET["id"] and strcmp($kart["$c"]['item_size'],$_GET["size"]) == "0") continue; }
        $buffer = trim($kart["$c"]['item_id'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
        $buffer = trim($kart["$c"]['item_name'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);
        $buffer = trim($kart["$c"]['item_type'],"\n"); fputs($karthandle, $buffer); fputs($karthandle, $lnb);

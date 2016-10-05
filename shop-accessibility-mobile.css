@@ -13,7 +13,7 @@ form {
  }
 
 #sidebar {
-  max-width: 270px;
+  max-width: 360px;
  }
 
 #sidebar.fixed {
@@ -65,15 +65,14 @@ a#show-hide {
  }
 
 .kart#kart {
-  color: #000000;
-  background-color: #999966;
+  color: #FFF;
+  background-color: #222215;
   border: none;
   border-radius: 8px;
   padding: 10px;
   padding-top: 5px;
   padding-bottom: 10px;
-  font-size: 0.89em;
-  width: 200px;
+  font-size: 0.7em;
   position: absolute;
   z-index: 10;
   margin-left: -6px;
@@ -81,8 +80,8 @@ a#show-hide {
  }
 
 .kart#kasse {
-  color: #CC9933;
-  background-color: #999966;
+  color: #FC9;
+  background-color: #222215;
   border-radius: 8px;
   padding: 10px;
   padding-top: 5px;
@@ -152,12 +151,12 @@ a#show-hide {
  }
 
 .shop-content#orderform {
-  max-width: 450px;
+  max-width: 700px;
   margin: 20px auto;
   padding-top: 30px;
  }
 
-@media (max-width: 450px) {
+@media (max-width: 750px) {
 .orderdata {
   text-align: left;
   float: left;
@@ -167,10 +166,10 @@ a#show-hide {
   
  }
 }
-@media (min-width: 451px) {
+@media (min-width: 751px) {
 .orderdata {
   text-align: right;
-  margin-right: 85px;
+  padding-right: 100px;
  }
 
 .orderline {
@@ -212,7 +211,6 @@ a#show-hide {
  }
 
 .centerme {
-  width: 350px;
  }
 
 .item-details {
@@ -246,7 +244,7 @@ a#show-hide {
 
 .buy {
   color: #FFFFFF;
-  background-color: #CC9933;
+  background-color: #333320;
   font-size: 1.2em;
   margin: 30px 10px 0px 10%;
   text-align: right;
@@ -258,7 +256,7 @@ a#show-hide {
  }
 
 .buy:hover {
-  background-color: #999966;
+  background-color: #665015;
   border: 1px solid #CC9933;
  }
 

@@ -40,8 +40,7 @@ include('read_index.php');
   </tr>
   <tr>
     <td align="right">
-      <font color="FF000"><b><?php echo $loc_lang["admin_pngonly"]; ?></b></font> <?php echo $loc_lang["admin_item_pic"]; ?><input size="5" name="upload_pic" type="file" accept="image/png"><br>
-      <?php echo $loc_lang["admin_pngpricetag"]; ?><input size="5" name="upload_pricetag" type="file" accept="image/png">
+      <font color="FF000"><b><?php echo $loc_lang["admin_pngonly"]; ?></b></font> <?php echo $loc_lang["admin_item_pic"]; ?><input size="5" name="upload_pic" type="file" accept="image/png">
     </td>
   </tr>
   <tr>

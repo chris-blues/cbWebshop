@@ -51,7 +51,7 @@ include('header_full.html');
 <!-- Output gathered data -->
 
 <body>
-<table width="600" height="280" border="0" rules="all">
+<table border="0" rules="all">
   <tr>
     <td>Customer Data:</td>
     <td>Items: (<?php echo $kartid; ?>)</td>

@@ -8,7 +8,6 @@ $col = "0";
 for ($c = 1; $c <= $itemamount; $c++)
  {
   $col++;
-  $alt = "{$loc_lang["click_to_view"]} {$data["$c"]['item_type']} {$data["$c"]['item_name']}{$loc_lang["click_to_view_add"]}";
   $buy = "{$loc_lang["buy"]}";
   $value = "{$loc_lang["pieces"]} ({$data["$c"]['item_preis']} &euro;/{$loc_lang["piece"]})";
   
@@ -24,6 +23,8 @@ foreach ($conf["item_type"] as $keycat => $valcat)
 
 /* ######################################################## */
 /* Erstelle Tracklist mit <audio> Playback */
+if ($_GET["accessibility"] != "TRUE") $playbutton = "play-black";
+else $playbutton = "play-white";
 if ($cat == "music")
   {
    $counter = "0";
@@ -64,9 +65,9 @@ if ($cat == "music")
       if (file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.ogg") and file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.mp3"))
         {
          $tracklisten = file_get_contents("shop/templates/get_audio.html");
-         $searchtrack  = array('%id%', '%trackname%', '%trackid%');
+         $searchtrack  = array('%id%', '%trackname%', '%trackid%', '%playbutton%', '%clicktoplay%');
         // Womit soll das ersetzt werden?
-         $replacetrack = array($data["$c"]['item_id'], $tracks["$track"]['name'], "{$tracks["$track"]['id']}");
+         $replacetrack = array($data["$c"]['item_id'], $tracks["$track"]['name'], "{$tracks["$track"]['id']}", $playbutton, $loc_lang["clicktoplay"]);
         // Finde und ersetze Platzhalter in $output
          $tracklist .= str_replace($searchtrack, $replacetrack, $tracklisten);
         }
@@ -112,7 +113,6 @@ if ($cat == "music")
                    '%preview%',
                    '%details%',
                    '%tracklist%',
-                   '%alt%',
                    '%buy%',
                    '%value%',
                    '%kartid%',
@@ -123,7 +123,8 @@ if ($cat == "music")
                    '%shop_pic_width%',
                    '%sizes%',
                    '%_currency%',
-                   '%_calls%');
+                   '%_calls%',
+                   '%noscript%');
   /* Womit soll das ersetzt werden? */
   $replace = array($data["$c"]['item_id'],
                    $data["$c"]['item_name'],
@@ -136,7 +137,6 @@ if ($cat == "music")
                    $data["$c"]['item_preview'],
                    $data["$c"]['item_details'],
                    $data["$c"]['tracklist'],
-                   $alt,
                    $buy,
                    $value,
                    $kartid,
@@ -147,7 +147,8 @@ if ($cat == "music")
                    $item_conf["shop_pic_width"],
                    $sizesdropdown,
                    $conf["_currency"],
-                   $calls);
+                   $calls,
+                   $loc_lang["noscript"]);
   /* Finde und ersetze Platzhalter in $output */
   $output = str_replace($search, $replace, $template);
   echo "$output";

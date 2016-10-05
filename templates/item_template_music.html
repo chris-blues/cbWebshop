@@ -1,11 +1,12 @@
-<div class="item" id="%id%" name="%id%">
+<div class="item shadow" id="%id%" name="%id%">
   <div><h1 class="item-header">%name% (%descr%)</h1><h4>%Type% </h4><br>%details%</div>
   <div class="item-pic">
-    <img id="%id%" src="shop/%pic%" alt="%alt%" onmouseout="src='shop/%pic%'" onmouseover="src='shop/%pic%.png'" border="0">
+    <img id="%id%" src="shop/%pic%" alt="%name%" title="%name%" border="0">
   </div>
   <div class="item-details">
     <div class="centerme">
       %tracklist%
+      <noscript>%noscript%</noscript>
       <form action="index.php" id="intokart%c%" method="get" target="_top" accept-charset="UTF-8">
         %_calls%
         <input type="hidden" name="job" value="additem">
@@ -13,8 +14,9 @@
         <input type="hidden" name="c" value="%c%">
       </form>
       <div class="button-buy">
-        <a href="javascript:" onclick="document.getElementById('intokart%c%').submit()"><div class="buy">%buy% : <b>%preis% €</b></div></a>
+        <a href="javascript:" onclick="document.getElementById('intokart%c%').submit()" onkeypress="document.getElementById('intokart%c%').submit()" href=""><div class="buy">%buy% : <b>%preis% €</b></div></a>
       </div>
     </div>
   </div>
+  <div class="clear"></div>
 </div>

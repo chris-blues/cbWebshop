@@ -26,7 +26,7 @@ include('read_index.php');
   $oldid = $data[$c]['item_id'];
   echo "<form name=\"item-$c\" action=\"savelist.php?job=updateitem\" method=\"post\" accept-charset=\"UTF-8\" enctype=\"multipart/form-data\">\n";
   echo "<table border=\"0\" align=\"center\">\n";
-  echo "  <tr>\n    <td>\n      Item No: <b>$c</b><br>\n      <img src=\"../{$data[$c]['item_pic']}\" height=\"120\" onmouseout=\"src='../{$data[$c]["item_pic"]}'\" onmouseover=\"src='../{$data[$c]["item_pic"]}.png'\" border=\"0\"><br>\n";
+  echo "  <tr>\n    <td>\n      Item No: <b>$c</b><br>\n      <img src=\"../{$data[$c]['item_pic']}\" height=\"120\" border=\"0\"><br>\n";
   echo "    </td>\n    <td align=\"right\">\n";
   echo "      {$loc_lang["admin_itemname"]}<input name=\"item_name\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_name']}\"><br>\n";
   
@@ -42,7 +42,6 @@ include('read_index.php');
   echo "      {$loc_lang["admin_descryear"]}<input name=\"item_descr\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_descr']}\"><br>\n";
   echo "      {$loc_lang["admin_itemprice"]}<input name=\"item_preis\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_preis']}\"><br>\n";
   echo "      {$loc_lang["admin_item_pic"]}<input size=\"5\" name=\"upload_pic\" type=\"file\" accept=\"image/png\"><br>\n";
-  echo "      {$loc_lang["admin_pngpricetag"]}<input size=\"5\" name=\"upload_pricetag\" type=\"file\" accept=\"image/png\">\n";
   echo "    </td>\n  </tr>\n  <tr>\n    <td align=\"center\" colspan=\"2\">\n";
   $data[$c]['tracklist'] = trim($data[$c]['tracklist'],"\n");
   echo "      {$loc_lang["admin_details"]}<br>\n      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";

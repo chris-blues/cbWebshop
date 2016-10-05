@@ -2,6 +2,8 @@
 // Author dieser Datei: Chris <chris(a)musicchris.de>
 // Stellen Sie sicher, daß alles in UTF-8 encodiert wird - keine ISO-9876 Dateien!!!!
 // html format strings, spezielle chars müssen codiert werden (ö -> &ouml; , ß -> &szlig; , € -> &euro;  etc)
+  $loc_lang["noscript"]                  = "Bitte aktivieren Sie JavaScript, um diese Seite zu nutzen!";
+  $loc_lang["clicktoplay"]               = "Klicken Sie hier um den Song anzuhören!";
   $loc_lang["translators_needed_1"]      = "Ihre Sprache ist nicht verfügbar? Falls Sie ein wenig Zeit haben, könnten Sie uns helfen, den Shop in Ihre Sprache zu";
   $loc_lang["translators_needed_2"]      = "übersetzen";
   $loc_lang["translators_needed_3"]      = ".";
@@ -54,10 +56,11 @@
   $loc_lang["address_2"]                 = "Zusatz: (optional) ";
   $loc_lang["zip"]                       = "PLZ: ";
   $loc_lang["city"]                      = "Stadt: ";
-  $loc_lang["province"]                  = "Land/Provinz: (optional) ";
+  $loc_lang["province"]                  = "Land/Provinz: (opt.) ";
   $loc_lang["country"]                   = "Staat: ";
   $loc_lang["join_newsletter"]           = "Ich möchte in den Folkadelic Newsletter eingetragen werden!";
   $loc_lang["submit_data"]               = " Daten senden! &gt;&gt;&gt; ";
+  $loc_lang["data_privacy_statement"]    = "Ihre Daten werden an niemanden weitergegeben! Wir nutzen die Daten nur, um ihr Paket zu beschriften, so daß es auch sicher ankommt. Wir speichern ihre Daten nur für kurze Zeit, um reagieren zu können, falls etwas mit der Sendung nicht stimmen sollte. Diese Daten werden nur in unserem E-Mail Fach gespeichert, so daß niemand außer uns darauf zugreifen kann. Die Daten, die auf unserem Server gespeichert sind, werden gelöscht, sobald ihre Bestellung abgeschickt wurde.";
   $loc_lang["once_money_arrived"]        = "Wenn Sie den Knopf 'Jetzt kaufen' drücken (dieser erscheint auf der linken Seite sobald alle erforlderlichen Daten vorhanden sind) wird die Bestellung abgeschickt. Sobald Ihr Geld uns erreicht hat werden wir das Paket auf Reisen schicken!\n";
   $loc_lang["kart_empty_error"]          = "Warenkorb scheint leer zu sein!";
   $loc_lang["no_country_selected"]       = "Sie haben im Warenkorb ihr Land nicht angegeben! Tun Sie das bitte!";
@@ -67,6 +70,11 @@
   $loc_lang["buy"]                       = "Kaufen";
   $loc_lang["one_moment"]                = "Einen Moment!";
   $loc_lang["redirecting_to_paypal"]     = "Sie werden zu PayPal weitergeleitet.";
+  $loc_lang["mailerror"]                 = "Etwas ist schief gegangen! Wir konnten Ihnen keine EMail schicken! Wir wurden aber benachrichtigt und werden uns bei Ihnen melden!";
+  $loc_lang["mailsent"]                  = "Ihnen wurde eine Email geschickt, die alle nötigen Informationen enthält, damit sie dieses Geschäft abschließen können.";
+  $loc_lang["data_erased"]               = "Ihre Daten wurden vom Server gelöscht!";
+  $loc_lang["error_data_erase"]          = "Ihre Daten konnten nicht gelöscht werden!";
+  $loc_lang["datastoredonserver"]        = "Ihre Daten wurden zur Fehlersuche vorerst auf dem Server belassen. Sie werden gelöscht, sobald wir damit fertig sind.";
   //admin
   //index
   $loc_lang["admin_title"]               = "Shop Admin Werkzeuge";

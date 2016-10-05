@@ -102,14 +102,14 @@ if ($kartamount < 1) $kartamount = "0";
 if ($kartmode == "action")
 {
 /* Lese karttmpfile und Erzeuge Array Kart[1][item_sth]   ORDERACTION */
-$kartfile = "tmp/kart-$kartid.tmp";
+$kartfile = "{$kartfilepath}/kart-$kartid.tmp";
 $kartfileerror = "0";
 $karthandle = fopen($kartfile, "r");
 $kartamount = "0";
 $kart_total = "0";
 $errorreturn = "&amp;errorreturn=1";
 if ($karthandle != NULL)
- {
+ { /* Lese Adressdaten */
   $buffer = fgets($karthandle); $kartlang = trim($buffer,"\n");
   $buffer = fgets($karthandle); $countryname = trim($buffer,"\n"); if ($countryname == "") { $error = "1"; $errors['kartfile']['country'] = "empty"; }
   $buffer = fgets($karthandle); $opt = trim($buffer,"\n"); if ($opt == "") { $error = "1"; $errors['kartfile']['opt'] = "empty"; }
@@ -138,7 +138,7 @@ if ($karthandle != NULL)
     $kart["$kartamount"]['item_total'] = $kart["$kartamount"]['item_amount'] * $kart["$kartamount"]['item_preis'];
    }
  }
-else { $error = "1"; $kartfileerror = "1"; $errors['kartfile']['file'] = "Unable to read kartfile.<br>kartmode=$kartmode<br>\n"; }
+else { $error = "1"; $kartfileerror = "1"; $errors['kartfile']['file'] = "Unable to read kartfile."; }
 fclose($karthandle);
 chmod($kartfile, 0777);
 $kartamount--; 
@@ -147,5 +147,6 @@ if ($kartamount < 1) {$kartamount = "0"; $error = "1"; $kartemptyerror = "1";}
 
 /* ################################################################### */
 //echo "read_kartfile.php:<br>\nkartfile: $kartfile<br>\nlastname: $lastname<br>\ncountryname: $countryname<br>\nerror: $error<br>\nkartemptyerror: $kartemptyerror<br>\nerrorreturn: $errorreturn<br>\nkartamount: $kartamount<br>\n";
-//echo "<pre>"; print_r($kart); print_r($errors); echo "</pre>\n";
+//echo "<pre>"; print_r($kart); echo "</pre>\n";
+//echo "<pre style=\"font-size: 0.85em;\">"; print_r($errors); echo "</pre>\n";
 ?>

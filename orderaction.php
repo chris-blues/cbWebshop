@@ -23,6 +23,7 @@ if (!$_POST["reset_x"])
 define( "LOC_LANG", $lang );
 include('locale/' . LOC_LANG . '.php');
 $kartmode = "action";
+$kartfilepath = "tmp";
 include('read_kartfile.php');
 
 /* ################################################################### */
@@ -61,7 +62,7 @@ if ($countryname == "USA") $countryname_code = "US";
 
 /* ################################################################### */
 
-include('header_short.html');
+//include('header_short.html');
 if ($paymentname == "PayPal") $onload = "document.paypal_form.submit();";
 else $onload = "document.leaveshop_form.submit();";
 if ($newsletter == "ja") $onload .= "document.jnl2_sign_form.submit();";
@@ -123,7 +124,7 @@ if (!isset($countryexists) or $countryexists != "yes")
 /* ################################################################### */
 
    echo "<b>{$loc_lang["one_moment"]}</b><br>\n";
-   $pp_returnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid&display=leaveshop";
+   $pp_returnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid&display=leaveshop&kart=reset";
    $pp_cancelreturnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid";
    if ($opt == "2")
      {
@@ -170,11 +171,10 @@ if (!isset($countryexists) or $countryexists != "yes")
         echo "<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/de_DE/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
         //echo "<input type=\"submit\" value=\"{$loc_lang["buy"]}\">\n";
       echo "</form>\n";
-//      if (!unlink($kartfile)) echo "ERROR! Could not delete $kartfile.<br>\n";
      }
    else
      {
-      echo "<form name=\"leaveshop_form\" action=\"../index.php?page=shop&amp;display=leaveshop&amp;kartid=$kartid&amp;lang=$lang\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
+      echo "<form name=\"leaveshop_form\" action=\"../index.php?page=shop&amp;display=leaveshop&amp;kartid=$kartid&amp;lang=$lang&amp;kart=reset\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
       echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
       echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
       //echo "<input type=\"submit\" value=\"{$loc_lang["buy"]}\">\n";
