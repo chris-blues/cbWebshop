@@ -1,5 +1,0 @@
-AuthName "Shop Admin"
-AuthType Basic
-AuthUserFile /customers/e/7/c/yourdomain.com/httpd.www/admin/.htpasswd
-AuthGroupFile /dev/null
-require valid-user 
