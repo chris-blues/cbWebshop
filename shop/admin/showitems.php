@@ -1,6 +1,39 @@
-<?php 
+<?php
+$debug = $_GET["debug"];
+if (isset($debug) and $debug == "true") $debug = true;
+else $debug = false;
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de"; break; }
+   case 'en': { $lang = "en"; break; }
+   case 'fr': { $lang = "fr"; break; }
+   default: { $lang = "de"; break; }
+  }
+$cbWebshop_dirname = getcwd();
+$directory = "{$cbWebshop_dirname}/../locale";
+$gettext_domain = 'cbWebshop';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+putenv('LC_MESSAGES=' . $locale);
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
+if ($debug) echo "locale: $locale<br>\n";
+// ============
+// init gettext
+// ============
+
 include('../conf/shop_conf.php');
-include("../locale/{$conf["_default_lang"]}.php");
+//include("../locale/{$conf["_default_lang"]}.php");
 include('header_short.php');
 echo "<body>\n";
 
@@ -23,5 +56,6 @@ for ($c=1; $c <= $counter; $c++)
 ?>
   </tr>  
 </table>
+<script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

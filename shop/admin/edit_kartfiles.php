@@ -1,4 +1,31 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   case 'en': { $lang = "en_EN"; break; }
+   default: { $lang = "en_EN"; break; }
+  }
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/../locale';
+$gettext_domain = 'cbWebshop';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 if (isset($_GET["kartid"])) $kartid = $_GET["kartid"];
 if (isset($_GET["delete"])) $delete = $_GET["delete"];
 
@@ -46,10 +73,12 @@ date_default_timezone_set('Europe/Berlin');
 <iframe src="" name="kart-content" frameborder="0" border="0" scrolling="auto" width="99%" height="400"></iframe>
 
 <?php
+echo "<button type=\"button\" value=\" Back \" id=\"buttonBackToBefore\"> &lt;&lt;&lt; " . gettext("Back") . " </button>";
 /*  echo "<pre>\n";
   print_r($kartfiles);
   echo "</pre>\n"; */
 ?>
 
+<script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

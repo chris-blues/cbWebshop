@@ -1,4 +1,31 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   case 'en': { $lang = "en_EN"; break; }
+   default: { $lang = "en_EN"; break; }
+  }
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/../locale';
+$gettext_domain = 'cbWebshop';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('header_short.php');
 echo "<body onload=\"document.getElementById('reload').submit();\">\n";
 //echo "<body>\n";
@@ -45,7 +72,7 @@ if ($_GET["job"] == "shop")
       if ($conf["surpress_ssl_warning"] != "TRUE") $conf["surpress_ssl_warning"] = "FALSE";
       else $conf["surpress_ssl_warning"] = "TRUE";
      }
-   
+
    //echo "<pre>CONF after POST: "; print_r($conf); echo "</pre>\n";
 
    if (!sort($conf["lang"])) echo "Failed to sort the array \$conf[\"lang\"]!<br>\n";
@@ -53,9 +80,9 @@ if ($_GET["job"] == "shop")
    if (!ksort($conf)) echo "Failed to sort the array!<br>\n";
    if (!ksort($conf["lang"])) echo "Failed to sort the array!<br>\n";
    if (!ksort($conf["item_type"])) echo "Failed to sort the array!<br>\n";
-   
+
    //echo "<pre>CONF after SORT: "; print_r($conf); echo "</pre>\n";
-   
+
    reset($conf); // bring array-pointer back to zero!
    $configfile = "../conf/shop_conf.php";
    $fHandle = fopen($configfile, "w");
@@ -102,8 +129,8 @@ if ($_GET["job"] == "shop")
          fputs($fHandle, $str);
         }
      }
-   $location = "settings.php";
-   if ($_POST["wheretoreturn"] == "itemtypes") $location = "edit_types.php";
+   $location = "settings";
+   if ($_POST["wheretoreturn"] == "itemtypes") $location = "edit_types";
   }
 
 /* ######################################## */
@@ -119,7 +146,7 @@ if ($_GET["job"] == "cost")
       $str = "\$cost[\"$key\"] = \"$value\";\n";
       fputs($fHandle, $str);
      }
-   $location = "edit_costs.php";
+   $location = "edit_costs";
   }
 
 /* ######################################## */
@@ -144,7 +171,7 @@ if ($_GET["job"] == "payment")
          fputs($fHandle, $str);
         }
      }
-   $location = "edit_payment.php";
+   $location = "edit_payment";
   }
 
 /* ######################################## */
@@ -153,7 +180,7 @@ if ($_GET["job"] == "countries")
   {
    foreach ($_POST as $key => $value)
      {
-      if ($value != "") $country[$key] = $value;
+      if ($value != "" and $key != "refer") $country[$key] = $value;
      }
    sort($country, SORT_STRING);
    $configfile = "../conf/countries.php";
@@ -165,11 +192,13 @@ if ($_GET["job"] == "countries")
       if ($value == "") $str = "";
       fputs($fHandle, $str);
      }
-   $location = "edit_countries.php";
+   $location = "edit_countries";
   }
 
 fputs($fHandle, "?>");
 fclose($fHandle);
+
+if (!isset($location) or $location == "" or isset($_POST["refer"])) $location = $_POST["refer"];
 
 /* ######################################## */
 
@@ -183,7 +212,8 @@ echo "$output\n</textarea>\n</form>\n";
 //if ($job == "countries") print_r($country);
 //echo "</pre>\n";
 ?>
-<center><button type="button" value=" Back " onclick="top.location='index.php'"> &lt;&lt;&lt; Back </button></center>
-<form id="reload" action="<?php echo $location; ?>"></form>
+<div class="center"><button type="button" value=" Back " id="buttonBackToBefore" data-target="<?php echo $location; ?>"> &lt;&lt;&lt; <?php echo gettext("Back"); ?> </button></div>
+<script type="text/javascript" src="scripts.js"></script>
+
 </body>
 </html>

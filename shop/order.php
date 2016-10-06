@@ -91,7 +91,7 @@ $costs = $transfercost + $shippingcost;
               echo "  <input type=\"submit\" value=\"&lt;&lt;&lt; " . gettext("Back to shop") . "\" title=\"" . gettext("Back to shop") . "\">\n";
               echo "</form></div>\n";
               echo "<div class=\"orderbuttons\">";
-              echo "<input type=\"button\" value=\" " . gettext("Submit data!") . " &gt;&gt;&gt; \" onclick=\"document.getElementById('submit_shipping_data').submit();\" title=\"" . gettext("Submit data!") . "\"></div>\n";
+              echo "<input type=\"button\" value=\" " . gettext("Submit data!") . " &gt;&gt;&gt; \" id=\"buttonSubmitShippingData\" title=\"" . gettext("Submit data!") . "\"></div>\n";
             ?>
      </div>
      <div class="clear notes" style="padding-top: 25px;"><?php echo gettext("Your data will not be shared with anybody! We only use it to label your package, so that it will find you. We store your data only for a short time, in order to be able to respond, if there should be something wrong with your shipment. This data is stored in our email-account, so no one else will have access to it. The data stored on our server is deleted, as soon as the order has been made."); ?></div>

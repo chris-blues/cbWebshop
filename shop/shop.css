@@ -191,3 +191,70 @@ a#show-hide {
   border: 1px solid #CC9933;
  }
 
+#play_active_preload {
+  display: none;
+}
+
+
+#shopAdminTools {
+  margin: 20px;
+  text-align: center;
+}
+
+ul {
+  width: 180px;
+}
+
+li {
+  list-style: none;
+  width: 180px;
+}
+
+li.settings {
+/*  display: none; */
+}
+
+.menu {
+  font-size: 0.9em;
+  padding: 0px;
+  margin: 0px;
+}
+
+.menu input {
+  width: 170px;
+}
+
+.menu hr {
+  width: 155px;
+}
+
+.center {
+  text-align: center;
+}
+
+div#menu {
+  flex: 0;
+  padding: 0px;
+}
+
+ul.menu {
+  padding: 10px 0px;
+  margin: 0px;
+  display: block;
+}
+
+ul.menu li {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+#adminContentFrame {
+  flex: 5;
+  border: 1px solid black;
+}
+
+#adminContentWrapper {
+  display: flex;
+  flex-flow: row wrap;
+}

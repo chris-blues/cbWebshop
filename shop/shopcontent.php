@@ -1,5 +1,5 @@
 <!-- BEGIN shopcontent.php -->
-<img src="shop/pics/play_active.png" style="display: none;">
+<img id="play_active_preload" src="shop/pics/play_active.png" style="display: none;">
 <?php
 include('conf/item_conf.php');
 

@@ -24,13 +24,13 @@ switch($browserlang)
    default: { $lang = "en"; break; }
   }
 $directory = $cbPlayer_dirname . '/locale';
-$domain = 'cbplayer';
+$gettext_domain = 'cbplayer';
 $locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
 
 setlocale(LC_MESSAGES, $locale);
-bindtextdomain($domain, $directory);
-textdomain($domain);
-bind_textdomain_codeset($domain, 'UTF-8');
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 // init gettext
 // ============

@@ -10,16 +10,18 @@ $browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 switch($browserlang)
   {
    case 'de': { $lang = "de_DE"; break; }
-   default: { $lang = "en"; break; }
+   case 'en': { $lang = "en_EN"; break; }
+   default: { $lang = "en_EN"; break; }
   }
-$directory = $cbPlayer_dirname . '/locale';
-$domain = 'cbplayer';
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/../../locale';
+$gettext_domain = 'cbWebshop';
 $locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
 
 setlocale(LC_MESSAGES, $locale);
-bindtextdomain($domain, $directory);
-textdomain($domain);
-bind_textdomain_codeset($domain, 'UTF-8');
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 // init gettext
 // ============
@@ -91,5 +93,6 @@ foreach($loc_lang as $key => $value)
 </form><br><br><br><br>
 <?php echo "</font>{$conf["font_style_close"]}\n"; ?>
 </center>
+<script type="text/javascript" src="../scripts.js"></script>
 </body>
 </html>

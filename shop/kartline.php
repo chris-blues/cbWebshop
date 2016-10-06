@@ -233,7 +233,7 @@ echo "</a></b></center>\n";
                 echo "<input type=\"hidden\" name=\"$call\" value=\"$value\">\n";
                }
              echo "<a class=\"iframe int\" id=\"media\" href=\"{$conf["callup"]}{$link}display=order\"><b>" . gettext("Change shipping data") . "</b></a>";
-             echo "<a id=\"final_buy\" href=\"javascript:\" onclick=\"document.getElementById('orderform').submit();\"><b> " . gettext("Finally buy!") . " &gt;&gt;&gt; </b></a>\n</form>";
+             echo "<a id=\"final_buy\" href=\"javascript:\"><b> " . gettext("Finally buy!") . " &gt;&gt;&gt; </b></a>\n</form>";
             }
           else
             {

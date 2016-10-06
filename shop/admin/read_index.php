@@ -26,7 +26,7 @@
          if ($cat == "music")
            {
             $tracklist = "../items/{$data[$counter]['item_id']}.dat";
-            $data[$counter]['tracklist'] = file_get_contents($tracklist);
+            if (file_exists($tracklist)) $data[$counter]['tracklist'] = file_get_contents($tracklist);
             /*$data[$counter]['item_details'] = str_replace("\r\n", "", $data[$counter]['item_details']);
             $data[$counter]['item_details'] = str_replace("\r", "", $data[$counter]['item_details']);
             $data[$counter]['item_details'] = str_replace("\n", "", $data[$counter]['item_details']);*/

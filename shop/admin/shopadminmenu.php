@@ -1,14 +1,54 @@
 <?php
-$settings = $_GET["settings"]; if (!isset($settings)) $settings = "hide";
-if ($settings == "hide") $settings_link = "show";
-if ($settings == "show") $settings_link = "hide";
+$debug = $_GET["debug"];
+if (isset($debug) and $debug == "true") $debug = true;
+else $debug = false;
 
-include('../conf/shop_conf.php');
-include("../locale/{$conf["_default_lang"]}.php");
-include('header_short.php');
+if ($debug)
+  {
+   error_reporting(E_ALL & ~E_NOTICE);
+   ini_set("display_errors", 1);
+  }
+else
+  {
+   error_reporting(0);
+   ini_set("display_errors", 0);
+  }
+ini_set("log_errors", 1);
+ini_set("error_log", "/www/admin/logs/php-error.log");
+
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de"; break; }
+   case 'en': { $lang = "en"; break; }
+   case 'fr': { $lang = "fr"; break; }
+   default: { $lang = "de"; break; }
+  }
+$cbWebshop_dirname = getcwd();
+$directory = "{$cbWebshop_dirname}/../locale";
+$gettext_domain = 'cbWebshop';
+$locale = "$lang"; echo "<!-- locale set to => $locale -->\n";
+
+putenv('LC_MESSAGES=' . $locale);
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 ?>
-<body class="menu">
-<ul class="menu">
+<div id="menu">
+  <button id="buttonToggleMenu"><?php echo gettext("Menu"); ?></button>
+<ul class="menu" id="menuContent">
   <li>
     <form action="showitems.php" target="shop-admin"><?php echo "<input type=\"submit\" value=\"" . gettext("View items") . "\"></form>\n"; ?>
   </li>
@@ -24,13 +64,12 @@ include('header_short.php');
   <li>
     <hr>
   </li>
-  <li>
+  <!--li>
     <form action="shopadminmenu.php" target="shop-menu" method="get">
-    <?php
-      if ($settings == "hide") echo "<input type=\"hidden\" name=\"settings\" value=\"show\"><input type=\"submit\" value=\"" . gettext("Show options") . "\"></form>\n";
-      if ($settings == "show") echo "<input type=\"hidden\" name=\"settings\" value=\"hide\"><input type=\"submit\" value=\"" . gettext("Hide options") . "\"></form>\n";
-    ?>
-  </li>
+      <input type="hidden" name="settings" value="show" id="settingsVisibility" data-switch="<?php echo gettext("Hide options"); ?>">
+      <button type="button" id="buttonToggleSettingsVisibility"><?php echo gettext("Show options"); ?></button>
+    </form>
+  </li-->
   <li class="settings">
     <hr><?php echo gettext("Layout:") . "\n"; ?>
   </li>
@@ -60,5 +99,4 @@ include('header_short.php');
     <form action="edit_countries.php" target="shop-admin"><?php echo "<input type=\"submit\" value=\"" . gettext("Edit countries") . "\"></form>\n"; ?>
   </li>
 </ul>
-</body>
-</html>
+</div>

@@ -10,16 +10,18 @@ $browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 switch($browserlang)
   {
    case 'de': { $lang = "de_DE"; break; }
-   default: { $lang = "en"; break; }
+   case 'en': { $lang = "en_EN"; break; }
+   default: { $lang = "en_EN"; break; }
   }
-$directory = $cbPlayer_dirname . '/locale';
-$domain = 'cbplayer';
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/../locale';
+$gettext_domain = 'cbWebshop';
 $locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
 
 setlocale(LC_MESSAGES, $locale);
-bindtextdomain($domain, $directory);
-textdomain($domain);
-bind_textdomain_codeset($domain, 'UTF-8');
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 // init gettext
 // ============
@@ -105,9 +107,10 @@ foreach ($conf as $key => $value)
       echo "  <tr><td>$key:</td><td colspan=\"2\"> <input name=\"$key\" value=\"$value\" type=\"text\" size=\"30\"></td></tr>\n";
      }
   }
-echo "<tr><td></td><td align=\"left\" colspan=\"1\"><button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; " . gettext("Back") . " </button></td><td colspan=\"1\" align=\"right\"><input type=\"submit\" value=\" " . gettext("Save") . " &gt;&gt;&gt; \"></td></tr>\n";
+echo "<tr><td></td><td align=\"left\" colspan=\"1\"><button type=\"button\" value=\" Back \" id=\"buttonBackToBefore\"> &lt;&lt;&lt; " . gettext("Back") . " </button></td><td colspan=\"1\" align=\"right\"><input type=\"submit\" value=\" " . gettext("Save") . " &gt;&gt;&gt; \"></td></tr>\n";
 echo "</table>\n</form>\n";
 //echo "Debugging:<br>\n<pre>"; print_r($conf); echo "</pre>\n";
 ?>
+<script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

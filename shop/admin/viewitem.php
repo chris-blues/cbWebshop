@@ -1,4 +1,31 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   case 'en': { $lang = "en_EN"; break; }
+   default: { $lang = "en_EN"; break; }
+  }
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/../locale';
+$gettext_domain = 'cbWebshop';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 include('header_short.php');
@@ -9,7 +36,7 @@ include('header_short.php');
   $c = $_GET["c"];
   
   echo "<h2>" . gettext("edit this item") . "</h2>\n<hr>\n<br>\n";
-  echo "  <div style=\"text-align: center;\"><form name=\"del-$c\" action=\"savelist.php\" method=\"get\" accept-charset=\"UTF-8\" onsubmit=\"return DeleteCheck()\">\n";
+  echo "  <div style=\"text-align: center;\"><form name=\"del-$c\" action=\"savelist.php\" method=\"get\" accept-charset=\"UTF-8\" id=\"deleteItem\">\n";
   echo "    <input type=\"hidden\" name=\"job\" value=\"delete\">\n";
   echo "    <input type=\"hidden\" name=\"num\" value=\"$c\">\n";
   echo "    <input type=\"submit\" value=\"        " . gettext("delete this item") . "        \">\n";
@@ -29,7 +56,7 @@ include('read_index.php');
   echo "  <tr>\n    <td>\n      Item No: <b>$c</b><br>\n      <img src=\"../{$data[$c]['item_pic']}\" height=\"120\" border=\"0\"><br>\n";
   echo "    </td>\n    <td align=\"right\">\n";
   echo "      " . gettext("Name:") . "<input name=\"item_name\" type=\"text\" length=\"20\" value=\"{$data[$c]['item_name']}\"><br>\n";
-  
+
   echo "      " . gettext("Type:") . "<select name=\"item_type\" size=\"1\" style=\"width:185px;\" width=\"185\">\n";
   foreach ($conf["item_type"] as $key => $value)
           {
@@ -46,7 +73,7 @@ include('read_index.php');
   $data[$c]['tracklist'] = trim($data[$c]['tracklist'],"\n");
   echo "      " . gettext("Details (html is allowed!):") . "<br>\n      <textarea name=\"item_details\" cols=\"50\" rows=\"8\">{$data[$c]['item_details']}</textarea><br>\n";
   if($cat == "music") { echo "      " . gettext("Tracklist (plain text only!)"); ?>:<br><textarea name="tracklist" cols="50" rows="8"><?php echo $data[$c]['tracklist']; ?></textarea><br><?php }
-  echo "      <button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; " . gettext("Back") . " </button> <input type=\"submit\" value=\" " . gettext("Save") . " \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n      <input type=\"hidden\" name=\"oldid\" value=\"$oldid\">\n";
+  echo "      <button type=\"button\" value=\" Back \" id=\"buttonBackToBefore\"> &lt;&lt;&lt; " . gettext("Back") . " </button> <input type=\"submit\" value=\" " . gettext("Save") . " \">\n      <input type=\"hidden\" name=\"c\" value=\"$c\">\n      <input type=\"hidden\" name=\"oldid\" value=\"$oldid\">\n";
   echo "    </td>\n  </tr>\n</table>\n";
   
   
@@ -98,5 +125,6 @@ include('read_index.php');
 ?>
 </table>
 </form>
+<script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

@@ -1,4 +1,31 @@
-<?php 
+<?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   case 'en': { $lang = "en_EN"; break; }
+   default: { $lang = "en_EN"; break; }
+  }
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/../locale';
+$gettext_domain = 'cbWebshop';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 include('header_short.php');
@@ -56,11 +83,12 @@ include('read_index.php');
   </tr>  <?php } ?>
   <tr>
     <td align="center">
-      <button type="button" value="Back" onclick="self.location='showitems.php'"> &lt;&lt;&lt; <?php echo gettext("Back"); ?> </button>
+      <button type="button" value="Back" id="buttonBackToBefore"> &lt;&lt;&lt; <?php echo gettext("Back"); ?> </button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo "<input type=\"submit\" value=\"" . gettext("Save") . "\">\n"; ?>
     </td>
   </tr>
 </table>
 </form>
+<script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

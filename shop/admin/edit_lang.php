@@ -1,4 +1,31 @@
 <?php
+
+// ============
+// init gettext
+// ============
+
+//Try to get some language information from the browser request header
+$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+switch($browserlang)
+  {
+   case 'de': { $lang = "de_DE"; break; }
+   case 'en': { $lang = "en_EN"; break; }
+   default: { $lang = "en_EN"; break; }
+  }
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/../locale';
+$gettext_domain = 'cbWebshop';
+$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_MESSAGES, $locale);
+bindtextdomain($gettext_domain, $directory);
+textdomain($gettext_domain);
+bind_textdomain_codeset($gettext_domain, 'UTF-8');
+// ============
+// init gettext
+// ============
+
 include('../conf/shop_conf.php');
 include("../locale/{$conf["_default_lang"]}.php");
 
@@ -27,6 +54,7 @@ echo "<h2>" . gettext("Edit available languages") . "</h2>\n" . gettext("Note th
 
 // Prepare Array for POST + add input fields for new types + hide unnecessary fields
 echo "<form name=\"langform\" action=\"save_settings.php?job=shop\" method=\"post\" accept-charste=\"UTF-8\">\n";
+echo "<input type=\"hidden\" name=\"refer\" value=\"edit_lang\">\n";
 foreach ($conf as $key => $value)
   {
    if ($key == "lang")
@@ -35,7 +63,7 @@ foreach ($conf as $key => $value)
       foreach($conf["$key"] as $key2 => $value2)
         {
          $count++;
-         echo "  <tr><td>$key - $key2:</td><td> <input name=\"$key$key2\" value=\"$value2\" type=\"text\" size=\"30\"><button type=\"button\" name=\"remove\" value=\"$key$key2\" onclick=\"this.form.$key$key2.value='';\"> " . gettext("Remove") . " </button></td></tr>\n";
+         echo "  <tr><td>$key - $key2:</td><td> <input name=\"$key$key2\" id=\"$key2\" class=\"editArrays\" value=\"$value2\" type=\"text\" size=\"30\"><button type=\"button\" name=\"remove\" value=\"$key$key2\" id=\"buttonRemoveRow_$key2\" data-id=\"$key2\"> " . gettext("Remove") . " </button></td></tr>\n";
         }
       $count++; $key2++;
       echo "  <tr><td>$key - $key2:</td><td> <input name=\"$key$key2\" value=\"{$_GET["register"]}\" type=\"text\" size=\"30\"></td></tr>\n";
@@ -59,7 +87,7 @@ foreach ($conf as $key => $value)
      }
   }
 
-echo "<div style=\"text-align: center;\"><button type=\"button\" value=\" Back \" onclick=\"self.location='showitems.php'\"> &lt;&lt;&lt; " . gettext("Back") . " </button><input type=\"submit\" value=\" " . gettext("Save") . " &gt;&gt;&gt; \"></div>\n</form>\n<br>\n<hr>\n<br>\n";
+echo "<div class=\"center\"><button type=\"button\" value=\" Back \" id=\"buttonBackToBefore\"> &lt;&lt;&lt; " . gettext("Back") . " </button><input type=\"submit\" value=\" " . gettext("Save") . " &gt;&gt;&gt; \"></div>\n</form>\n<br>\n<hr>\n<br>\n";
 // echo "Debugging:<br>\n<pre>"; print_r($conf); echo "</pre>\n";
 
 echo $operation_message;
@@ -105,5 +133,6 @@ echo "</table>\n";
 //print_r($lang_files);
 echo "\n";
 ?>
+<script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>

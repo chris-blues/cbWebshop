@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-10-05 20:42+0200\n"
-"PO-Revision-Date: 2016-10-05 20:42+0200\n"
+"POT-Creation-Date: 2016-10-06 02:51+0200\n"
+"PO-Revision-Date: 2016-10-06 02:51+0200\n"
 "Last-Translator: chris_blues <chris@musicchris.de>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,218 +15,227 @@ msgstr ""
 "X-Poedit-SearchPath-0: locale\n"
 "X-Poedit-SearchPath-1: .\n"
 
-#: admin/edit_costs.php:8 admin/shopadminmenu.php:45
+#: admin/edit_costs.php:35 admin/shopadminmenu.php:84
 msgid "Edit costs"
-msgstr ""
+msgstr "Edit costs"
 
-#: admin/edit_costs.php:9 admin/edit_payment.php:10 admin/settings.php:34
+#: admin/edit_costs.php:36 admin/edit_payment.php:37 admin/settings.php:36
 msgid "Edit carefully!"
-msgstr ""
+msgstr "Edit carefully!"
 
-#: admin/edit_costs.php:9 admin/edit_payment.php:10
+#: admin/edit_costs.php:36 admin/edit_payment.php:37
 msgid "Use dots for decimals (e.g.: 1234.56)"
-msgstr ""
+msgstr "Use dots for decimals (e.g.: 1234.56)"
 
-#: admin/edit_costs.php:18
+#: admin/edit_costs.php:45
 msgid "Your Home Country:"
-msgstr ""
+msgstr "Your Home Country:"
 
-#: admin/edit_costs.php:32 admin/edit_countries.php:21 admin/edit_lang.php:62
-#: admin/edit_payment.php:22 admin/edit_types.php:93 admin/newitem.php:59
-#: admin/savelist.php:258 admin/settings.php:108 admin/viewitem.php:49
+#: admin/edit_costs.php:59 admin/edit_countries.php:49
+#: admin/edit_kartfiles.php:76 admin/edit_lang.php:90 admin/edit_payment.php:49
+#: admin/edit_types.php:95 admin/newitem.php:86 admin/save_settings.php:215
+#: admin/savelist.php:285 admin/settings.php:110 admin/viewitem.php:76
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
-#: admin/edit_costs.php:32 admin/edit_countries.php:21 admin/edit_lang.php:62
-#: admin/edit_payment.php:22 admin/edit_types.php:93 admin/newitem.php:60
-#: admin/settings.php:108 admin/viewitem.php:49
+#: admin/edit_costs.php:59 admin/edit_countries.php:49 admin/edit_lang.php:90
+#: admin/edit_payment.php:49 admin/edit_types.php:95 admin/newitem.php:87
+#: admin/settings.php:110 admin/viewitem.php:76
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
-#: admin/edit_countries.php:8 admin/shopadminmenu.php:60
+#: admin/edit_countries.php:35 admin/shopadminmenu.php:99
 msgid "Edit countries"
-msgstr ""
+msgstr "Edit countries"
 
-#: admin/edit_countries.php:9
+#: admin/edit_countries.php:36
 msgid "These will show up in the kart's shipping-list."
-msgstr ""
+msgstr "These will show up in the kart's shipping-list."
 
-#: admin/edit_countries.php:16 admin/edit_lang.php:38 admin/edit_types.php:52
+#: admin/edit_countries.php:44 admin/edit_lang.php:66 admin/edit_types.php:54
 msgid "Remove"
-msgstr ""
+msgstr "Remove"
 
-#: admin/edit_kartfiles.php:19 admin/shopadminmenu.php:22
+#: admin/edit_kartfiles.php:46 admin/shopadminmenu.php:62
 msgid "View available karts"
-msgstr ""
+msgstr "View available karts"
 
-#: admin/edit_kartfiles.php:40 admin/edit_lang.php:83 admin/edit_lang.php:91
+#: admin/edit_kartfiles.php:67 admin/edit_lang.php:111 admin/edit_lang.php:119
 msgid "delete file"
-msgstr ""
+msgstr "delete file"
 
-#: admin/edit_lang.php:26
+#: admin/edit_lang.php:53
 msgid "Edit available languages"
-msgstr ""
+msgstr "Edit available languages"
 
-#: admin/edit_lang.php:26
+#: admin/edit_lang.php:53
 msgid ""
 "Note that you need a translated language in the shop's locale!!! You can "
 "translate the locale-file <a href=\"translate/translate.php\" target=\"_blank"
 "\">here</a>. At the bottom of this page you can process existing language "
 "files!"
 msgstr ""
+"Note that you need a translated language in the shop's locale!!! You can "
+"translate the locale-file <a href=\"translate/translate.php\" target=\"_blank"
+"\">here</a>. At the bottom of this page you can process existing language "
+"files!"
 
-#: admin/edit_lang.php:73
+#: admin/edit_lang.php:101
 msgid "Existing language files:"
-msgstr ""
+msgstr "Existing language files:"
 
-#: admin/edit_lang.php:88
+#: admin/edit_lang.php:116
 msgid "Not registered yet:"
-msgstr ""
+msgstr "Not registered yet:"
 
-#: admin/edit_lang.php:94
+#: admin/edit_lang.php:122
 msgid "register file"
-msgstr ""
+msgstr "register file"
 
-#: admin/edit_lang.php:99
+#: admin/edit_lang.php:127
 msgid "rename file"
-msgstr ""
+msgstr "rename file"
 
-#: admin/edit_payment.php:9 admin/shopadminmenu.php:48
+#: admin/edit_payment.php:36 admin/shopadminmenu.php:87
 msgid "Edit payment"
-msgstr ""
+msgstr "Edit payment"
 
-#: admin/edit_types.php:31 admin/shopadminmenu.php:54
+#: admin/edit_types.php:33 admin/shopadminmenu.php:93
 msgid "Edit item-types"
-msgstr ""
+msgstr "Edit item-types"
 
-#: admin/edit_types.php:31
+#: admin/edit_types.php:33
 msgid "These will show up in 'Add new item' once you added an item here."
-msgstr ""
+msgstr "These will show up in 'Add new item' once you added an item here."
 
-#: admin/edit_types.php:49
+#: admin/edit_types.php:51
 msgid "Music"
-msgstr ""
+msgstr "Music"
 
-#: admin/edit_types.php:50
+#: admin/edit_types.php:52
 msgid "Clothing"
-msgstr ""
+msgstr "Clothing"
 
-#: admin/index.php:35
+#: admin/index.php:52
 msgid "Shop Admin Tools"
-msgstr ""
-
-#: admin/newitem.php:10
-msgid "Add item to the shop"
-msgstr ""
-
-#: admin/newitem.php:25 admin/viewitem.php:33
-msgid "Type:"
-msgstr ""
-
-#: admin/newitem.php:26
-msgid "Choose type!"
-msgstr ""
-
-#: admin/newitem.php:35 admin/viewitem.php:31
-msgid "Name:"
-msgstr ""
-
-#: admin/newitem.php:36
-msgid "Year:"
-msgstr ""
+msgstr "Shop Admin Tools"
 
 #: admin/newitem.php:37
+msgid "Add item to the shop"
+msgstr "Add item to the shop"
+
+#: admin/newitem.php:52 admin/viewitem.php:60
+msgid "Type:"
+msgstr "Type:"
+
+#: admin/newitem.php:53
+msgid "Choose type!"
+msgstr "Choose type!"
+
+#: admin/newitem.php:62 admin/viewitem.php:58
+msgid "Name:"
+msgstr "Name:"
+
+#: admin/newitem.php:63
+msgid "Year:"
+msgstr "Year:"
+
+#: admin/newitem.php:64
 msgid "Sizes:"
-msgstr ""
+msgstr "Sizes:"
 
-#: admin/newitem.php:38 admin/viewitem.php:43
+#: admin/newitem.php:65 admin/viewitem.php:70
 msgid "Price:"
-msgstr ""
+msgstr "Price:"
 
-#: admin/newitem.php:43
+#: admin/newitem.php:70
 msgid "PNG-files only!"
-msgstr ""
+msgstr "PNG-files only!"
 
-#: admin/newitem.php:43 admin/viewitem.php:44
+#: admin/newitem.php:70 admin/viewitem.php:71
 msgid "Item's Pic:"
-msgstr ""
+msgstr "Item's Pic:"
 
-#: admin/newitem.php:48 admin/viewitem.php:47
+#: admin/newitem.php:75 admin/viewitem.php:74
 msgid "Details (html is allowed!):"
-msgstr ""
+msgstr "Details (html is allowed!):"
 
-#: admin/newitem.php:54 admin/viewitem.php:48
+#: admin/newitem.php:81 admin/viewitem.php:75
 msgid "Tracklist (plain text only!)"
-msgstr ""
+msgstr "Tracklist (plain text only!)"
 
-#: admin/read_kartfile.php:68 conf/payment_conf.php:4 kartline.php:193
+#: admin/read_kartfile.php:70 conf/payment_conf.php:4 kartline.php:193
 #: leaveshop.php:43 order.php:29 orderaction.php:70
 msgid "Bank Transfer"
-msgstr ""
+msgstr "Bank Transfer"
 
-#: admin/read_kartfile.php:69 conf/payment_conf.php:7 kartline.php:199
+#: admin/read_kartfile.php:71 conf/payment_conf.php:7 kartline.php:199
 #: leaveshop.php:49 order.php:35 orderaction.php:76
 msgid "PayPal"
-msgstr ""
+msgstr "PayPal"
 
-#: admin/read_kartfile.php:70 conf/payment_conf.php:10 kartline.php:205
+#: admin/read_kartfile.php:72 conf/payment_conf.php:10 kartline.php:205
 #: leaveshop.php:55 order.php:41 orderaction.php:82
 msgid "Pay on delivery"
-msgstr ""
+msgstr "Pay on delivery"
 
-#: admin/settings.php:33
+#: admin/settings.php:35
 msgid "Shop Settings"
-msgstr ""
+msgstr "Shop Settings"
 
-#: admin/settings.php:64
+#: admin/settings.php:66
 msgid "Default language:"
-msgstr ""
+msgstr "Default language:"
 
-#: admin/settings.php:75
+#: admin/settings.php:77
 msgid "Bank Account:"
-msgstr ""
+msgstr "Bank Account:"
 
-#: admin/shopadminmenu.php:13
+#: admin/shopadminmenu.php:50
+msgid "Menu"
+msgstr "Menu"
+
+#: admin/shopadminmenu.php:53
 msgid "View items"
-msgstr ""
+msgstr "View items"
 
-#: admin/shopadminmenu.php:16
+#: admin/shopadminmenu.php:56
 msgid "Add new item"
-msgstr ""
+msgstr "Add new item"
 
-#: admin/shopadminmenu.php:30
-msgid "Show options"
-msgstr ""
-
-#: admin/shopadminmenu.php:31
+#: admin/shopadminmenu.php:69
 msgid "Hide options"
-msgstr ""
+msgstr "Hide options"
 
-#: admin/shopadminmenu.php:35
+#: admin/shopadminmenu.php:70
+msgid "Show options"
+msgstr "Show options"
+
+#: admin/shopadminmenu.php:74
 msgid "Layout:"
-msgstr ""
+msgstr "Layout:"
 
-#: admin/shopadminmenu.php:39
+#: admin/shopadminmenu.php:78
 msgid "General settings:"
-msgstr ""
+msgstr "General settings:"
 
-#: admin/shopadminmenu.php:42
+#: admin/shopadminmenu.php:81
 msgid "Financial:"
-msgstr ""
+msgstr "Financial:"
 
-#: admin/shopadminmenu.php:51
+#: admin/shopadminmenu.php:90
 msgid "Contents:"
-msgstr ""
+msgstr "Contents:"
 
-#: admin/shopadminmenu.php:57
+#: admin/shopadminmenu.php:96
 msgid "Edit languages"
-msgstr ""
+msgstr "Edit languages"
 
-#: admin/showitems.php:20 admin/viewitem.php:11
+#: admin/showitems.php:53 admin/viewitem.php:38
 msgid "edit this item"
-msgstr ""
+msgstr "edit this item"
 
-#: admin/translate/translate.php:49
+#: admin/translate/translate.php:51
 msgid ""
 "The language you want to use as a template. Here are all languages we "
 "already have. We recommend you use english or deutsch to avoid subsequent "
@@ -234,274 +243,302 @@ msgid ""
 "WARNING! Don't use this switch, once you have begun working! It will destroy "
 "all your work!"
 msgstr ""
+"The language you want to use as a template. Here are all languages we "
+"already have. We recommend you use english or deutsch to avoid subsequent "
+"errors, since these were the first languages we had.\n"
+"WARNING! Don't use this switch, once you have begun working! It will destroy "
+"all your work!"
 
-#: admin/translate/translate.php:52
+#: admin/translate/translate.php:54
 msgid ""
 "In to which language would you like to translate? Please enter the language "
 "name in its own language! (e.g.:fran&#231;ais instead of french!)"
 msgstr ""
+"In to which language would you like to translate? Please enter the language "
+"name in its own language! (e.g.:fran&#231;ais instead of french!)"
 
-#: admin/translate/translate.php:54
+#: admin/translate/translate.php:56
 msgid ""
 "Please tell us your &quot;name &lt;email-address&gt;&quot; so, that we can "
 "come back to you if there are any questions."
 msgstr ""
+"Please tell us your &quot;name &lt;email-address&gt;&quot; so, that we can "
+"come back to you if there are any questions."
 
-#: admin/translate/translate.php:56
+#: admin/translate/translate.php:58
 msgid "Systemname of text field"
-msgstr ""
+msgstr "Systemname of text field"
 
-#: admin/translate/translate.php:56
+#: admin/translate/translate.php:58
 msgid "Your new translation"
-msgstr ""
+msgstr "Your new translation"
 
-#: admin/translate/translate.php:56
+#: admin/translate/translate.php:58
 msgid "Your template"
-msgstr ""
+msgstr "Your template"
 
-#: admin/translate/translate.php:85
+#: admin/translate/translate.php:87
 msgid ""
 "Please make sure you have checked for errors trice!!!!! There's nothing "
 "worse for us than to find out which version is the best in a strange foreign "
 "language!!!"
 msgstr ""
+"Please make sure you have checked for errors trice!!!!! There's nothing "
+"worse for us than to find out which version is the best in a strange foreign "
+"language!!!"
 
-#: admin/translate/translate.php:86
+#: admin/translate/translate.php:88
 msgid "OK, I have double-checked! Send this translation!"
-msgstr ""
+msgstr "OK, I have double-checked! Send this translation!"
 
-#: admin/translate/translators.php:36
+#: admin/translate/translators.php:38
 msgid ""
 "Your language is not available? If you have some time to spare, you could "
 "help us."
 msgstr ""
-
-#: admin/viewitem.php:15
-msgid "delete this item"
-msgstr ""
+"Your language is not available? If you have some time to spare, you could "
+"help us."
 
 #: admin/viewitem.php:42
-msgid "Year/Size:"
-msgstr ""
+msgid "delete this item"
+msgstr "delete this item"
 
-#: admin/viewitem.php:55
+#: admin/viewitem.php:69
+msgid "Year/Size:"
+msgstr "Year/Size:"
+
+#: admin/viewitem.php:82
 msgid "Expected Audio-File-Names in:"
-msgstr ""
+msgstr "Expected Audio-File-Names in:"
 
 #: kartline.php:61 kartline.php:162
 msgid "other"
-msgstr ""
+msgstr "other"
 
 #: kartline.php:115 kartline.php:214
 msgid "Shopping kart"
-msgstr ""
+msgstr "Shopping kart"
 
 #: kartline.php:119 shopcontent.php:152
 msgid "Please activate JavaScript to use this page!"
-msgstr ""
+msgstr "Please activate JavaScript to use this page!"
 
-#: kartline.php:128 shop.php:79
+#: kartline.php:128 shop.php:81
 msgid "Hide Details"
-msgstr ""
+msgstr "Hide Details"
 
 #: kartline.php:143
 msgid "remove"
-msgstr ""
+msgstr "remove"
 
 #: kartline.php:152
 msgid "Sub-Total"
-msgstr ""
+msgstr "Sub-Total"
 
 #: kartline.php:157
 msgid "Select country!"
-msgstr ""
+msgstr "Select country!"
 
 #: kartline.php:169 leaveshop.php:142
 msgid "Shipping"
-msgstr ""
+msgstr "Shipping"
 
 #: kartline.php:176
 msgid "Choose payment!"
-msgstr ""
+msgstr "Choose payment!"
 
 #: kartline.php:211
 msgid "reset shopping kart (including all adress data)"
-msgstr ""
+msgstr "reset shopping kart (including all adress data)"
 
 #: kartline.php:213 leaveshop.php:83 leaveshop.php:144
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: kartline.php:235
 msgid "Change shipping data"
-msgstr ""
+msgstr "Change shipping data"
 
 #: kartline.php:236
 msgid "Finally buy!"
-msgstr ""
+msgstr "Finally buy!"
 
 #: kartline.php:242
 msgid "Enter shipping data"
-msgstr ""
+msgstr "Enter shipping data"
 
 #: kartline.php:248
 msgid "Kart is empty."
-msgstr ""
+msgstr "Kart is empty."
 
 #: leaveshop.php:64 leaveshop.php:82
 msgid "Your order"
-msgstr ""
+msgstr "Your order"
 
 #: leaveshop.php:83
 msgid "Transfercost"
-msgstr ""
+msgstr "Transfercost"
 
 #: leaveshop.php:83
 msgid "Shipping cost"
-msgstr ""
+msgstr "Shipping cost"
 
 #: leaveshop.php:84
 msgid "For your information and as an invoice to your order at"
-msgstr ""
+msgstr "For your information and as an invoice to your order at"
 
 #: leaveshop.php:85
 msgid "Thank you for your order and your interest in our work!"
-msgstr ""
+msgstr "Thank you for your order and your interest in our work!"
 
 #: leaveshop.php:85
 msgid "Here is what you ordered:"
-msgstr ""
+msgstr "Here is what you ordered:"
 
 #: leaveshop.php:86
 msgid "Kart-ID:"
-msgstr ""
+msgstr "Kart-ID:"
 
 #: leaveshop.php:87
 msgid ""
 "Please transfer the amount to our account as soon as possible, so we can "
 "send you the shipment as soon as your money has arrived!"
 msgstr ""
+"Please transfer the amount to our account as soon as possible, so we can "
+"send you the shipment as soon as your money has arrived!"
 
 #: leaveshop.php:88
 msgid "We hope you enjoy our work and wish you all the best!"
-msgstr ""
+msgstr "We hope you enjoy our work and wish you all the best!"
 
 #: leaveshop.php:91
 msgid "speaks"
-msgstr ""
+msgstr "speaks"
 
 #: leaveshop.php:95
 msgid "orders"
-msgstr ""
+msgstr "orders"
 
 #: leaveshop.php:121
 msgid "Thank you for your order!"
-msgstr ""
+msgstr "Thank you for your order!"
 
 #: leaveshop.php:130 shopcontent.php:13
 msgid "pieces"
-msgstr ""
+msgstr "pieces"
 
 #: leaveshop.php:149
 #, php-format
 msgid "Please send <b>%s %s</b> to the following bank account:"
-msgstr ""
+msgstr "Please send <b>%s %s</b> to the following bank account:"
 
 #: leaveshop.php:152
 msgid "As soon as your money arrives we'll send your shipment."
-msgstr ""
+msgstr "As soon as your money arrives we'll send your shipment."
 
 #: leaveshop.php:156
 msgid ""
 "Your order will be sent soon! Please keep enough cash under your pillow to "
 "pay for the package, when it arrives!"
 msgstr ""
+"Your order will be sent soon! Please keep enough cash under your pillow to "
+"pay for the package, when it arrives!"
 
 #: leaveshop.php:169
 msgid ""
 "Something went wrong! We couldn't send an email to you! But we have been "
 "notified and will get in touch with you!"
 msgstr ""
+"Something went wrong! We couldn't send an email to you! But we have been "
+"notified and will get in touch with you!"
 
 #: leaveshop.php:170
 msgid ""
 "Your data was kept on the server for error tracking. It will be erased as "
 "soon as we have completed."
 msgstr ""
+"Your data was kept on the server for error tracking. It will be erased as "
+"soon as we have completed."
 
 #: leaveshop.php:174
 msgid ""
 "An email has been sent to you, containing all the information you'll need to "
 "finalize this business."
 msgstr ""
+"An email has been sent to you, containing all the information you'll need to "
+"finalize this business."
 
 #: leaveshop.php:175
 msgid "Your data could not be erased!"
-msgstr ""
+msgstr "Your data could not be erased!"
 
 #: leaveshop.php:176
 msgid "Your data has been erased from the server!"
-msgstr ""
+msgstr "Your data has been erased from the server!"
 
 #: order.php:54
 msgid ""
 "This connection is NOT encrypted with SSL! I strongly recommend: do NOT send "
 "your private data through an unencrypted connection!"
 msgstr ""
+"This connection is NOT encrypted with SSL! I strongly recommend: do NOT send "
+"your private data through an unencrypted connection!"
 
 #: order.php:61
 msgid "Encrypt now!"
-msgstr ""
+msgstr "Encrypt now!"
 
 #: order.php:66
 msgid "This connection is encrypted with SSL."
-msgstr ""
+msgstr "This connection is encrypted with SSL."
 
 #: order.php:68
 msgid ""
 "Now we need to know, where we shall send the order. You still can make "
 "changes to the contents of the shopping kart!"
 msgstr ""
+"Now we need to know, where we shall send the order. You still can make "
+"changes to the contents of the shopping kart!"
 
 #: order.php:72
 msgid "First name:"
-msgstr ""
+msgstr "First name:"
 
 #: order.php:73
 msgid "Last name:"
-msgstr ""
+msgstr "Last name:"
 
 #: order.php:74
 msgid "Street No:"
-msgstr ""
+msgstr "Street No:"
 
 #: order.php:75
 msgid "Adress line 2: (optional)"
-msgstr ""
+msgstr "Adress line 2: (optional)"
 
 #: order.php:76
 msgid "ZIP:"
-msgstr ""
+msgstr "ZIP:"
 
 #: order.php:77
 msgid "City:"
-msgstr ""
+msgstr "City:"
 
 #: order.php:78
 msgid "Province: (optional)"
-msgstr ""
+msgstr "Province: (optional)"
 
 #: order.php:79
 msgid "Country:"
-msgstr ""
+msgstr "Country:"
 
 #: order.php:91
 msgid "Back to shop"
-msgstr ""
+msgstr "Back to shop"
 
 #: order.php:94
 msgid "Submit data!"
-msgstr ""
+msgstr "Submit data!"
 
 #: order.php:97
 msgid ""
@@ -512,53 +549,61 @@ msgid ""
 "access to it. The data stored on our server is deleted, as soon as the order "
 "has been made."
 msgstr ""
+"Your data will not be shared with anybody! We only use it to label your "
+"package, so that it will find you. We store your data only for a short time, "
+"in order to be able to respond, if there should be something wrong with your "
+"shipment. This data is stored in our email-account, so no one else will have "
+"access to it. The data stored on our server is deleted, as soon as the order "
+"has been made."
 
 #: orderaction.php:110
 msgid "Kart seems to be emtpy!"
-msgstr ""
+msgstr "Kart seems to be emtpy!"
 
 #: orderaction.php:111
 msgid "You didn't choose your country in the kart! Please do so!"
-msgstr ""
+msgstr "You didn't choose your country in the kart! Please do so!"
 
 #: orderaction.php:112
 msgid ""
 "You didn't choose your preferred payment method in the kart! Please do so!"
 msgstr ""
+"You didn't choose your preferred payment method in the kart! Please do so!"
 
 #: orderaction.php:115
 msgid ""
 "You didn't enter all necessary information! Use the button below to return!"
 msgstr ""
+"You didn't enter all necessary information! Use the button below to return!"
 
 #: orderaction.php:119
 msgid "BACK TO ORDER-FORM!"
-msgstr ""
+msgstr "BACK TO ORDER-FORM!"
 
 #: orderaction.php:154
 msgid "One moment!"
-msgstr ""
+msgstr "One moment!"
 
 #: orderaction.php:160
 msgid "Redirecting you to PayPal."
-msgstr ""
+msgstr "Redirecting you to PayPal."
 
-#: shop.php:80
+#: shop.php:82
 msgid "Show Details"
-msgstr ""
+msgstr "Show Details"
 
-#: shop.php:81
+#: shop.php:83
 msgid "Really delete this item?"
-msgstr ""
+msgstr "Really delete this item?"
 
 #: shopcontent.php:12
 msgid "Buy"
-msgstr ""
+msgstr "Buy"
 
 #: shopcontent.php:13
 msgid "piece"
-msgstr ""
+msgstr "piece"
 
 #: shopcontent.php:71
 msgid "Click here to play this song!"
-msgstr ""
+msgstr "Click here to play this song!"

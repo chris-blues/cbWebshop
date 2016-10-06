@@ -37,3 +37,4 @@ function DeleteCheck () {
   var chk = window.confirm();
   return (chk);
 }
+
