@@ -1,17 +1,20 @@
 <!-- BEGIN shopcontent.php -->
-<img id="play_active_preload" src="shop/pics/play_active.png" style="display: none;">
+<img id="play_active_preload" src="shop/pics/play_active.png" class="hidden" style="display: none;">
 <?php
-include('conf/item_conf.php');
+include('shop/conf/shop_conf.php');
 
 include('shop/read_index.php');
+
+$locale_size = gettext("size");
+$buy = gettext("Buy");
+
 /* Lese Vorlage aus Datei in einen String */
 $col = "0";
 for ($c = 1; $c <= $itemamount; $c++)
  {
   $col++;
-  $buy = gettext("Buy");
-  $value = gettext("pieces") . " ({$data["$c"]['item_preis']} €/" . gettext("piece") . ")";
-
+  $value = sprintf(gettext("pieces (%s €/piece)"), $data["$c"]['item_preis'] );
+  if ($debug) echo "$value <br>\n";
 
 // Get category ( music | clothing )
 foreach ($conf["item_type"] as $keycat => $valcat)
@@ -87,11 +90,11 @@ if ($cat == "music")
      $sizes = explode(" ", $data[$c]['item_descr']);
      foreach ($sizes as $sizeskey => $sizesvalue)
        {
-        if ($sizesvalue == "XXL") $sizesvalueshow = $sizesvalue . " +2 €";
-        if ($sizesvalue == "XL") $sizesvalueshow = $sizesvalue . " +1 €";
-        if ($sizesvalue == "L") $sizesvalueshow = $sizesvalue;
-        if ($sizesvalue == "M") $sizesvalueshow = $sizesvalue . " -1 €";
-        if ($sizesvalue == "S") $sizesvalueshow = $sizesvalue . " -2 €";
+        if ($sizesvalue == "XXL") $sizesvalueshow = $sizesvalue . " (+2 €)";
+        if ($sizesvalue == "XL") $sizesvalueshow = $sizesvalue . " (+1 €)";
+        if ($sizesvalue == "L") $sizesvalueshow = $sizesvalue . " (±0 €)";
+        if ($sizesvalue == "M") $sizesvalueshow = $sizesvalue . " (-1 €)";
+        if ($sizesvalue == "S") $sizesvalueshow = $sizesvalue . " (-2 €)";
         $sizesdropdown .= "<option value=\"$sizesvalue\">$sizesvalueshow</option>\n";
        }
     }
@@ -115,6 +118,7 @@ if ($cat == "music")
                    '%details%',
                    '%tracklist%',
                    '%buy%',
+                   '%target%',
                    '%value%',
                    '%kartid%',
                    '%lang%',
@@ -122,6 +126,7 @@ if ($cat == "music")
                    '%shop_width%',
                    '%shop_height%',
                    '%shop_pic_width%',
+                   '%size%',
                    '%sizes%',
                    '%_currency%',
                    '%_calls%',
@@ -139,6 +144,7 @@ if ($cat == "music")
                    $data["$c"]['item_details'],
                    $data["$c"]['tracklist'],
                    $buy,
+                   $conf["callup"],
                    $value,
                    $kartid,
                    $lang,
@@ -146,6 +152,7 @@ if ($cat == "music")
                    $item_conf["shop_width"],
                    $item_conf["shop_height"],
                    $item_conf["shop_pic_width"],
+                   $locale_size,
                    $sizesdropdown,
                    $conf["_currency"],
                    $calls,

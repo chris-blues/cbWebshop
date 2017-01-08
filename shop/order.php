@@ -53,7 +53,7 @@ $costs = $transfercost + $shippingcost;
           {
            echo "<p style=\"font-weight: bold;\">" . gettext("This connection is NOT encrypted with SSL! I strongly recommend: do NOT send your private data through an unencrypted connection!") . "\n";
            ?>
-           <form action="https://<?php echo $_SERVER["HTTP_HOST"] . "/" . $conf["callup"]; ?>" method="get" accept-charset="UTF-8">
+           <form action="<?php echo $conf["callup"]; ?>" method="get" accept-charset="UTF-8">
            <?php foreach($conf["call"] as $call => $value) { ?>
              <input type="hidden" name="<?php echo $call; ?>" value="<?php echo $value; ?>">
             <?php } ?>
@@ -63,7 +63,7 @@ $costs = $transfercost + $shippingcost;
            
            <?php
           }
-        else { ?> <img src="pics/ssl20.png" style="vertical-align: middle;" alt="<?php echo gettext("This connection is encrypted with SSL."); ?>" title="<?php echo gettext("This connection is encrypted with SSL."); ?>"><br> <?php }
+        else { ?> <img src="shop/pics/ssl20.png" style="vertical-align: middle;" alt="<?php echo gettext("This connection is encrypted with SSL."); ?>" title="<?php echo gettext("This connection is encrypted with SSL."); ?>"><br> <?php }
        }
         echo gettext("Now we need to know, where we shall send the order. You still can make changes to the contents of the shopping kart!") . "<br>\n<br>\n";
         echo "<div class=\"orderdata\">\n";
@@ -91,7 +91,7 @@ $costs = $transfercost + $shippingcost;
               echo "  <input type=\"submit\" value=\"&lt;&lt;&lt; " . gettext("Back to shop") . "\" title=\"" . gettext("Back to shop") . "\">\n";
               echo "</form></div>\n";
               echo "<div class=\"orderbuttons\">";
-              echo "<input type=\"button\" value=\" " . gettext("Submit data!") . " &gt;&gt;&gt; \" id=\"buttonSubmitShippingData\" title=\"" . gettext("Submit data!") . "\"></div>\n";
+              echo "<input type=\"button\" id=\"submitShippingData\" value=\" " . gettext("Submit data!") . " &gt;&gt;&gt; \" id=\"buttonSubmitShippingData\" title=\"" . gettext("Submit data!") . "\"></div>\n";
             ?>
      </div>
      <div class="clear notes" style="padding-top: 25px;"><?php echo gettext("Your data will not be shared with anybody! We only use it to label your package, so that it will find you. We store your data only for a short time, in order to be able to respond, if there should be something wrong with your shipment. This data is stored in our email-account, so no one else will have access to it. The data stored on our server is deleted, as soon as the order has been made."); ?></div>

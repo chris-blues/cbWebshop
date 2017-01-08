@@ -2,7 +2,8 @@
 <?php
 if ($debug)
   {
-   error_reporting(E_ALL & ~E_NOTICE);
+//   error_reporting(E_ALL & ~E_NOTICE);
+   error_reporting(E_ALL);
    ini_set("display_errors", 1);
   }
 else
@@ -25,17 +26,31 @@ switch($browserlang)
   {
    case 'de': { $lang = "de_DE"; break; }
    case 'en': { $lang = "en_EN"; break; }
-   default: { $lang = "en_EN"; break; }
   }
-$cbWebshop_dirname = getcwd();
-$directory = $cbWebshop_dirname . '/locale';
-$gettext_domain = 'cbWebshop';
-$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
 
-setlocale(LC_MESSAGES, $locale);
-bindtextdomain($gettext_domainn, $directory);
+if (isset($_GET["lang"]) and $_GET["lang"] != "") $lang = $_GET["lang"];
+
+switch($lang)
+  {
+   case 'de':      { $lang = "de_DE"; break; }
+   case 'de_DE':   { $lang = "de_DE"; break; }
+   case 'deutsch': { $lang = "de_DE"; break; }
+   case 'en':      { $lang = "en_EN"; break; }
+   case 'en_EN':   { $lang = "en_EN"; break; }
+   case 'english': { $lang = "en_EN"; break; }
+   default:        { $lang = "en_EN"; break; }
+  }
+
+$cbWebshop_dirname = getcwd();
+$directory = $cbWebshop_dirname . '/shop/locale';
+$gettext_domain = 'cbWebshop';
+$locale = $lang;// echo "<!-- locale set to => $locale -->\n";
+
+setlocale(LC_ALL, $locale);
+bindtextdomain($gettext_domain, $directory);
 textdomain($gettext_domain);
 bind_textdomain_codeset($gettext_domain, 'UTF-8');
+
 // ============
 // init gettext
 // ============
@@ -57,7 +72,7 @@ foreach($conf["call"] as $call => $value)
    $value = str_replace('\$','$',$value);
   }
 
-include("locale/$lang.php");
+//include("locale/$lang.php");
 include('read_index.php');
 
 //echo "DEBUG shop.php:<br>\nlang: $lang - \$conf[call][lang]: {$conf[call][lang]}<br>\nkartid: $kartid<br>\n<br>\n";
@@ -84,5 +99,18 @@ include('read_index.php');
   </div>
 
 </div>
+
+<div id="locale-data"
+     data-hideDetails="<?php echo gettext("hide Details"); ?>"
+     data-showDetails="<?php echo gettext("show Details"); ?>"
+     data-call="<?php echo str_replace("&amp;","&",$conf["callup"]) . $link; ?>">
+</div>
+
+<?php if ($_GET["display"] == "orderaction") { ?>
+<script type="text/javascript" src="shop/checkout.js"></script>
+<?php }
+else { ?>
+<script type="text/javascript" src="shop/shop.js"></script>
+<?php } ?>
+<noscript><?php echo gettext("Please activate JavaScript to use this page!"); ?></noscript>
 <!-- End shop/shop.php -->
-<?php if ($debug) { echo "<h2>\$conf</h2><pre>"; print_r($conf); echo "</pre>\n"; } ?>

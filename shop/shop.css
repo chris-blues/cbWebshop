@@ -8,6 +8,10 @@ form {
   clear: both;
  }
 
+.hidden {
+  display: none;
+}
+
 #shop-main {
   margin: 0px;
  }
@@ -20,7 +24,6 @@ form {
  }
 
 #shopframe {
-  
  }
 
 .shop-content#orderform {
@@ -214,7 +217,7 @@ li.settings {
 /*  display: none; */
 }
 
-.menu {
+/*.menu {
   font-size: 0.9em;
   padding: 0px;
   margin: 0px;
@@ -247,7 +250,7 @@ ul.menu li {
   text-align: center;
   margin: 0px;
   padding: 0px;
-}
+}*/
 
 #adminContentFrame {
   flex: 5;

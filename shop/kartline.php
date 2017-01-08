@@ -8,8 +8,6 @@ $c = $_GET["c"];
 $kartfile = "shop/tmp/kart-$kartid.tmp";
 $shopdir = getcwd();
 
-//echo "DEBUG kartline.php:\n<pre>lang: $lang\nkartid: $kartid\njob: $job\nid: $id\nkartfile: $shopdir/$kartfile</pre>\n";
-
 include('read_index.php');
 
 if (!isset($newitem)) $job = "";
@@ -111,12 +109,10 @@ if ($job == "additem")
 
 <div class="kart shadow" id="kart">
 <?php
-echo "<center><b class=\"karthead\"><a href=\"javascript:show_kart();\" id=\"show-hide\" name=\"show-hide\" onfocus=\"this.blur();\">";
+echo "<center><b class=\"karthead\"><a href=\"javascript:\" id=\"show-hide\" name=\"show-hide\">";
   echo gettext("Shopping kart");
 echo "</a></b></center>\n";
 ?>
-  <script type="text/javascript" src="shop/shop.js"></script>
-  <noscript><?php echo gettext("Please activate JavaScript to use this page!"); ?></noscript>
 
 <?php
         if ($_GET["kart"] == "show") { echo "<div class=\"karthide\" name=\"karthide\" id=\"kartshow\">\n"; }
@@ -125,7 +121,7 @@ echo "</a></b></center>\n";
         <?php
         if ($kartamount > 0)
          {
-          echo "<center><a href=\"javascript:show_items();\" id=\"show-details\" onfocus=\"this.blur();\">" . gettext("Hide Details") . "</a></center>\n";
+          echo "<center><a href=\"javascript:\" id=\"show-details\">" . gettext("Hide Details") . "</a></center>\n";
           echo "<div class=\"hideable\" name=\"hideable\" id=\"hideable\" style=\"margin: 0px; padding: 0px; padding-top: 10px;\">";
           for ($counter = "1"; $counter <= $kartamount; $counter++)
             {
@@ -153,7 +149,7 @@ echo "</a></b></center>\n";
 
           if ($countryname == "")
             { ?><div class="kartitem"><div class="firstkartitem">
-             <select name="countryname" size="1" onchange="self.location='<?php echo $conf["callup"] . $link; ?>kart=show&amp;job=addopt&amp;copt='+this.selectedIndex">
+             <select name="countryname" id="countryname" size="1">
              <?php echo "<option selected=\"selected\">" . gettext("Select country!") . "</option>\n";
              foreach($country as $key => $value)
                {
@@ -172,7 +168,7 @@ echo "</a></b></center>\n";
 
            if ($opt == "" or !isset($opt))
            { ?><div class="kartitem"><div class="firstkartitem">
-            <select name="payment" size="0" onchange="self.location='<?php echo $conf["callup"] . $link; ?>kart=show&amp;job=addopt&amp;opt='+this.selectedIndex">
+            <select name="payment" id="payment" size="0">
             <?php echo "<option value=\"payment\" selected=\"selected\">" . gettext("Choose payment!") . "</option>\n";
             foreach($payment as $key => $value)
                {
@@ -211,7 +207,6 @@ echo "</a></b></center>\n";
           echo "<div class=\"kartitem\">\n<div class=\"firstkartitem\">\n<a href=\"{$conf["callup"]}{$link}job=reset\" target=\"_top\"><img src=\"shop/pics/del.png\" alt=\"" . gettext("reset shopping kart (including all adress data)") . "\" title=\"" . gettext("reset shopping kart (including all adress data)") . "\" border=\"0\"></a></div> ";
           $complete = $kart_total + $transfercost + $shipcost; $complete = number_format($complete, 2, '.', ' ');
           echo "<div class=\"secondkartitem\"> " . gettext("Total") . ": <b>$complete {$conf["_currency"]}</b>\n</div></div></div>\n";
-          echo "<script type=\"text/javascript\">document.getElementById(\"show-hide\").firstChild.data = \"" . gettext("Shopping kart") . " ($complete {$conf["_currency"]}) \";</script>\n";
 
 /* Check, if all userdata is already received. If all is there,change enter data to change data AND display BUY-link below the kart-list! */
           $datamissing = "0";
@@ -227,20 +222,20 @@ echo "</a></b></center>\n";
           if ($datamissing == "0")
             {
              //echo "<div class=\"kart\" id=\"kasse\">\n";
-             echo "<form action=\"shop/orderaction.php?kartid=$kartid&amp;lang=$lang\" id=\"orderform\" method=\"post\" accept-charset=\"UTF-8\">\n";
+             echo "<form action=\"{$conf["callup"]}{$link}display=orderaction\" id=\"orderform\" method=\"post\" accept-charset=\"UTF-8\">\n";
              foreach($conf["call"] as $call => $value)
                {
                 echo "<input type=\"hidden\" name=\"$call\" value=\"$value\">\n";
                }
-             echo "<a class=\"iframe int\" id=\"media\" href=\"{$conf["callup"]}{$link}display=order\"><b>" . gettext("Change shipping data") . "</b></a>";
-             echo "<a id=\"final_buy\" href=\"javascript:\"><b> " . gettext("Finally buy!") . " &gt;&gt;&gt; </b></a>\n</form>";
+             echo "<a class=\"iframe int\" href=\"{$conf["callup"]}{$link}display=order\"><b>" . gettext("Change shipping data") . "</b></a>";
+             echo "<a id=\"final_buy\" href=\"javascript:\"><b> " . gettext("Finally buy!") . " &gt;&gt;&gt; </b></a>\n<div class=\"clear\"></div>\n</form>";
             }
           else
             {
              //echo "<div class=\"kart\" id=\"kasse\">\n";
              echo "<a href=\"{$conf["callup"]}{$link}display=order\"><b>";
              echo gettext("Enter shipping data");
-             echo "</b></a>\n";
+             echo "</b></a>\n<div class=\"clear\"></div>\n";
             }
          }
         else

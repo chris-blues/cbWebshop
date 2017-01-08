@@ -1,9 +1,10 @@
+<!-- BEGIN read_index.php -->
 <?php
 
 /* LESE index.dat und schließe index.dat */
   //$dir = getcwd();
   //echo "DEBUG: read_index.php<br>\nfile: $dir /shop/items/index.dat<br>\n";
-  $counter = "0";
+  $counter = 0;
   $fHandle = fopen("shop/items/index.dat","r");
   if ($fHandle != NULL)
    {
@@ -29,7 +30,7 @@
         {  */
          if ($cat == "music") 
            {
-            $tracklist = "items/{$data[$counter]['item_id']}.dat";
+            $tracklist = "shop/items/{$data[$counter]['item_id']}.dat";
             $data[$counter]['tracklist'] = file_get_contents($tracklist);
             $data[$counter]['tracklist'] = trim($data[$counter]['tracklist'],"\n");
            }
@@ -47,3 +48,4 @@
 /* ############################################################# */
 
 ?> 
+<!-- END read_index.php -->

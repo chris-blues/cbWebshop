@@ -1,18 +1,20 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cbWebshop v0.60\n"
-"POT-Creation-Date: 2016-10-06 02:51+0200\n"
-"PO-Revision-Date: 2016-10-06 02:51+0200\n"
+"Project-Id-Version: cbWebshop\n"
+"POT-Creation-Date: 2017-01-08 23:43+0100\n"
+"PO-Revision-Date: 2017-01-08 23:43+0100\n"
 "Last-Translator: chris_blues <chris@musicchris.de>\n"
-"Language-Team: chris_blues <chris@musicchris.de>\n"
-"Language: de\n"
+"Language-Team: cbWebshop <cbwebshop@musicchris.de>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.9\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: locale\n"
+"X-Poedit-SearchPath-1: .\n"
 
 #: admin/edit_costs.php:35 admin/shopadminmenu.php:84
 msgid "Edit costs"
@@ -31,9 +33,10 @@ msgid "Your Home Country:"
 msgstr "Ihr Heimatland:"
 
 #: admin/edit_costs.php:59 admin/edit_countries.php:49
-#: admin/edit_kartfiles.php:76 admin/edit_lang.php:90 admin/edit_payment.php:49
-#: admin/edit_types.php:95 admin/newitem.php:86 admin/save_settings.php:215
-#: admin/savelist.php:285 admin/settings.php:110 admin/viewitem.php:76
+#: admin/edit_kartfiles.php:76 admin/edit_lang.php:90
+#: admin/edit_payment.php:49 admin/edit_types.php:95 admin/newitem.php:86
+#: admin/save_settings.php:215 admin/savelist.php:285 admin/settings.php:110
+#: admin/viewitem.php:76
 msgid "Back"
 msgstr "Zurück"
 
@@ -165,18 +168,18 @@ msgstr "Einzelheiten (html ist erlaubt!):"
 msgid "Tracklist (plain text only!)"
 msgstr "Tracklist (nur reiner Text erlaubt!)"
 
-#: admin/read_kartfile.php:70 conf/payment_conf.php:4 kartline.php:193
-#: leaveshop.php:43 order.php:29 orderaction.php:70
+#: admin/read_kartfile.php:70 conf/payment_conf.php:4 kartline.php:189
+#: leaveshop.php:43 order.php:29 orderaction.php:54
 msgid "Bank Transfer"
 msgstr "Überweisung"
 
-#: admin/read_kartfile.php:71 conf/payment_conf.php:7 kartline.php:199
-#: leaveshop.php:49 order.php:35 orderaction.php:76
+#: admin/read_kartfile.php:71 conf/payment_conf.php:7 kartline.php:195
+#: leaveshop.php:49 order.php:35 orderaction.php:60
 msgid "PayPal"
 msgstr "PayPal"
 
-#: admin/read_kartfile.php:72 conf/payment_conf.php:10 kartline.php:205
-#: leaveshop.php:55 order.php:41 orderaction.php:82
+#: admin/read_kartfile.php:72 conf/payment_conf.php:10 kartline.php:201
+#: leaveshop.php:55 order.php:41 orderaction.php:66
 msgid "Pay on delivery"
 msgstr "Nachnahme"
 
@@ -312,63 +315,59 @@ msgstr "Jahr/Größe:"
 msgid "Expected Audio-File-Names in:"
 msgstr "Erwartete Audiodateinamen:"
 
-#: kartline.php:61 kartline.php:162
+#: kartline.php:59 kartline.php:158
 msgid "other"
 msgstr "andere"
 
-#: kartline.php:115 kartline.php:214
+#: kartline.php:113
 msgid "Shopping kart"
 msgstr "Warenkorb"
 
-#: kartline.php:119 shopcontent.php:152
-msgid "Please activate JavaScript to use this page!"
-msgstr "Bitte aktivieren Sie JavaScript, um diese Seite nutzen zu können!"
-
-#: kartline.php:128 shop.php:81
+#: kartline.php:124 shop.php:96
 msgid "Hide Details"
 msgstr "Details verstecken"
 
-#: kartline.php:143
+#: kartline.php:139
 msgid "remove"
 msgstr "entfernen"
 
-#: kartline.php:152
+#: kartline.php:148
 msgid "Sub-Total"
 msgstr "Zwischensumme"
 
-#: kartline.php:157
+#: kartline.php:153
 msgid "Select country!"
 msgstr "Land wählen"
 
-#: kartline.php:169 leaveshop.php:142
+#: kartline.php:165 leaveshop.php:142
 msgid "Shipping"
 msgstr "Lieferung"
 
-#: kartline.php:176
+#: kartline.php:172
 msgid "Choose payment!"
 msgstr "Bezahlung wählen!"
 
-#: kartline.php:211
+#: kartline.php:207
 msgid "reset shopping kart (including all adress data)"
 msgstr "Warenkorb löschen (inkl der Adressdaten)"
 
-#: kartline.php:213 leaveshop.php:83 leaveshop.php:144
+#: kartline.php:209 leaveshop.php:83 leaveshop.php:144
 msgid "Total"
 msgstr "Summe"
 
-#: kartline.php:235
+#: kartline.php:230
 msgid "Change shipping data"
 msgstr "Lieferdaten ändern"
 
-#: kartline.php:236
+#: kartline.php:231
 msgid "Finally buy!"
 msgstr "Jetzt kaufen!"
 
-#: kartline.php:242
+#: kartline.php:237
 msgid "Enter shipping data"
 msgstr "Lieferdaten eingeben"
 
-#: kartline.php:248
+#: kartline.php:243
 msgid "Kart is empty."
 msgstr "Warenkorb ist leer."
 
@@ -430,7 +429,7 @@ msgstr "bestellt"
 msgid "Thank you for your order!"
 msgstr "Vielen Dank für Ihre Bestellung!"
 
-#: leaveshop.php:130 shopcontent.php:13
+#: leaveshop.php:130
 msgid "pieces"
 msgstr "Stück"
 
@@ -563,56 +562,76 @@ msgstr ""
 "gespeichert, so daß niemand sonst Zugriff auf Ihre Daten hat. Ihre Daten auf "
 "dem Server werden gelöscht sobald Sie Ihre Bestellung abschicken."
 
-#: orderaction.php:110
+#: orderaction.php:88
 msgid "Kart seems to be emtpy!"
 msgstr "Der Warenkorb scheint leer zu sein!"
 
-#: orderaction.php:111
+#: orderaction.php:89
 msgid "You didn't choose your country in the kart! Please do so!"
 msgstr "Sie haben im Warenkorb kein Land angegeben! Bitte holen Sie das nach!"
 
-#: orderaction.php:112
+#: orderaction.php:90
 msgid ""
 "You didn't choose your preferred payment method in the kart! Please do so!"
 msgstr ""
 "Sie haben im Warenkorb kein Art der Bezahlung angegeben! Bitte holen Sie das "
 "nach!"
 
-#: orderaction.php:115
+#: orderaction.php:93
 msgid ""
 "You didn't enter all necessary information! Use the button below to return!"
 msgstr ""
 "Sie haben nicht alle notwendigen Felder asgefüllt! Benutzen Sie den Zurück-"
 "Knopf unten um zurückzukehren!"
 
-#: orderaction.php:119
+#: orderaction.php:97
 msgid "BACK TO ORDER-FORM!"
 msgstr "ZURÜCK ZUM BESTELLFORMULAR!"
 
-#: orderaction.php:154
+#: orderaction.php:133
 msgid "One moment!"
 msgstr "Einen Moment!"
 
-#: orderaction.php:160
+#: orderaction.php:146
 msgid "Redirecting you to PayPal."
 msgstr "Sie werden zu PayPal weitergeleitet."
 
-#: shop.php:82
+#: shop.php:97
 msgid "Show Details"
 msgstr "Details anzeigen"
 
-#: shop.php:83
+#: shop.php:98
 msgid "Really delete this item?"
 msgstr "Diesen Artikel wirklich löschen?"
 
-#: shopcontent.php:12
+#: shop.php:104
+msgid "hide Details"
+msgstr "Details verstecken"
+
+#: shop.php:105
+msgid "show Details"
+msgstr "Details anzeigen"
+
+#: shop.php:115 shopcontent.php:159
+msgid "Please activate JavaScript to use this page!"
+msgstr "Bitte aktivieren Sie JavaScript, um diese Seite nutzen zu können!"
+
+#: shopcontent.php:8
+msgid "size"
+msgstr "Größe"
+
+#: shopcontent.php:9
 msgid "Buy"
 msgstr "Kaufen"
 
-#: shopcontent.php:13
-msgid "piece"
-msgstr "Stück"
+#: shopcontent.php:16
+#, php-format
+msgid "pieces (%s €/piece)"
+msgstr "Stück (%s €/Stk)"
 
-#: shopcontent.php:71
+#: shopcontent.php:74
 msgid "Click here to play this song!"
 msgstr "Klicken Sie hier, um den Song zu hören!"
+
+#~ msgid "piece"
+#~ msgstr "Stück"

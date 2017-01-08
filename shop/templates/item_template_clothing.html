@@ -6,8 +6,8 @@
   <div class="item-details">
     <div class="centerme">
       %details%
-      <br>Größe:
-      <form action="index.php" id="intokart%c%" method="get" target="_top" accept-charset="UTF-8">
+      <br>%size%
+      <form action="%target%" id="intokart%c%" method="get" target="_top" accept-charset="UTF-8">
         %_calls%
         <input type="hidden" name="job" value="additem">
         <input type="hidden" name="id" value="%id%">
@@ -15,10 +15,10 @@
         <select size="1" name="size" form="intokart%c%">
           %sizes%
         </select>
-      </form>
       <div class="button-buy">
-        <a href="javascript:" onclick="document.getElementById('intokart%c%').submit()" onkeypress="document.getElementById('intokart%c%').submit()"><div class="buy">%buy% : <b>%preis% €</b></div></a>
+        <a href="javascript:"><div class="buy" data-id="%c%">%buy% : <b>%preis% €</b></div></a>
       </div>
+      </form>
     </div>
   </div>
   <div class="clear"></div>

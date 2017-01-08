@@ -1,45 +1,31 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-</head>
 <?php
 error_reporting(0);
 ini_set("display_errors", 0);
 ini_set("log_errors", 1);
 ini_set("error_log", "/www/admin/logs/php-error.log");
 
-
 // ============
 // init gettext
 // ============
+$directory = 'shop/locale';
+$gettext_domain = 'cbWebshop';
+$locale = $_POST["lang"];
 
-//Try to get some language information from the browser request header
-$browserlang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-
-switch($browserlang)
-  {
-   case 'de': { $lang = "de_DE"; break; }
-   default: { $lang = "en"; break; }
-  }
-$directory = $cbPlayer_dirname . '/locale';
-$gettext_domain = 'cbplayer';
-$locale = "$lang";// echo "<!-- locale set to => $locale -->\n";
-
-setlocale(LC_MESSAGES, $locale);
+setlocale(LC_ALL, $locale);
 bindtextdomain($gettext_domain, $directory);
 textdomain($gettext_domain);
 bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 // init gettext
 // ============
+$kartid = $_POST["kartid"];
+$lang = $_POST["lang"];
 
+include('shop/conf/shop_conf.php');
+include('shop/conf/cost_conf.php');
+include('shop/conf/payment_conf.php');
+include('shop/conf/countries.php');
 
-include('conf/shop_conf.php');
-include('conf/cost_conf.php');
-include('conf/payment_conf.php');
-include('conf/countries.php');
 /* ################################################################### */
 /* Hole Variablen aus POST-Formular */
 $error = "0"; $posterror = "0";
@@ -51,10 +37,8 @@ if (!$_POST["reset_x"])
 
 /* ################################################################### */
 
-define( "LOC_LANG", $lang );
-include('locale/' . LOC_LANG . '.php');
 $kartmode = "action";
-$kartfilepath = "tmp";
+$kartfilepath = "shop/tmp";
 include('read_kartfile.php');
 
 /* ################################################################### */
@@ -89,14 +73,8 @@ if ($countryname == "Poland") $countryname_code = "PL";
 if ($countryname == "USA") $countryname_code = "US";
 
 /* ################################################################### */
-
-//include('header_short.html');
-if ($paymentname == "PayPal") $onload = "document.paypal_form.submit();";
-else $onload = "document.leaveshop_form.submit();";
-if ($newsletter == "ja") $onload .= "document.jnl2_sign_form.submit();";
-echo "<body onload=\"$onload\">\n";
-echo "<table width=\"500\" height=\"600\" align=\"center\" border=\"0\">";
 ?>
+<table width="500" height="600" align="center" border="0">
   <tr>
     <td align="center" valign="center">
 <?php
@@ -118,6 +96,7 @@ if ($error != "0")
    echo "</ol><br>\n";
    echo "</td></tr><tr><td align=\"center\">\n<a href=\"../index.php?page=shop&amp;display=order&amp;kartid=$kartid&amp;lang=$lang$errorreturn\" target=\"_top\"><b>" . gettext("BACK TO ORDER-FORM!") . "</b></a><br>\n</td></tr></table></td></tr></table>";
    echo "<pre>\n"; print_r($errors); print_r($errorreturn); echo "</pre>\n";
+   echo "</body>\n</html>";
    exit;
   }
   
@@ -134,7 +113,7 @@ foreach($country as $key => $value)
 if (!isset($countryexists) or $countryexists != "yes")
   {
    $key++;
-   $country[$key] = htmlspecialchars($countryname, ENT_QUOTES | ENT_HTML5, "UTF-8");
+   $country[$key] = htmlspecialchars(strip_tags($countryname), ENT_QUOTES | ENT_HTML5, "UTF-8");
    sort($country, SORT_STRING);
    $configfile = "shop/conf/countries.php";
    $fHandle = fopen($configfile, "w");
@@ -152,8 +131,15 @@ if (!isset($countryexists) or $countryexists != "yes")
 /* ################################################################### */
 
    echo "<b>" . gettext("One moment!") . "</b><br>\n";
-   $pp_returnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid&display=leaveshop&kart=reset";
-   $pp_cancelreturnpath = "/index.php?page=shop&lang=$lang&kartid=$kartid";
+   $counter = 0;
+   foreach ($conf["call"] as $key => $value)
+     {
+      if ($counter == 0) $calls = "$key=" . $conf["call"][$key];
+      else $calls .= "&amp;$key=" . $conf["call"][$key];
+      $counter++;
+     }
+   $pp_returnpath = "/{$conf["callup"]}?$calls&display=leaveshop&kart=reset";
+   $pp_cancelreturnpath = "/{$conf["callup"]}?$calls";
    if ($opt == "2")
      {
       if ($lang == "english") $lc = "EN"; else $lc = "DE";
@@ -196,12 +182,12 @@ if (!isset($countryexists) or $countryexists != "yes")
        }
 
         echo "<input id=\"shipping_1\" name=\"shipping_1\" type=\"hidden\" value=\"$costs\" />\n";
-        echo "<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/de_DE/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
+        //echo "<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/de_DE/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
       echo "</form>\n";
      }
    else
      {
-      echo "<form name=\"leaveshop_form\" action=\"../index.php?page=shop&amp;display=leaveshop&amp;kartid=$kartid&amp;lang=$lang&amp;kart=reset\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
+      echo "<form id=\"checkout_form\" name=\"leaveshop_form\" action=\"{$conf["callup"]}?$calls&display=leaveshop\" method=\"post\" accept-charset=\"UTF-8\" target=\"_top\">\n";
       echo "<input type=\"hidden\" name=\"lang\" value=\"$lang\">\n";
       echo "<input type=\"hidden\" name=\"kartid\" value=\"$kartid\">\n";
       echo "</form>\n";

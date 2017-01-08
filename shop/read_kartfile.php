@@ -1,3 +1,4 @@
+<!-- BEGIN read_kartfile.php -->
 <?php
 unset($item_exists);
 unset($item_pointer);
@@ -7,6 +8,7 @@ $kartfile = "shop/tmp/kart-$kartid.tmp";
 if ($kartmode == "kart")
 {
 /* Lese karttmpfile falls vorhanden und Erzeuge Array Kart[1][item_sth] */
+// if (file_exists($kartfile))
 $karthandle = fopen($kartfile, "r");
 $kartamount = "0";
 $kart_total = "0";
@@ -150,3 +152,4 @@ if ($kartamount < 1) {$kartamount = "0"; $error = "1"; $kartemptyerror = "1";}
 //echo "<pre>"; print_r($kart); echo "</pre>\n";
 //echo "<pre style=\"font-size: 0.85em;\">"; print_r($errors); echo "</pre>\n";
 ?>
+<!-- END read_kartfile.php -->
