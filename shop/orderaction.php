@@ -26,6 +26,14 @@ include('shop/conf/cost_conf.php');
 include('shop/conf/payment_conf.php');
 include('shop/conf/countries.php');
 
+   $counter = 0;
+   foreach ($conf["call"] as $key => $value)
+     {
+      if ($counter == 0) $calls = "$key=" . $conf["call"][$key];
+      else $calls .= "&amp;$key=" . $conf["call"][$key];
+      $counter++;
+     }
+
 /* ################################################################### */
 /* Hole Variablen aus POST-Formular */
 $error = "0"; $posterror = "0";
@@ -74,6 +82,7 @@ if ($countryname == "USA") $countryname_code = "US";
 
 /* ################################################################### */
 ?>
+<div class="orderaction">
 <table width="500" height="600" align="center" border="0">
   <tr>
     <td align="center" valign="center">
@@ -94,7 +103,7 @@ if ($error != "0")
      }
    echo $errormessage;
    echo "</ol><br>\n";
-   echo "</td></tr><tr><td align=\"center\">\n<a href=\"../index.php?page=shop&amp;display=order&amp;kartid=$kartid&amp;lang=$lang$errorreturn\" target=\"_top\"><b>" . gettext("BACK TO ORDER-FORM!") . "</b></a><br>\n</td></tr></table></td></tr></table>";
+   echo "</td></tr><tr><td align=\"center\">\n<a href=\"../{$conf["callup"]}?$calls&amp;display=order$errorreturn\" target=\"_top\"><b>" . gettext("BACK TO ORDER-FORM!") . "</b></a><br>\n</td></tr></table></td></tr></table>";
    echo "<pre>\n"; print_r($errors); print_r($errorreturn); echo "</pre>\n";
    echo "</body>\n</html>";
    exit;
@@ -131,13 +140,6 @@ if (!isset($countryexists) or $countryexists != "yes")
 /* ################################################################### */
 
    echo "<b>" . gettext("One moment!") . "</b><br>\n";
-   $counter = 0;
-   foreach ($conf["call"] as $key => $value)
-     {
-      if ($counter == 0) $calls = "$key=" . $conf["call"][$key];
-      else $calls .= "&amp;$key=" . $conf["call"][$key];
-      $counter++;
-     }
    $pp_returnpath = "/{$conf["callup"]}?$calls&display=leaveshop&kart=reset";
    $pp_cancelreturnpath = "/{$conf["callup"]}?$calls";
    if ($opt == "2")
@@ -198,3 +200,4 @@ if (!isset($countryexists) or $countryexists != "yes")
     </td>
   </tr>
 </table>
+</div>

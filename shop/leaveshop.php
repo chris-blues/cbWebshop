@@ -116,7 +116,7 @@ if (!mail($email_shop, $betreff_shop, $mail_shop, $header_shop)) { echo "<h3>ERR
 
 
 /* html format */
-echo "<div class=\"shadow\">\n";
+echo "<div class=\"leaveshop shadow\">\n";
 echo "<table width=\"75%\" align=\"center\" valign=\"center\" border=\"0\">\n<tr>\n<td align=\"center\" colspan=\"3\">\n";
 echo "<h3>" . gettext("Thank you for your order!") . "</h3>\n";
 echo "<hr style=\"width:100%; color:#000000; background-color:#544a31; height:1px; margin-right:0; text-align:center;\">\n";
@@ -163,7 +163,7 @@ if ($newsletter=="ja")
    $_POST["email"] = $email;
    include('newsletter/newsletter.php');
   }
-echo "<br><div class=\"shadow\" style=\"text-align: center;\">";
+echo "<br><div class=\"leaveshop shadow\" style=\"text-align: center;\">";
 if ($mailerrorbuyer == "1") 
   {
    echo gettext("Something went wrong! We couldn't send an email to you! But we have been notified and will get in touch with you!") . "<br>\n";

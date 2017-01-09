@@ -28,7 +28,7 @@ switch($browserlang)
    case 'en': { $lang = "en_EN"; break; }
   }
 
-if (isset($_GET["lang"]) and $_GET["lang"] != "") $lang = $_GET["lang"];
+if (isset($_GET["lang"]) and strlen($_GET["lang"]) > 1) $lang = $_GET["lang"];
 
 switch($lang)
   {
@@ -113,4 +113,7 @@ else { ?>
 <script type="text/javascript" src="shop/shop.js"></script>
 <?php } ?>
 <noscript><?php echo gettext("Please activate JavaScript to use this page!"); ?></noscript>
+
+<?php // echo "<!-- \n"; print_r($_GET); echo "\n-->\n"; ?>
+
 <!-- End shop/shop.php -->

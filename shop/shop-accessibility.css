@@ -129,10 +129,14 @@ a#show-hide {
   float: right;
  }
 
-.item {
+.item, .leaveshop, .orderaction {
   padding: 20px 50px 70px;
   clear: both;
  }
+
+.item-info {
+  padding-right: 200px;
+}
 
 .item-header {
   

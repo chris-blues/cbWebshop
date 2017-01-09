@@ -115,7 +115,7 @@ a#show-hide {
   float: right;
  }
 
-.item {
+.item, .leaveshop, .orderaction {
   margin: 5px;
   padding-left: 5px;
   clear: both;
