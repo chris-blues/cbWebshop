@@ -12,6 +12,10 @@ form {
   display: none;
 }
 
+.shadow {
+  box-shadow: 0px 0px 5px 1px #555;
+}
+
 #shop-main {
   margin: 0px;
  }
@@ -148,6 +152,7 @@ a#show-hide {
 
 .item-pic img {
   width: 250px;
+  padding: 0px;
  }
 
 .item-details {

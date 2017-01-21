@@ -3,7 +3,7 @@
  <source src="shop/items/audio/%id%/%trackid%.mp3" type="audio/mpeg" />
  <source src="shop/items/audio/%id%/%trackid%.ogg" type="audio/ogg" />
 </audio>
-<a class="%id%_%trackid%" href="javascript:play_%id%_%trackid%();" onfocus="this.blur()" title="%clicktoplay%">
+<a class="%id%_%trackid% playAudioTrigger" data-id="%id%_%trackid%" href="javascript:" onfocus="this.blur()" title="%clicktoplay%">
   <img src="shop/pics/%playbutton%.png" id="%id%_%trackid%-button" border="0" name="playbutton" alt="play"> %trackname%</a>
 <script type="text/javascript">
    var audio_%id%_%trackid% = document.getElementById('%id%_%trackid%');

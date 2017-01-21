@@ -27,7 +27,7 @@ bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 
 include('../conf/shop_conf.php');
-include("../locale/{$conf["_default_lang"]}.php");
+//include("../locale/{$conf["_default_lang"]}.php");
 include('../conf/cost_conf.php');
 include('../conf/countries.php');
 include('header_short.php');

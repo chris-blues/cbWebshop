@@ -3,6 +3,8 @@ $debug = $_GET["debug"];
 if (isset($debug) and $debug == "true") $debug = true;
 else $debug = false;
 
+$debug = false;
+
 if ($debug)
   {
    error_reporting(E_ALL & ~E_NOTICE);

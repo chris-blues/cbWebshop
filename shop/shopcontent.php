@@ -66,13 +66,13 @@ if ($cat == "music")
    $tracklist = "<ul>\n";
    for ($track = "1"; $track <= $counter; $track++)
      {
-      if (file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.ogg") and file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.mp3"))
+      if (file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.ogg") or file_exists("shop/items/audio/{$data["$c"]['item_id']}/{$tracks["$track"]['id']}.mp3"))
         {
          $tracklisten = file_get_contents("shop/templates/get_audio.html");
          $searchtrack  = array('%id%', '%trackname%', '%trackid%', '%playbutton%', '%clicktoplay%');
         // Womit soll das ersetzt werden?
          $replacetrack = array($data["$c"]['item_id'], $tracks["$track"]['name'], "{$tracks["$track"]['id']}", $playbutton, gettext("Click here to play this song!"));
-        // Finde und ersetze Platzhalter in $output
+        // Finde und ersetze Platzhalter in $tracklist
          $tracklist .= str_replace($searchtrack, $replacetrack, $tracklisten);
         }
       else

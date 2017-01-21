@@ -2,13 +2,11 @@
       {
        if (document.getElementsByName("karthide")[0].style.display == "none")
          {
-	  console.log("showing kart");
           $( "div.karthide" ).slideDown( 500 );
           document.getElementsByName('karthide')[0].id = 'karthide';
          }
        else
          {
-	  console.log("hiding kart");
           $( "div.karthide" ).slideUp( 500 );
           document.getElementsByName('karthide')[0].id = 'kartshow';
          }
@@ -18,7 +16,6 @@
       {
        if (document.getElementsByName("hideable")["0"].style.display == "none")
          {
-	  console.log("showing items");
           document.getElementById("show-details").firstChild.data = document.getElementById("locale_data").getAttribute("data-hideDetails");
           for (var i = 0; i < document.getElementsByName("hideable").length; i++)
             {
@@ -27,7 +24,6 @@
          }
        else
          {
-	  console.log("hiding items");
           document.getElementById("show-details").firstChild.data = document.getElementById("locale_data").getAttribute("data-showDetails");
           for (var i = 0; i < document.getElementsByName("hideable").length; i++)
             {
@@ -45,34 +41,64 @@ function DeleteCheck()
 
 function intokart(id)
   {
-   console.log("intokart(intokart" + id + ") called.");
    document.getElementById("intokart" + id).submit();
   }
 
 function switch_country (call, index)
   {
-   console.log("changing country");
    self.location = call + 'kart=show&job=addopt&copt=' + index;
   }
 
 function switch_payment(call, index)
   {
-   console.log("changing country");
    self.location = call + 'kart=show&job=addopt&opt=' + index;
+  }
+
+function toggleAudioPlayback(id, numberOfAudioItems)
+  {
+   audioObjects = document.getElementsByTagName("audio");
+   for (var i = 0; i < audioObjects.length; i++)
+     {
+      audioObjects[i].pause();
+      document.getElementsByName("playbutton")[i].src = "shop/pics/play-black.png";
+     }
+   if (currentlyPlaying == id)
+     {
+      document.getElementById(id).pause();
+      document.getElementById(id + "-button").src = "shop/pics/play-black.png";
+      currentlyPlaying = "none";
+     }
+   else
+     {
+      document.getElementById(id).play();
+      document.getElementById(id + "-button").src = "shop/pics/play_active.png";
+      currentlyPlaying = id;
+     }
   }
 
 function initShop ()
   {
+   console.log("initShop()...");
    var buyButtons = document.getElementsByClassName("buy");
    for ( var i = 0 ; i < buyButtons.length ; i++ )
      { buyButtons[i].addEventListener("click", function() { intokart( this.getAttribute("data-id") ); });  }
    document.getElementById("show-hide").addEventListener("click", function() { show_kart(); });
-   document.getElementById("show-details").addEventListener("click", function() { show_items(); });
+   if (document.getElementById("show-details") != null) { document.getElementById("show-details").addEventListener("click", function() { show_items(); }); }
+
+   currentlyPlaying = "none";
+   var audioItems = document.getElementsByClassName("playAudioTrigger");
+   var numberOfAudioItems = audioItems.length;
+   console.log(numberOfAudioItems + " audio items detected");
+   for (var i=0; i< numberOfAudioItems; i++)
+   {
+    audioItems[i].addEventListener("click", function() { toggleAudioPlayback(this.getAttribute("data-id"), numberOfAudioItems); });
+   }
+   console.log("initShop() has ended.");
   }
 
 document.addEventListener('DOMContentLoaded', function () { initShop(); });
 var call = document.getElementById("locale-data").getAttribute("data-call");
-console.log("call -> " + call);
+
 var country = document.getElementById("countryname");
 if (country != null) { country.addEventListener("change", function() { switch_country(call, this.selectedIndex); }); }
 var payment = document.getElementById("payment");

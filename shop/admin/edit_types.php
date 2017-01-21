@@ -27,7 +27,7 @@ bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 
 include('../conf/shop_conf.php');
-include("../locale/{$conf["_default_lang"]}.php");
+//include("../locale/{$conf["_default_lang"]}.php");
 include('header_full.html');
 echo "<body>\n";
 echo "<h2>" . gettext("Edit item-types") . "</h2>\n" . gettext("These will show up in 'Add new item' once you added an item here.") . "<br><br>\n<hr>\n<br><br>\n";

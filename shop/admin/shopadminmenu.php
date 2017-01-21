@@ -3,6 +3,8 @@ $debug = $_GET["debug"];
 if (isset($debug) and $debug == "true") $debug = true;
 else $debug = false;
 
+$debug = false;
+
 if ($debug)
   {
    error_reporting(E_ALL & ~E_NOTICE);
@@ -92,9 +94,9 @@ bind_textdomain_codeset($gettext_domain, 'UTF-8');
   <li class="settings">
     <form action="edit_types.php" target="shop-admin"><?php echo "<input type=\"submit\" value=\"" . gettext("Edit item-types") . "\"></form>\n"; ?>
   </li>
-  <li class="settings">
+  <!--li class="settings">
     <form action="edit_lang.php" target="shop-admin"><?php echo "<input type=\"submit\" value=\"" . gettext("Edit languages") . "\"></form>\n"; ?>
-  </li>
+  </li-->
   <li class="settings">
     <form action="edit_countries.php" target="shop-admin"><?php echo "<input type=\"submit\" value=\"" . gettext("Edit countries") . "\"></form>\n"; ?>
   </li>

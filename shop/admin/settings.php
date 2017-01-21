@@ -27,7 +27,7 @@ bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 
 include('../conf/shop_conf.php');
-include("../locale/{$conf["_default_lang"]}.php");
+//include("../locale/{$conf["_default_lang"]}.php");
 include('header_full.html');
 echo "<body>\n";
 if (!natcasesort($conf["lang"])) echo "Failed to sort the array \$conf[\"lang\"]!<br>\n";

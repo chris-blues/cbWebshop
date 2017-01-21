@@ -27,7 +27,7 @@ bind_textdomain_codeset($gettext_domain, 'UTF-8');
 // ============
 
 include('../conf/shop_conf.php');
-include("../locale/{$conf["_default_lang"]}.php");
+//include("../locale/{$conf["_default_lang"]}.php");
 include('header_short.php');
 if (isset($_GET["type"])) { $type = $_GET["type"]; $type--; }
 else $type = "-1";

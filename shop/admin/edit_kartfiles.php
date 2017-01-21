@@ -30,7 +30,7 @@ if (isset($_GET["kartid"])) $kartid = $_GET["kartid"];
 if (isset($_GET["delete"])) $delete = $_GET["delete"];
 
 include('../conf/shop_conf.php');
-include("../locale/{$conf["_default_lang"]}.php");
+//include("../locale/{$conf["_default_lang"]}.php");
 include('header_short.php');
 
 if (isset($delete) and isset($kartid)) unlink("../tmp/$kartid");
