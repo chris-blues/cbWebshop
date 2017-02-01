@@ -219,7 +219,7 @@ ul {
 
 li {
   list-style: none;
-  width: 180px;
+ /* width: 180px; */
 }
 
 li.settings {

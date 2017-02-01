@@ -98,7 +98,7 @@ if ($cat == "music")
         $sizesdropdown .= "<option value=\"$sizesvalue\">$sizesvalueshow</option>\n";
        }
     }
-  
+
   $calls = "";
   foreach($conf["call"] as $call => $value)
     {
