@@ -14,7 +14,7 @@ for ($c = 1; $c <= $itemamount; $c++)
  {
   $col++;
   $value = sprintf(gettext("pieces (%s €/piece)"), $data["$c"]['item_preis'] );
-  if ($debug) echo "$value <br>\n";
+  if ($debug and $debug != "FALSE") echo "$value <br>\n";
 
 // Get category ( music | clothing )
 foreach ($conf["item_type"] as $keycat => $valcat)
@@ -106,14 +106,14 @@ if ($cat == "music")
     }
 
   /* Was soll ersetzt werden? */
-  $search  = array('%id%', 
-                   '%name%', 
+  $search  = array('%id%',
+                   '%name%',
                    '%type%',
                    '%Type%',
-                   '%TYPE%', 
-                   '%descr%', 
-                   '%preis%', 
-                   '%pic%', 
+                   '%TYPE%',
+                   '%descr%',
+                   '%preis%',
+                   '%pic%',
                    '%preview%',
                    '%details%',
                    '%tracklist%',

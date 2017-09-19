@@ -17,12 +17,10 @@ form {
  }
 
 #sidebar {
-  max-width: 270px;
+/*  max-width: 270px;*/
  }
 
-#sidebar.fixed {
-  
- }
+#sidebar.fixed {}
 
 .shop-lang {
   float: left;
@@ -30,7 +28,7 @@ form {
  }
 
 .kart#container {
-  position: relative;
+  /*position: relative;*/
   padding: 0px;
   margin: 0px;
  }
@@ -77,11 +75,11 @@ a#show-hide {
   padding-top: 5px;
   padding-bottom: 10px;
   font-size: 0.89em;
-  width: 200px;
+/*  width: 200px;
   position: absolute;
   z-index: 10;
   margin-left: -6px;
-  margin-top: -15px;
+  margin-top: -15px;*/
  }
 
 .kart#kasse {
@@ -118,6 +116,7 @@ a#show-hide {
 .item, .leaveshop, .orderaction {
   margin: 5px;
   padding-left: 5px;
+  padding-bottom: 1px;
   clear: both;
  }
 
@@ -142,7 +141,7 @@ a#show-hide {
  }
 
 #container {
-  
+
  }
 
 .shop-content {
@@ -152,7 +151,7 @@ a#show-hide {
  }
 
 #shopframe {
-  
+
  }
 
 .shop-content#orderform {
@@ -168,7 +167,7 @@ a#show-hide {
  }
 
 .orderline {
-  
+
  }
 }
 @media (min-width: 451px) {
@@ -245,16 +244,16 @@ a#show-hide {
 .button-buy {
   clear: both;
   margin-bottom: 30px;
-  text-align: right;
+  text-align: center;
  }
 
 .buy {
   color: #FFFFFF;
   background-color: #CC9933;
   font-size: 1.2em;
-  margin: 30px 10px 0px 10%;
-  text-align: right;
-  position: absolute;
+  margin: 30px 10px;
+  text-align: center;
+/*  position: relative;*/
   padding: 4px 16px;
   border: none;
   border-radius: 6px;
